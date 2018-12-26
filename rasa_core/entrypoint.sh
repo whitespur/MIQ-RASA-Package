@@ -19,7 +19,7 @@ case ${1} in
         exec "${@:2}"
         ;;
     train)
-        exec python -m rasa_core.train -s data/stories.md -d config/domain.yml -o ./model "${@:2}"
+        exec python -m rasa_core.train -s /app/data/stories.md -d /app/model/domain.yml -o ./model "${@:2}"
         ;;
     *)
         print_help
