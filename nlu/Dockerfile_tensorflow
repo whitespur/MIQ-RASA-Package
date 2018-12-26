@@ -13,13 +13,13 @@ RUN apt-get update -qq \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 WORKDIR ${RASA_NLU_HOME}
-COPY rasa_nlu/. ${RASA_NLU_HOME}
+COPY nlu/. ${RASA_NLU_HOME}
 
 RUN pip install -r alt_requirements/requirements_tensorflow_sklearn.txt
 
 RUN pip install -e .
 
-COPY rasa_nlu/sample_configs/config_embedding.yml ${RASA_NLU_HOME}/config/config.yml
+COPY nlu/sample_configs/config_embedding.yml ${RASA_NLU_HOME}/config/config.yml
 
 VOLUME ["/app/projects", "/app/logs", "/app/data", "/app/config"]
 

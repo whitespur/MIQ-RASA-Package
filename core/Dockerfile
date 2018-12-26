@@ -23,11 +23,11 @@ RUN apt-get update -qq && \
 WORKDIR /app
 
 # Copy as early as possible so we can cache ...
-COPY rasa_core/requirements.txt .
+COPY core/requirements.txt .
 
 RUN pip install -r requirements.txt --no-cache-dir
 
-COPY rasa_core/. .
+COPY core/. .
 
 RUN pip install -e . --no-cache-dir
 VOLUME ["/app/model", "/app/config", "/app/project"]
