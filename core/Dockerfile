@@ -33,6 +33,6 @@ RUN pip install -e . --no-cache-dir
 VOLUME ["/app/model", "/app/config", "/app/project"]
 EXPOSE 5005
 
-ENTRYPOINT ["entrypoint.sh"]
+ENTRYPOINT ["/app/entrypoint.sh"]
 
 CMD ["start", "-d", "/app/model/"]
