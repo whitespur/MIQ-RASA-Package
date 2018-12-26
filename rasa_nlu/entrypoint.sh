@@ -9,5 +9,19 @@ function print_help {
     echo " train-agent                - Train a dialogue model"
     echo " run                        - Run agent"
 }
-    exec python -m rasa_nlu.train -c /app/config/config.yml -d /app/data/nlu_data.md -o /app/projects/current/nlu_model
+
+case ${1} in
+    train-nlu)
+        exec python -m rasa_nlu.train -c config.yml -d data/nlu_data.md -o models/current/nlu_model
+        ;;
+    train-agent)
+        exec python -m rasa_core.train -d ./domain.yml -s data/stories.md -o models/current/dialogue
+        ;;        
+    run)
+        exec python -m rasa_core.run -d models/current/dialogue -u models/current/nlu_model
+        ;;        
+    *)
+        print_help
+        ;;
+esac
 

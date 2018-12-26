@@ -36,4 +36,4 @@ EXPOSE 5005
 
 ENTRYPOINT ["./entrypoint.sh"]
 
-CMD ["train"]
+CMD ["start", "-d", "/app/model/"]
