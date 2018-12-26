@@ -10,5 +10,4 @@ function print_help {
     echo " help                                         - Print this help"
     echo " run                                          - Run an arbitrary command inside the container"
 }
-    exec python -m rasa_core.train -s /app/data/stories.md -d /app/config/domain.yml -o /app/model "${@:2}"
-
+    exec python -m rasa_core.train -s /app/data/stories.md -d /app/config/domain.yml -o /app/model
