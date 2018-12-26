@@ -42,7 +42,7 @@ function download_package {
 
 case ${1} in
     start)
-        exec python -m rasa_nlu.server "${@:2}" 
+        exec sudo python -m rasa_nlu.server "${@:2}" 
         ;;
     run)
         exec "${@:2}"
