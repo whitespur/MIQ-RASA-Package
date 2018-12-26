@@ -1,13 +1,5 @@
-action_factory: null
-action_names:
-- utter_greet
-- utter_goodbye
-- utter_confirm
-- utter_meetup
-- utter_affirm_suggest_transport
-- utter_suggest_transport
-- utter_thanks
-- utter_deny
+%YAML 1.1
+---
 actions:
 - utter_greet
 - utter_goodbye
@@ -20,16 +12,26 @@ actions:
 config:
   store_entities_as_slots: true
 entities: []
+forms: []
 intents:
-- greet
-- goodbye
-- affirm
-- thanks
-- thanks+goodbye
-- meetup
-- affirm+ask_transport
-- ask_transport
-- deny
+- greet:
+    use_entities: true
+- goodbye:
+    use_entities: true
+- affirm:
+    use_entities: true
+- thanks:
+    use_entities: true
+- thanks+goodbye:
+    use_entities: true
+- meetup:
+    use_entities: true
+- affirm+ask_transport:
+    use_entities: true
+- ask_transport:
+    use_entities: true
+- deny:
+    use_entities: true
 slots: {}
 templates:
   utter_affirm_suggest_transport:
@@ -56,4 +58,3 @@ templates:
   utter_thanks:
   - text: You are very welcome.
   - text: Glad I could help!
-topics: []
