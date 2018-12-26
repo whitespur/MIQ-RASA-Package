@@ -1,17 +1,23 @@
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+
 import json
 import logging
 import os
+import typing
 from typing import Any, List, Text
-
-from rasa_core.actions.action import ACTION_LISTEN_NAME
 
 from rasa_core import utils
 from rasa_core.constants import FALLBACK_SCORE
-from rasa_core.domain import Domain
 from rasa_core.policies.policy import Policy
-from rasa_core.trackers import DialogueStateTracker
 
 logger = logging.getLogger(__name__)
+
+if typing.TYPE_CHECKING:
+    from rasa_core.domain import Domain
+    from rasa_core.trackers import DialogueStateTracker
 
 
 class FallbackPolicy(Policy):
@@ -26,10 +32,11 @@ class FallbackPolicy(Policy):
         return None
 
     def __init__(self,
-                 nlu_threshold: float = 0.3,
-                 core_threshold: float = 0.3,
-                 fallback_action_name: Text = "action_default_fallback"
-                 ) -> None:
+                 nlu_threshold=0.3,  # type: float
+                 core_threshold=0.3,  # type: float
+                 fallback_action_name="action_default_fallback"  # type: Text
+                 ):
+        # type: (...) -> None
         """Create a new Fallback policy.
 
         Args:
@@ -50,18 +57,20 @@ class FallbackPolicy(Policy):
         self.fallback_action_name = fallback_action_name
 
     def train(self,
-              training_trackers: List[DialogueStateTracker],
-              domain: Domain,
-              **kwargs: Any
-              ) -> None:
+              training_trackers,  # type: List[DialogueStateTracker]
+              domain,  # type: Domain
+              **kwargs  # type: Any
+              ):
+        # type: (...) -> None
         """Does nothing. This policy is deterministic."""
 
         pass
 
     def should_fallback(self,
-                        nlu_confidence: float,
-                        last_action_name: Text
-                        ) -> bool:
+                        nlu_confidence,  # type float
+                        last_action_name  # type: Text
+                        ):
+        # type: (...) -> bool
         """It should predict fallback action only if
         a. predicted NLU confidence is lower than ``nlu_threshold`` &&
         b. last action is NOT fallback action
@@ -77,9 +86,8 @@ class FallbackPolicy(Policy):
         result[idx] = fallback_score
         return result
 
-    def predict_action_probabilities(self,
-                                     tracker: DialogueStateTracker,
-                                     domain: Domain) -> List[float]:
+    def predict_action_probabilities(self, tracker, domain):
+        # type: (DialogueStateTracker, Domain) -> List[float]
         """Predicts a fallback action if NLU confidence is low
             or no other policy has a high-confidence prediction"""
 
@@ -92,7 +100,7 @@ class FallbackPolicy(Policy):
 
         if tracker.latest_action_name == self.fallback_action_name:
             result = [0.0] * domain.num_actions
-            idx = domain.index_for_action(ACTION_LISTEN_NAME)
+            idx = domain.index_for_action('action_listen')
             result[idx] = FALLBACK_SCORE
 
         elif self.should_fallback(nlu_confidence, tracker.latest_action_name):
@@ -113,7 +121,8 @@ class FallbackPolicy(Policy):
 
         return result
 
-    def persist(self, path: Text) -> None:
+    def persist(self, path):
+        # type: (Text) -> None
         """Persists the policy to storage."""
         config_file = os.path.join(path, 'fallback_policy.json')
         meta = {
@@ -125,7 +134,8 @@ class FallbackPolicy(Policy):
         utils.dump_obj_as_json_to_file(config_file, meta)
 
     @classmethod
-    def load(cls, path: Text) -> 'FallbackPolicy':
+    def load(cls, path):
+        # type: (Text) -> FallbackPolicy
         meta = {}
         if os.path.exists(path):
             meta_path = os.path.join(path, "fallback_policy.json")

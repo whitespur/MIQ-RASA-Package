@@ -1,8 +1,14 @@
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+
 import time
 
 import json
 import logging
 import numpy as np
+import warnings
 from apscheduler.schedulers.background import BackgroundScheduler
 from pytz import UnknownTimeZoneError
 from types import LambdaType
@@ -48,15 +54,15 @@ except UnknownTimeZoneError:
 
 class MessageProcessor(object):
     def __init__(self,
-                 interpreter: NaturalLanguageInterpreter,
-                 policy_ensemble: PolicyEnsemble,
-                 domain: Domain,
-                 tracker_store: TrackerStore,
-                 generator: NaturalLanguageGenerator,
-                 action_endpoint: Optional[EndpointConfig] = None,
-                 max_number_of_predictions: int = 10,
-                 message_preprocessor: Optional[LambdaType] = None,
-                 on_circuit_break: Optional[LambdaType] = None
+                 interpreter,  # type: NaturalLanguageInterpreter
+                 policy_ensemble,  # type: PolicyEnsemble
+                 domain,  # type: Domain
+                 tracker_store,  # type: TrackerStore
+                 generator,  # type: NaturalLanguageGenerator
+                 action_endpoint=None,  # type: Optional[EndpointConfig]
+                 max_number_of_predictions=10,  # type: int
+                 message_preprocessor=None,  # type: Optional[LambdaType]
+                 on_circuit_break=None  # type: Optional[LambdaType]
                  ):
         self.interpreter = interpreter
         self.nlg = generator
@@ -68,7 +74,8 @@ class MessageProcessor(object):
         self.on_circuit_break = on_circuit_break
         self.action_endpoint = action_endpoint
 
-    def handle_message(self, message: UserMessage) -> Optional[List[Text]]:
+    def handle_message(self, message):
+        # type: (UserMessage) -> Optional[List[Text]]
         """Handle a single message with this processor."""
 
         # preprocess message if necessary
@@ -85,7 +92,8 @@ class MessageProcessor(object):
         else:
             return None
 
-    def predict_next(self, sender_id: Text) -> Optional[Dict[Text, Any]]:
+    def predict_next(self, sender_id):
+        # type: (Text) -> Optional[Dict[Text, Any]]
 
         # we have a Tracker instance for each user
         # which maintains conversation state
@@ -108,8 +116,8 @@ class MessageProcessor(object):
             "tracker": tracker.current_state(EventVerbosity.AFTER_RESTART)
         }
 
-    def log_message(self,
-                    message: UserMessage) -> Optional[DialogueStateTracker]:
+    def log_message(self, message):
+        # type: (UserMessage) -> Optional[DialogueStateTracker]
 
         # preprocess message if necessary
         if self.message_preprocessor is not None:
@@ -127,12 +135,13 @@ class MessageProcessor(object):
         return tracker
 
     def execute_action(self,
-                       sender_id: Text,
-                       action_name: Text,
-                       dispatcher: Dispatcher,
-                       policy: Text,
-                       confidence: float
-                       ) -> Optional[DialogueStateTracker]:
+                       sender_id,  # type: Text
+                       action_name,  # type: Text
+                       dispatcher,  # type: Dispatcher
+                       policy,  # type: Text
+                       confidence  # type: float
+                       ):
+        # type: (...) -> Optional[DialogueStateTracker]
 
         # we have a Tracker instance for each user
         # which maintains conversation state
@@ -149,9 +158,8 @@ class MessageProcessor(object):
                            "'{}'.".format(sender_id))
         return tracker
 
-    def predict_next_action(self,
-                            tracker: DialogueStateTracker
-                            ) -> Tuple[Action, Text, float]:
+    def predict_next_action(self, tracker):
+        # type: (DialogueStateTracker) -> Tuple[Action, Text, float]
         """Predicts the next action the bot should take after seeing x.
 
         This should be overwritten by more advanced policies to use
@@ -162,13 +170,12 @@ class MessageProcessor(object):
         max_index = int(np.argmax(probabilities))
         action = self.domain.action_for_index(max_index, self.action_endpoint)
         logger.debug("Predicted next action '{}' with prob {:.2f}.".format(
-            action.name(), probabilities[max_index]))
+                action.name(), probabilities[max_index]))
         return action, policy, probabilities[max_index]
 
     @staticmethod
-    def _is_reminder_still_valid(tracker: DialogueStateTracker,
-                                 reminder_event: ReminderScheduled
-                                 ) -> bool:
+    def _is_reminder_still_valid(tracker, reminder_event):
+        # type: (DialogueStateTracker, ReminderScheduled) -> bool
         """Check if the conversation has been restarted after reminder."""
 
         for e in reversed(tracker.applied_events()):
@@ -178,9 +185,8 @@ class MessageProcessor(object):
         return False  # not found in applied events --> has been restarted
 
     @staticmethod
-    def _has_message_after_reminder(tracker: DialogueStateTracker,
-                                    reminder_event: ReminderScheduled
-                                    ) -> bool:
+    def _has_message_after_reminder(tracker, reminder_event):
+        # type: (DialogueStateTracker, ReminderScheduled) -> bool
         """Check if the user sent a message after the reminder."""
 
         for e in reversed(tracker.events):
@@ -191,10 +197,8 @@ class MessageProcessor(object):
                 return True
         return True  # tracker has probably been restarted
 
-    def handle_reminder(self,
-                        reminder_event: ReminderScheduled,
-                        dispatcher: Dispatcher
-                        ) -> None:
+    def handle_reminder(self, reminder_event, dispatcher):
+        # type: (ReminderScheduled, Dispatcher) -> None
         """Handle a reminder that is triggered asynchronously."""
 
         tracker = self._get_tracker(dispatcher.sender_id)
@@ -236,9 +240,16 @@ class MessageProcessor(object):
 
     def _parse_message(self, message):
         # for testing - you can short-cut the NLU part with a message
-        # in the format /intent{"entity1": val1, "entity2": val2}
+        # in the format _intent[entity1=val1,entity=val2]
         # parse_data is a dict of intent & entities
-        if message.text.startswith(INTENT_MESSAGE_PREFIX):
+        if (message.text.startswith(INTENT_MESSAGE_PREFIX) or
+                message.text.startswith("_")):
+            if RegexInterpreter.is_using_deprecated_format(message.text):
+                warnings.warn(
+                        "Parsing messages with leading `_` is deprecated and "
+                        "will be removed. Instead, prepend your intents with "
+                        "`{0}`, e.g. `{0}mood_greet` "
+                        "or `{0}restart`.".format(INTENT_MESSAGE_PREFIX))
             parse_data = RegexInterpreter().parse(message.text)
         else:
             parse_data = self.interpreter.parse(message.text)
@@ -249,9 +260,8 @@ class MessageProcessor(object):
                                                 parse_data["entities"]))
         return parse_data
 
-    def _handle_message_with_tracker(self,
-                                     message: UserMessage,
-                                     tracker: DialogueStateTracker) -> None:
+    def _handle_message_with_tracker(self, message, tracker):
+        # type: (UserMessage, DialogueStateTracker) -> None
 
         if message.parse_data:
             parse_data = message.parse_data
@@ -305,8 +315,8 @@ class MessageProcessor(object):
                 should_predict_another_action):
             # circuit breaker was tripped
             logger.warning(
-                "Circuit breaker tripped. Stopped predicting "
-                "more actions for sender '{}'".format(tracker.sender_id))
+                    "Circuit breaker tripped. Stopped predicting "
+                    "more actions for sender '{}'".format(tracker.sender_id))
             if self.on_circuit_break:
                 # call a registered callback
                 self.on_circuit_break(tracker, dispatcher)
@@ -317,8 +327,8 @@ class MessageProcessor(object):
         is_listen_action = action_name == ACTION_LISTEN_NAME
         return not is_listen_action
 
-    def _schedule_reminders(self, events: List[Event],
-                            dispatcher: Dispatcher) -> None:
+    def _schedule_reminders(self, events, dispatcher):
+        # type: (List[Event], Dispatcher) -> None
         """Uses the scheduler to time a job to trigger the passed reminder.
 
         Reminders with the same `id` property will overwrite one another
@@ -375,21 +385,21 @@ class MessageProcessor(object):
                         pass
                     else:
                         logger.warning(
-                            "Action '{0}' set a slot type '{1}' that "
-                            "it never set during the training. This "
-                            "can throw of the prediction. Make sure to "
-                            "include training examples in your stories "
-                            "for the different types of slots this "
-                            "action can return. Remember: you need to "
-                            "set the slots manually in the stories by "
-                            "adding '- slot{{\"{1}\": {2}}}' "
-                            "after the action."
-                            "".format(action_name, e.key,
-                                      json.dumps(e.value)))
+                                "Action '{0}' set a slot type '{1}' that "
+                                "it never set during the training. This "
+                                "can throw of the prediction. Make sure to "
+                                "include training examples in your stories "
+                                "for the different types of slots this "
+                                "action can return. Remember: you need to "
+                                "set the slots manually in the stories by "
+                                "adding '- slot{{\"{1}\": {2}}}' "
+                                "after the action."
+                                "".format(action_name, e.key,
+                                          json.dumps(e.value)))
 
     @staticmethod
-    def log_bot_utterances_on_tracker(tracker: DialogueStateTracker,
-                                      dispatcher: Dispatcher) -> None:
+    def log_bot_utterances_on_tracker(tracker, dispatcher):
+        # type: (DialogueStateTracker, Dispatcher) -> None
 
         if dispatcher.latest_bot_messages:
             for m in dispatcher.latest_bot_messages:
@@ -408,7 +418,7 @@ class MessageProcessor(object):
             events = []
 
         logger.debug("Action '{}' ended with events '{}'".format(
-            action_name, ['{}'.format(e) for e in events]))
+                action_name, ['{}'.format(e) for e in events]))
 
         self._warn_about_new_slots(tracker, action_name, events)
 
@@ -424,7 +434,8 @@ class MessageProcessor(object):
             e.timestamp = time.time()
             tracker.update(e)
 
-    def _get_tracker(self, sender_id: Text) -> Optional[DialogueStateTracker]:
+    def _get_tracker(self, sender_id):
+        # type: (Text) -> Optional[DialogueStateTracker]
 
         sender_id = sender_id or UserMessage.DEFAULT_SENDER_ID
         tracker = self.tracker_store.get_or_create_tracker(sender_id)
@@ -433,9 +444,8 @@ class MessageProcessor(object):
     def _save_tracker(self, tracker):
         self.tracker_store.save(tracker)
 
-    def _prob_array_for_action(self,
-                               action_name: Text
-                               ) -> Tuple[Optional[List[float]], None]:
+    def _prob_array_for_action(self, action_name):
+        # type: (Text) -> Tuple[Optional[List[float]], None]
         idx = self.domain.index_for_action(action_name)
         if idx is not None:
             result = [0.0] * self.domain.num_actions
@@ -444,10 +454,10 @@ class MessageProcessor(object):
         else:
             return None, None
 
-    def _get_next_action_probabilities(
-        self,
-        tracker: DialogueStateTracker
-    ) -> Tuple[Optional[List[float]], Optional[Text]]:
+    def _get_next_action_probabilities(self,
+                                       tracker  # type: DialogueStateTracker
+                                       ):
+        # type: (...) -> Tuple[Optional[List[float]], Optional[Text]]
 
         followup_action = tracker.followup_action
         if followup_action:
@@ -457,12 +467,12 @@ class MessageProcessor(object):
                 return result
             else:
                 logger.error(
-                    "Trying to run unknown follow up action '{}'!"
-                    "Instead of running that, we will ignore the action "
-                    "and predict the next action.".format(followup_action))
+                        "Trying to run unknown follow up action '{}'!"
+                        "Instead of running that, we will ignore the action "
+                        "and predict the next action.".format(followup_action))
 
         if (tracker.latest_message.intent.get("name") ==
                 self.domain.restart_intent):
             return self._prob_array_for_action(ACTION_RESTART_NAME)
         return self.policy_ensemble.probabilities_using_best_policy(
-            tracker, self.domain)
+                tracker, self.domain)

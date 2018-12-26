@@ -1,7 +1,15 @@
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+
+import typing
 from typing import Optional, Union
 
-from rasa_core.domain import Domain
 from rasa_core.utils import EndpointConfig
+
+if typing.TYPE_CHECKING:
+    from rasa_core.domain import Domain
 
 
 class NaturalLanguageGenerator(object):
@@ -17,9 +25,10 @@ class NaturalLanguageGenerator(object):
 
     @staticmethod
     def create(
-        obj: Union['NaturalLanguageGenerator', EndpointConfig, None],
-        domain: Optional[Domain]
-    ) -> 'NaturalLanguageGenerator':
+            obj,  # type: Union[NaturalLanguageGenerator, EndpointConfig, None]
+            domain  # type: Optional[Domain]
+    ):
+        # type: (...) -> NaturalLanguageGenerator
         """Factory to create a generator."""
 
         if isinstance(obj, NaturalLanguageGenerator):

@@ -35,10 +35,6 @@ FALLBACK_MODEL_NAME = "fallback"
 
 DEFAULT_REQUEST_TIMEOUT = 60 * 5  # 5 minutes
 
-STATUS_READY = 0
-STATUS_TRAINING = 1
-STATUS_FAILED = -1
-
 
 def load_from_server(component_builder=None,  # type: Optional[Text]
                      project=None,  # type: Optional[Text]
@@ -170,7 +166,7 @@ class Project(object):
                  pull_models=None):
         self._component_builder = component_builder
         self._models = {}
-        self.status = STATUS_READY
+        self.status = 0
         self.current_training_processes = 0
         self._reader_lock = Lock()
         self._loader_lock = Lock()
@@ -389,17 +385,10 @@ class Project(object):
             return Metadata.load(path)
 
     def as_dict(self):
-        result = {}
-        result["status"] = 'ready'
-        if self.status == STATUS_TRAINING:
-            result["status"] = 'training'
-        elif self.status == STATUS_FAILED:
-            result["status"] = 'failed'
-            result["error_message"] = self.error_message
-        result["current_training_processes"] = self.current_training_processes
-        result["available_models"] = list(self._models.keys())
-        result["loaded_models"] = self._list_loaded_models()
-        return result
+        return {'status': 'training' if self.status else 'ready',
+                'current_training_processes': self.current_training_processes,
+                'available_models': list(self._models.keys()),
+                'loaded_models': self._list_loaded_models()}
 
     def _list_loaded_models(self):
         models = []

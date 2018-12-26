@@ -1,9 +1,14 @@
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+
 import logging
 import os
 import tempfile
 import zipfile
 from functools import wraps
-from typing import List, Text, Optional, Union, Callable, Any
+from typing import List, Text, Optional, Union
 
 from flask import Flask, request, abort, Response, jsonify, json
 from flask_cors import CORS, cross_origin
@@ -21,7 +26,8 @@ from rasa_core.version import __version__
 logger = logging.getLogger(__name__)
 
 
-def _docs(sub_url: Text) -> Text:
+def _docs(sub_url):
+    # type: (Text) -> Text
     """Create a url to a subpart of the docs."""
     return constants.DOCS_BASE_URL + sub_url
 
@@ -34,11 +40,11 @@ def ensure_loaded_agent(agent):
         def decorated(*args, **kwargs):
             if not agent.is_ready():
                 return error(
-                    503,
-                    "NoAgent",
-                    "No agent loaded. To continue processing, a "
-                    "model of a trained agent needs to be loaded.",
-                    help_url=_docs("/server.html#running-the-http-server"))
+                        503,
+                        "NoAgent",
+                        "No agent loaded. To continue processing, a "
+                        "model of a trained agent needs to be loaded.",
+                        help_url=_docs("/server.html#running-the-http-server"))
 
             return f(*args, **kwargs)
 
@@ -59,15 +65,12 @@ def request_parameters():
             raise
 
 
-def requires_auth(app: Flask,
-                  token: Optional[Text] = None
-                  ) -> Callable[[Any], Any]:
+def requires_auth(app, token=None):
+    # type: (Flask, Optional[Text]) -> function
     """Wraps a request handler with token authentication."""
 
-    def decorator(f: Callable[[Any], Any]) -> Callable[[Any, Any], Any]:
-        def sender_id_from_args(f: Callable[[Any], Any],
-                                args: Any,
-                                kwargs: Any) -> Optional[Text]:
+    def decorator(f):
+        def sender_id_from_args(f, args, kwargs):
             argnames = utils.arguments_of(f)
             try:
                 sender_id_arg_idx = argnames.index("sender_id")
@@ -79,8 +82,7 @@ def requires_auth(app: Flask,
             except ValueError:
                 return None
 
-        def sufficient_scope(*args: Any,
-                             **kwargs: Any) -> Optional[bool]:
+        def sufficient_scope(*args, **kwargs):
             jwt_data = view_decorators._decode_jwt_from_headers()
             user = jwt_data.get("user", {})
 
@@ -96,7 +98,7 @@ def requires_auth(app: Flask,
                 return False
 
         @wraps(f)
-        def decorated(*args: Any, **kwargs: Any) -> Any:
+        def decorated(*args, **kwargs):
             provided = request.args.get('token')
             # noinspection PyProtectedMember
             if token is not None and provided == token:
@@ -105,17 +107,17 @@ def requires_auth(app: Flask,
                 if sufficient_scope(*args, **kwargs):
                     return f(*args, **kwargs)
                 abort(error(
-                    403, "NotAuthorized",
-                    "User has insufficient permissions.",
-                    help_url=_docs(
-                        "/server.html#security-considerations")))
+                        403, "NotAuthorized",
+                        "User has insufficient permissions.",
+                        help_url=_docs(
+                                "/server.html#security-considerations")))
             elif token is None and app.config.get('JWT_ALGORITHM') is None:
                 # authentication is disabled
                 return f(*args, **kwargs)
 
             abort(error(
-                401, "NotAuthenticated", "User is not authenticated.",
-                help_url=_docs("/server.html#security-considerations")))
+                    401, "NotAuthenticated", "User is not authenticated.",
+                    help_url=_docs("/server.html#security-considerations")))
 
         return decorated
 
@@ -124,21 +126,21 @@ def requires_auth(app: Flask,
 
 def error(status, reason, message, details=None, help_url=None):
     return Response(
-        json.dumps({
-            "version": __version__,
-            "status": "failure",
-            "message": message,
-            "reason": reason,
-            "details": details or {},
-            "help": help_url,
-            "code": status}),
-        status=status,
-        content_type="application/json")
+            json.dumps({
+                "version": __version__,
+                "status": "failure",
+                "message": message,
+                "reason": reason,
+                "details": details or {},
+                "help": help_url,
+                "code": status}),
+            status=status,
+            content_type="application/json")
 
 
 def event_verbosity_parameter(default_verbosity):
     event_verbosity_str = request.args.get(
-        'include_events', default=default_verbosity.name).upper()
+            'include_events', default=default_verbosity.name).upper()
     try:
         return EventVerbosity[event_verbosity_str]
     except KeyError:
@@ -150,10 +152,10 @@ def event_verbosity_parameter(default_verbosity):
 
 
 def create_app(agent,
-               cors_origins: Optional[Union[Text, List[Text]]] = None,
-               auth_token: Optional[Text] = None,
-               jwt_secret: Optional[Text] = None,
-               jwt_method: Optional[Text] = "HS256",
+               cors_origins=None,  # type: Optional[Union[Text, List[Text]]]
+               auth_token=None,  # type: Optional[Text]
+               jwt_secret=None,  # type: Optional[Text]
+               jwt_method="HS256",  # type: Optional[Text]
                ):
     """Class representing a Rasa Core HTTP server."""
 
@@ -257,8 +259,8 @@ def create_app(agent,
             return jsonify(tracker.current_state(verbosity))
         else:
             logger.warning(
-                "Append event called, but could not extract a "
-                "valid event. Request JSON: {}".format(request_params))
+                    "Append event called, but could not extract a "
+                    "valid event. Request JSON: {}".format(request_params))
             return error(400, "InvalidParameter",
                          "Couldn't extract a proper event from the request "
                          "body.",
@@ -476,7 +478,7 @@ def create_app(agent,
         zip_ref.extractall(model_directory)
         zip_ref.close()
         logger.debug("Unzipped model to {}".format(
-            os.path.abspath(model_directory)))
+                os.path.abspath(model_directory)))
 
         ensemble = PolicyEnsemble.load(model_directory)
         agent.policy_ensemble = ensemble

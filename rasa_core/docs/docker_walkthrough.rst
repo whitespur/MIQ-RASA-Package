@@ -1,9 +1,7 @@
-:desc: Building Rasa with Docker
-
 .. _docker_walkthrough:
 
-Building Rasa with Docker
-=========================
+Development with Docker
+=======================
 
 This walkthrough provides a tutorial on how to set up Rasa Core, Rasa NLU,
 and an Action Server with Docker containers.

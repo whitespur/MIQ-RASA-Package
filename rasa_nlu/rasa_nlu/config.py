@@ -8,7 +8,7 @@ import logging
 import os
 
 import six
-import ruamel.yaml as yaml
+import yaml
 from builtins import object
 # Describes where to search for the config file if no location is specified
 from typing import Text, Optional, Dict, Any, List
@@ -82,27 +82,11 @@ def component_config_from_pipeline(
         defaults=None  # type: Optional[Dict[Text, Any]]
 ):
     # type: (...) -> Dict[Text, Any]
-    from rasa_nlu.registry import registered_components
     for c in pipeline:
-        c_name = c.get("name")
-        if c_name not in registered_components:
-            c_name = get_custom_name(c)
-
-        if c_name == name:
+        if c.get("name") == name:
             return override_defaults(defaults, c)
-
-    return override_defaults(defaults, {})
-
-
-def get_custom_name(
-    component,  # type: Dict[Text, Any]
-):
-    """Checks whether there is a separate "class" attribute or just a name
-    and returns the name in either case"""
-    if "class" in component:
-        return component.get("name")
     else:
-        return utils.class_from_module_path(component.get("name")).name
+        return override_defaults(defaults, {})
 
 
 class RasaNLUModelConfig(object):

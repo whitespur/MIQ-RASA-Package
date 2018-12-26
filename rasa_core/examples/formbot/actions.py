@@ -1,11 +1,19 @@
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+
+import typing
 from typing import Dict, Text, Any, List, Union
 
 from rasa_core_sdk import ActionExecutionRejection
-from rasa_core_sdk import Tracker
-from rasa_core_sdk.events import SlotSet
-from rasa_core_sdk.executor import CollectingDispatcher
 from rasa_core_sdk.forms import FormAction, REQUESTED_SLOT
+from rasa_core_sdk.events import SlotSet
+
+if typing.TYPE_CHECKING:
+    from rasa_core_sdk import Tracker
+    from rasa_core_sdk.executor import CollectingDispatcher
 
 
 class RestaurantForm(FormAction):
@@ -18,7 +26,8 @@ class RestaurantForm(FormAction):
         return "restaurant_form"
 
     @staticmethod
-    def required_slots(tracker: Tracker) -> List[Text]:
+    def required_slots(tracker):
+        # type: (Tracker) -> List[Text]
         """A list of required slots that the form has to fill"""
 
         return ["cuisine", "num_people", "outdoor_seating",
@@ -63,7 +72,8 @@ class RestaurantForm(FormAction):
                 "mexican"]
 
     @staticmethod
-    def is_int(string: Text) -> bool:
+    def is_int(string):
+        # type: (Text) -> bool
         """Check if a string is an integer"""
         try:
             int(string)
@@ -71,10 +81,8 @@ class RestaurantForm(FormAction):
         except ValueError:
             return False
 
-    def validate(self,
-                 dispatcher: CollectingDispatcher,
-                 tracker: Tracker,
-                 domain: Dict[Text, Any]) -> List[Dict]:
+    def validate(self, dispatcher, tracker, domain):
+        # type: (CollectingDispatcher, Tracker, Dict[Text, Any]) -> List[Dict]
         """Validate extracted requested slot
             else reject the execution of the form action
         """
@@ -130,10 +138,8 @@ class RestaurantForm(FormAction):
         # validation succeed, set the slots values to the extracted values
         return [SlotSet(slot, value) for slot, value in slot_values.items()]
 
-    def submit(self,
-               dispatcher: CollectingDispatcher,
-               tracker: Tracker,
-               domain: Dict[Text, Any]) -> List[Dict]:
+    def submit(self, dispatcher, tracker, domain):
+        # type: (CollectingDispatcher, Tracker, Dict[Text, Any]) -> List[Dict]
         """Define what the form has to do
             after all required slots are filled"""
 

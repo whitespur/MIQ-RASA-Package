@@ -1,3 +1,8 @@
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+
 import json
 import logging
 from typing import Text, Optional, List
@@ -18,9 +23,8 @@ class SlackBot(SlackClient, OutputChannel):
     def name(cls):
         return "slack"
 
-    def __init__(self,
-                 token: Text,
-                 slack_channel: Optional[Text] = None) -> None:
+    def __init__(self, token, slack_channel=None):
+        # type: (Text, Optional[Text]) -> None
 
         self.slack_channel = slack_channel
         super(SlackBot, self).__init__(token)
@@ -66,7 +70,7 @@ class SlackBot(SlackClient, OutputChannel):
         button_attachment = [{"fallback": message,
                               "callback_id": message.replace(' ', '_')[:20],
                               "actions": self._convert_to_slack_buttons(
-                                  buttons)}]
+                                      buttons)}]
 
         super(SlackBot, self).api_call("chat.postMessage",
                                        channel=recipient,
@@ -90,10 +94,9 @@ class SlackInput(InputChannel):
         return cls(credentials.get("slack_token"),
                    credentials.get("slack_channel"))
 
-    def __init__(self,
-                 slack_token: Text,
-                 slack_channel: Optional[Text] = None,
-                 errors_ignore_retry: Optional[List[Text]] = None) -> None:
+    def __init__(self, slack_token, slack_channel=None,
+                 errors_ignore_retry=None):
+        # type: (Text, Optional[Text], Optional[List[Text]]) -> None
         """Create a Slack input channel.
 
         Needs a couple of settings to properly authenticate and validate
@@ -177,17 +180,18 @@ class SlackInput(InputChannel):
                                          {"content_type": "application/json"})
                 elif self._is_user_message(output):
                     return self.process_message(
-                        on_new_message,
-                        text=output['event']['text'],
-                        sender_id=output.get('event').get('user'))
+                            on_new_message,
+                            text=output['event']['text'],
+                            sender_id=output.get('event').get('user'))
             elif request.form:
                 output = dict(request.form)
                 if self._is_button_reply(output):
-                    sender_id = json.loads(output['payload'][0])['user']['id']
                     return self.process_message(
-                        on_new_message,
-                        text=self._get_button_reply(output),
-                        sender_id=sender_id)
+                            on_new_message,
+                            text=self._get_button_reply(output),
+                            sender_id=json.loads(
+                                    output['payload'][0]).get('user').get(
+                                'id'))
 
             return make_response()
 

@@ -1,3 +1,8 @@
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+
 import json
 import pytest
 
@@ -13,11 +18,13 @@ from tests.conftest import DEFAULT_DOMAIN_PATH, DEFAULT_STORIES_FILE
 def test_create_train_data_no_history(default_domain):
     featurizer = MaxHistoryTrackerFeaturizer(max_history=1)
     training_trackers = training.load_data(
-        DEFAULT_STORIES_FILE, default_domain, augmentation_factor=0)
-
+            DEFAULT_STORIES_FILE,
+            default_domain,
+            augmentation_factor=0
+    )
     assert len(training_trackers) == 3
     (decoded, _) = featurizer.training_states_and_actions(
-        training_trackers, default_domain)
+            training_trackers, default_domain)
 
     # decoded needs to be sorted
     hashed = []
@@ -112,7 +119,7 @@ def test_domain_from_template():
     domain_file = DEFAULT_DOMAIN_PATH
     domain = Domain.load(domain_file)
     assert len(domain.intents) == 10
-    assert len(domain.action_names) == 10
+    assert len(domain.action_names) == 7
 
 
 def test_utter_templates():
@@ -128,8 +135,8 @@ def test_utter_templates():
 
 def test_restaurant_domain_is_valid():
     # should raise no exception
-    Domain.validate_domain_yaml(
-        read_file('examples/restaurantbot/restaurant_domain.yml'))
+    Domain.validate_domain_yaml(read_file(
+            'examples/restaurantbot/restaurant_domain.yml'))
 
 
 def test_custom_slot_type(tmpdir):
@@ -223,8 +230,7 @@ templates:
     assert domain.entities == ["cuisine"]
     assert isinstance(domain.slots[0], TextSlot)
     assert domain.slots[0].name == "cuisine"
-    assert sorted(domain.user_actions) == sorted(["utter_greet",
-                                                  "utter_goodbye"])
+    assert sorted(domain.user_actions) == sorted(["utter_greet", "utter_goodbye"])
 
     domain = domain_1.merge(domain_2, override=True)
     # single attribute should be taken from domain_2

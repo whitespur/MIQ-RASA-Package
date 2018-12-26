@@ -1,20 +1,24 @@
-import itertools
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
 
 import contextlib
 import io
-from typing import Text, List
+import itertools
+import os
+import sys
 
 import jsonpickle
-import os
+import six
 
 from rasa_core import utils
 from rasa_core.domain import Domain
-from rasa_core.events import UserUttered, Event
 from rasa_core.trackers import DialogueStateTracker
 from tests.conftest import DEFAULT_DOMAIN_PATH
 
 
-def tracker_from_dialogue_file(filename: Text, domain: Domain = None):
+def tracker_from_dialogue_file(filename, domain=None):
     dialogue = read_dialogue_file(filename)
 
     if domain is not None:
@@ -26,11 +30,11 @@ def tracker_from_dialogue_file(filename: Text, domain: Domain = None):
     return tracker
 
 
-def read_dialogue_file(filename: Text):
+def read_dialogue_file(filename):
     return jsonpickle.loads(utils.read_file(filename))
 
 
-def write_text_to_file(tmpdir: Text, filename: Text, text: Text):
+def write_text_to_file(tmpdir, filename, text):
     path = tmpdir.join(filename).strpath
     with io.open(path, "w", encoding="utf-8") as f:
         f.write(text)
@@ -38,7 +42,7 @@ def write_text_to_file(tmpdir: Text, filename: Text, text: Text):
 
 
 @contextlib.contextmanager
-def cwd(path: Text):
+def cwd(path):
     CWD = os.getcwd()
 
     os.chdir(path)
@@ -50,7 +54,7 @@ def cwd(path: Text):
 
 @contextlib.contextmanager
 def mocked_cmd_input(package, text):
-    if isinstance(text, str):
+    if isinstance(text, six.string_types):
         text = [text]
 
     text_generator = itertools.cycle(text)
@@ -66,13 +70,3 @@ def mocked_cmd_input(package, text):
         yield
     finally:
         package.input = i
-
-
-def user_uttered(text: Text, confidence: float) -> UserUttered:
-    parse_data = {'intent': {'name': text, 'confidence': confidence}}
-    return UserUttered(text='Random', intent=parse_data['intent'],
-                       parse_data=parse_data)
-
-
-def get_tracker(events: List[Event]) -> DialogueStateTracker:
-    return DialogueStateTracker.from_events("sender", events, [], 20)

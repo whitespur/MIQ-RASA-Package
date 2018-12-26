@@ -2,6 +2,7 @@ import json
 import os
 
 import pytest
+from builtins import str
 from httpretty import httpretty
 
 from rasa_core import utils
@@ -67,14 +68,14 @@ def test_cap_length_with_short_string():
 
 
 def test_pad_list_to_size():
-    assert (utils.pad_list_to_size(["e1", "e2"], 4, "other") ==
-            ["e1", "e2", "other", "other"])
+    assert utils.pad_list_to_size(["e1", "e2"], 4, "other") == \
+           ["e1", "e2", "other", "other"]
 
 
 def test_read_lines():
     lines = utils.read_lines("data/test_stories/stories.md",
                              max_line_limit=2,
-                             line_pattern=r"\*.*")
+                             line_pattern="\*.*")
 
     lines = list(lines)
 
@@ -83,25 +84,25 @@ def test_read_lines():
 
 def test_endpoint_config():
     endpoint = EndpointConfig(
-        "https://abc.defg/",
-        params={"A": "B"},
-        headers={"X-Powered-By": "Rasa"},
-        basic_auth={"username": "user",
-                    "password": "pass"},
-        token="mytoken",
-        token_name="letoken",
-        store_type="redis",
-        port=6379,
-        db=0,
-        password="password",
-        timeout=30000
+            "https://abc.defg/",
+            params={"A": "B"},
+            headers={"X-Powered-By": "Rasa"},
+            basic_auth={"username": "user",
+                        "password": "pass"},
+            token="mytoken",
+            token_name="letoken",
+            store_type="redis",
+            port=6379,
+            db=0,
+            password="password",
+            timeout=30000
     )
 
     httpretty.register_uri(
-        httpretty.POST,
-        'https://abc.defg/test',
-        status=500,
-        body='')
+            httpretty.POST,
+            'https://abc.defg/test',
+            status=500,
+            body='')
 
     httpretty.enable()
     endpoint.request("post", subpath="test",
@@ -130,7 +131,8 @@ def test_read_yaml_string():
     password: pass
     """
     r = utils.read_yaml_string(config_without_env_var)
-    assert r['user'] == 'user' and r['password'] == 'pass'
+    assert r['user'] == 'user' and \
+        r['password'] == 'pass'
 
 
 def test_read_yaml_string_with_env_var():
@@ -139,7 +141,8 @@ def test_read_yaml_string_with_env_var():
     password: ${PASS}
     """
     r = utils.read_yaml_string(config_with_env_var)
-    assert r['user'] == 'user' and r['password'] == 'pass'
+    assert r['user'] == 'user' and \
+        r['password'] == 'pass'
 
 
 def test_read_yaml_string_with_env_var_prefix():
@@ -148,7 +151,8 @@ def test_read_yaml_string_with_env_var_prefix():
     password: db_${PASS}
     """
     r = utils.read_yaml_string(config_with_env_var_prefix)
-    assert r['user'] == 'db_user' and r['password'] == 'db_pass'
+    assert r['user'] == 'db_user' and \
+        r['password'] == 'db_pass'
 
 
 def test_read_yaml_string_with_env_var_postfix():
@@ -157,7 +161,8 @@ def test_read_yaml_string_with_env_var_postfix():
     password: ${PASS}_admin
     """
     r = utils.read_yaml_string(config_with_env_var_postfix)
-    assert r['user'] == 'user_admin' and r['password'] == 'pass_admin'
+    assert r['user'] == 'user_admin' and \
+        r['password'] == 'pass_admin'
 
 
 def test_read_yaml_string_with_env_var_infix():
@@ -166,7 +171,8 @@ def test_read_yaml_string_with_env_var_infix():
     password: db_${PASS}_admin
     """
     r = utils.read_yaml_string(config_with_env_var_infix)
-    assert r['user'] == 'db_user_admin' and r['password'] == 'db_pass_admin'
+    assert r['user'] == 'db_user_admin' and \
+        r['password'] == 'db_pass_admin'
 
 
 def test_read_yaml_string_with_env_var_not_exist():

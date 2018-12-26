@@ -9,7 +9,7 @@ import logging
 import multiprocessing
 import os
 from concurrent.futures import ProcessPoolExecutor as ProcessPool
-from typing import Text, Dict, Any, Optional
+from typing import Text, Dict, Any, Optional, List
 
 import six
 from builtins import object
@@ -20,11 +20,12 @@ from twisted.logger import jsonFileLogObserver, Logger
 from rasa_nlu import utils, config
 from rasa_nlu.components import ComponentBuilder
 from rasa_nlu.config import RasaNLUModelConfig
-from rasa_nlu.evaluate import run_evaluation
+from rasa_nlu.evaluate import get_evaluation_metrics, clean_intent_labels
 from rasa_nlu.model import InvalidProjectError
-from rasa_nlu.project import Project, load_from_server, \
-        STATUS_READY, STATUS_TRAINING, STATUS_FAILED
+from rasa_nlu.project import Project, load_from_server
 from rasa_nlu.train import do_train_in_worker, TrainingException
+from rasa_nlu.training_data import Message
+from rasa_nlu.training_data.loading import load_data
 
 logger = logging.getLogger(__name__)
 
@@ -283,6 +284,21 @@ class DataRouter(object):
         return [os.path.basename(fn)
                 for fn in utils.list_subdirectories(path)]
 
+    def parse_training_examples(self, examples, project, model):
+        # type: (Optional[List[Message]], Text, Text) -> List[Dict[Text, Text]]
+        """Parses a list of training examples to the project interpreter"""
+
+        predictions = []
+        for ex in examples:
+            logger.debug("Going to parse: {}".format(ex.as_dict()))
+            response = self.project_store[project].parse(ex.text,
+                                                         None,
+                                                         model)
+            logger.debug("Received response: {}".format(response))
+            predictions.append(response)
+
+        return predictions
+
     def format_response(self, data):
         return self.emulator.normalise_response_json(data)
 
@@ -316,32 +332,34 @@ class DataRouter(object):
             raise MaxTrainingError
 
         if project in self.project_store:
-            self.project_store[project].status = STATUS_TRAINING
+            self.project_store[project].status = 1
         elif project not in self.project_store:
             self.project_store[project] = Project(
                     self.component_builder, project,
                     self.project_dir, self.remote_storage)
-            self.project_store[project].status = STATUS_TRAINING
+            self.project_store[project].status = 1
 
         def training_callback(model_path):
             model_dir = os.path.basename(os.path.normpath(model_path))
             self.project_store[project].update(model_dir)
             self._current_training_processes -= 1
             self.project_store[project].current_training_processes -= 1
-            if (self.project_store[project].status == STATUS_TRAINING and
+            if (self.project_store[project].status == 1 and
                     self.project_store[project].current_training_processes ==
                     0):
-                self.project_store[project].status = STATUS_READY
+                self.project_store[project].status = 0
             return model_dir
 
         def training_errback(failure):
             logger.warning(failure)
-
+            target_project = self.project_store.get(
+                    failure.value.failed_target_project)
             self._current_training_processes -= 1
             self.project_store[project].current_training_processes -= 1
-            self.project_store[project].status = STATUS_FAILED
-            self.project_store[project].error_message = str(failure)
-
+            if (target_project and
+                    self.project_store[project].current_training_processes ==
+                    0):
+                target_project.status = 0
             return failure
 
         logger.debug("New training queued")
@@ -371,7 +389,7 @@ class DataRouter(object):
                 target_project = self.project_store.get(
                         e.failed_target_project)
                 if target_project:
-                    target_project.status = STATUS_READY
+                    target_project.status = 0
                 raise e
         else:
             result = self.pool.submit(do_train_in_worker,
@@ -394,27 +412,41 @@ class DataRouter(object):
         project = project or RasaNLUModelConfig.DEFAULT_PROJECT_NAME
         model = model or None
         file_name = utils.create_temporary_file(data, "_training_data")
+        test_data = load_data(file_name)
 
         if project not in self.project_store:
             raise InvalidProjectError("Project {} could not "
                                       "be found".format(project))
 
-        model_name = self.project_store[project]._dynamic_load_model(model)
+        preds_json = self.parse_training_examples(test_data.intent_examples,
+                                                  project,
+                                                  model)
 
-        self.project_store[project]._loader_lock.acquire()
-        try:
-            if not self.project_store[project]._models.get(model_name):
-                interpreter = self.project_store[project]. \
-                    _interpreter_for_model(model_name)
-                self.project_store[project]._models[model_name] = interpreter
-        finally:
-            self.project_store[project]._loader_lock.release()
+        predictions = [
+            {"text": e.text,
+             "intent": e.data.get("intent"),
+             "predicted": p.get("intent", {}).get("name"),
+             "confidence": p.get("intent", {}).get("confidence")}
+            for e, p in zip(test_data.intent_examples, preds_json)
+        ]
 
-        return run_evaluation(
-                data_path=file_name,
-                model=self.project_store[project]._models[model_name],
-                errors_filename=None
-        )
+        y_true = [e.data.get("intent") for e in test_data.intent_examples]
+        y_true = clean_intent_labels(y_true)
+
+        y_pred = [p.get("intent", {}).get("name") for p in preds_json]
+        y_pred = clean_intent_labels(y_pred)
+
+        report, precision, f1, accuracy = get_evaluation_metrics(y_true,
+                                                                 y_pred)
+
+        return {
+            "intent_evaluation": {
+                "report": report,
+                "predictions": predictions,
+                "precision": precision,
+                "f1_score": f1,
+                "accuracy": accuracy}
+        }
 
     def unload_model(self, project, model):
         # type: (Text, Text) -> Dict[Text]

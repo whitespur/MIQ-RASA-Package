@@ -1,5 +1,10 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+
 import datetime
 import json
 import logging
@@ -27,12 +32,8 @@ class BotFramework(OutputChannel):
     def name(cls):
         return "botframework"
 
-    def __init__(self,
-                 app_id: Text,
-                 app_password: Text,
-                 conversation: Dict[Text, Any],
-                 bot_id: Text,
-                 service_url: Text) -> None:
+    def __init__(self, app_id, app_password, conversation, bot_id, service_url):
+        # type: (Text, Text, Dict[Text], Text, Text) -> None
 
         self.app_id = app_id
         self.app_password = app_password
@@ -70,10 +71,12 @@ class BotFramework(OutputChannel):
         else:
             return BotFramework.headers
 
-    def send(self, recipient_id: Text, message_data: Dict[Text, Any]) -> None:
+    def send(self, recipient_id, message_data):
+        # type: (Text, Dict[Text, Any]) -> None
 
-        post_message_uri = ('{}conversations/{}/activities'
-                            ''.format(self.global_uri, self.conversation['id']))
+        post_message_uri = self.global_uri + \
+                           'conversations/{}/activities'.format(
+                                   self.conversation['id'])
         data = {"type": "message",
                 "recipient": {
                     "id": recipient_id
@@ -142,7 +145,8 @@ class BotFrameworkInput(InputChannel):
 
         return cls(credentials.get("app_id"), credentials.get("app_password"))
 
-    def __init__(self, app_id: Text, app_password: Text) -> None:
+    def __init__(self, app_id, app_password):
+        # type: (Text, Text) -> None
         """Create a Bot Framework input channel.
 
         Args:

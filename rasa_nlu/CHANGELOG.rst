@@ -4,37 +4,6 @@ Change Log
 All notable changes to this project will be documented in this file.
 This project adheres to `Semantic Versioning`_ starting with version 0.7.0.
 
-[Unreleased 0.14.0.aX] - `master`_
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Added
------
-- environment variables specified with ``${env_variable}`` in a yaml
-  configuration file are now replaced with the value of the environment variable
-- more documentation on how to run NLU with Docker
-- ``analyzer`` parameter to ``intent_featurizer_count_vectors`` featurizer to
-  configure whether to use word or character n-grams
-
-Changed
--------
-- ``EmbeddingIntentClassifier`` has been refactored, including changes to the
-  config parameters as well as comments and types for all class functions.
-- the http server's ``POST /evaluate`` endpoint returns evaluation results
-  for both entities and intents
-- use cloudpickle version 0.6.1
-- replaced ``yaml`` with ``ruamel.yaml``
-
-Removed
--------
-- ``/config`` endpoint
-
-Fixed
------
-- Should loading jieba custom dictionaries only once.
-- Set attributes of custom components correctly if they defer from the default
-- NLU Server can now handle training data mit emojis in it
-- If the ``token_name`` is not given in the endpoint configuration, the default
-  value is ``token`` instead of ``None`
 
 [0.13.8] - 2018-11-21
 ^^^^^^^^^^^^^^^^^^^^^
@@ -44,7 +13,7 @@ Fixed
 - pinned spacy version to ``spacy<=2.0.12,>2.0`` to avoid dependency conflicts
   with tensorflow
 
-[0.13.7] - 2018-10-11`
+[0.13.7] - 2018-10-11
 ^^^^^^^^^^^^^^^^^^^^^
 
 Fixed

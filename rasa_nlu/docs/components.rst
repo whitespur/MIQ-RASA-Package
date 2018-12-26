@@ -126,8 +126,7 @@ intent_featurizer_count_vectors
     `sklearn's CountVectorizer <http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html>`_. 
     All tokens which consist only of digits (e.g. 123 and 99 but not a123d) will be assigned to the same feature.
 
-    .. note::
-        If the words in the model language cannot be split by whitespace,
+    .. note:: If the words in the model language cannot be split by whitespace, 
         a language-specific tokenizer is required in the pipeline before this component
         (e.g. using ``tokenizer_jieba`` for Chinese).
 
@@ -135,22 +134,7 @@ intent_featurizer_count_vectors
     See `sklearn's CountVectorizer docs <http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html>`_
     for detailed description of the configuration parameters
 
-    This featurizer can be configured to use word or character n-grams, using ``analyzer`` config parameter.
-    By default ``analyzer`` is set to ``word`` so word token counts are used as features.
-    If you want to use character n-grams, set ``analyzer`` to ``char`` or ``char_wb``.
-
-    .. note::
-        Option ‘char_wb’ creates character n-grams only from text inside word boundaries;
-        n-grams at the edges of words are padded with space.
-        This option can be used to create `Subword Semantic Hashing <https://arxiv.org/abs/1810.07150>`_
-
-    .. note::
-        For character n-grams do not forget to increase ``min_ngram`` and ``max_ngram`` parameters.
-        Otherwise the vocabulary will contain only single letters
-
     Handling Out-Of-Vacabulary (OOV) words:
-
-        .. note:: Enabled only if ``analyzer`` is ``word``.
 
         Since the training is performed on limited vocabulary data, it cannot be guaranteed that during prediction
         an algorithm will not encounter an unknown word (a word that were not seen during training).
@@ -161,8 +145,9 @@ intent_featurizer_count_vectors
         maybe some additional general words. Then an algorithm will likely classify a message with unknown words as this intent ``outofscope``.
 
         .. note::
+        
             This featurizer creates a bag-of-words representation by **counting** words,
-            so the number of ``OOV_token`` in the sentence might be important.
+            so the number of ``OOV_token`` s might be important.
 
             - ``OOV_token`` set a keyword for unseen words; if training data contains ``OOV_token`` as words in some messages,
               during prediction the words that were not seen during training will be substituted with provided ``OOV_token``;
@@ -178,10 +163,6 @@ intent_featurizer_count_vectors
 
         pipeline:
         - name: "intent_featurizer_count_vectors"
-          # whether to use word or character n-grams
-          # 'char_wb' creates character n-grams only inside word boundaries
-          # n-grams at the edges of words are padded with space.
-          "analyzer": 'word',  # use 'char' or 'char_wb' for character
           # the parameters are taken from
           # sklearn's CountVectorizer
           # regular expression for tokens
@@ -346,8 +327,8 @@ intent_classifier_tensorflow_embedding
 
     The algorithm also has hyperparameters to control:
         - neural network's architecture:
-            - ``hidden_layers_sizes_a`` sets a list of hidden layer sizes before the embedding layer for user inputs, the number of hidden layers is equal to the length of the list
-            - ``hidden_layers_sizes_b`` sets a list of hidden layer sizes before the embedding layer for intent labels, the number of hidden layers is equal to the length of the list
+            - ``num_hidden_layers_a`` and ``hidden_layer_size_a`` set the number of hidden layers and their sizes before embedding layer for user inputs;
+            - ``num_hidden_layers_b`` and ``hidden_layer_size_b`` set the number of hidden layers and their sizes before embedding layer for intent labels;
         - training:
             - ``batch_size`` sets the number of training examples in one forward/backward pass, the higher the batch size, the more memory space you'll need;
             - ``epochs`` sets the number of times the algorithm will see training data, where ``one epoch`` = one forward pass and one backward pass of all the training examples;
@@ -358,7 +339,6 @@ intent_classifier_tensorflow_embedding
             - ``similarity_type`` sets the type of the similarity, it should be either ``cosine`` or ``inner``;
             - ``num_neg`` sets the number of incorrect intent labels, the algorithm will minimize their similarity to the user input during training;
             - ``use_max_sim_neg`` if ``true`` the algorithm only minimizes maximum similarity over incorrect intent labels;
-            - ``random_seed`` (None or int) An integer sets the random seed for numpy and tensorflow, so that the random initialisation is always the same and produces the same training result
         - regularization:
             - ``C2`` sets the scale of L2 regularization
             - ``C_emb`` sets the scale of how important is to minimize the maximum similarity between embeddings of different intent labels;
@@ -377,8 +357,10 @@ intent_classifier_tensorflow_embedding
         pipeline:
         - name: "intent_classifier_tensorflow_embedding"
           # nn architecture
-          "hidden_layers_sizes_a": [256, 128]
-          "hidden_layers_sizes_b": []
+          "num_hidden_layers_a": 2
+          "hidden_layer_size_a": [256, 128]
+          "num_hidden_layers_b": 0
+          "hidden_layer_size_b": []
           "batch_size": [64, 256]
           "epochs": 300
           # embedding parameters
@@ -388,12 +370,11 @@ intent_classifier_tensorflow_embedding
           "similarity_type": "cosine"  # string 'cosine' or 'inner'
           "num_neg": 20
           "use_max_sim_neg": true  # flag which loss function to use
-          "random_seed": None # set to any int to generate a reproducible training result
           # regularization
           "C2": 0.002
           "C_emb": 0.8
           "droprate": 0.2
-          # flag for tokenizing intents
+          # flag if to tokenize intents
           "intent_tokenization_flag": false
           "intent_split_symbol": "_"
           # visualization of accuracy

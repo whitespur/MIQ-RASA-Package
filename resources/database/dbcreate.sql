@@ -1,15 +1,5 @@
 CREATE SCHEMA IF NOT EXISTS "rasa_ui";
-
-COMMENT ON SCHEMA "rasa_ui" IS 'standard rasaui schema';
-
-GRANT ALL ON SCHEMA "rasa_ui" TO :postgres_user;
 GRANT ALL ON SCHEMA "rasa_ui" TO PUBLIC;
-
-
-DO $$
-BEGIN
-  EXECUTE 'ALTER DATABASE '|| current_database()||' set search_path = ''rasa_ui'', ''$user'', ''public''';
-END $$;
 
 /* Sequences */
 
@@ -299,8 +289,7 @@ CREATE TABLE responses
   response_type integer,
   CONSTRAINT response_pkey PRIMARY KEY (response_id),
   CONSTRAINT intent_fkey FOREIGN KEY (intent_id) REFERENCES intents (intent_id) ON DELETE CASCADE,
-  CONSTRAINT action_fkey FOREIGN KEY (action_id) REFERENCES actions (action_id) ON DELETE CASCADE,
-  CONSTRAINT responses_response_type_fkey FOREIGN KEY (response_type) REFERENCES rasa_ui.response_type (response_type_id) ON DELETE CASCADE
+  CONSTRAINT action_fkey FOREIGN KEY (action_id) REFERENCES actions (action_id) ON DELETE CASCADE
 )
 WITH (
   OIDS = FALSE

@@ -1,3 +1,8 @@
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+
 import logging
 import pika
 from typing import Text
@@ -6,7 +11,8 @@ logger = logging.getLogger(__name__)
 
 
 class EventChannel(object):
-    def publish(self, event: Text) -> None:
+    def publish(self, event):
+        # type: (Text) -> None
         """Publishes a json-formatted Rasa Core event into an event queue."""
 
         raise NotImplementedError("Event broker must implement the `publish` "

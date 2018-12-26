@@ -125,13 +125,16 @@ def test_dialogflow_response():
     assert norm == {
         "id": norm["id"],
         "result": {
-            "action": data["intent"]["name"],
-            "actionIncomplete": False,
+            "action": None,
+            "actionIncomplete": None,
             "contexts": [],
             "fulfillment": {},
             "metadata": {
                 "intentId": norm["result"]["metadata"]["intentId"],
-                "intentName": data["intent"]["name"],
+                "intentName": {
+                    "confidence": data["intent"]["confidence"],
+                    "name": data["intent"]["name"]
+                },
                 "webhookUsed": "false"
             },
             "parameters": {
@@ -140,7 +143,7 @@ def test_dialogflow_response():
                 ]
             },
             "resolvedQuery": data["text"],
-            "score": data["intent"]["confidence"],
+            "score": None,
             "source": "agent"
         },
         "sessionId": norm["sessionId"],

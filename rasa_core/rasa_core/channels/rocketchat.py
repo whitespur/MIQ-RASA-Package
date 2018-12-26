@@ -1,3 +1,8 @@
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+
 import logging
 from typing import Text
 
@@ -81,7 +86,8 @@ class RocketChatInput(InputChannel):
                    credentials.get("password"),
                    credentials.get("server_url"))
 
-    def __init__(self, user: Text, password: Text, server_url: Text) -> None:
+    def __init__(self, user, password, server_url):
+        # type: (Text, Text, Text) -> None
 
         self.user = user
         self.password = password
@@ -90,7 +96,7 @@ class RocketChatInput(InputChannel):
     def send_message(self, text, sender_name, recipient_id, on_new_message):
         if sender_name != self.user:
             output_channel = RocketChatBot(
-                self.user, self.password, self.server_url)
+                    self.user, self.password, self.server_url)
 
             user_msg = UserMessage(text, output_channel, recipient_id,
                                    input_channel=self.name())

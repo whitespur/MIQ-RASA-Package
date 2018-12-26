@@ -39,17 +39,17 @@ class DialogflowEmulator(NoEmulator):
             "result": {
                 "source": "agent",
                 "resolvedQuery": data["text"],
-                "action": data["intent"]["name"],
-                "actionIncomplete": False,
+                "action": None,
+                "actionIncomplete": None,
                 "parameters": entities,
                 "contexts": [],
                 "metadata": {
                     "intentId": str(uuid.uuid1()),
                     "webhookUsed": "false",
-                    "intentName": data["intent"]["name"]
+                    "intentName": data["intent"]
                 },
                 "fulfillment": {},
-                "score": data["intent"]["confidence"],
+                "score": None,
             },
             "status": {
                 "code": 200,

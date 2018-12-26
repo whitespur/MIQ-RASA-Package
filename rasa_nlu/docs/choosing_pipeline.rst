@@ -201,8 +201,6 @@ a full list of components. For example, these two configurations are equivalent:
 
 Below is a list of all the pre-configured pipeline templates.
 
-.. _section_spacy_pipeline:
-
 spacy_sklearn
 ~~~~~~~~~~~~~
 
@@ -226,8 +224,6 @@ the components and configure them separately:
     - name: "ner_crf"
     - name: "ner_synonyms"
     - name: "intent_classifier_sklearn"
-
-.. _section_tensorflow_embedding_pipeline:
 
 tensorflow_embedding
 ~~~~~~~~~~~~~~~~~~~~
@@ -257,7 +253,6 @@ default is to use a simple whitespace tokenizer:
 If you have a custom tokenizer for your language, you can replace the whitespace
 tokenizer with something more accurate. 
 
-.. _section_mitie_pipeline:
 
 mitie
 ~~~~~
