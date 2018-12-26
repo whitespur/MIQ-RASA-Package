@@ -9,27 +9,21 @@
     "utter_greet": {
       "slots": []
     },
-    "utter_deny": {
+    "utter_meetup": {
       "slots": []
     },
-    "utter_meetup": {
+    "utter_deny": {
       "slots": []
     }
   },
-  "rasa_core": "0.13.0a4",
-  "python": "3.6.7",
+  "rasa_core": "0.9.3",
   "max_histories": [
-    5,
-    null,
-    5,
-    2
+    3,
+    5
   ],
   "ensemble_name": "rasa_core.policies.ensemble.SimplePolicyEnsemble",
   "policy_names": [
-    "rasa_core.policies.keras_policy.KerasPolicy",
-    "rasa_core.policies.fallback.FallbackPolicy",
     "rasa_core.policies.memoization.MemoizationPolicy",
-    "rasa_core.policies.form_policy.FormPolicy"
-  ],
-  "trained_at": "20181217-231048"
+    "rasa_core.policies.keras_policy.KerasPolicy"
+  ]
 }
