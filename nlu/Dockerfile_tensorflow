@@ -19,6 +19,7 @@ RUN pip install -r alt_requirements/requirements_tensorflow_sklearn.txt
 
 RUN pip install -e .
 RUN chmod +x /app/entrypoint.sh
+RUN ls
 
 COPY nlu/sample_configs/config_embedding.yml ${RASA_NLU_HOME}/config/config.yml
 
@@ -26,5 +27,5 @@ VOLUME ["/app/projects", "/app/logs", "/app/data", "/app/config"]
 
 EXPOSE 5000
 
-ENTRYPOINT ["/app/entrypoint.sh"]
+ENTRYPOINT ["./entrypoint.sh"]
 CMD ["start", "-c", "/app/config/config.yml", "--path", "/app/projects"]
