@@ -30,7 +30,7 @@ RUN pip install -r requirements.txt --no-cache-dir
 COPY rasa_core/. .
 
 RUN pip install -e . --no-cache-dir
-RUN chmod +x /app/entrypoint.sh
+RUN chmod -R +x .
 VOLUME ["/app/model", "/app/project", "/app/config"]
 EXPOSE 5005
 
