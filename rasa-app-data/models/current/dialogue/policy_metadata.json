@@ -1,0 +1,25 @@
+{
+  "action_fingerprints": {
+    "action_listen": {
+      "slots": []
+    },
+    "utter_goodbye": {
+      "slots": []
+    },
+    "utter_meetup": {
+      "slots": []
+    },
+    "utter_deny": {
+      "slots": []
+    },
+    "utter_greet": {
+      "slots": []
+    }
+  },
+  "rasa_core": "0.13.0a5",
+  "python": "3.6.7",
+  "max_histories": [],
+  "ensemble_name": "rasa_core.policies.ensemble.SimplePolicyEnsemble",
+  "policy_names": [],
+  "trained_at": "20181221-202616"
+}
