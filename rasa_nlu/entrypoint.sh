@@ -42,8 +42,6 @@ function download_package {
 
 case ${1} in
     start)
-        exec ls -ls
-        exec ls config
         exec python -m rasa_nlu.server "${@:2}" 
         ;;
     run)
