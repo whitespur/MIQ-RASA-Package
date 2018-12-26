@@ -4,24 +4,55 @@ set -e
 
 function print_help {
     echo "Available options:"
-    echo " help                       - Print this help"
-    echo " train-nlu                  - Train a dialogue model"
-    echo " train-agent                - Train a dialogue model"
-    echo " run                        - Run agent"
+    echo " start commands (rasa cmd line arguments)  - Start RasaNLU server"
+    echo " download {mitie, spacy en, spacy de}      - Download packages for mitie or spacy (english or german)"
+    echo " start -h                                  - Print RasaNLU help"
+    echo " help                                      - Print this help"
+    echo " run                                       - Run an arbitrary command inside the container"
+}
+
+function download_package {
+    case $1 in
+        mitie)
+            echo "Downloading mitie model..."
+            wget https://github.com/mit-nlp/MITIE/releases/download/v0.4/MITIE-models-v0.2.tar.bz2
+            tar jxf MITIE-models-v0.2.tar.bz2
+            ;;
+        spacy)
+            case $2 in 
+                en|de)
+                    echo "Downloading spacy.$2 model..."
+                    python -m spacy download "$2"
+                    echo "Done."
+                    ;;
+                *) 
+                    echo "Error. Rasa_nlu supports only english and german models for the time being"
+                    print_help
+                    exit 1
+                    ;;
+            esac
+            ;;
+        *) 
+            echo "Error: invalid package specified."
+            echo 
+            print_help
+            ;;
+    esac
 }
 
 case ${1} in
-    train-nlu)
-        exec python -m rasa_nlu.train -c config.yml -d data/nlu_data.md -o models/current/nlu_model
+    start)
+        exec python -m rasa_nlu.server "${@:2}" 
         ;;
-    train-agent)
-        exec python -m rasa_core.train -d ./domain.yml -s data/stories.md -o models/current/dialogue
-        ;;        
     run)
-        exec python -m rasa_core.run -d models/current/dialogue -u models/current/nlu_model
-        ;;        
+        exec "${@:2}"
+        ;;
+    download)
+        download_package ${@:2}
+        ;;
     *)
         print_help
         ;;
 esac
+
 
