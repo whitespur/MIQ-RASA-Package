@@ -26,4 +26,4 @@ VOLUME ["/app/projects", "/app/logs", "/app/data", "/app/config"]
 
 EXPOSE 5000
 ENTRYPOINT ["./entrypoint.sh"]
-CMD ["train-nlu"]
+CMD ["train-agent"]
