@@ -15,6 +15,7 @@ RUN apt-get update -qq \
 WORKDIR ${RASA_NLU_HOME}
 COPY rasa_nlu/. ${RASA_NLU_HOME}
 RUN pip install sklearn
+RUN pip install spacy
 RUN pip install -r alt_requirements/requirements_tensorflow_sklearn.txt
 
 RUN pip install -e .
