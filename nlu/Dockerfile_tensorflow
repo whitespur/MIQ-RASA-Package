@@ -25,7 +25,7 @@ COPY nlu/sample_configs/config_embedding.yml ${RASA_NLU_HOME}/config/config.yml
 VOLUME ["/app/projects", "/app/logs", "/app/data", "/app/config"]
 
 EXPOSE 5000
-RUN ls
+RUN ls /app/config
 
 ENTRYPOINT ["./entrypoint.sh"]
 CMD ["start", "-c", "/app/config/config.yml", "--path", "/app/projects"]
