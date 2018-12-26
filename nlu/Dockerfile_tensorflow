@@ -25,5 +25,5 @@ VOLUME ["/app/projects", "/app/logs", "/app/data", "/app/config"]
 
 EXPOSE 5000
 
-ENTRYPOINT ["sh", "./entrypoint.sh"]
+ENTRYPOINT ["entrypoint.sh"]
 CMD ["start", "-c", "/app/config/config.yml", "--path", "/app/projects"]
