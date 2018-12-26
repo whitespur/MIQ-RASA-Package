@@ -18,10 +18,10 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - "./rasa-app-data/config:/app/config"
-      - "./rasa-app-data/models:/app/projects"
-      - "./rasa-app-data/logs:/app/logs"
-      - "./rasa-app-data/data:/app/data"
+      - "rasa-app-data/config:/app/config"
+      - "rasa-app-data/models:/app/projects"
+      - "rasa-app-data/logs:/app/logs"
+      - "rasa-app-data/data:/app/data"
   rasa_core:
     build:
       context: '.'
@@ -33,11 +33,11 @@ services:
       - "rasa_nlu"
       - "action_server"
     volumes:
-      - "./rasa-app-data/models/current/dialogue:/app/model"
-      - "./rasa-app-data/models/current/:/app/current"
-      - "./rasa-app-data/config:/app/config"
-      - "./rasa-app-data/project:/app/project"
-      - "./rasa-app-data/data:/app/data"
+      - "rasa-app-data/models/current/dialogue:/app/model"
+      - "rasa-app-data/models/current/:/app/current"
+      - "rasa-app-data/config:/app/config"
+      - "rasa-app-data/project:/app/project"
+      - "rasa-app-data/data:/app/data"
     command:
       - start
       - -d
