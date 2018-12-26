@@ -12,10 +12,10 @@ function print_help {
 
 case ${1} in
     train-nlu)
-        exec python -m rasa_nlu.train -c config.yml -d data/nlu_data.md -o models/current/nlu_model
+        exec python -m rasa_nlu.train -c ./config/config.yml -d data/nlu_data.md -o models/current/nlu_model
         ;;
     train-agent)
-        exec python -m rasa_core.train -d ./domain.yml -s data/stories.md -o models/current/dialogue
+        exec python -m rasa_core.train -d ./config/domain.yml -s data/stories.md -o models/current/dialogue
         ;;        
     run)
         exec python -m rasa_core.run -d models/current/dialogue -u models/current/nlu_model
