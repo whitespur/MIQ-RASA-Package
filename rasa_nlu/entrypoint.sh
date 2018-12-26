@@ -42,8 +42,6 @@ function download_package {
 
 case ${1} in
     start)
-        exec ls
-        exec ls /app/config
         exec sudo python -m rasa_nlu.server "${@:2}" 
         ;;
     run)

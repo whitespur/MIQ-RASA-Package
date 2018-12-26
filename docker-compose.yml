@@ -13,7 +13,7 @@ services:
   rasa_nlu:
     build:
       context: '.'
-      dockerfile: nlu/Dockerfile_tensorflow
+      dockerfile: rasa_nlu/Dockerfile_tensorflow
     networks: ['rasa-network']
     ports:
       - "5000:5000"
@@ -25,7 +25,7 @@ services:
   rasa_core:
     build:
       context: '.'
-      dockerfile: core/Dockerfile
+      dockerfile: rasa_core/Dockerfile
     networks: ['rasa-network']
     ports:
       - "5005:5005"
