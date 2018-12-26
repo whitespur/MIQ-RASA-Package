@@ -18,6 +18,7 @@ COPY nlu/. ${RASA_NLU_HOME}
 RUN pip install -r alt_requirements/requirements_tensorflow_sklearn.txt
 
 RUN pip install -e .
+RUN chmod +x /app/entrypoint.sh
 
 COPY nlu/sample_configs/config_embedding.yml ${RASA_NLU_HOME}/config/config.yml
 

@@ -30,6 +30,7 @@ RUN pip install -r requirements.txt --no-cache-dir
 COPY core/. .
 
 RUN pip install -e . --no-cache-dir
+RUN chmod +x /app/entrypoint.sh
 VOLUME ["/app/model", "/app/config", "/app/project"]
 EXPOSE 5005
 
