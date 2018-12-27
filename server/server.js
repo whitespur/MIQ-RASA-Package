@@ -70,14 +70,10 @@ app.use(function(req, res, next) {
     }
   }
 });
-var privateKey = fs.readFileSync('/app/certificates/privkey.pem').toString();
-var certificate = fs.readFileSync('/app/certificates/cert.pem').toString();
 
-var credentials = crypto.createCredentials({key: privateKey, cert: certificate});
 
 
 var server = require('http').createServer(app);
-server.setSecure(credentials);
 var io = require('socket.io').listen(server);
   
 const NodeCache = require( "node-cache" );
