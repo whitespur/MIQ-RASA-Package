@@ -29,6 +29,6 @@ HEALTHCHECK CMD ${HEALTHCHECK_CMD}
 
 EXPOSE ${http_port}
 USER root
-RUN ls -ls /
+RUN pwd
 
 ENTRYPOINT sh -c "hostname -i; npm start"
