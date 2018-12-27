@@ -15,7 +15,9 @@ var request = require('request');
 var routes = require('./routes/index')
 var cors = require('cors')
 var jwt = require('jsonwebtoken');
-
+const crypto = require('crypto'),
+  fs = require("fs");
+  
 const db = require('./db/db')
 const url = require('url');
 
@@ -68,10 +70,16 @@ app.use(function(req, res, next) {
     }
   }
 });
+var privateKey = fs.readFileSync('privatekey.pem').toString();
+var certificate = fs.readFileSync('certificate.pem').toString();
+
+var credentials = crypto.createCredentials({key: privateKey, cert: certificate});
+
 
 var server = require('http').createServer(app);
+server.setSecure(credentials);
 var io = require('socket.io').listen(server);
-
+  
 const NodeCache = require( "node-cache" );
 //https://github.com/mpneuried/nodecache
 const socketCache =  new NodeCache({useClones: false});
