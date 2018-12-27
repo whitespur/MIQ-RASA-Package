@@ -62,7 +62,6 @@ services:
       POSTGRES_DB: "rasaui"
 
   rasa_ui: 
-    privileged: true
     build:
       context: '.'
       dockerfile: 'Dockerfile'    
