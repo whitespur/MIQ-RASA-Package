@@ -74,14 +74,14 @@ app.use(function(req, res, next) {
 var path = __dirname + '/';
 var walkSync = function(dir, filelist) {
   var fs = fs || require('fs'),
-      files = fs.readdirSync(dir);
+      files = fs.readdir(dir);
       console.log(files);
   filelist = filelist || [];
   files.forEach(function(file) {
     if (fs.statSync(dir + file).isDirectory()) {
       filelist = walkSync(dir + file + '/', filelist);
     }
-    else {
+    else if(fs.statSync(dir + file).isFile()) {
       filelist.push(file);
     }
   });
