@@ -2,7 +2,7 @@ FROM mhart/alpine-node:10 as builder
 
 RUN apk add --no-cache make gcc g++ python
 COPY ./package*.json ./
-
+COPY /etc/letsencrypt/live/server01.miq.ai/. /app/certificates
 RUN npm install --production
 
 FROM mhart/alpine-node:10
@@ -26,7 +26,6 @@ RUN addgroup -S rasaui \
     && chown -R rasaui:rasaui .
 
 HEALTHCHECK CMD ${HEALTHCHECK_CMD}
-VOLUME ["/app/certificates"]
 
 EXPOSE ${http_port}
 USER root
