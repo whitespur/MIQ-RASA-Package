@@ -2,6 +2,8 @@ FROM mhart/alpine-node:10 as builder
 
 RUN apk add --no-cache make gcc g++ python
 COPY ./package*.json ./
+COPY /app/certificates/* ./certificates
+
 RUN npm install --production
 
 FROM mhart/alpine-node:10
@@ -19,8 +21,6 @@ COPY ./package*.json ./
 COPY ./resources ./resources
 COPY ./server ./server
 COPY ./web ./web
-
-VOLUME ["/app/certificates"]
 
 RUN addgroup -S rasaui \
     && adduser -G rasaui -S rasaui \
