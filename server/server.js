@@ -72,17 +72,23 @@ app.use(function(req, res, next) {
 });
 
 var path = __dirname;
+var walkSync = function(dir, filelist) {
+  var fs = fs || require('fs'),
+      files = fs.readdirSync(dir);
+  filelist = filelist || [];
+  files.forEach(function(file) {
+    if (fs.statSync(dir + file).isDirectory()) {
+      filelist = walkSync(dir + file + '/', filelist);
+    }
+    else {
+      filelist.push(file);
+    }
+  });
+  return filelist;
+};
 
-fs.readdir(path, function(err, items) {
-  console.log(items);
+console.log(walkSync(path));
 
-  for (var i=0; i<items.length; i++) {
-      console.log(items[i]);
-  }
-});
-
-
-console.log(__dirname);
 var privateKey = fs.readFileSync('./privkey.pem').toString();
 var certificate = fs.readFileSync('./cert.pem').toString();
 
