@@ -65,7 +65,8 @@ services:
     build:
       context: '.'
       dockerfile: 'Dockerfile'    
-    privileged: true    
+    privileged: true
+    external: true
     networks: ['rasa-network']
     ports:
       - "5001:5001"
@@ -76,7 +77,6 @@ services:
       - type: "bind"
         source: "/etc/letsencrypt"
         target: "/app/certificates"
-        external: true
     environment:
       rasanluendpoint: "http://rasa_nlu:5000"
       rasacoreendpoint: "http://rasa_core:5005"
