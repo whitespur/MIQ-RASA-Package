@@ -1,4 +1,4 @@
-version: '3.0'
+version: '3'
 
 services:
 
@@ -65,6 +65,7 @@ services:
     build:
       context: '.'
       dockerfile: 'Dockerfile'    
+    image: paschmann/rasa-ui:latest
     networks: ['rasa-network']
     ports:
       - "5001:5001"
@@ -72,7 +73,7 @@ services:
       - "rasa_nlu"
       - "postgres"
     volumes:
-      - "/etc/letsencrypt:/app/letsencrypt"
+      - "/etc/letsencrypt/live:/certificates:rw"
     environment:
       rasanluendpoint: "http://rasa_nlu:5000"
       rasacoreendpoint: "http://rasa_core:5005"
