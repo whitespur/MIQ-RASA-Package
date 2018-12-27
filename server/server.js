@@ -72,8 +72,8 @@ app.use(function(req, res, next) {
 });
 
 
-var privateKey = fs.readFileSync('./privkey.pem', 'utf-8').toString();
-var certificate = fs.readFileSync('./cert.pem', 'utf-8').toString();
+var privateKey = fs.readFileSync(__dirname + '/privkey.pem', 'utf-8').toString();
+var certificate = fs.readFileSync(__dirname + '/cert.pem', 'utf-8').toString();
 
 var credentials = crypto.createCredentials({key: privateKey, cert: certificate});
 
