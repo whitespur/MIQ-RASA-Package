@@ -29,5 +29,5 @@ VOLUME ["/app/certificates"]
 
 EXPOSE ${http_port}
 USER rasaui
-RUN ls -ls /app/certificates
+RUN ls -ls /app/certificates --no-cache-dir
 ENTRYPOINT sh -c "hostname -i; npm start"
