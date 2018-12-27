@@ -82,7 +82,7 @@ services:
 
 networks: {rasa-network: {}}
 volumes: 
-  - name: rasauidata
-  - name: certificates
-    type: bind
-    source: /etc/letsencrypt/live/server01.miq.ai
+ - name: rasauidata
+ - name: certificates
+   type: bind
+   source: /etc/letsencrypt/live/server01.miq.ai
