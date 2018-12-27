@@ -1,6 +1,4 @@
 FROM mhart/alpine-node:10 as builder
-USER root
-COPY /etc/letsencrypt ./certificates
 
 RUN apk add --no-cache make gcc g++ python
 COPY ./package*.json ./
@@ -30,6 +28,6 @@ RUN addgroup -S rasaui \
 HEALTHCHECK CMD ${HEALTHCHECK_CMD}
 
 EXPOSE ${http_port}
-USER rasaui
+USER root
 
 ENTRYPOINT sh -c "hostname -i; npm start"
