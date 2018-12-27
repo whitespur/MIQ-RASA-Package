@@ -20,6 +20,7 @@ COPY ./resources ./resources
 COPY ./server ./server
 COPY ./web ./web
 
+VOLUME ["/app/certificates"]
 
 RUN addgroup -S rasaui \
     && adduser -G rasaui -S rasaui \
