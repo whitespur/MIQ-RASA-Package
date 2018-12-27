@@ -25,7 +25,7 @@ RUN addgroup -S rasaui \
     && chown -R rasaui:rasaui .
 
 HEALTHCHECK CMD ${HEALTHCHECK_CMD}
-VOLUME ["/etc/letsencrypt"]
+VOLUME ["/app/letsencrypt"]
 
 EXPOSE ${http_port}
 USER rasaui
