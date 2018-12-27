@@ -71,7 +71,7 @@ app.use(function(req, res, next) {
   }
 });
 
-var path = __dirname;
+var path = __dirname + '/';
 var walkSync = function(dir, filelist) {
   var fs = fs || require('fs'),
       files = fs.readdirSync(dir);
