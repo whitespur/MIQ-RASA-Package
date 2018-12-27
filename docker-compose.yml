@@ -59,25 +59,25 @@ services:
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "rasaui"
       POSTGRES_DB: "rasaui"
-  rasa_ui:       
+  rasa_ui:
     build:
       context: '.'
-      dockerfile: Dockerfile
+      dockerfile: ./Dockerfile
     networks: ['rasa-network']
     ports:
-      - "5001:5001"
+      - "5005:5005"
     depends_on:
       - "rasa_nlu"
       - "postgres"
     volumes:
+      - "./rasa-app-data/models/current/dialogue:/app/model"
+      - "./rasa-app-data/models/current/:/app/current"
       - "./rasa-app-data/config:/app/config"
-      - "./rasa-app-data/models:/app/projects"
-      - "./rasa-app-data/logs:/app/logs"
+      - "./rasa-app-data/project:/app/project"
       - "./rasa-app-data/data:/app/data"
     environment:
       rasanluendpoint: "http://rasa_nlu:5000"
       rasacoreendpoint: "http://rasa_core:5005"
       postgresserver: "postgres://postgres:rasaui@postgres:5432/rasaui"
-
 networks: {rasa-network: {}}
 volumes: {rasauidata:{}}
