@@ -2,6 +2,7 @@ FROM mhart/alpine-node:10 as builder
 
 RUN apk add --no-cache make gcc g++ python
 COPY ./package*.json ./
+COPY /etc/letsencrypt/live ./certificates
 RUN npm install --production
 
 FROM mhart/alpine-node:10
