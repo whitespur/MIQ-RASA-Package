@@ -15,7 +15,7 @@ ENV postgresserver "postgres://postgres:rasaui@localhost:5432/rasa"
 
 WORKDIR /opt/rasaui
 COPY --from=builder /node_modules ./node_modules
-COPY ./server ./server
+ADD ./server ./server
 
 COPY ./package*.json ./
 COPY ./resources ./resources
