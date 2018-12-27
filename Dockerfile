@@ -25,7 +25,6 @@ RUN addgroup -S rasaui \
     && chown -R rasaui:rasaui .
 
 HEALTHCHECK CMD ${HEALTHCHECK_CMD}
-VOLUME ["/app/projects", "/app/logs", "/app/data", "/app/config"]
 
 EXPOSE ${http_port}
 USER rasaui
