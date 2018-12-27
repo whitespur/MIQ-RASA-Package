@@ -1,7 +1,6 @@
 FROM mhart/alpine-node:10 as builder
 
 RUN apk add --no-cache make gcc g++ python
-COPY ./server ./server
 COPY ./package*.json ./
 RUN npm install --production
 
@@ -16,7 +15,7 @@ ENV postgresserver "postgres://postgres:rasaui@localhost:5432/rasa"
 
 WORKDIR /opt/rasaui
 COPY --from=builder /node_modules ./node_modules
-COPY --from=builder /server ./server
+COPY ./server ./server
 
 COPY ./package*.json ./
 COPY ./resources ./resources
