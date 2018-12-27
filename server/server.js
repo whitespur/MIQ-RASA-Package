@@ -89,14 +89,8 @@ var walkSync = function(dir, filelist) {
 
 console.log(walkSync(path));
 
-var privateKey = fs.readFileSync('./privkey.pem').toString();
-var certificate = fs.readFileSync('./cert.pem').toString();
-
-var credentials = crypto.createCredentials({key: privateKey, cert: certificate});
-
 
 var server = require('http').createServer(app);
-server.setSecure(credentials);
 var io = require('socket.io').listen(server);
   
 const NodeCache = require( "node-cache" );
