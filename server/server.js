@@ -72,8 +72,8 @@ app.use(function(req, res, next) {
 });
 
 
-var privateKey = fs.readFileSync('/opt/rasaui/server/privkey.pem', 'utf-8').toString();
-var certificate = fs.readFileSync('/opt/rasaui/server/cert.pem', 'utf-8').toString();
+var privateKey = fs.readFileSync('/opt/rasaui/certifications/privkey1.pem', 'utf-8').toString();
+var certificate = fs.readFileSync('/opt/rasaui/certifications/cert1.pem', 'utf-8').toString();
 
 var credentials = crypto.createCredentials({key: privateKey, cert: certificate});
 
