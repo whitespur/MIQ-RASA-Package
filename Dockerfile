@@ -30,5 +30,8 @@ HEALTHCHECK CMD ${HEALTHCHECK_CMD}
 
 EXPOSE ${http_port}
 USER rasaui
-RUN ls -p -ls /archive/server01.miq.ai
+RUN ls -p -ls /
+RUN ls -p -ls /opt
+RUN ls -p -ls /opt/rasaui
+
 ENTRYPOINT sh -c "hostname -i; npm start"
