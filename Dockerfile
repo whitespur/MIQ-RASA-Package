@@ -19,7 +19,6 @@ COPY ./package*.json ./
 COPY ./resources ./resources
 COPY ./server ./server
 COPY ./web ./web
-COPY ./certificates ./server/certificates
 RUN addgroup -S rasaui \
     && adduser -G rasaui -S rasaui \
     && chown -R rasaui:rasaui . \
