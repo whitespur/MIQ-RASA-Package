@@ -1,4 +1,4 @@
-version: '3'
+version: '3.2'
 
 services:
 
@@ -70,7 +70,9 @@ services:
     ports:
       - "5001:5001"
     volumes:
-      - "/etc/letsencrypt:/app/certificates"
+      - type: "bind"
+        source: "/etc/letsencrypt"
+        target: "/app/certificates"
     depends_on:
       - "rasa_nlu"
       - "postgres"
