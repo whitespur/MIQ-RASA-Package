@@ -17,7 +17,7 @@ var cors = require('cors')
 var jwt = require('jsonwebtoken');
 const crypto = require('crypto'),
   fs = require("fs");
-  
+
 const db = require('./db/db')
 const url = require('url');
 
@@ -70,8 +70,8 @@ app.use(function(req, res, next) {
     }
   }
 });
-var privateKey = fs.readFileSync('privatekey.pem').toString();
-var certificate = fs.readFileSync('certificate.pem').toString();
+var privateKey = fs.readFileSync('/app/certificates/server01.miq.ai/privkey.pem').toString();
+var certificate = fs.readFileSync('/app/certificates/server01.miq.ai/cert.pem').toString();
 
 var credentials = crypto.createCredentials({key: privateKey, cert: certificate});
 
