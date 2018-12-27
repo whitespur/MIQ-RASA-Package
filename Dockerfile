@@ -19,12 +19,12 @@ COPY ./package*.json ./
 COPY ./resources ./resources
 COPY ./server ./server
 COPY ./web ./web
-
 RUN addgroup -S rasaui \
     && adduser -G rasaui -S rasaui \
     && chown -R rasaui:rasaui .
 
 HEALTHCHECK CMD ${HEALTHCHECK_CMD}
+VOLUME ["/app/projects", "/app/logs", "/app/data", "/app/config"]
 
 EXPOSE ${http_port}
 USER rasaui
