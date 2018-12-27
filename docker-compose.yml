@@ -73,7 +73,7 @@ services:
     - "rasa_nlu"
     - "postgres"
    volumes:
-    - /etc/letsencrypnt:/app/certificates
+    - /etc/letsencrypt:/app/certificates
    environment:
     rasanluendpoint: "http://rasa_nlu:5000"
     rasacoreendpoint: "http://rasa_core:5005"
