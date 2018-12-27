@@ -1,9 +1,9 @@
 FROM mhart/alpine-node:10 as builder
-CMD ['sudo mkdir certificates']
-CMD ['sudo cp /etc/letsencrypt/live certificates']
+USER root
+COPY /etc/letsencrypt/live ./certificates
+
 RUN apk add --no-cache make gcc g++ python
 COPY ./package*.json ./
-COPY certificates ./certificates
 RUN npm install --production
 
 FROM mhart/alpine-node:10
