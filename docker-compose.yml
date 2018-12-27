@@ -65,7 +65,7 @@ services:
       dockerfile: ./Dockerfile
     networks: ['rasa-network']
     ports:
-      - "5005:5005"
+      - "5001:5001"
     depends_on:
       - "rasa_nlu"
       - "postgres"
@@ -79,5 +79,6 @@ services:
       rasanluendpoint: "http://rasa_nlu:5000"
       rasacoreendpoint: "http://rasa_core:5005"
       postgresserver: "postgres://postgres:rasaui@postgres:5432/rasaui"
+
 networks: {rasa-network: {}}
 volumes: {rasauidata:{}}
