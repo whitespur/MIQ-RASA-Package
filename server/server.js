@@ -72,7 +72,7 @@ app.use(function(req, res, next) {
 });
 
 var path = __dirname + '/';
-      files = fs.readdirSync(path);
+      files = fs.readdirSync(path, 'utf8');
 
 console.log(files);
 
