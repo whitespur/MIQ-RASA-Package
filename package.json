@@ -37,8 +37,7 @@
     "socket.io-client": "^2.0.4",
     "tether": "latest",
     "xdate": "latest",
-    "fs": "latest",
-    "crypto": "latest"
+    "fs": "latest"
   },
   "config": {
     "rasanluendpoint": "http://localhost:5000",
