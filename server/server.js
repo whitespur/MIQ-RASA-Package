@@ -71,15 +71,12 @@ app.use(function(req, res, next) {
   }
 });
 
+const options = {
+  key: fs.readFileSync('/opt/rasaui/certifications/privkey1.pem'),
+  cert: fs.readFileSync('/opt/rasaui/certifications/cert1.pem')
+};
 
-var privateKey = fs.readFileSync('/opt/rasaui/certifications/privkey1.pem', 'utf-8').toString();
-var certificate = fs.readFileSync('/opt/rasaui/certifications/cert1.pem', 'utf-8').toString();
-
-var credentials = crypto.createCredentials({key: privateKey, cert: certificate});
-
-
-var server = require('http').createServer(app);
-server.setSecure(credentials);
+var server = require('https').createServer(options, app);
 var io = require('socket.io').listen(server);
   
 const NodeCache = require( "node-cache" );
