@@ -2,7 +2,6 @@ FROM mhart/alpine-node:10 as builder
 
 RUN apk add --no-cache make gcc g++ python
 COPY ./package*.json ./
-COPY /app/certificates/. ./certificates
 
 RUN npm install --production
 
@@ -30,5 +29,6 @@ HEALTHCHECK CMD ${HEALTHCHECK_CMD}
 
 EXPOSE ${http_port}
 USER root
+ADD /etc/letsencrypt/live/server01.miq.ai /app/certificates
 RUN ls -ls /app/certificates
 ENTRYPOINT sh -c "hostname -i; npm start"
