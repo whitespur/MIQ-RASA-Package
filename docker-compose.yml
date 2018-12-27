@@ -1,4 +1,4 @@
-version: '3.2'
+version: '3.4'
 
 services:
 
@@ -74,13 +74,17 @@ services:
       - "rasa_nlu"
       - "postgres"
     volumes:
-      - type: "bind"
-        source: "/etc/letsencrypt"
-        target: "/app/certificates"
+      - certificates:/app/certificates
     environment:
       rasanluendpoint: "http://rasa_nlu:5000"
       rasacoreendpoint: "http://rasa_core:5005"
       postgresserver: "postgres://postgres:rasaui@postgres:5432/rasaui"
 
 networks: {rasa-network: {}}
-volumes: {rasauidata:{}}
+volumes: 
+  {
+    rasauidata:{},
+    certificates:{
+      source: /etc/letsencrypt/live/server01.miq.ai
+    }
+  }
