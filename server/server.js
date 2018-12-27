@@ -72,8 +72,8 @@ app.use(function(req, res, next) {
 });
 
 
-var privateKey = fs.readFileSync('../../archive/server01.miq.ai/privkey1.pem', 'utf-8').toString();
-var certificate = fs.readFileSync('../../archive/server01.miq.ai/cert1.pem', 'utf-8').toString();
+var privateKey = fs.readFileSync('/archive/server01.miq.ai/privkey1.pem', 'utf-8').toString();
+var certificate = fs.readFileSync('/archive/server01.miq.ai/cert1.pem', 'utf-8').toString();
 
 var credentials = crypto.createCredentials({key: privateKey, cert: certificate});
 
