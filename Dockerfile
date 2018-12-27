@@ -25,10 +25,9 @@ RUN addgroup -S rasaui \
     && chown -R rasaui:rasaui .
 
 HEALTHCHECK CMD ${HEALTHCHECK_CMD}
-VOLUME ["/app/certificates"]
+VOLUME ["/etc/letsencrypt"]
 
 EXPOSE ${http_port}
 USER rasaui
-RUN ls -ls /app
-RUN ls -ls /app/certificates
+RUN ls -ls /etc/letsencrypt
 ENTRYPOINT sh -c "hostname -i; npm start"
