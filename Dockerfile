@@ -29,5 +29,5 @@ VOLUME ["/app/projects", "/app/logs", "/app/data", "/app/config"]
 
 EXPOSE ${http_port}
 USER rasaui
-RUN ls /app/data
+RUN ls /app
 ENTRYPOINT sh -c "hostname -i; npm start"
