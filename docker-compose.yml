@@ -86,4 +86,3 @@ volumes:
   - name: certificates
     type: bind
     source: /etc/letsencrypt/live/server01.miq.ai
-  }
