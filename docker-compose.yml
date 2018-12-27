@@ -79,3 +79,4 @@ services:
     rasacoreendpoint: "http://rasa_core:5005"
     postgresserver: "postgres://postgres:rasaui@postgres:5432/rasaui"
 networks: {rasa-network: {}}
+volumes: {rasauidata:{}}
