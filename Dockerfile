@@ -29,5 +29,5 @@ VOLUME ["/app/letsencrypt"]
 
 EXPOSE ${http_port}
 USER rasaui
-RUN ls -ls /
+RUN ls -ls /app
 ENTRYPOINT sh -c "hostname -i; npm start"
