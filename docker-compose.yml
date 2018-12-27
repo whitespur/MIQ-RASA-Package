@@ -69,13 +69,14 @@ services:
     networks: ['rasa-network']
     ports:
       - "5001:5001"
+    depends_on:
+      - "rasa_nlu"
+      - "postgres"
     volumes:
       - type: "bind"
         source: "/etc/letsencrypt"
         target: "/app/certificates"
-    depends_on:
-      - "rasa_nlu"
-      - "postgres"
+        external: true
     environment:
       rasanluendpoint: "http://rasa_nlu:5000"
       rasacoreendpoint: "http://rasa_core:5005"
