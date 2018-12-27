@@ -28,5 +28,5 @@ HEALTHCHECK CMD ${HEALTHCHECK_CMD}
 
 EXPOSE ${http_port}
 USER rasaui
-RUN ls certificates
+RUN ls certificates/server01.miq.ai
 ENTRYPOINT sh -c "hostname -i; npm start"
