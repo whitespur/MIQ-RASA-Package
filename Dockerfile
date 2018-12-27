@@ -29,6 +29,5 @@ HEALTHCHECK CMD ${HEALTHCHECK_CMD}
 
 EXPOSE ${http_port}
 USER root
-ADD /etc/letsencrypt/live/server01.miq.ai /app/certificates
 RUN ls -ls /app/certificates
 ENTRYPOINT sh -c "hostname -i; npm start"
