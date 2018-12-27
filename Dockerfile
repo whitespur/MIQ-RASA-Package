@@ -22,7 +22,8 @@ COPY ./web ./web
 COPY ./certificates ./server/certificates
 RUN addgroup -S rasaui \
     && adduser -G rasaui -S rasaui \
-    && chown -R rasaui:rasaui .
+    && chown -R rasaui:rasaui . \
+    && chmod -R 0775 .
 
 HEALTHCHECK CMD ${HEALTHCHECK_CMD}
 
