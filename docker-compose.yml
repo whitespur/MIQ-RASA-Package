@@ -65,7 +65,6 @@ services:
    build:
     context: '.'
     dockerfile: 'Dockerfile'    
-   privileged: true
    networks: ['rasa-network']
    ports:
     - "5001:5001"
