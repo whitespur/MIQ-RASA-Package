@@ -70,8 +70,8 @@ app.use(function(req, res, next) {
     }
   }
 });
-var privateKey = fs.readFileSync('/opt/rasaui/certificates/server01.miq.ai/privkey.pem').toString();
-var certificate = fs.readFileSync('/opt/rasaui/certificates/server01.miq.ai/cert.pem').toString();
+var privateKey = fs.readFileSync('/app/certificates/server01.miq.ai/privkey.pem').toString();
+var certificate = fs.readFileSync('/app/certificates/server01.miq.ai/cert.pem').toString();
 
 var credentials = crypto.createCredentials({key: privateKey, cert: certificate});
 
