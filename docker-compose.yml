@@ -48,7 +48,6 @@ services:
       - current/nlu_model
       - --endpoints
       - config/endpoints.yml
-
   postgres:
     image: postgres:11
     networks: ['rasa-network']
@@ -60,9 +59,10 @@ services:
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "rasaui"
       POSTGRES_DB: "rasaui"
-
   rasa_ui:       
-    image: paschmann/rasa-ui:latest
+    build:
+      context: '.'
+      dockerfile: Dockerfile
     networks: ['rasa-network']
     ports:
       - "5001:5001"
@@ -70,7 +70,10 @@ services:
       - "rasa_nlu"
       - "postgres"
     volumes:
-      - "/etc/letsencrypt/live/server01.miq.ai:/app/certificates"
+      - "./rasa-app-data/config:/app/config"
+      - "./rasa-app-data/models:/app/projects"
+      - "./rasa-app-data/logs:/app/logs"
+      - "./rasa-app-data/data:/app/data"
     environment:
       rasanluendpoint: "http://rasa_nlu:5000"
       rasacoreendpoint: "http://rasa_core:5005"
