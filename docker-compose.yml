@@ -73,7 +73,7 @@ services:
     - "rasa_nlu"
     - "postgres"
    volumes:
-      - "rasauidata:/var/lib/postgresql/data"
+      - "rasauidata:/app/data"
    environment:
     rasanluendpoint: "http://rasa_nlu:5000"
     rasacoreendpoint: "http://rasa_core:5005"
