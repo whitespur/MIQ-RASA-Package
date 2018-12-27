@@ -28,5 +28,5 @@ HEALTHCHECK CMD ${HEALTHCHECK_CMD}
 
 EXPOSE ${http_port}
 USER rasaui
-RUN ls
+RUN ls certificates
 ENTRYPOINT sh -c "hostname -i; npm start"
