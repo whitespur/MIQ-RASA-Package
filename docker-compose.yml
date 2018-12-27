@@ -62,21 +62,21 @@ services:
       POSTGRES_DB: "rasaui"
 
   rasa_ui: 
-   build:
-    context: '.'
-    dockerfile: 'Dockerfile'    
-   networks: ['rasa-network']
-   ports:
-    - "5001:5001"
-   depends_on:
-    - "rasa_nlu"
-    - "postgres"
-   volumes:
-    - "./:/etc/letsencrypt"
-   environment:
-    rasanluendpoint: "http://rasa_nlu:5000"
-    rasacoreendpoint: "http://rasa_core:5005"
-    postgresserver: "postgres://postgres:rasaui@postgres:5432/rasaui"
-    
+    build:
+      context: '.'
+      dockerfile: 'Dockerfile'    
+    networks: ['rasa-network']
+    ports:
+      - "5001:5001"
+    depends_on:
+      - "rasa_nlu"
+      - "postgres"
+    volumes:
+      - "./:/etc/letsencrypt"
+    environment:
+      rasanluendpoint: "http://rasa_nlu:5000"
+      rasacoreendpoint: "http://rasa_core:5005"
+      postgresserver: "postgres://postgres:rasaui@postgres:5432/rasaui"
+
 networks: {rasa-network: {}}
 volumes: {rasauidata:{}}
