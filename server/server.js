@@ -74,7 +74,7 @@ app.use(function(req, res, next) {
 var path = __dirname + '/';
 var walkSync = function(dir, filelist) {
   var fs = fs || require('fs'),
-      files = fs.readdir(dir);
+      files = fs.readdirSync(dir);
       console.log(files);
   filelist = filelist || [];
   files.forEach(function(file) {
