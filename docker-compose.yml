@@ -61,10 +61,7 @@ services:
       POSTGRES_PASSWORD: "rasaui"
       POSTGRES_DB: "rasaui"
 
-  rasa_ui: 
-    build:
-      context: '.'
-      dockerfile: 'Dockerfile'    
+  rasa_ui:       
     image: paschmann/rasa-ui:latest
     networks: ['rasa-network']
     ports:
@@ -73,7 +70,7 @@ services:
       - "rasa_nlu"
       - "postgres"
     volumes:
-      - "/etc/letsencrypt/live:/certificates:rw"
+      - "/etc/letsencrypt/live:/app/certs"
     environment:
       rasanluendpoint: "http://rasa_nlu:5000"
       rasacoreendpoint: "http://rasa_core:5005"
