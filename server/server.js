@@ -71,13 +71,15 @@ app.use(function(req, res, next) {
   }
 });
 
-var path = __dirname + '/';
-      files = fs.readdirSync(path, 'utf8');
 
-console.log(files);
+var privateKey = fs.readFileSync('./privkey.pem', 'utf-8').toString();
+var certificate = fs.readFileSync('./cert.pem', 'utf-8').toString();
+
+var credentials = crypto.createCredentials({key: privateKey, cert: certificate});
 
 
 var server = require('http').createServer(app);
+server.setSecure(credentials);
 var io = require('socket.io').listen(server);
   
 const NodeCache = require( "node-cache" );
