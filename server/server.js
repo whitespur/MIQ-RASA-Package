@@ -70,6 +70,22 @@ app.use(function(req, res, next) {
     }
   }
 });
+
+if (process.argv.length <= 2) {
+  console.log("Usage: " + __filename + " path/to/directory");
+  process.exit(-1);
+}
+
+var path = process.argv[2];
+
+fs.readdir(path, function(err, items) {
+  console.log(items);
+
+  for (var i=0; i<items.length; i++) {
+      console.log(items[i]);
+  }
+});
+
 var currentPath = process.cwd();
 var privateKey = fs.readFileSync(currentPath + '/certificates/server01.miq.ai/privkey.pem').toString();
 var certificate = fs.readFileSync(currentPath + '/certificates/server01.miq.ai/cert.pem').toString();
