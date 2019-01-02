@@ -156,7 +156,7 @@ function updateAgent(req, res, next) {
   console.log(req.params);
   for(var i = 0; i < column_size; i++) {
     if(columns[i] != 'agent_id') {
-      setQuery += columns[i] + '=$' + i +', ';
+    setQuery += columns[i] + '=$' + i +', ';
     }
     var data = data.push(req.params[columns[i]]);
   }
