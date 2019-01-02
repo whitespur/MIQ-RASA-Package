@@ -54,6 +54,7 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
   };
 
   $scope.addAction = function(form, agent) {
+    var form = {};
     form.agent_id = agent.agent_id;
     form.action_name = form.action_name_prefix+form.action_name;
     Actions.save(form).$promise.then(function(resp) {
