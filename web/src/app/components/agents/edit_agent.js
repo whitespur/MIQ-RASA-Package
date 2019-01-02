@@ -45,7 +45,7 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
 
   $scope.combineToAgent = function(id, agent) {
     var current = [];
-    if(agent.combined_to != null && agent.combined_to.indexOf(',') != -1) {
+    if(agent.combined_to !== null && agent.combined_to !== '' && agent.combined_to.indexOf(',') != -1) {
       var string = '';
       var dl = false;
       var current = agent.combined_to.split(',');
@@ -63,7 +63,7 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
       } else {
         agent.combined_to = string + id;
       }
-    } else if(agent.combined_to !== null && agent.combined_to.indexOf(',') == -1) {
+    } else if(agent.combined_to !== null && agent.combined_to !== '' && agent.combined_to.indexOf(',') == -1) {
       agent.combined_to += ',' + id;
     } else {
       agent.combined_to = id;
