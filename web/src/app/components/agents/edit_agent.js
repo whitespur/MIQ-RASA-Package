@@ -48,7 +48,7 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
     if(agent.combined_to != null) {
       var string = '';
       var current = agent.combined_to.split(',');
-      for(var i = 0; i < current.length(); i++) {
+      for(var i = 0; i < current.length; i++) {
         string += current[i] + ',';
       }
       string.substr(0, myString.length-1)
