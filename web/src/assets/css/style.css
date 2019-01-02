@@ -120,7 +120,7 @@ tags-input .tags .tag-item .remove-button {
     color:#fff;  
 }
 
-.border-miq {
+.border-miq > .card-header {
     background: #115770;
     border-color:#115770;
     color:#fff;  
