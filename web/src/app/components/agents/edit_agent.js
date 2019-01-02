@@ -43,8 +43,19 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
     });
   };
 
-  $scope.combineToAgent = function(agent) {
-    agent.combined_to = '2,4';
+  $scope.combineToAgent = function(id, agent) {
+    var current = [];
+    if(agent.combined_to != null) {
+      var string = '';
+      var current = agent.combined_to.split(',');
+      for(var i = 0; i < current.length(); i++) {
+        string += current[i] + ',';
+      }
+      string.substr(0, myString.length-1)
+      agent.combined_to = string;
+    } else {
+      agent.combined_to = '2,4';
+    }
     Agent.update({ agent_id:$scope.$routeParams.agent_id }, agent).$promise.then(function() {
       $rootScope.$broadcast('setAlertText', "Combined!!");
     });
