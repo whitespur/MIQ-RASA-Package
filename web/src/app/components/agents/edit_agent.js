@@ -66,6 +66,7 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
     } else if(agent.combined_to !== null && agent.combined_to !== '' && agent.combined_to.indexOf(',') == -1) {
       if(agent.combined_to == id) {
         agent.combined_to = null;
+        dl = true;
       } else {
         agent.combined_to += ',' + id;
       }
@@ -74,10 +75,10 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
     }
 
     if(dl === false) {
-    Agent.update({ agent_id:$scope.$routeParams.agent_id }, agent).$promise.then(function() {
-        $('.agent_' + id).addClass('combined');
-        $rootScope.$broadcast('setAlertText', "Combined!!");
-    });
+      Agent.update({ agent_id:$scope.$routeParams.agent_id }, agent).$promise.then(function() {
+          $('.agent_' + id).addClass('combined');
+          $rootScope.$broadcast('setAlertText', "Combined!!");
+      });
     } else {
       Agent.update({ agent_id:$scope.$routeParams.agent_id }, agent).$promise.then(function() {
         $('.agent_' + id).removeClass('combined');
