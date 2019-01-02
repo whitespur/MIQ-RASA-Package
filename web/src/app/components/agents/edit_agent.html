@@ -154,14 +154,13 @@
                         <label class="form-control-label" for="{{agent.agent_id}}_formgroupClientSecret">Client Secret</label>
                         <input type="text" class="form-control" disabled value="{{ agent.client_secret_key }}">
                       </div>
-                      <br><br>
+                      <br>
                       <hr>
-                      <br><br>
+                      <br>
                       <div class="form-group">
                         <label class="form-control-label" for="{{agent.agent_id}}_formgroupClientSecret">Updated</label>
                         <input type="text" class="form-control" disabled value="Yesterday">
                       </div>
-                      <br><br>
                       <div class="form-group">
                         <label class="form-control-label" for="{{agent.agent_id}}_formgroupClientSecret">Updated by</label>
                         <input type="text" class="form-control" disabled value="MIQ: Mike">
@@ -196,8 +195,8 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" ng-model="formData.agent_name" class="form-control" id="name" placeholder="Enter the agent name">
+                    <label for="agent_fallback" data-toggle="tooltip" data-placement="top" title="Default fallback is the text that will be send to the chatbot in the case that it does not find a reply in its system." tooltip>Default fallback text</label>
+                    <input type="text" ng-model="formData.agent_fallback" class="form-control" id="agent_fallback" placeholder="Enter the string here">
                 </div>
             </div>
         </div>
