@@ -44,6 +44,10 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
     });
   };
 
+  $scope.combineToAgent = function() {
+    console.log('Call Was a success');
+  };
+
   $scope.addAction = function(form, agent) {
     form.agent_id = agent.agent_id;
     form.action_name = form.action_name_prefix+form.action_name;
