@@ -66,7 +66,7 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
     } else if(agent.combined_to !== null && agent.combined_to !== '' && agent.combined_to.indexOf(',') == -1) {
       agent.combined_to += ',' + id;
     } else {
-      agent.combined_to = id;
+      agent.combined_to = "" + id + "";
     }
     Agent.update({ agent_id:$scope.$routeParams.agent_id }, agent).$promise.then(function() {
       $rootScope.$broadcast('setAlertText', "Combined!!");
