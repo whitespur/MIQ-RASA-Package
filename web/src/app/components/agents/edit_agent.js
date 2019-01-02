@@ -22,6 +22,10 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
       $scope.actionsList = data;
   });
 
+  Agent.query(function(data) {
+    $scope.agentList = data;
+  });
+
   function parseStories(story_details){
     if(angular.isUndefined(story_details) || story_details === null) return;
     var lines = story_details.split("\n");
