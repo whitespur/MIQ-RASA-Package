@@ -43,13 +43,14 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
     });
   };
 
-  $scope.combineToAgent = function() {
+  $scope.combineToAgent = function(agent) {
     console.log('Call Was a success');
-    Agent.update({ agent_id:$scope.$routeParams.agent_id, combine_with: '2,4' }).$promise.then(function() {
+    var form = {};
+    form.combine_with = '2,4';
+    Agent.update({ agent_id:$scope.$routeParams.agent_id, combine_with: '2,4' }, agent).$promise.then(function() {
       $rootScope.$broadcast('setAlertText', "Combined!!");
     });
   };
-
   $scope.addAction = function(form, agent) {
     form.agent_id = agent.agent_id;
     form.action_name = form.action_name_prefix+form.action_name;
