@@ -114,6 +114,14 @@ tags-input .tags .tag-item .remove-button {
     color:#fff;
 }
 
+.combined .header-buttons {
+    color:#fff;
+}
+
+.btn-outline-secondary:hover {
+    background:transparent !important;
+}
+
 .alert-miq {
     background: #115770;
     border-color:#115770;
