@@ -46,7 +46,7 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
 
   $scope.combineToAgent = function() {
     console.log('Call Was a success');
-    Agent.combineAgents({agent_id: $scope.$routeParams.agent_id, combine_with: 2,4}).$promise.then(function(resp) {
+    Agent.combineAgents({agent_id: $scope.$routeParams.agent_id, combine_with: '2,4'}).$promise.then(function(resp) {
       console.log('Combined');
     });
   };
