@@ -161,6 +161,25 @@ function updateAgent(req, res, next) {
     });
 }
 
+
+function combineAgents(req, res, next) {
+  console.log("Agent.combineAgents");
+  db.none('update agents set combined_to=$2 where agent_id=$1',
+    [parseInt(req.params.agent_id), req.body.agent_name])
+    .then(function () {
+      res.status(200)
+        .json({
+          status: 'success',
+          message: 'Combined agent'
+        });
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
+
+
+
 function removeAgent(req, res, next) {
   var agentID = parseInt(req.params.agent_id);
   db.result('delete from intents where agent_id = $1; delete from actions where agent_id = $1; delete from entities where agent_id = $1; delete from agents where agent_id = $1;', agentID)
@@ -199,5 +218,6 @@ module.exports = {
   updateAgent: updateAgent,
   removeAgent: removeAgent,
   uploadAgentFromFile:uploadAgentFromFile,
-  updateAgentStory: updateAgentStory
+  updateAgentStory: updateAgentStory,
+  combineAgents: combineAgents
 };
