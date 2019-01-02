@@ -3,7 +3,6 @@ angular
 .controller('EditAgentController', EditAgentController)
 
 function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEntities, Actions, AgentActions,ActionResponses, Response) {
-  console.log(Agent);
   Agent.get({agent_id: $scope.$routeParams.agent_id}, function(data) {
       $scope.agent = data;
       $scope.storiesList = [];
@@ -46,7 +45,10 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
 
   $scope.combineToAgent = function() {
     console.log('Call Was a success');
-    Agent.combineAgents({agent_id: $scope.$routeParams.agent_id, combine_with: '2,4'}).$promise.then(function(resp) {
+    form.agent_id = $scope.$routeParams.agent_id;
+    form.combine_with = '2,4';
+    Agent.save(form).$promise.then(function(resp) {
+      $scope.form={};
       console.log('Combined');
     });
   };
