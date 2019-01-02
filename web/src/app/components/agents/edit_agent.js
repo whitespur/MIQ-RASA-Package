@@ -45,9 +45,7 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
 
   $scope.combineToAgent = function() {
     console.log('Call Was a success');
-    var form = {};
-    form.combine_with = '2,4';
-    Agent.update({ agent_id:$scope.$routeParams.agent_id }, form).$promise.then(function() {
+    Agent.update({ agent_id:$scope.$routeParams.agent_id, combine_with: '2,4' }).$promise.then(function() {
       $rootScope.$broadcast('setAlertText', "Combined!!");
     });
   };
