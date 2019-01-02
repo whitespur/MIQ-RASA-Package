@@ -58,13 +58,17 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
       }
 
       if(dl === true) {
-        string.substr(0, string.length-2)
+        var string = string.replace(/(^,)|(,$)/g, "");
         agent.combined_to = string;
       } else {
         agent.combined_to = string + id;
       }
     } else if(agent.combined_to !== null && agent.combined_to !== '' && agent.combined_to.indexOf(',') == -1) {
-      agent.combined_to += ',' + id;
+      if(agent.combined_to == id) {
+        agent.combined_to = null;
+      } else {
+        agent.combined_to += ',' + id;
+      }
     } else {
       agent.combined_to = "" + id + "";
     }
