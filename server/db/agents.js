@@ -150,13 +150,14 @@ function updateAgent(req, res, next) {
   var data = [parseInt(req.params.agent_id)];
   var column_size = Object.keys(req.params).length;
   var columns = [
-    'agent_name', 'endpoint_enabled', 'endpoint_url', 'basic_auth_username', 'basic_auth_password', 'rasa_core_enabled', 'combined_to'
+    'agent_id', 'agent_name', 'endpoint_enabled', 'endpoint_url', 'basic_auth_username', 'basic_auth_password', 'rasa_core_enabled', 'combined_to'
   ];
   var setQuery = '';
   console.log(req.params);
   for(var i = 0; i < column_size; i++) {
-    setQuery += columns[i] + '=$' + i +', ';
-    console.log(columns[i]);
+    if(columns[i] != 'agent_id') {
+      setQuery += columns[i] + '=$' + i +', ';
+    }
     var data = data.push(req.params[columns[i]]);
   }
   setQuery.trimRight();
