@@ -45,9 +45,9 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
 
   $scope.combineToAgent = function(id, agent) {
     var current = [];
+    var dl = false;
     if(agent.combined_to !== null && agent.combined_to !== '' && agent.combined_to.indexOf(',') != -1) {
       var string = '';
-      var dl = false;
       var current = agent.combined_to.split(',');
       for(var i = 0; i < current.length; i++) {
         if(current[i] != id) {
@@ -72,8 +72,15 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
     } else {
       agent.combined_to = "" + id + "";
     }
+
     Agent.update({ agent_id:$scope.$routeParams.agent_id }, agent).$promise.then(function() {
-      $rootScope.$broadcast('setAlertText', "Combined!!");
+      if(dl === false) {
+        $('#agent_' + id).addClass('combined');
+        $rootScope.$broadcast('setAlertText', "Combined!!");
+      } else {
+        $('#agent_' + id).removeClass('hcombinedide');
+        $rootScope.$broadcast('setAlertText', "Agent Combination Removed!!");
+      }
     });
   };
   $scope.addAction = function(form, agent) {
