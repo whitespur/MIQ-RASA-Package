@@ -58,7 +58,7 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
       }
 
       if(dl === true) {
-        string.substr(0, myString.length-1)
+        string.substr(0, string.length-1)
         agent.combined_to = string;
       } else {
         agent.combined_to = string + id;
