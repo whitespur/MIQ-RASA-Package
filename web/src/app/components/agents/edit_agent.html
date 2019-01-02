@@ -141,7 +141,7 @@
                         <div ng-if="agent.agent_id != innerAgent.agent_id">
                             <div class="card-header agent_{{innerAgent.agent_id}}" role="tab" id="headingOne">
                                 <span><a ng-click="combineToAgent(innerAgent.agent_id,agent)" confirm-click-title="Combining Agents" confirm-click="Are you sure? This will combine the agents, all its intents, expressions, and resolved entities.">{{ innerAgent.agent_name }}</a></span>
-                                <span class="float-right">
+                                <span class="float-right" style="margin-top:-1px;">
                                   <a style="border:0; padding: 0.2rem;" class="btn btn-outline-secondary" data-toggle="collapse" data-target="#agent_{{innerAgent.agent_id}}" aria-expanded="true" aria-controls="collapseOne">
                                   <i class="fa fa-cog fa-lg header-buttons"></i></a>
                                 </span>
