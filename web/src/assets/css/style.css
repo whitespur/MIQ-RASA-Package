@@ -110,4 +110,12 @@ tags-input .tags .tag-item .remove-button {
 /** MIQ **/
 .combined {
     background: #379457;
+    border-color:#379457;
+    color:#fff;
+}
+
+.alert-miq {
+    background: #115770;
+    border-color:#115770;
+    color:#fff;  
 }
