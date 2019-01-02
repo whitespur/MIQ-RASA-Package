@@ -147,23 +147,8 @@ function createAgent(req, res, next) {
 
 function updateAgent(req, res, next) {
   console.log("Agent.updateAgent");
-  var data = [parseInt(req.params.agent_id)];
-  var column_size = Object.keys(req.params).length;
-  var columns = [
-    'agent_id', 'agent_name', 'endpoint_enabled', 'endpoint_url', 'basic_auth_username', 'basic_auth_password', 'rasa_core_enabled', 'combined_to'
-  ];
-  var setQuery = '';
-  console.log(req.params);
-  for(var i = 0; i < column_size; i++) {
-    if(columns[i] != 'agent_id') {
-    setQuery += columns[i] + '=$' + i +', ';
-    }
-    var data = data.push(req.params[columns[i]]);
-  }
-  setQuery.trimRight();
-  /*
-  db.none('update agents set ' + setQuery + ' where agent_id=$1',
-    data)
+  db.none('update agents set agent_name=$2, endpoint_enabled=$3, endpoint_url=$4, basic_auth_username=$5, basic_auth_password=$6, rasa_core_enabled=$7, combined_to=$8 where agent_id=$1',
+    [parseInt(req.params.agent_id), req.body.agent_name, req.body.endpoint_enabled, req.body.endpoint_url, req.body.basic_auth_username, req.body.basic_auth_password, req.body.rasa_core_enabled, req.body.combined_to])
     .then(function () {
       res.status(200)
         .json({
@@ -173,7 +158,7 @@ function updateAgent(req, res, next) {
     })
     .catch(function (err) {
       return next(err);
-    });*/
+    });
 }
 
 
