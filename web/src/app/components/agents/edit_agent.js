@@ -63,7 +63,7 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
       } else {
         agent.combined_to = string + id;
       }
-    } else if(agent.combined_to !== null) {
+    } else if(agent.combined_to !== null && agent.combined_to.indexOf(',') == -1) {
       agent.combined_to += ',' + id;
     } else {
       agent.combined_to = id;
