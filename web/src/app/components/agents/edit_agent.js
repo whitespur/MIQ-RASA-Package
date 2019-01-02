@@ -75,12 +75,12 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
 
     if(dl === false) {
     Agent.update({ agent_id:$scope.$routeParams.agent_id }, agent).$promise.then(function() {
-        $('.agent_' + id).addClass('combined', 'combination-row');
+        $('.agent_' + id).addClass('combined');
         $rootScope.$broadcast('setAlertText', "Combined!!");
     });
     } else {
       Agent.update({ agent_id:$scope.$routeParams.agent_id }, agent).$promise.then(function() {
-        $('.agent_' + id).removeClass(['combined', 'combination-row']);
+        $('.agent_' + id).removeClass('combined');
         $rootScope.$broadcast('setAlertText', "Agent Combination Removed!!");
     });
     }
