@@ -148,36 +148,63 @@
                               </div>
                               <div ng-if="innerAgent.combine_to != null">
                                 <div id="agent_{{innerAgent.agent_id}}" class="collapse combined" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+                                    <div class="card-block">
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="{{innerAgent.agent_id}}_formGroupExampleInput1">Name</label>
+                                          <input disabled ng-model="innerAgent.agent_name" type="text" class="form-control" id="{{innerAgent.agent_id}}_formGroupExampleInput1" placeholder="Service Endpoint URL" value="{{ innerAgent.agent_name }}">
+                                        </div>
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="{{innerAgent.agent_id}}_formgroupClientSecret">Client Secret</label>
+                                          <input type="text" class="form-control" disabled value="{{ innerAgent.client_secret_key }}">
+                                        </div>
+                                        <hr>
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="{{innerAgent.agent_id}}_formgroupClientSecret">Updated</label>
+                                          <input type="text" class="form-control" disabled value="Yesterday">
+                                        </div>
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="{{innerAgent.agent_id}}_formgroupClientSecret">Updated by</label>
+                                          <input type="text" class="form-control" disabled value="MIQ: Mike">
+                                        </div>
+                                      <div>
+                                      </div>
+                                    </div>
+                                      <div class="card-footer">
+                                          <button type="submit" class="btn btn-sm btn-primary"  ng-click="editAgentInfo(innerAgent)"><i class="fa fa-dot-circle-o"></i> Pick</button>
+                                      </div>
+                                    </div>
+                                  </div>
                               </div>
                               <div ng-if="innerAgent.combine_to == null">
                                 <div id="agent_{{innerAgent.agent_id}}" class="collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
-                              </div>
-                              <div class="card-block">
-                                    <div class="form-group">
-                                      <label class="form-control-label" for="{{innerAgent.agent_id}}_formGroupExampleInput1">Name</label>
-                                      <input disabled ng-model="innerAgent.agent_name" type="text" class="form-control" id="{{innerAgent.agent_id}}_formGroupExampleInput1" placeholder="Service Endpoint URL" value="{{ innerAgent.agent_name }}">
+                                    <div class="card-block">
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="{{innerAgent.agent_id}}_formGroupExampleInput1">Name</label>
+                                          <input disabled ng-model="innerAgent.agent_name" type="text" class="form-control" id="{{innerAgent.agent_id}}_formGroupExampleInput1" placeholder="Service Endpoint URL" value="{{ innerAgent.agent_name }}">
+                                        </div>
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="{{innerAgent.agent_id}}_formgroupClientSecret">Client Secret</label>
+                                          <input type="text" class="form-control" disabled value="{{ innerAgent.client_secret_key }}">
+                                        </div>
+                                        <hr>
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="{{innerAgent.agent_id}}_formgroupClientSecret">Updated</label>
+                                          <input type="text" class="form-control" disabled value="Yesterday">
+                                        </div>
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="{{innerAgent.agent_id}}_formgroupClientSecret">Updated by</label>
+                                          <input type="text" class="form-control" disabled value="MIQ: Mike">
+                                        </div>
+                                      <div>
+                                      </div>
                                     </div>
-                                    <div class="form-group">
-                                      <label class="form-control-label" for="{{innerAgent.agent_id}}_formgroupClientSecret">Client Secret</label>
-                                      <input type="text" class="form-control" disabled value="{{ innerAgent.client_secret_key }}">
+                                      <div class="card-footer">
+                                          <button type="submit" class="btn btn-sm btn-primary"  ng-click="editAgentInfo(innerAgent)"><i class="fa fa-dot-circle-o"></i> Pick</button>
+                                      </div>
                                     </div>
-                                    <hr>
-                                    <div class="form-group">
-                                      <label class="form-control-label" for="{{innerAgent.agent_id}}_formgroupClientSecret">Updated</label>
-                                      <input type="text" class="form-control" disabled value="Yesterday">
-                                    </div>
-                                    <div class="form-group">
-                                      <label class="form-control-label" for="{{innerAgent.agent_id}}_formgroupClientSecret">Updated by</label>
-                                      <input type="text" class="form-control" disabled value="MIQ: Mike">
-                                    </div>
-                                  <div>
                                   </div>
-                                </div>
-                                  <div class="card-footer">
-                                      <button type="submit" class="btn btn-sm btn-primary"  ng-click="editAgentInfo(innerAgent)"><i class="fa fa-dot-circle-o"></i> Pick</button>
-                                  </div>
-                                </div>
                               </div>
+                              
 
                               <div style="float:right">
                                 <dir-pagination-controls pagination-id="agentsList"></dir-pagination-controls>
