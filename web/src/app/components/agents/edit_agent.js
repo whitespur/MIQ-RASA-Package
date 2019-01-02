@@ -45,14 +45,14 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
 
   $scope.combineToAgent = function(id, agent) {
     var current = [];
-    if(agent.combined_to !== null) {
+    if(agent.combined_to != null) {
       var string = '';
       var dl = false;
       var current = agent.combined_to.split(',');
       for(var i = 0; i < current.length; i++) {
-        if(current[i] !== id) {
+        if(current[i] != id) {
           string += current[i] + ',';
-        } else if(current[i] === id) {
+        } else if(current[i] == id) {
           dl = true;
         }
       }
