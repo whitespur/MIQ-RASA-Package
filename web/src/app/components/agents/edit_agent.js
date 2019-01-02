@@ -3,7 +3,7 @@ angular
 .controller('EditAgentController', EditAgentController)
 
 function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEntities, Actions, AgentActions,ActionResponses, Response) {
-
+  console.log(Agent);
   Agent.get({agent_id: $scope.$routeParams.agent_id}, function(data) {
       $scope.agent = data;
       $scope.storiesList = [];
