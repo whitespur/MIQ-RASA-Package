@@ -147,8 +147,21 @@ function createAgent(req, res, next) {
 
 function updateAgent(req, res, next) {
   console.log("Agent.updateAgent");
-  db.none('update agents set agent_name=$2, endpoint_enabled=$3, endpoint_url=$4, basic_auth_username=$5, basic_auth_password=$6, rasa_core_enabled=$7 where agent_id=$1',
-    [parseInt(req.params.agent_id), req.body.agent_name, req.body.endpoint_enabled, req.body.endpoint_url, req.body.basic_auth_username, req.body.basic_auth_password, req.body.rasa_core_enabled])
+  var data = [parseInt(req.params.agent_id)];
+  var columns = [
+    'agent_name', 'endpoint_enabled', 'endpoint_url', 'basic_auth_username', 'basic_auth_password', 'rasa_core_enabled', 'combined_to'
+  ];
+  var setQuery = '';
+  for(var i = 0; i < req.params.length; i++) {
+    setQuery += columns[i] + '=$' + i +', ';
+    data.push(req.params[columns[i]]);
+  }
+  setQuery.trimRight();
+  console.log(data);
+  console.log(setQuery);
+  /*
+  db.none('update agents set ' + setQuery + ' where agent_id=$1',
+    data)
     .then(function () {
       res.status(200)
         .json({
@@ -158,7 +171,7 @@ function updateAgent(req, res, next) {
     })
     .catch(function (err) {
       return next(err);
-    });
+    });*/
 }
 
 
