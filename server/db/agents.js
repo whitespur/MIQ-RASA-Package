@@ -148,12 +148,13 @@ function createAgent(req, res, next) {
 function updateAgent(req, res, next) {
   console.log("Agent.updateAgent");
   var data = [parseInt(req.params.agent_id)];
+  var column_size = Object.keys(req.params).length;
   var columns = [
     'agent_name', 'endpoint_enabled', 'endpoint_url', 'basic_auth_username', 'basic_auth_password', 'rasa_core_enabled', 'combined_to'
   ];
   var setQuery = '';
-  console.log(req.params)
-  for(var i = 0; i < req.params.length; i++) {
+  console.log(column_size)
+  for(var i = 0; i < column_size; i++) {
     setQuery += columns[i] + '=$' + i +', ';
     data.push(req.params[columns[i]]);
   }
