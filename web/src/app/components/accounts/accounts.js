@@ -4,6 +4,8 @@ angular
 
 function AccountsController($scope, $rootScope, Account) {
   Account.get(function(data) {
-      $scope.accountList = data;
+    console.log(data);
+
+    $scope.accountList = data;
   });
 }
