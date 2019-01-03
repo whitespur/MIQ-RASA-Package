@@ -47,7 +47,7 @@ angular.module('app').controller('appCtrl', function($rootScope, $scope, $route,
      $scope.$route = $route;
      $scope.$location = $location;
      $scope.$routeParams = $routeParams;
-
+     console.log($routeParams);
      $scope.go = function ( path ) {
        $location.path( path );
      };
