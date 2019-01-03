@@ -7,7 +7,6 @@ function AccountsController($scope, $rootScope, Account) {
     if(data.username !== undefined) {
       data = [data];
     }
-
     $scope.accountList = data;
   });
 }
