@@ -13,13 +13,14 @@ function authenticateUser(req, res, next) {
     // create a token
     var token = jwt.sign(tokenData, global.jwtsecret);
     // return the information including token as JSON
-    res.json({username: 'admin',token: token});
+    res.json({username: data.username,token: token});
     }
   }).catch(function (err) {
     console.log("Information didnt match or not provided.")
     return res.status(401).send({
         success: false,
-        message: 'Username and password didnt match.'
+        message: 'Username and password didnt match.',
+        err: err
     });
   });
 }
