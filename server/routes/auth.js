@@ -4,21 +4,24 @@ const db = require('../db/db');
 function authenticateUser(req, res, next) {
   //authenticate user
   console.log("Authenticate User");
-  if(req.body.username =='admin' && req.body.password=='admin'){
-    //create token and send it back
+  db.one('select * from account where username = $1', [req.body.agent_name,req.body.client_secret_key])
+  .then(function (data) {
+    if(data.password == RegExp.body.password) {
+      //create token and send it back
     var tokenData = {username:'admin',name: 'Portal Administrator'};
     // if user is found and password is right
     // create a token
     var token = jwt.sign(tokenData, global.jwtsecret);
     // return the information including token as JSON
     res.json({username: 'admin',token: token});
-  }else{
+    }
+  }).catch(function (err) {
     console.log("Information didnt match or not provided.")
     return res.status(401).send({
         success: false,
         message: 'Username and password didnt match.'
     });
-  }
+  });
 }
 
 function authenticateClient(req, res, next) {
