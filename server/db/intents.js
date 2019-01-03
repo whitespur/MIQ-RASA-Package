@@ -29,11 +29,12 @@ function getAgentIntentsWithCombined(req, res, next) {
   var AgentID = parseInt(req.params.agent_id);
   var CombinedIds = req.query.combined_to;
   var IDS;
-  if(CombinedIds != undefined) {
+  if(CombinedIds != undefined ) {
     IDS = CombinedIds + ',' + AgentID;
   } else {
     IDS = AgentID;
   }
+  console.log(IDS);
   db.any('select * from intents where agent_id IN (' + IDS + ')')
     .then(function (data) {
         res.status(200)
