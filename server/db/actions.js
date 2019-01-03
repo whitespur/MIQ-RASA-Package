@@ -16,7 +16,8 @@ function getSingleAction(req, res, next) {
 function getAgentActions(req, res, next) {
   console.log("actions.getAgentActions");
   var AgentID = parseInt(req.params.agent_id);
-  db.any('select * from actions where agent_id = $1', AgentID)
+  var IDS = req.query.combined_to + ',' + AgentID;
+  db.any('select * from actions where agent_id IN (' + IDS + ')')
     .then(function (data) {
       res.status(200)
         .json(data);
