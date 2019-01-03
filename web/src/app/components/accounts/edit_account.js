@@ -3,7 +3,7 @@ angular
 .controller('AccountsController', AccountsController)
 
 function AccountsController($scope, $rootScope, Account) {
-  Account.query(function(data) {
-    $scope.accountList = data;
+  Account.get({agent_id: $scope.$routeParams.account_id}, function(data) {
+      $scope.account = data;
   });
 }
