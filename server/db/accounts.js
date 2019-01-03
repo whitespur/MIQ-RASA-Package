@@ -13,7 +13,7 @@ function getAccounts(req, res, next) {
 
 function getSingleAccount(req, res, next) {
   var accountID = parseInt(req.params.accounts_id);
-  console.log(req.params);
+  console.log(req.params.accounts_id);
   db.one('select * from accounts where user_id = $1', accountID)
     .then(function (data) {
       console.log(data);
