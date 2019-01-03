@@ -264,7 +264,7 @@ function updateAndSendRasaResponse(req, cacheKey, rasa_response, modelName, proj
     db.any(
     'select agents.endpoint_enabled as agent_endpoint, agents.endpoint_url, agents.basic_auth_username,agents.basic_auth_password, '+
     'intents.endpoint_enabled as intent_endpoint, intents.intent_id, intents.intent_name  from agents, intents where '+
-    ' and intents.intent_name=$1 and intents.agent_id=agents.agent_id', [rasa_response.intent.name,projectName])
+    'intents.intent_name=$1 and intents.agent_id=agents.agent_id', [rasa_response.intent.name,projectName])
     .then(function (data) {
       //check if webhook is configured
       if(data.length>0){
