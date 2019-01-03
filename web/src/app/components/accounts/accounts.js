@@ -4,6 +4,7 @@ angular
 
 function AccountsController($scope, $rootScope, Agent) {
   Account.query(function(data) {
+    console.log(data);
       $scope.accountList = data;
   });
 
