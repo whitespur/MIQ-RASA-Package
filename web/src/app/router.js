@@ -121,7 +121,7 @@ app.config(function($routeProvider, $locationProvider) {
       activePage:'accounts'
     })
     .when('/accounts/:account_id', {
-      controller:'AccountsController as account',
+      controller:'EditAccountController as EditAccount',
       templateUrl:'/app/components/accounts/edit_account.html',
       activePage:'edit_account'
     })
