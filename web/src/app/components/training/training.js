@@ -164,7 +164,7 @@ function TrainingController($scope, $rootScope, $interval, $http, Rasa_Status, A
         }
         domain_yml_obj.action_factory="remote";
 
-        AgentActions.query({agent_id: agent_id},function(actionsList) {
+        AgentActions.query({agent_id: agent_id, combined_to: $scope.selectedAgent.combined_to},function(actionsList) {
             if(actionsList!=null && actionsList.length >0){
               //build actions
               domain_yml_obj.actions =actionsList.map(function(action) {
