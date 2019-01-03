@@ -1,6 +1,6 @@
 const db = require('./db')
 
-function getAccounts() {
+function getAccounts(req, res, next) {
   db.one('select * from account')
     .then(function (data) {
       res.status(200)
