@@ -15,7 +15,8 @@ function getAllEntities(req, res, next) {
 function getAllEntitiesForAgent(req, res, next) {
   console.log("Entities.getAllEntitiesForAgent");
   var agentId = parseInt(req.params.agent_id);
-  db.any('select * from entities where agent_id=$1', agentId)
+  var IDS = req.query.combined_to + ',' + agent_id;
+  db.any('select * from entities where agent_id IN (' + IDS + ')')
     .then(function (data) {
       res.status(200)
         .json(data);
