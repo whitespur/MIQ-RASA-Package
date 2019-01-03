@@ -36,6 +36,7 @@ router.post('/actions', actions.createAgentAction);
 router.get('/agents/:agent_id/actions', actions.getAgentActions);
 
 router.get('/agents/:agent_id/intents', intents.getAgentIntents);
+router.get('/agents/:agent_id/intentscombined', intents.getAgentIntentsWithCombined);
 router.get('/intents/:intent_id', intents.getSingleIntent);
 router.get('/intents/:intent_id/unique_intent_entities', intents.getUniqueIntents);
 router.put('/intents/:intent_id', intents.updateIntent);
