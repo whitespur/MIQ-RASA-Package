@@ -14,15 +14,20 @@
             <form>
               <div class="card">
                 <div class="card-header">
-                  <strong>Intent Name</strong>
+                  <strong>Username / E-mail</strong>
                 </div>
                 <div class="card-block">
                   <div class="row">
-                    <div class="col-sm-12">
+                    <div class="col-sm-6">
                       <div class="form-group">
-                        <input ng-model="intent.intent_name" type="text" class="form-control" value="{{intent.intent_name}}" placeholder="Service Endpoint URL">
+                        <input ng-model="account.username" type="text" class="form-control" value="{{account.username}}" placeholder="Insert Username">
                       </div>
                     </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                          <input ng-model="account.email" type="text" class="form-control" value="{{account.email}}" placeholder="Insert Email">
+                        </div>
+                      </div>
                   </div>
                 </div>
               </div>
