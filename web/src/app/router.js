@@ -116,7 +116,7 @@ app.config(function($routeProvider, $locationProvider) {
       activePage:'settings'
     })
     .when('/accounts', {
-      controller:'AccountsController',
+      controller:'SettingsController',
       templateUrl:'/app/components/accounts/accounts.html',
       activePage:'accounts'
     })
