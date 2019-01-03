@@ -16,7 +16,13 @@ function getSingleAction(req, res, next) {
 function getAgentActions(req, res, next) {
   console.log("actions.getAgentActions");
   var AgentID = parseInt(req.params.agent_id);
-  var IDS = req.query.combined_to + ',' + AgentID;
+  var CombinedIds = req.query.combined_to;
+  var IDS;
+  if(CombinedIds != undefined ) {
+    IDS = CombinedIds + ',' + AgentID;
+  } else {
+    IDS = AgentID;
+  }
   db.any('select * from actions where agent_id IN (' + IDS + ')')
     .then(function (data) {
       res.status(200)
