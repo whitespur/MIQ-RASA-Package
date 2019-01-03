@@ -1,24 +1,29 @@
 <ol class="breadcrumb" breadcrumb="">
   <li class="breadcrumb-item ng-scope active"><span>Accounts</span></li>
+  <!-- Breadcrumb Menu-->
+  <li class="breadcrumb-menu">
+      <div class="btn-group" role="group">
+          <a class="btn btn-outline-secondary" href="#!/account/create"><i class="fa fa-user"></i> &nbsp;Create Account</a>
+      </div>
+  </li>
 </ol>
 <div class="container-fluid">
   <div class="animated fadeIn">
     <div class="row">
         <div class="col-sm-12 col-lg-12">
           <div id="accordion" role="tablist">
-            <div class="card" dir-paginate="account in accountList  | itemsPerPage: 7" pagination-id="agentsList">
+            <div class="card" dir-paginate="account in accountList  | itemsPerPage: 7" pagination-id="accountList">
               <div class="card-header" role="tab" id="headingOne">
                 <span><a ng-href="#!/account_center/{{account.user_id}}">{{ account.username }}</a></span>
                 <span class="float-right">
-                  <a style="border:0; padding: 0.2rem;" class="btn btn-outline-secondary" data-toggle="collapse" data-target="#agent_{{account.user_id}}" aria-expanded="true" aria-controls="collapseOne">
+                  <a style="border:0; padding: 0.2rem;" class="btn btn-outline-secondary" data-toggle="collapse" data-target="#account_{{account.user_id}}" aria-expanded="true" aria-controls="collapseOne">
                   <i class="fa fa-cog fa-lg header-buttons"></i></a>
                 </span>
               </div>
-              <div id="agent_{{account.user_id}}" class="collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+              <div id="account_{{account.user_id}}" class="collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
                 <div class="card-block">
                  
                 </div>
-              </div>
                 <div class="card-footer">
                     <button type="submit" class="btn btn-sm btn-primary"  ng-click="editAgentInfo(agent)"><i class="fa fa-dot-circle-o"></i> Edit</button>
                 </div>
