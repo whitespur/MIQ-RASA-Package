@@ -3,10 +3,7 @@ angular
 .controller('AccountsController', AccountsController)
 
 function AccountsController($scope, $rootScope, Account) {
-  Account.get(function(data) {
-    if(data.username !== undefined) {
-      data = [data];
-    }
+  Account.query(function(data) {
     $scope.accountList = data;
   });
 }
