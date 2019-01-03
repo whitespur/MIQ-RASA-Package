@@ -29,18 +29,11 @@ function getAgentIntentsWithCombined(req, res, next) {
   console.log("intents.getAgentIntentsWithCombined");
   var AgentID = parseInt(req.params.agent_id);
   var CombinedIds = req.params.combined_ids.split(',');
-
-  db.any('select * from intents where agent_id = $1', AgentID)
+  var IDS = {...AgentID, ...CombinedIds};
+  db.any('select * from intents where agent_id LIKE $1', IDS)
     .then(function (data) {
-      db.any('select * from intents where agent_id IN $1', CombinedIds)
-        .then(function (innerData) {
-          data = {...data, ...innerData};
-          res.status(200)
-            .json(data);
-        })
-        .catch(function (err) {
-          return next(err);
-        });
+        res.status(200)
+          .json(data);
     })
     .catch(function (err) {
       return next(err);
