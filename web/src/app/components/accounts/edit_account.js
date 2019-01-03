@@ -1,8 +1,8 @@
 angular
 .module('app')
-.controller('AccountsController', AccountsController)
+.controller('EditAccountController', EditAccountController)
 
-function AccountsController($scope, $rootScope, Account) {
+function EditAccountController($scope, $rootScope, Account) {
   console.log($scope.$routeParams.account_id);
   Account.get({account_id: $scope.$routeParams.account_id}, function(data) {
     console.log(data);
