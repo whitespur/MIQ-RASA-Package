@@ -94,23 +94,17 @@ function TrainingController($scope, $rootScope, $interval, $http, Rasa_Status, A
               var expressionIds = expressions.map(function(item) { return item['expression_id']; }).toString();
               if (expressionIds.length > 0) {
                 ExpressionParameters.query({expression_ids: expressionIds}, function(params) {
-      console.log(params);
-      console.log(regex);
-
                   generateData(regex, intents, expressions, params, synonyms);
                   /* WIP 2.3 - Update to latest json model for Rasa */
                   var entityIds = params.map(function(item) { return item['entity_id']; }).toString();
                   if (entityIds.length > 0) {
                     EntitySynonymVariantsByEntity.query({entity_ids: entityIds}, function(entitysynonyms) {
-      console.log(entitysynonyms);
-
                       generateData(regex, intents, expressions, params, entitysynonyms)
                     }, function(error) {
                       $scope.generateError = error;
                       $scope.exportdata = undefined;
                     });
                   } else {
-
                     generateData(regex, intents, expressions, params);
                   }
 
@@ -145,7 +139,7 @@ function TrainingController($scope, $rootScope, $interval, $http, Rasa_Status, A
         $scope.stories_md = data.story_details;
     });
 
-    AgentEntities.query({agent_id: agent_id, combined_to: $scope.selectedAgent.combined_to},function(allEntities) {
+    AgentEntities.query({agent_id: agent_id},function(allEntities) {
         var requiredSlots = allEntities.filter(entity => (entity.slot_data_type != 'NOT_USED' && entity.slot_data_type != '' ));
         if(requiredSlots.length>0){
           //build slots
@@ -170,7 +164,7 @@ function TrainingController($scope, $rootScope, $interval, $http, Rasa_Status, A
         }
         domain_yml_obj.action_factory="remote";
 
-        AgentActions.query({agent_id: agent_id, combined_to: $scope.selectedAgent.combined_to},function(actionsList) {
+        AgentActions.query({agent_id: agent_id},function(actionsList) {
             if(actionsList!=null && actionsList.length >0){
               //build actions
               domain_yml_obj.actions =actionsList.map(function(action) {
@@ -190,7 +184,6 @@ function TrainingController($scope, $rootScope, $interval, $http, Rasa_Status, A
                       if(!responsesArrObj.hasOwnProperty(response.action_name)){
                         responsesArrObj[response.action_name]=[];
                       }
-                      console.log(response);
                       //add response text if there is one
                       if(response.response_text!=null && response.response_text !=''){
                         response_templete.text=response.response_text;
@@ -229,6 +222,11 @@ function TrainingController($scope, $rootScope, $interval, $http, Rasa_Status, A
   }
 
   function generateData(regex, intents, expressions, params, synonyms) {
+    console.log(intents);
+    console.log(regex);
+    console.log(expressions);
+    console.log(params);
+    console.log(synonyms);
     var tmpData = {};
     var tmpIntent = {};
     var tmpExpression = {};
