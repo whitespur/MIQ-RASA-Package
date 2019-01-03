@@ -222,8 +222,6 @@ function TrainingController($scope, $rootScope, $interval, $http, Rasa_Status, A
   }
 
   function generateData(regex, intents, expressions, params, synonyms) {
-    console.log(intents);
-    console.log(expressions);
     var tmpData = {};
     var tmpIntent = {};
     var tmpExpression = {};
