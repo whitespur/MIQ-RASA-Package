@@ -3,8 +3,10 @@ angular
 .controller('AccountsController', AccountsController)
 
 function AccountsController($scope, $rootScope, Account) {
+  console.log($rootScope);
+  console.log(Account);
+
   Account.query(function(data) {
-    console.log(data);
       $scope.accountList = data;
   });
 }
