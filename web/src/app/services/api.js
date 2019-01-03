@@ -31,7 +31,7 @@ app.factory('Intent', function($resource) {
 });
 
 app.factory('Intents', function($resource) {
-  return $resource(api_endpoint_v2 + '/agents/:agent_id/intents', {agent_id:'@id'});
+  return $resource(api_endpoint_v2 + '/agents/:agent_id/intents', {agent_id:'@id',combined_to:'@combined_to'});
 });
 
 app.factory('Expressions', function($resource) {
