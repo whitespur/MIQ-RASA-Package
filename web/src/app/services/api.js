@@ -1,5 +1,9 @@
 
 
+app.factory('Accounts', function($resource) {
+  return $resource(api_endpoint_v2 + '/accounts');
+});
+
 app.factory('Agent', function($resource) {
   return $resource(api_endpoint_v2 + '/agents/:agent_id/:path', {agent_id: '@id', path: '@path'},
       {
