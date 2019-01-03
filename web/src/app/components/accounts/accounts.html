@@ -14,7 +14,7 @@
           <div id="accordion" role="tablist">
             <div class="card" dir-paginate="account in accountList  | itemsPerPage: 10" pagination-id="accountList">
               <div class="card-header" role="tab" id="headingOne">
-                <span><a ng-href="#!/account_center/{{account.user_id}}">{{ account.username }}</a></span>
+                <span><a style="text-transform: capitalize;" ng-href="#!/account_center/{{account.user_id}}">{{ account.username }}</a></span>
                 <span class="float-right">
                   <a style="border:0; padding: 0.2rem;" class="btn btn-outline-secondary" data-toggle="collapse" data-target="#account_{{account.user_id}}" aria-expanded="true" aria-controls="collapseOne">
                   <i class="fa fa-cog fa-lg header-buttons"></i></a>
