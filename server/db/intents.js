@@ -25,6 +25,28 @@ function getAgentIntents(req, res, next) {
     });
 }
 
+function getAgentIntentsWithCombined(req, res, next) {
+  console.log("intents.getAgentIntentsWithCombined");
+  var AgentID = parseInt(req.params.agent_id);
+  var CombinedIds = req.params.combined_ids.split(',');
+
+  db.any('select * from intents where agent_id = $1', AgentID)
+    .then(function (data) {
+      db.any('select * from intents where agent_id IN $1', CombinedIds)
+        .then(function (innerData) {
+          data = {...data, ...innerData};
+          res.status(200)
+            .json(data);
+        })
+        .catch(function (err) {
+          return next(err);
+        });
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
+
 function getUniqueIntents(req, res, next) {
   console.log("intents.getUniqueIntents");
   var IntentID = parseInt(req.params.intent_id);
