@@ -1,7 +1,3 @@
-angular
-.module('app')
-.controller('SettingsController', SettingsController)
-
 function SettingsController($scope) {
   console.log($scope);
   Account.query(function(data) {
@@ -9,3 +5,7 @@ function SettingsController($scope) {
       $scope.accountList = data;
   });
 }
+
+angular
+.module('app')
+.controller('SettingsController', SettingsController)
