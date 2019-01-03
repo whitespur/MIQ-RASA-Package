@@ -1,8 +1,9 @@
 const db = require('./db')
 
 function getAccounts(req, res, next) {
-  db.one('select * from account')
+  db.one('SELECT * FROM account')
     .then(function (data) {
+      console.log(data);
       res.status(200)
         .json(data);
     })
