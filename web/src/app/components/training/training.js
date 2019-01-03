@@ -139,7 +139,7 @@ function TrainingController($scope, $rootScope, $interval, $http, Rasa_Status, A
         $scope.stories_md = data.story_details;
     });
 
-    AgentEntities.query({agent_id: agent_id},function(allEntities) {
+    AgentEntities.query({agent_id: agent_id, combined_to: $scope.selectedAgent.combined_to},function(allEntities) {
         var requiredSlots = allEntities.filter(entity => (entity.slot_data_type != 'NOT_USED' && entity.slot_data_type != '' ));
         if(requiredSlots.length>0){
           //build slots
