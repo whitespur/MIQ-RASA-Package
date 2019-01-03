@@ -1,6 +1,7 @@
 const db = require('./db')
 
 function getAccounts(req, res, next) {
+  console.log('TEST::::::::::::::');
   db.one('SELECT * FROM account')
     .then(function (data) {
       console.log(data);
