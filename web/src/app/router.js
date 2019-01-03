@@ -115,6 +115,16 @@ app.config(function($routeProvider, $locationProvider) {
       templateUrl:'/app/components/settings/settings.html',
       activePage:'settings'
     })
+    .when('/account_center', {
+      controller:'AccountController',
+      templateUrl:'/app/components/accounts/accounts.html',
+      activePage:'account_center'
+    })
+    .when('/permission_center', {
+      controller:'PermissionController',
+      templateUrl:'/app/components/permissions/permissions.html',
+      activePage:'permission_center'
+    })
     .otherwise({
       redirectTo:'/'
     });
