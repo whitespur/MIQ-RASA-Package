@@ -2,7 +2,7 @@ const db = require('./db')
 
 function getAccounts(req, res, next) {
   console.log('TEST::::::::::::::');
-  db.one('SELECT * FROM account')
+  db.any('SELECT * FROM account')
     .then(function (data) {
       console.log(data);
       res.status(200)
