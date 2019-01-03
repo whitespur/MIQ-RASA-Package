@@ -1,4 +1,4 @@
-function SettingsController($scope) {
+function AccountsController($scope) {
   console.log($scope);
   Account.query(function(data) {
     console.log(data);
@@ -8,4 +8,4 @@ function SettingsController($scope) {
 
 angular
 .module('app')
-.controller('SettingsController', SettingsController)
+.controller('AccountsController', AccountsController)
