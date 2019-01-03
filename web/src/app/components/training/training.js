@@ -70,6 +70,7 @@ function TrainingController($scope, $rootScope, $interval, $http, Rasa_Status, A
 
   $scope.getData = function(agent_id) {
     $scope.selectedAgent = objectFindByKey($scope.agentList, 'agent_id', agent_id);
+
     //Get Intents, Expressions, Parameters/Entities, Synonyms
     var intent_i;
     var expression_i;
@@ -81,7 +82,7 @@ function TrainingController($scope, $rootScope, $interval, $http, Rasa_Status, A
 
     reset();
 
-    Agent.query({agent_id: agent_id, path: "intents"}, function(intents) {
+    Agent.query({agent_id: agent_id, combined_to: $scope.selectedAgent.combined_to, path: "intentscombined"}, function(intents) {
       //Fetch rasa core data only if its enabled.
       if($scope.selectedAgent.rasa_core_enabled==true)
         populateCoreDomainYaml(agent_id,intents);
