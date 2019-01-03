@@ -22,6 +22,7 @@ var auth = require('./auth');
 var logs = require('../db/logs');
 
 router.get('/accounts', accounts.getAccounts);
+router.get('/accounts/:accounts_id', accounts.getSingleAccount);
 
 router.get('/agents', agents.getAllAgents);
 router.get('/agents/:agent_id', agents.getSingleAgent);

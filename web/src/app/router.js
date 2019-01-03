@@ -120,6 +120,11 @@ app.config(function($routeProvider, $locationProvider) {
       templateUrl:'/app/components/accounts/accounts.html',
       activePage:'accounts'
     })
+    .when('/accounts/:account_id', {
+      controller:'AccountsController as account',
+      templateUrl:'/app/components/accounts/edit_account.html',
+      activePage:'edit_account'
+    })
     .when('/permission_center', {
       controller:'PermissionsController',
       templateUrl:'/app/components/permissions/permissions.html',
