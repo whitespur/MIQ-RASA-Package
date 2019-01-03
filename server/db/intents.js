@@ -30,8 +30,10 @@ function getAgentIntentsWithCombined(req, res, next) {
   var AgentID = parseInt(req.params.agent_id);
   var CombinedIds = req.params.combined_ids;
   var IDS = CombinedIds + ',' + AgentID;
+  console.log(IDS);
   db.any('select * from intents where agent_id IN ($1)', IDS)
     .then(function (data) {
+      console.log(data);
         res.status(200)
           .json(data);
     })
