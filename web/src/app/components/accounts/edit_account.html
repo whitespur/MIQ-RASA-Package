@@ -16,6 +16,38 @@
                 <div class="card-header">
                   <div class="row">
                     <div class="col-sm-6">
+                        <strong>Client ID</strong>
+                    </div>
+                    <div class="col-sm-6">
+                      <strong>Account Type</strong>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-block">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <input ng-model="account.client_id" disabled type="text" class="form-control" value="{{account.client_id}}" placeholder="Insert client id">
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                          <input ng-model="account.account_type" type="text" class="form-control" value="{{account.account_type}}" placeholder="Insert account type">
+                        </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      <div class="row">
+          <div class="col-sm-12 col-lg-12">
+            <form>
+              <div class="card">
+                <div class="card-header">
+                  <div class="row">
+                    <div class="col-sm-6">
                         <strong>Username</strong>
                     </div>
                     <div class="col-sm-6">
