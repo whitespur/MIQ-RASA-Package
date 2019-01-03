@@ -184,6 +184,7 @@ function TrainingController($scope, $rootScope, $interval, $http, Rasa_Status, A
                       if(!responsesArrObj.hasOwnProperty(response.action_name)){
                         responsesArrObj[response.action_name]=[];
                       }
+                      console.log(response);
                       //add response text if there is one
                       if(response.response_text!=null && response.response_text !=''){
                         response_templete.text=response.response_text;
