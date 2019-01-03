@@ -1,8 +1,8 @@
 angular
 .module('app')
-.controller('AccountsController', AccountsController)
+.controller('AccountsController', SettingsController)
 
-function AccountsController($scope, $rootScope, Agent) {
+function SettingsController($scope) {
   console.log($scope);
   Account.query(function(data) {
     console.log(data);
