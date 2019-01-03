@@ -1,6 +1,6 @@
 
 
-app.factory('Accounts', function($resource) {
+app.factory('Account', function($resource) {
   return $resource(api_endpoint_v2 + '/accounts');
 });
 
