@@ -15,8 +15,7 @@ var request = require('request');
 var routes = require('./routes/index')
 var cors = require('cors')
 var jwt = require('jsonwebtoken');
-const crypto = require('crypto'),
-  fs = require("fs");
+const fs = require("fs");
 
 const db = require('./db/db')
 const url = require('url');
@@ -24,10 +23,10 @@ const url = require('url');
 app.use(cors())
 app.use(bodyParser.urlencoded({
     parameterLimit: 10000,
-    limit: '2mb',
+    limit: '6mb',
     extended: true
   }));
-app.use(bodyParser.json({ limit: '2mb' }));
+app.use(bodyParser.json({ limit: '6mb' }));
 /** Serve static files for UI website on root / */
 app.use('/', express.static('web/src/'));
 app.use('/scripts', express.static('node_modules/'));
