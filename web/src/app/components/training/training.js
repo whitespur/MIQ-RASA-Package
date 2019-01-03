@@ -83,7 +83,6 @@ function TrainingController($scope, $rootScope, $interval, $http, Rasa_Status, A
     reset();
 
     Agent.query({agent_id: agent_id, combined_to: $scope.selectedAgent.combined_to, path: "intentscombined"}, function(intents) {
-      console.log(intents);
       //Fetch rasa core data only if its enabled.
       if($scope.selectedAgent.rasa_core_enabled==true)
         populateCoreDomainYaml(agent_id,intents);
@@ -95,17 +94,23 @@ function TrainingController($scope, $rootScope, $interval, $http, Rasa_Status, A
               var expressionIds = expressions.map(function(item) { return item['expression_id']; }).toString();
               if (expressionIds.length > 0) {
                 ExpressionParameters.query({expression_ids: expressionIds}, function(params) {
+      console.log(params);
+      console.log(regex);
+
                   generateData(regex, intents, expressions, params, synonyms);
                   /* WIP 2.3 - Update to latest json model for Rasa */
                   var entityIds = params.map(function(item) { return item['entity_id']; }).toString();
                   if (entityIds.length > 0) {
                     EntitySynonymVariantsByEntity.query({entity_ids: entityIds}, function(entitysynonyms) {
+      console.log(entitysynonyms);
+
                       generateData(regex, intents, expressions, params, entitysynonyms)
                     }, function(error) {
                       $scope.generateError = error;
                       $scope.exportdata = undefined;
                     });
                   } else {
+
                     generateData(regex, intents, expressions, params);
                   }
 
