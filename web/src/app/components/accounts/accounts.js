@@ -1,6 +1,6 @@
 angular
 .module('app')
-.controller('AccountsController', SettingsController)
+.controller('SettingsController', SettingsController)
 
 function SettingsController($scope) {
   console.log($scope);
