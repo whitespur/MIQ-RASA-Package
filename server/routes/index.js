@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
+var accounts = require('../db/accounts');
 var agents = require('../db/agents');
 var intents = require('../db/intents');
 var actions = require('../db/actions');
@@ -19,6 +20,8 @@ var core_router = require('./mw_routes/core_router');
 var nlu_router = require('./mw_routes/nlu_router');
 var auth = require('./auth');
 var logs = require('../db/logs');
+
+router.get('/accounts', accounts.getAccounts);
 
 router.get('/agents', agents.getAllAgents);
 router.get('/agents/:agent_id', agents.getSingleAgent);
