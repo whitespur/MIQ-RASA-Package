@@ -4,7 +4,9 @@ angular
 
 function AccountsController($scope, $rootScope, Account) {
   Account.get(function(data) {
-    console.log(data);
+    if(data.username !== undefined) {
+      data = [data];
+    }
 
     $scope.accountList = data;
   });
