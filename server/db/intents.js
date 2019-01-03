@@ -111,5 +111,6 @@ module.exports = {
   getSingleIntent: getSingleIntent,
   removeIntent: removeIntent,
   getUniqueIntents: getUniqueIntents,
-  updateIntent: updateIntent
+  updateIntent: updateIntent,
+  getAgentIntentsWithCombined: getAgentIntentsWithCombined
 };
