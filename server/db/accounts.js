@@ -11,7 +11,6 @@ function getAccounts(req, res, next) {
     });
 }
 
-
 module.exports = {
-  getAccounts: getAccounts,
+  getAccounts: getAccounts
 };
