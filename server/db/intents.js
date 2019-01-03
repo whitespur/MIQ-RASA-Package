@@ -28,6 +28,7 @@ function getAgentIntents(req, res, next) {
 function getAgentIntentsWithCombined(req, res, next) {
   console.log("intents.getAgentIntentsWithCombined");
   var AgentID = parseInt(req.params.agent_id);
+  console.log(req);
   var CombinedIds = req.params.combined_to;
   var IDS = CombinedIds + ',' + AgentID;
   console.log(IDS);
