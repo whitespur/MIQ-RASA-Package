@@ -2,9 +2,8 @@ angular
 .module('app')
 .controller('AccountsController', AccountsController)
 
-function AccountsController($scope, $rootScope, Account) {
+function AccountsController($scope, $rootScope) {
   console.log($rootScope);
-  console.log(Account);
 
   Account.query(function(data) {
       $scope.accountList = data;
