@@ -134,10 +134,6 @@ function finalizeCacheFlushToDbAndRespond(cacheKey, http_code, res, body) {
         //insert message and use that id to insert nlu_parse_log
         nlu_parse_cache.message_text= nlu_parse_cache.response_text;
         nlu_parse_cache.user_message_ind=false;
-        
-        if (nlu_parse_cache.response_text == undefined) {
-            nlu_parse_cache.response_text = 'Dette er en test når tingene ikke forståes.';
-        }
 
         if (nlu_parse_cache.agent_id != undefined) {
           db.any('insert into messages(agent_id, user_id, user_name, message_text, message_rich, user_message_ind)' +
@@ -172,6 +168,9 @@ function finalizeCacheFlushToDbAndRespond(cacheKey, http_code, res, body) {
     'Content-Type': 'application/json'
   });
   if (body !== "") {
+    if(body.response_text == undefined) {
+      body.response_text = 'test';
+    }
     res.write(JSON.stringify(body));
   }
   res.end();
