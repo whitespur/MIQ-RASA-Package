@@ -79,8 +79,8 @@
           <div class="card-block">
             <ul id="chat-msg-id-{{user.user_id}}" class="chat-messaages" scroll-bottom>
             <li ng-if="message.message_text" ng-class="message.user_message_ind==true?'user-message':'bot-message'" ng-repeat="message in user.chatlog">
-              <span ng-if="message.user_message_ind" class="bg-primary" data-toggle="modal" data-target="#messageFeedbackModal" ng-click="updateModalFeedbackInfo(message)">{{message.message_text}}<span class="time">{{message.message_text}}</span></span>
-              <span ng-if="!message.user_message_ind" class="bg-light text-dark"  data-toggle="modal" data-target="#messageModalCenter" ng-click="updateModalInfo(message)">{{message.message_text}}<span class="time">{{message.message_text}}</span></span>
+              <span ng-if="message.user_message_ind" class="bg-primary" data-toggle="modal" data-target="#messageFeedbackModal" ng-click="updateModalFeedbackInfo(message)">{{message.message_text}}<span class="time">{{message.timestamp}}</span></span>
+              <span ng-if="!message.user_message_ind" class="bg-light text-dark"  data-toggle="modal" data-target="#messageModalCenter" ng-click="updateModalInfo(message)">{{message.message_text}}<span class="time">{{message.timestamp}}</span></span>
             </li>
             </ul>
           </div>
