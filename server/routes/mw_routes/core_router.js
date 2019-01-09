@@ -427,6 +427,11 @@ var await = require('asyncawait/await');
     coreParseLogCache.set(cacheKey, coreParseReqObj);
   }
 
+  function requestRasaCoreTraining(req, cacheKey, agentObj) {
+    console.log("Rasa Core: Training rasa core for: ");
+    console.log(agentObj);
+  }
+
   module.exports = {
     parseRequest: parseRequest,
     restartRasaCoreConversation: restartRasaCoreConversation,

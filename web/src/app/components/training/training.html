@@ -123,6 +123,7 @@
                               <li>Run <pre>python -m rasa_core.server -d models/dialogue -u models/nlu/current </pre></li>
                             </ul>
                           </li>
+                          <li><b>Automatisk metode under opbygning</b></li>
                         </ul>
                     </div>
                   </div>
@@ -170,6 +171,7 @@ if __name__ == '__main__':
                   </div>
                 </div>
               <div class="card-footer">
+                <button type="button" class="btn btn-success" ng-show="exportdata !== undefined" ng-click="trainCore()"><i class="fa fa-magic"></i>&nbsp; Start Training</button>
                 <button type="button" class="btn btn-secondary" ng-show="exportdata !== undefined" ng-click="savecoretofiles()" ng-disabled="selectedAgent.rasa_core_enabled!=true"><i class="fa fa-file"></i>&nbsp; Download Files</button>
                 <a href="" id="core_domain"></a>
                 <a href="" id="core_stories"></a>
