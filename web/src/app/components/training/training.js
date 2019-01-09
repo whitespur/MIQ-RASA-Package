@@ -354,8 +354,7 @@ function TrainingController($scope, $rootScope, $interval, $http, Rasa_Status, A
       });
     });
   }
-}
-
+  
 /**
  * Core
  */
@@ -372,4 +371,5 @@ $scope.trainCore = function() {
         console.log(errorResponse);
       }
     );
+}
 }
