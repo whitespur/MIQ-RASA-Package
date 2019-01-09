@@ -354,22 +354,4 @@ function TrainingController($scope, $rootScope, $interval, $http, Rasa_Status, A
       });
     });
   }
-  
-/**
- * Core
- */
-
-$scope.trainCore = function() {
-  
-  $http.post(api_endpoint_v2 + "/core/requestRasaCoreTraining?name=" + agentname + "_" + id + "&project=" + agentname, JSON.stringify(exportData)).then(
-      function(response){
-        console.log(response);
-      },
-      function(errorResponse){
-        $scope.generateError = JSON.stringify(errorResponse.data.errorBody);
-        $rootScope.trainings_under_this_process = 0;
-        console.log(errorResponse);
-      }
-    );
-}
 }

@@ -130,7 +130,6 @@ router.post('/rasa/parse', middleware.parseRasaRequest);
 
 //rasa core API
 router.post('/rasa/restart', core_router.restartRasaCoreConversation);
-router.post('/rasa/requestRasaCoreTraining', core_router.requestRasaCoreTraining);
 
 //messages api
 router.get('/agent/:agent_id/messages', messages.getUniqueUsersList);

@@ -428,8 +428,7 @@ var await = require('asyncawait/await');
   }
 
   function requestRasaCoreTraining(req, cacheKey, agentObj) {
-    console.log("Rasa Core: Training rasa core for: ");
-    console.log(agentObj);
+    console.log("Rasa Core: Training rasa core for: ")
   }
 
   module.exports = {
