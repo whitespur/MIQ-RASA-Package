@@ -127,13 +127,17 @@ function finalizeCacheFlushToDbAndRespond(cacheKey, http_code, res, body) {
       }else{
         if(body != ""){
           if(body.response_text != undefined)nlu_parse_cache.response_text = body.response_text;
-          if(body.response_text == undefined)nlu_parse_cache.response_text = 'Dette er en test når tingene ikke forståes.';
           if(body.response_rich != undefined)nlu_parse_cache.message_rich = body.response_rich;
           nlu_parse_cache.user_response_time_ms = Date.now() - nlu_parse_cache.createTime;
         }
+
         //insert message and use that id to insert nlu_parse_log
         nlu_parse_cache.message_text= nlu_parse_cache.response_text;
         nlu_parse_cache.user_message_ind=false;
+        
+        if (nlu_parse_cache.response_text == undefined) {
+            nlu_parse_cache.response_text = 'Dette er en test når tingene ikke forståes.';
+        }
 
         if (nlu_parse_cache.agent_id != undefined) {
           db.any('insert into messages(agent_id, user_id, user_name, message_text, message_rich, user_message_ind)' +
