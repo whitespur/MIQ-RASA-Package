@@ -361,7 +361,7 @@ function TrainingController($scope, $rootScope, $interval, $http, Rasa_Status, A
 
   $scope.trainCore = function() {
     
-    $http.post(api_endpoint_v2 + "/rasa/requestRasaCoreTraining?name=" + agentname + "_" + id + "&project=" + agentname, JSON.stringify(exportData)).then(
+    $http.post(api_endpoint_v2 + "/rasa/requestRasaCoreTraining", JSON.stringify(exportData)).then(
         function(response){
           console.log(response);
         },
