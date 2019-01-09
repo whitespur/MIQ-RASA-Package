@@ -362,7 +362,7 @@ function TrainingController($scope, $rootScope, $interval, $http, Rasa_Status, A
 
   $scope.trainCore = function() {
     
-    $http.post(api_endpoint_v2 + "/rasa/requestRasaCoreTraining", JSON.stringify(core_domain_yaml)).then(
+    $http.post(api_endpoint_v2 + "/rasa/requestRasaCoreTraining", {domain: JSON.stringify(core_domain_yaml), story: JSON.stringify($scope.stories_md)}).then(
         function(response){
           console.log(response);
         },
