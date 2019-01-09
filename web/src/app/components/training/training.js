@@ -209,6 +209,7 @@ function TrainingController($scope, $rootScope, $interval, $http, Rasa_Status, A
                   try {
                     console.log("YAML: "+JSON.stringify(domain_yml_obj));
                     if(!angular.equals(domain_yml_obj, {}))
+                      core_domain_yaml = domain_yml_obj;
                       $scope.domain_yml=yaml.stringify(domain_yml_obj);
                   } catch (e) {
                     console.log(e);
@@ -361,7 +362,7 @@ function TrainingController($scope, $rootScope, $interval, $http, Rasa_Status, A
 
   $scope.trainCore = function() {
     
-    $http.post(api_endpoint_v2 + "/rasa/requestRasaCoreTraining", JSON.stringify(exportData)).then(
+    $http.post(api_endpoint_v2 + "/rasa/requestRasaCoreTraining", JSON.stringify(core_domain_yaml)).then(
         function(response){
           console.log(response);
         },
