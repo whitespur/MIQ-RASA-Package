@@ -169,38 +169,11 @@ function finalizeCacheFlushToDbAndRespond(cacheKey, http_code, res, body) {
   });
   if (body !== "") {
     if(body.response_text == undefined) {
-     
-    } else {
-      res.write(JSON.stringify(body));
+      body.response_text = 'test';
     }
+    res.write(JSON.stringify(body));
   }
   res.end();
-}
-
-function logFallback(fallback) {
-  db.any('insert into fallback_logs(text, query, event_data, event_type)' +
-  ' values() RETURNING log_id')
-  .then(function (returnData) {
-    console.log('Fallback logged');
-  })
-  .catch(function (err) {
-    console.log("Exception in the DB log");
-    console.log(err);
-  });
-}
-}
-
-function defaultFallback(projectName, body, res) {
-  db.any('SELECT fallback FROM agents WHERE agent_name = ' + projectName)
-  .then(function (returnData) {
-    console.log('Fallback Fetched');
-    body.response_text = fallback;
-    res.write(JSON.stringify(body));
-  })
-  .catch(function (err) {
-    console.log("Exception in the DB log");
-    console.log(err);
-  });
 }
 
 function updateCacheWithRasaNluResponse(rasa_response, cacheKey){
