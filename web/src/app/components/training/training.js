@@ -27,14 +27,16 @@ function TrainingController($scope, $rootScope, $interval, $http, Rasa_Status, A
     console.log(exportData);
     $http.post(api_endpoint_v2 + "/rasa/train?name=" + agentname + "_" + id + "&project=" + agentname, JSON.stringify(exportData)).then(
         function(response){
-          console.log(response);
-          $scope.message = "Training for " + agentname + " completed successfully";
-          $rootScope.trainings_under_this_process = 0;
-        },
-        function(errorResponse){
-          $scope.generateError = JSON.stringify(errorResponse.data.errorBody);
-          $rootScope.trainings_under_this_process = 0;
-        }
+          db.any('insert into agent_models(model_id,agent_id,model_name)' +
+          ' values(default,' + $scope.agent.agent_id + ',' + agentname + '_' + id + ')')
+          .then(function (returnData) {
+            $scope.message = "Training for " + agentname + " completed successfully";
+            $rootScope.trainings_under_this_process = 0;
+          },
+          function(errorResponse){
+            $scope.generateError = JSON.stringify(errorResponse.data.errorBody);
+            $rootScope.trainings_under_this_process = 0;
+          }
       );
   }
 
