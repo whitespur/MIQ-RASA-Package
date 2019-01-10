@@ -87,11 +87,18 @@ function parseRequest(req, res, next, agentObj) {
   var projectName;
   if(req.body.model != undefined){
     modelName = req.body.model;
+    FinalizeRequest(req, res, modelName);
   } else {
-    
+    db.any('SELECT model_name FROM agent_models WHERE agent_id = ' + agentObj.agent_id + ' ORDER BY created_at asc LIMIT 1')
+      .then(function (returnData) {
+        modelName = returnData[0].model_name;
+        FinalizeRequest(req, res, modelName);
+      },
+      function(errorResponse){
+        $scope.generateError = JSON.stringify(errorResponse.data.errorBody);
+        $rootScope.trainings_under_this_process = 0;
+      }
   }
-
- 
 }
 
 function FinalizeRequest(req, res, modelName) {
