@@ -64,9 +64,13 @@ function trainRasaNlu(req, res, next) {
           sendOutput(response.statusCode, res, JSON.stringify({errorBody : body}));
           return;
       }
-      console.log("Training Done !! Response Code : " + response.statusCode);
-      sendOutput(200, res, "");
-      return;
+      db.any('insert into agent_models(model_id,agent_id,model_name)' +
+          ' values(default,' + $scope.agent.agent_id + ',' + agentname + '_' + id + ')')
+          .then(function (returnData) {
+            console.log("Training Done !! Response Code : " + response.statusCode);
+            sendOutput(200, res, "");
+            return;
+          });
     } catch (err) {
       console.log(err);
       sendOutput(500, res, '{"error" : ' + err + '}');
