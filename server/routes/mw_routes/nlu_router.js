@@ -187,8 +187,8 @@ function logFallback(req, type, fallback) {
   obj.event_type = type;
   obj.event_data = fallback;
   obj.text = fallback.intent;
-  db.any('insert into fallback_logs(text, query, event_data, event_type)' +
-  ' values(${text},${query},${event_data},${event_type}) RETURNING log_id', obj)
+  db.any('insert into fallback_logs(log_id,text, query, event_data, event_type)' +
+  ' values(default,${text},${query},${event_data},${event_type})', obj)
   .then(function (returnData) {
     console.log('Fallback logged');
   })
@@ -199,7 +199,7 @@ function logFallback(req, type, fallback) {
 }
 
 function defaultFallback(projectName, body, res) {
-  db.any('SELECT fallback FROM agents WHERE agent_name = ' + projectName)
+  db.any('SELECT fallback FROM agents WHERE agent_name = "' + projectName + '"')
   .then(function (returnData) {
     console.log('Fallback Fetched');
     body.response_text = fallback;
