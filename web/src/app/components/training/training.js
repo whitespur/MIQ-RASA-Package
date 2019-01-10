@@ -36,8 +36,8 @@ function TrainingController($scope, $rootScope, $interval, $http, Rasa_Status, A
           function(errorResponse){
             $scope.generateError = JSON.stringify(errorResponse.data.errorBody);
             $rootScope.trainings_under_this_process = 0;
-          }
-      );
+          })
+        })
   }
 
   $scope.savetofile = function() {
