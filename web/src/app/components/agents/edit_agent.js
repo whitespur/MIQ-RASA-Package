@@ -25,7 +25,8 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
     $scope.agentList = data;
   });
   $scope.agent_fallback = Response.fallback;
-
+  console.log(  $scope.agent_fallback);
+  console.log(Response.fallback);
   function parseStories(story_details){
     if(angular.isUndefined(story_details) || story_details === null) return;
     var lines = story_details.split("\n");
