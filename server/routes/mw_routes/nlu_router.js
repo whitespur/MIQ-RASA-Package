@@ -94,6 +94,7 @@ function parseRequest(req, res, next, agentObj) {
   } else {
     db.any('SELECT model_name FROM agent_models WHERE agent_id = ' + agentObj.agent_id + ' ORDER BY created_at asc LIMIT 1')
       .then(function (returnData) {
+        console.log(returnData);
         modelName = returnData[0].model_name;
         FinalizeRequest(req, res, modelName);
       },
