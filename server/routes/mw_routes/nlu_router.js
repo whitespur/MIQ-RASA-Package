@@ -94,9 +94,7 @@ function parseRequest(req, res, next, agentObj) {
   } else {
     db.any("SELECT agents.agent_id, model_name FROM agents JOIN agent_models ON agent_models.agent_id = agents.agent_id WHERE agent_name = '" + req.body.project + "'  ORDER BY created_at asc LIMIT 1")
       .then(function (returnData){
-        modelName = returnData[0].model_name;
-        console.log(modelName);
-
+        modelName = returnData[0].model_name.toLowerCase();;
         FinalizeRequest(req, res, modelName,obj, agentObj);
       },
       function(errorResponse){
