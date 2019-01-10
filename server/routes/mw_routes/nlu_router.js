@@ -85,15 +85,20 @@ function parseRequest(req, res, next, agentObj) {
 
   var modelName;
   var projectName;
-
-  projectName = req.body.project;
-  var cache_key = req.jwt.username + "_" + modelName + "_" + Date.now();
-
   if(req.body.model != undefined){
     modelName = req.body.model;
   } else {
-    modelName = 'latests';
+    
   }
+
+ 
+}
+
+function FinalizeRequest(req, res, modelName) {
+  var projectName = req.body.project;
+  var cache_key = req.jwt.username + "_" + modelName + "_" + Date.now();
+
+ 
   logRequest(req, "parse", {project:projectName, model: modelName, intent: '', query: req.body.q});
   createInitialCacheRequest(req,cache_key,agentObj);
 
