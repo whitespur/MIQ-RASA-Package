@@ -178,9 +178,15 @@ function finalizeCacheFlushToDbAndRespond(cacheKey, http_code, res, body) {
   res.end();
 }
 
-function logFallback(fallback) {
+function logFallback(req, type, fallback) {
+  var obj = {};
+  obj.ip_address = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  obj.query = req.originalUrl;
+  obj.event_type = type;
+  obj.event_data = fallback;
+  obj.text = fallback.intent;
   db.any('insert into fallback_logs(text, query, event_data, event_type)' +
-  ' values() RETURNING log_id')
+  ' values(${text},${query},${event_data},${event_type}) RETURNING log_id', obj)
   .then(function (returnData) {
     console.log('Fallback logged');
   })
