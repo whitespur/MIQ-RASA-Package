@@ -97,7 +97,7 @@ function parseRequest(req, res, next, agentObj) {
       function(errorResponse){
         $scope.generateError = JSON.stringify(errorResponse.data.errorBody);
         $rootScope.trainings_under_this_process = 0;
-      }
+      })
   }
 }
 
