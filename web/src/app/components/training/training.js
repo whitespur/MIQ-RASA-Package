@@ -25,7 +25,7 @@ function TrainingController($scope, $rootScope, $interval, $http, Rasa_Status, A
     var id = new XDate().toString('yyyyMMdd-HHmmss');
     reset();
     console.log(exportData);
-    $http.post(api_endpoint_v2 + "/rasa/train?name=" + agentname + "_" + id + "&project=" + agentname, JSON.stringify(exportData)).then(
+    $http.post(api_endpoint_v2 + "/rasa/train?name=" + agentname + "_" + id + "&project=" + agentname + "&agent_id=" + $scope.agent.agent_id + "", JSON.stringify(exportData)).then(
         function(response){
           $scope.message = "Training for " + agentname + " completed successfully";
           $rootScope.trainings_under_this_process = 0;
