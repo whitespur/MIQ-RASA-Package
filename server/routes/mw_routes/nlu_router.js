@@ -79,7 +79,7 @@ function trainRasaNlu(req, res, next) {
 
 function parseRequest(req, res, next, agentObj) {
   console.log("Routing to NLU Parse Request -> " + global.rasanluendpoint + "/parse");
-
+  const obj = agentObj; 
   if(req.body.q == ''){ 
     console.log("Query not found");
     sendOutput(500, res, '{"error" : "Query not found !!"}');
@@ -92,12 +92,10 @@ function parseRequest(req, res, next, agentObj) {
     modelName = req.body.model;
     FinalizeRequest(req, res, modelName);
   } else {
-    console.log("SELECT agents.agent_id, model_name FROM agents JOIN agent_models ON agent_models.agent_id = agents.agent_id WHERE agent_name = '" + req.body.project + "'  ORDER BY created_at asc LIMIT 1");
     db.any("SELECT agents.agent_id, model_name FROM agents JOIN agent_models ON agent_models.agent_id = agents.agent_id WHERE agent_name = '" + req.body.project + "'  ORDER BY created_at asc LIMIT 1")
-      .then(function (returnData) {
-        console.log(returnData);
+      .then(function (returnData){
         modelName = returnData[0].model_name;
-        FinalizeRequest(req, res, modelName);
+        FinalizeRequest(req, res, modelName,obj, agentObj);
       },
       function(errorResponse){
         console.log('Error');
@@ -106,7 +104,9 @@ function parseRequest(req, res, next, agentObj) {
   }
 }
 
-function FinalizeRequest(req, res, modelName) {
+function FinalizeRequest(req, res, modelName, agentObj, second) {
+  console.log(second);
+  console.log(agentObj);
   var projectName = req.body.project;
   var cache_key = req.jwt.username + "_" + modelName + "_" + Date.now();
 
