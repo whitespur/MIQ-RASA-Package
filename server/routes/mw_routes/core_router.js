@@ -427,9 +427,33 @@ var await = require('asyncawait/await');
     coreParseLogCache.set(cacheKey, coreParseReqObj);
   }
 
-  function requestRasaCoreTraining(req, cacheKey, agentObj) {
-    console.log("Rasa Core: Training rasa core for: ");
-    console.log(agentObj);
+  function requestRasaCoreTraining(req, res, next) {
+    console.log("Rasa Core Train Request -> " + global.rasacoreendpoint + "/train");
+    console.log(req);
+    request({
+      method: "POST",
+      uri: global.rasacoreendpoint + "/model",
+      json: req.body
+    }, function (error, response, body) {
+      if(error){
+        console.log("Error Occured when posting data to nlu endpoint. " + error);
+        sendOutput(500, res, '{"error" : ' + error + '}');
+        return;
+      }
+      try {
+        if(response.statusCode != 200){
+            console.log("Error occured while training. Response Code : "+response.statusCode+" Body"+ body);
+            sendOutput(response.statusCode, res, JSON.stringify({errorBody : body}));
+            return;
+        }
+        console.log("Training Done !! Response Code : " + response.statusCode);
+        sendOutput(200, res, "");
+        return;
+      } catch (err) {
+        console.log(err);
+        sendOutput(500, res, '{"error" : ' + err + '}');
+      }
+    });
   }
 
   module.exports = {
