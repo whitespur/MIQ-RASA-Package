@@ -24,6 +24,9 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
   Agent.query(function(data) {
     $scope.agentList = data;
     $scope.agent_fallback = data.fallback;
+
+    console.log($scope.agent_fallback);
+    
   });
 
   function parseStories(story_details){
