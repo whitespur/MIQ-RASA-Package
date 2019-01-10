@@ -199,10 +199,10 @@ function logFallback(req, type, fallback) {
 }
 
 function defaultFallback(projectName, body, res) {
-  db.any("SELECT * FROM agents WHERE agent_name = 'test'")
+  db.any("SELECT fallback FROM agents WHERE agent_name = 'test'")
   .then(function (returnData) {
     console.log('Fallback Fetched');
-    body.response_text = fallback;
+    body.response_text = returnData;
     res.write(JSON.stringify(body));
   })
   .catch(function (err) {
