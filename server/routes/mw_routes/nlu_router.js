@@ -203,7 +203,11 @@ function defaultFallback(projectName, body, res) {
   db.any("SELECT default_text FROM agents WHERE agent_name = '" + projectName + "'")
   .then(function (returnData) {
     console.log('Fallback Fetched');
-    body.response_text = returnData[0].default_text;
+    if(returnData[0].default_text == '' || returnData[0].default_text == undefined) {
+      body.response_text = 'Sorry.. I did not understand that, can you rephrase?';
+    } else {
+      body.response_text = returnData[0].default_text;
+    }
     res.write(JSON.stringify(body));
     res.end();
 
