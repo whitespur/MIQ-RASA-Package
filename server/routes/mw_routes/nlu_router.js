@@ -94,7 +94,8 @@ function parseRequest(req, res, next, agentObj) {
   } else {
     db.any("SELECT agents.agent_id, model_name FROM agents JOIN agent_models ON agent_models.agent_id = agents.agent_id WHERE agent_name = '" + req.body.project + "'  ORDER BY created_at asc LIMIT 1")
       .then(function (returnData){
-        modelName = returnData[0].model_name.toLowerCase();;
+        modelName = returnData[0].model_name.toLowerCase();
+        console.log(modelName);
         FinalizeRequest(req, res, modelName,obj, agentObj);
       },
       function(errorResponse){
@@ -190,7 +191,7 @@ function finalizeCacheFlushToDbAndRespond(cacheKey, http_code, res, body, req) {
     if(body.response_text == undefined) {
       var projectName = req.body.project;
       var modelName = req.body.model;
-      logFallback(req, "fallback", {project:projectName, model: modelName, intent: body.text, query: req.body.q});
+      logFallback(req, "fallback", {project:projectName, model: modelName, intent: req.body.q, query: req.body.q});
       defaultFallback(projectName, body, res);
     } else {
       res.write(JSON.stringify(body));
