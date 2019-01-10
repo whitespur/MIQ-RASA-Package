@@ -106,11 +106,11 @@ function parseRequest(req, res, next, agentObj) {
 
 function FinalizeRequest(req, res, modelName, agentObj, second) {
   var projectName = req.body.project;
-  req.body.modelName = modelName;
+  req.body.model = modelName;
   var cache_key = req.jwt.username + "_" + modelName + "_" + Date.now();
   logRequest(req, "parse", {project:projectName, model: modelName, intent: '', query: req.body.q});
   createInitialCacheRequest(req,cache_key,agentObj);
-
+  console.log(req.body);
   request({
     method: "POST",
     uri: global.rasanluendpoint + "/parse",
