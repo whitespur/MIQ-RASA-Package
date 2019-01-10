@@ -86,13 +86,16 @@ function parseRequest(req, res, next, agentObj) {
   var modelName;
   var projectName;
 
+  projectName = req.body.project;
+  var cache_key = req.jwt.username + "_" + modelName + "_" + Date.now();
+
   if(req.body.model != undefined){
-    projectName = req.body.project;
     modelName = req.body.model;
-    var cache_key = req.jwt.username + "_" + modelName + "_" + Date.now();
-    logRequest(req, "parse", {project:projectName, model: modelName, intent: '', query: req.body.q});
-    createInitialCacheRequest(req,cache_key,agentObj);
+  } else {
+    modelName = 'latests';
   }
+  logRequest(req, "parse", {project:projectName, model: modelName, intent: '', query: req.body.q});
+  createInitialCacheRequest(req,cache_key,agentObj);
 
   request({
     method: "POST",
