@@ -65,7 +65,7 @@ function trainRasaNlu(req, res, next) {
           return;
       }
       db.any('insert into agent_models(model_id,agent_id,model_name)' +
-          ' values(default,' + $scope.agent.agent_id + ',' + agentname + '_' + id + ')')
+          ' values(default,' + req.query.agent_id + ',' + req.query.name + ')')
           .then(function (returnData) {
             console.log("Training Done !! Response Code : " + response.statusCode);
             sendOutput(200, res, "");
