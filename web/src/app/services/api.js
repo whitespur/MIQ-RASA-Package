@@ -7,6 +7,13 @@ app.factory('Account', function($resource) {
   });
 });
 
+app.factory('Agent_Models', function($resource) {
+  return $resource(api_endpoint_v2 + '/agent/models/:agent_id', {agent_id: '@id'},
+  {
+      'update': { method:'PUT' }
+  });
+});
+
 app.factory('Agent', function($resource) {
   return $resource(api_endpoint_v2 + '/agents/:agent_id/:path', {agent_id: '@id', path: '@path'},
       {
