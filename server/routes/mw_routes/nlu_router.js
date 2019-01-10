@@ -203,7 +203,7 @@ function defaultFallback(projectName, body, res) {
   db.any("SELECT fallback FROM agents WHERE agent_name = 'test'")
   .then(function (returnData) {
     console.log('Fallback Fetched');
-    body.response_text = returnData;
+    body.response_text = returnData[0].fallback;
     res.write(JSON.stringify(body));
     res.end();
 
