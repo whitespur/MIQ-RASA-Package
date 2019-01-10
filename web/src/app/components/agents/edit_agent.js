@@ -43,9 +43,9 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
   };
 
   $scope.setDefaultCallback = function(agent) {
-    Agent.update({ agent_id:agent.agent_id }, agent).$promise.then(function() {
-      $rootScope.$broadcast('setAlertText', "Fallback was succesfully updated!!");
-  });
+    Agent.update({ agent_id:$scope.$routeParams.agent_id }, agent).$promise.then(function() {
+        $rootScope.$broadcast('setAlertText', "Default fallback updated!!");
+    });
   }
   $scope.combineToAgent = function(id, agent) {
     var current = [];
