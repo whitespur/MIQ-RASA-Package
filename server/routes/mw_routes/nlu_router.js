@@ -92,7 +92,7 @@ function parseRequest(req, res, next, agentObj) {
     modelName = req.body.model;
     FinalizeRequest(req, res, modelName);
   } else {
-    db.any('SELECT agents.agent_id, model_name FROM agents INNER JOIN agent_models ON agent_models.agent_id = agents.agent_id WHERE agent_name = ' + req.body.project + '  ORDER BY created_at asc LIMIT 1')
+    db.any("SELECT agents.agent_id, model_name FROM agents INNER JOIN agent_models ON agent_models.agent_id = agents.agent_id WHERE agent_name = '" + req.body.project + "'  ORDER BY created_at asc LIMIT 1")
       .then(function (returnData) {
         console.log(returnData);
         modelName = returnData[0].model_name;
