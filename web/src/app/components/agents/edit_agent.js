@@ -25,6 +25,8 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
     $scope.agentList = data;
   });
 
+  $scope.agent_fallback = agent.fallback;
+
   function parseStories(story_details){
     if(angular.isUndefined(story_details) || story_details === null) return;
     var lines = story_details.split("\n");
@@ -43,6 +45,9 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
     });
   };
 
+  $scope.setDefaultCallback = function(agent) {
+    console.log(agent);
+  }
   $scope.combineToAgent = function(id, agent) {
     var current = [];
     var dl = false;
