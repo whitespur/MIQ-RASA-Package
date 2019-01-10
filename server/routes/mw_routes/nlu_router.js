@@ -106,6 +106,7 @@ function parseRequest(req, res, next, agentObj) {
 }
 
 function FinalizeRequest(req, res, modelName, agentObj, second) {
+  console.log(modelName);
   var projectName = req.body.project;
   var cache_key = req.jwt.username + "_" + modelName + "_" + Date.now();
   logRequest(req, "parse", {project:projectName, model: modelName, intent: '', query: req.body.q});
