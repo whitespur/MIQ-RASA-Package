@@ -175,9 +175,10 @@ function finalizeCacheFlushToDbAndRespond(cacheKey, http_code, res, body, req) {
       defaultFallback(projectName, body, res);
     } else {
       res.write(JSON.stringify(body));
+      res.end();
+
     }
   }
-  res.end();
 }
 
 function logFallback(req, type, fallback) {
@@ -204,6 +205,8 @@ function defaultFallback(projectName, body, res) {
     console.log('Fallback Fetched');
     body.response_text = returnData;
     res.write(JSON.stringify(body));
+    res.end();
+
   })
   .catch(function (err) {
     console.log("Exception in the DB log");
