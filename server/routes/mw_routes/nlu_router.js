@@ -169,6 +169,8 @@ function finalizeCacheFlushToDbAndRespond(cacheKey, http_code, res, body, req) {
   });
   if (body !== "") {
     if(body.response_text == undefined) {
+      var projectName = req.body.project;
+      var modelName = req.body.model;
       logFallback(req, "fallback", {project:projectName, model: modelName, intent: body.text, query: req.body.q});
       defaultFallback(projectName, body, res);
     } else {
