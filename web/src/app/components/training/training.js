@@ -24,9 +24,10 @@ function TrainingController($scope, $rootScope, $interval, $http, Rasa_Status, A
     var agentname = objectFindByKey($scope.agentList, 'agent_id', $scope.agent.agent_id).agent_name;
     var id = new XDate().toString('yyyyMMdd-HHmmss');
     reset();
-    console.log(exportData);
     $http.post(api_endpoint_v2 + "/rasa/train?name=" + agentname + "_" + id + "&project=" + agentname, JSON.stringify(exportData)).then(
         function(response){
+          console.log('DB:: insert into agent_models(model_id,agent_id,model_name)' +
+          ' values(default,' + $scope.agent.agent_id + ',' + agentname + '_' + id + ')');
           db.any('insert into agent_models(model_id,agent_id,model_name)' +
           ' values(default,' + $scope.agent.agent_id + ',' + agentname + '_' + id + ')')
           .then(function (returnData) {
