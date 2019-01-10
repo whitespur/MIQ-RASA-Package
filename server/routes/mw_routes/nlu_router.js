@@ -188,6 +188,7 @@ function finalizeCacheFlushToDbAndRespond(cacheKey, http_code, res, body, req) {
     'Content-Type': 'application/json'
   });
   if (body !== "") {
+    console.log(body);
     if(body.response_text == undefined) {
       var projectName = req.body.project;
       var modelName = req.body.model;
