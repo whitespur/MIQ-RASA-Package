@@ -23,6 +23,7 @@ var auth = require('./auth');
 
 router.use(function (req, res, next) {
     console.log('Middleware Proc');
+    var url = req.url.replace('/', '');
     if(url == 'version' || url == 'rasa/version' || url == 'status' || url == 'settings') {
         console.log('Next');
         next('route')

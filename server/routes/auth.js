@@ -47,7 +47,6 @@ var pages = {
       });
   }
   onCanView = function(req, res, next) {
-    var url = req.url.replace('/', '');
     var jwt = req.jwt;
     
       requestUserPermission(jwt.username, url, next);
