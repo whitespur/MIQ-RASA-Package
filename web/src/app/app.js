@@ -67,6 +67,7 @@ angular.module('app').controller('appCtrl', function($rootScope, $scope, $route,
                 // success callback
                 $sessionStorage.jwt = response.data.token;
                 $cookies.put('loggedinjwt', $sessionStorage.jwt);
+                $sessionStorage.uid = response.data.uid;
                 $rootScope.$broadcast("USER_AUTHENTICATED");
         }, function(errorResponse){
             // failure callback

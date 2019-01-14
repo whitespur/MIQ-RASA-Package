@@ -1,6 +1,5 @@
 var jwt = require('jsonwebtoken');
 const db = require('../db/db');
-
 "use strict";
 var permissions = {
   0: 'Not Allowed',
@@ -39,7 +38,7 @@ var components = ['navigation','accounts'];
         // create a token
         var token = jwt.sign(tokenData, global.jwtsecret);
         // return the information including token as JSON
-        res.json({username: data.username,token: token});
+        res.json({username: data.username,token: token, uid: data.user_id});
         }
       }).catch(function (err) {
         console.log("Information didnt match or not provided.")
