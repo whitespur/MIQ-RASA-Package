@@ -19,8 +19,13 @@ function getSingleAccount(req, res, next) {
   db.one('select * from account where user_id = $1', accountID)
     .then(function (data) {
       console.log(data);
-      res.status(200)
+      if(is_array(data)) {
+        res.status(200)
         .json(data);
+      } else {
+        res.status(200)
+        .json([data]);
+      }
     }).catch(function (err) {
       return next(err);
     });
