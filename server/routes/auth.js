@@ -51,7 +51,7 @@ var pages = {
     var jwt = req.jwt;
     var headers = req.headers;
     console.log(url);
-    if(url == 'version' || url == 'version' || url == 'status') {
+    if(url == 'version' || url == 'rasa/version' || url == 'status') {
       next();
     } else {
       requestUserPermission(jwt.username, url, next);
