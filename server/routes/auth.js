@@ -61,7 +61,7 @@ var components = ['navigation','accounts'];
   }
   requestUserPermission = function(username, page_name,next, res, req) {
     console.log("auth.requestUserPermissions");
-    db.one("SELECT * FROM account WHERE name = '" + page_name + "' AND username = '" + username + "'")
+    db.one("SELECT * FROM account WHERE username = '" + username + "'")
       .then(function (permission) {
         backURL=req.header('Referer') || '/';
         if(permission != '' && isComponent(page_name) == false) {
