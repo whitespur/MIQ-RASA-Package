@@ -47,9 +47,9 @@ var pages = {
       });
   }
   onCanView = function(req, res, next) {
+    var url = req.url.replace('/', '');
     console.log('URL: ' + url);
 
-    var url = req.url.replace('/', '');
     var jwt = req.jwt;
     if(url == 'version' || url == 'rasa/version' || url == 'status') {
       next();
