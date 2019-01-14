@@ -93,6 +93,7 @@ var pages = {
 
             return next(err);
           });
+        }
       })
       .catch(function (err) {
         backURL=req.header('Referer') || '/';
