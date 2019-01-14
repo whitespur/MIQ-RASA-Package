@@ -111,7 +111,7 @@ var components = ['navigation','accounts'];
               message: 'You cannot view this page.',
               errCode: 755,
               redirect: backURL,
-              response: response
+              response: permission
           });
         }
       })
