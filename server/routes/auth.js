@@ -68,7 +68,7 @@ var pages = {
             console.log('Viewable');
             next('route');
           } else {
-            console.log('Not Viewable');
+            console.log('Not Viewable2');
             res.redirect(backURL);
           }
         } else {
