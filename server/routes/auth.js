@@ -33,7 +33,7 @@ var components = ['navigation','accounts'];
       .then(function (data) {
         if(data.password == req.body.password) {
           //create token and send it back
-        var tokenData = {username:data.username,name:data.username};
+        var tokenData = {username:data.username,name:data.username,level:data.level};
         // if user is found and password is right
         // create a token
         var token = jwt.sign(tokenData, global.jwtsecret);
