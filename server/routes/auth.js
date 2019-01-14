@@ -25,7 +25,7 @@ var pages = {
   10:'permission_center'
 };
 
-var components = ['navigation'];
+var components = ['navigation','accounts'];
 
   onAuthenticate = function(req, res, next) {
       //authenticate user
