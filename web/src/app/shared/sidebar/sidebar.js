@@ -2,10 +2,10 @@ angular
 .module('app')
 .controller('SideBarController', SideBarController)
 
-function SideBarController($scope,Navigation, Account, $sessionStorage) {
+function SideBarController($scope,Navigation, Account) {
     var jwt = req.jwt;
-
-    Account.get({account_id: $sessionStorage.uid}, function(data) {
+    console.log($scope);
+    Account.get({account_id: $scope.$routeParams.account_id}, function(data) {
         $scope.account = data;
         console.log(data);
             console.log('i was here LinksLevel');

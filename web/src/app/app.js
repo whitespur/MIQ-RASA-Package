@@ -47,6 +47,7 @@ angular.module('app').controller('appCtrl', function($rootScope, $scope, $route,
      $scope.$route = $route;
      $scope.$location = $location;
      $scope.$routeParams = $routeParams;
+     $scope.$sessionStorage = $sessionStorage;
      $scope.go = function ( path ) {
        $location.path( path );
      };
