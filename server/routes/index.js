@@ -21,7 +21,9 @@ var nlu_router = require('./mw_routes/nlu_router');
 var logs = require('../db/logs');
 var auth = require('./auth');
 
-router.get('/accounts', accounts.getAccounts);
+router.get('/accounts', accounts.getAccounts, function(req, res, next) {
+    auth.auth_canView(req, res, next, 'accounts');
+});
 router.get('/accounts/:accounts_id', accounts.getSingleAccount);
 
 router.get('/agents', agents.getAllAgents);
