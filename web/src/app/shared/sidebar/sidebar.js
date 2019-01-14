@@ -2,7 +2,7 @@ angular
 .module('app')
 .controller('SideBarController', SideBarController)
 
-function SideBarController(Navigation, Account) {
+function SideBarController($scope,Navigation, Account) {
     Account.get({account_id: $scope.$routeParams.account_id}, function(data) {
         $scope.account = data;
         console.log(data);
