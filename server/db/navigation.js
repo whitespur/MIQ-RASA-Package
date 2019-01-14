@@ -13,10 +13,8 @@ function getLinks(req, res, next) {
 
 function getLinksByLevel(req, res, next) {
   var query = req.params.level;
-  console.log('i was here LinksLevel QUERY: ' + query);
   db.any('SELECT * FROM navigation WHERE level <= $1', query)
     .then(function (data) {
-      console.log(data);
       res.status(200)
         .json(data);
     })
