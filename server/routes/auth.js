@@ -58,7 +58,7 @@ var pages = {
   requestUserPermission = function(username, page_name,next, res) {
     console.log("auth.requestUserPermissions");
     console.log('Checking::SELECT account_type_id, name, level FROM account JOIN account_type_permissions ON account_type_id = user_id WHERE username = ' + username + ' & name = ' + page_name);
-    db.one('SELECT account_type_id, name, level FROM account JOIN account_type_permissions ON account_type_id = user_id WHERE username = ' + username + ' & name = ' + page_name)
+    db.one("SELECT account_type_id, name, level FROM account JOIN account_type_permissions ON account_type_id = user_id WHERE username = '" + username + "' & name = '" + page_name + '"')
       .then(function (response) {
           if(response.level >= level) {
             console.log('Viewable');
