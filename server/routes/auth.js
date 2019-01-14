@@ -68,7 +68,6 @@ var components = ['navigation'];
           db.one("SELECT * FROM navigation WHERE href LIKE '%" + page_name + "%'")
           .then(function (response) {
             backURL=req.header('Referer') || '/';
-            console.log(respoonse);
             if(response != '') {
               if(permission.level >= response.level) {
                 next('route');
