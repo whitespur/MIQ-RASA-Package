@@ -58,7 +58,7 @@ var pages = {
       next();
     } else {
       console.log('Check');
-      Authentication.requestUserPermission(jwt.username, url);
+      requestUserPermission(jwt.username, url);
     }
   }
   onDeAuthenticate = function(req, res) {
