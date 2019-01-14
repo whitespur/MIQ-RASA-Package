@@ -64,7 +64,7 @@ var components = ['navigation','accounts'];
       .then(function (permission) {
         backURL=req.header('Referer').split('/')[0] || '/';
         if(permission != '' && isComponent(page_name) == false) {
-          db.one("SELECT * FROM navigation WHERE href LIKE '%" + page_name + "%'")
+          db.one("SELECT * FROM navigation WHERE href LIKE '%" + page_name.split('/')[0] + "%'")
           .then(function (response) {
             backURL=req.header('Referer').split('/')[0] || '/';
             if(response != '') {
