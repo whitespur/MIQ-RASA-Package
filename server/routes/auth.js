@@ -118,8 +118,5 @@ class Authentication{
   }
 
 module.exports = {
-  auth_init: Authentication.onAuthenticate,
-  auth_check: Authentication.onIsAuthenticated,
-  auth_canView: Authentication.onCanView,
-  auth_destruct: Authentication.onDeAuthenticate,
+  auth: Authentication
 };
