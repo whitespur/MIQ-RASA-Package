@@ -22,15 +22,11 @@ var logs = require('../db/logs');
 var auth = require('./auth');
 
 router.use(function (req, res, next) {
-    console.log('Middleware Proc');
     var url = req.url.replace('/', '');
-    if(url == 'version' || url == 'rasa/version' || url == 'status' || url == 'settings') {
-        console.log('Next');
+    if(url == 'version' || url == 'rasa/version' || url == 'rasa/status' || url == 'status' || url == 'settings') {
         next('route')
     } else {
-        console.log('CanView');
-
-        auth.auth_canView(req, res, next);
+        auth.auth_canView(req, res, next, url);
     }
 })
 
