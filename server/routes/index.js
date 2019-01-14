@@ -28,6 +28,7 @@ router.use(function (req, res, next) {
     if(url == 'version' || url == 'rasa/version' || url == 'rasa/status' || url == 'status' || url == 'settings' || url == 'rasa/config' || url == 'auth/init') {
         next('route')
     } else {
+        console.log(url);
         auth.auth_canView(req, res, next, url);
     }
 })
