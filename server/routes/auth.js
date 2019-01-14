@@ -25,6 +25,8 @@ var pages = {
   10:'permission_center'
 };
 
+var components = ['navigation'];
+
   onAuthenticate = function(req, res, next) {
       //authenticate user
       console.log("Authenticate User");
@@ -62,7 +64,7 @@ var pages = {
     db.one("SELECT * FROM account JOIN account_type_permissions ON account_type_id::int = user_id WHERE name = '" + page_name + "' AND username = '" + username + "'")
       .then(function (permission) {
         backURL=req.header('Referer') || '/';
-        if(permission != '') {
+        if(permission != '' && isComponent(page_name) == false) {
           db.one("SELECT * FROM navigation WHERE href LIKE '%" + page_name + "%'")
           .then(function (response) {
             backURL=req.header('Referer') || '/';
@@ -80,9 +82,13 @@ var pages = {
                 });
               }
             } else {
-              console.log('Not Viewable');
-              console.log(':: No Result == NOT VIEWABLE');
-              res.redirect(backURL);
+              return res.status(200).json({
+                  success: false,
+                  message: 'You cannot view this page.',
+                  errCode: 755,
+                  redirect: backURL,
+                  response: response
+              });
             }
           })
           .catch(function (err) {
@@ -92,6 +98,16 @@ var pages = {
             res.redirect(backURL);
 
             return next(err);
+          });
+        } else if( isComponent(page_name) !== false && permission.level >= 2) {
+          next('route');
+        } else {
+          return res.status(200).json({
+              success: false,
+              message: 'You cannot view this page.',
+              errCode: 755,
+              redirect: backURL,
+              response: response
           });
         }
       })
@@ -127,6 +143,12 @@ var pages = {
   
   onIsAuthenticated = function() {
 
+  }
+
+  isComponent = function(name) {
+    if(components.indexOf(name) !== -1) {
+      return true;
+    } else { return false;}
   }
 
 module.exports = {
