@@ -150,8 +150,8 @@ var components = ['navigation'];
 
   isComponent = function(name) {
     if(components.indexOf(name) > -1) {
-      return false;
-    } else { return true;}
+      return true;
+    } else { return false;}
   }
 
 module.exports = {
