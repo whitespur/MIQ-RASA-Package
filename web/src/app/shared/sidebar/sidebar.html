@@ -8,7 +8,7 @@
             </li>
           -->
             <li  dir-paginate="link in nav_links  | itemsPerPage: 10" pagination-id="nav">
-                <span class="{{link.isTitle ? 'nav-title' : 'nav-item'}}">
+                <span class="{{link.isTitle == 1 ? 'nav-item' : 'nav-item'}}">
                     <a class="nav-link" ng-class="{active: $route.current.activePage == link.page}" href="#!{{link.href}}"><i class="{{link.icon}}"></i> {{link.name}} </a>
                 </span>
             </li>
