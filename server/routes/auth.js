@@ -3,7 +3,7 @@
 var jwt = require('jsonwebtoken');
 const db = require('../db/db');"use strict";
 
-var Router = importFile('/routers/router');
+var Router = importFile('/routes/index');
 class Authentication extends Router {
 
   constructor() {
