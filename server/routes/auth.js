@@ -26,6 +26,15 @@ class Authentication{
       10:'permission_center'
     };
   }
+
+  get services() {
+    return {
+      'POST /init'       : 'onAuthenticate',
+      '/check'           : 'onIsAuthenticated',
+      '/deauthenticate'  : 'onDeAuthenticate',
+      '/canView'         : 'onCanView'
+    };
+  }
   onAuthenticate(user) {
       //authenticate user
       console.log("Authenticate User");

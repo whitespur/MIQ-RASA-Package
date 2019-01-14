@@ -19,7 +19,8 @@ var health = require('./health');
 var core_router = require('./mw_routes/core_router');
 var nlu_router = require('./mw_routes/nlu_router');
 var logs = require('../db/logs');
-var auth = new Authentication("./auth", app);
+var AuthRouter = require('./auth');
+var auth = new Authentication("/auth", app);
 
 router.get('/accounts', accounts.getAccounts);
 router.get('/accounts/:accounts_id', accounts.getSingleAccount);
