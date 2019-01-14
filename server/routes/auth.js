@@ -50,14 +50,14 @@ var pages = {
   }
   onCanView = function(req, res, next, url) {
     var jwt = req.jwt;
-    requestUserPermission(jwt.username, url, next);
+    requestUserPermission(jwt.username, url, next, res, req);
   }
   onDeAuthenticate = function(req, res) {
       //authenticate user
       console.log("Deauthenticate User");
       res.status(200).send({ auth: false, token: null });
   }
-  requestUserPermission = function(username, page_name,next, res) {
+  requestUserPermission = function(username, page_name,next, res, req) {
     console.log("auth.requestUserPermissions");
     db.one("SELECT account_type_id, account_type_permissions.name as name, level FROM account JOIN account_type_permissions ON account_type_id::int = user_id WHERE name = '" + page_name + "' AND username = '" + username + "'")
       .then(function (response) {
