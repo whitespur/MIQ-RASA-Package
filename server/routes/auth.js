@@ -106,8 +106,8 @@ var pages = {
 }
 
 module.exports = {
-  'auth_init'            : onAuthenticate,
-  'auth_check'           : onIsAuthenticated,
-  'auth_deauthenticate'  : onDeAuthenticate,
-  'auth_canView'         : onCanView
+  auth_init           : onAuthenticate,
+  auth_check          : onIsAuthenticated,
+  auth_deauthenticate : onDeAuthenticate,
+  auth_canView        : onCanView
 };
