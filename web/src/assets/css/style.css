@@ -58,7 +58,7 @@ canvas.chart {
 }
 
 .need_auth {
-    background: #29363d !important;
+    background:url(../img/miq.svg) #29363d !important;
 }
 
 .app-header.navbar .nav-item .nav-link, .app-header.navbar .nav-item .dropdown-toggle {
