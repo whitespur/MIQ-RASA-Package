@@ -8,7 +8,7 @@ app.factory('Account', function($resource) {
 });
 
 app.factory('Navigation', function($resource) {
-  return $resource(api_endpoint_v2 + '/navigation/:level');
+  return $resource(api_endpoint_v2 + '/navigation/:level', {level: '@level'});
 });
 
 app.factory('Agent_Models', function($resource) {
