@@ -78,7 +78,11 @@ var pages = {
         }
       })
       .catch(function (err) {
+        backURL=req.header('Referer') || '/';
+
         console.log(err);
+        res.redirect(backURL);
+
         return next(err);
       });
   }
