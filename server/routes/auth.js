@@ -62,7 +62,7 @@ var pages = {
     db.one("SELECT * FROM account JOIN account_type_permissions ON account_type_id::int = user_id WHERE name = '" + page_name + "' AND username = '" + username + "'")
       .then(function (permission) {
         backURL=req.header('Referer') || '/';
-        if(response != '') {
+        if(permission != '') {
           db.one("SELECT * FROM navigation WHERE name = '" + page_name + "'")
           .then(function (response) {
             backURL=req.header('Referer') || '/';
