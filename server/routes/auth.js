@@ -52,10 +52,12 @@ var pages = {
     var url = req.url.replace('/', '');
     var jwt = req.jwt;
     var headers = req.headers;
-    
+    console.log(url);
     if(url == 'version' || url == 'version' || url == 'status') {
+      console.log('next');
       next();
     } else {
+      console.log('Check');
       Authentication.requestUserPermission(jwt.username, url);
     }
   }
