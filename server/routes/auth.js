@@ -47,8 +47,8 @@ var pages = {
       });
   }
   onCanView = function(req, res, next) {
-    console.log(req);
-    console.log(res);
+    console.log(req.headers);
+    console.log(res.headers);
       //Get permissions from both parts
       var usrPems     = Authentication.requestUserPermission(user_id, this.pages[page_id]);
   }
