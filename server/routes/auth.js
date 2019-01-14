@@ -66,6 +66,7 @@ var components = ['navigation'];
         backURL=req.header('Referer') || '/';
         console.log(components);
               console.log(page_name);
+              console.log(isComponent(page_name));
         if(permission != '' && isComponent(page_name) == false) {
           db.one("SELECT * FROM navigation WHERE href LIKE '%" + page_name + "%'")
           .then(function (response) {
