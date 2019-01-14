@@ -24,7 +24,7 @@ var pages = {
   10:'permission_center'
 };
 
-var components = ['navigation','accounts', 'avgNluResponseTimesLast30Days', 'activeUserCountLast30Days', 'agentsByIntentConfidencePct'];
+var components = ['navigation','accounts', 'avgNluResponseTimesLast30Days', 'activeUserCountLast30Days', 'agentsByIntentConfidencePct', 'intentsMostUsed'];
 
   onAuthenticate = function(req, res, next) {
       //authenticate user
