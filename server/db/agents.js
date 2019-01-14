@@ -107,7 +107,7 @@ function uploadAgentFromFile(req, res, next) {
 }
 
 function getAllAgents(req, res, next) {
-  console.log(req);
+  if(req.jwt.level > 2) {
   db.any('select * from agents')
     .then(function (data) {
       res.status(200)
@@ -116,6 +116,16 @@ function getAllAgents(req, res, next) {
     .catch(function (err) {
       return next(err);
     });
+  } else {
+    db.any('select * from agents WHERE account = $1', req.jwt.uid)
+    .then(function (data) {
+      res.status(200)
+        .json(data);
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+  }
 }
 
 function getSingleAgent(req, res, next) {
