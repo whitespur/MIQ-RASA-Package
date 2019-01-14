@@ -4,8 +4,7 @@ angular
 
 function SideBarController($scope,Navigation, Account,$sessionStorage) {
     $scope.$sessionStorage = $sessionStorage;
-    console.log($scope);
-    Account.get({account_id: $scope.$routeParams.account_id}, function(data) {
+    Account.get({account_id: $sessionStorage.uid}, function(data) {
         $scope.account = data;
         console.log(data);
             console.log('i was here LinksLevel');
