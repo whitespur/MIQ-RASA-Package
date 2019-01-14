@@ -21,6 +21,7 @@ var nlu_router = require('./mw_routes/nlu_router');
 var auth = require('./auth');
 var logs = require('../db/logs');
 
+router.use(auth.auth_canView);
 router.get('/accounts', accounts.getAccounts);
 router.get('/accounts/:accounts_id', accounts.getSingleAccount);
 
@@ -139,8 +140,16 @@ router.post('/messages/list', messages.getMessagesListByUser);
 router.get('/messages/:messages_id', messages.getMessageDetails);
 
 //authentication js
-router.post('/auth', auth.authenticateUser);
+router.post('/auth/init', auth.auth_init);
+router.post('/auth/check', auth.auth_check);
+router.get('/auth/destroy', auth.auth_destruct);
+router.post('/auth/canView', auth.auth_canView);
+
+
 router.post('/authclient', auth.authenticateClient);
 
 router.get('/health', health.liveness);
+
+
+
 module.exports = router;

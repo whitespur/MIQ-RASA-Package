@@ -60,6 +60,20 @@ angular.module('app').controller('appCtrl', function($rootScope, $scope, $route,
      });
 
      $scope.loginUser = function(user){
-       Authentication.onAuthenticate(user);
+       // Your authenication logic
+       $http.post(api_endpoint_v2 + "/auth/init", JSON.stringify(user))
+            .then(
+                function(response){
+                // success callback
+                $sessionStorage.jwt = response.data.token;
+                $cookies.put('loggedinjwt', $sessionStorage.jwt);
+                $rootScope.$broadcast("USER_AUTHENTICATED");
+        }, function(errorResponse){
+            // failure callback
+            $('#alertTextDiv').addClass('show');
+            $scope.alert_text = "Invalid Username and Password. Please try again.";
+            $timeout(function(){$('#alertTextDiv').removeClass('show')}, 2000);
+        }
+        );
      }
 });
