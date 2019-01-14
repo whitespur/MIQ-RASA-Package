@@ -48,10 +48,9 @@ var pages = {
   }
   onCanView = function(req, res, next) {
     var url = req.url.replace('/', '');
-    console.log('URL: ' + url);
-
     var jwt = req.jwt;
     if(url == 'version' || url == 'rasa/version' || url == 'status' || url == 'settings') {
+      console.log('Next');
       next();
     } else {
       requestUserPermission(jwt.username, url, next);
