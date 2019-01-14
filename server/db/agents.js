@@ -107,6 +107,7 @@ function uploadAgentFromFile(req, res, next) {
 }
 
 function getAllAgents(req, res, next) {
+  console.log(req.jwt);
   if(req.jwt.level > 2) {
   db.any('select * from agents')
     .then(function (data) {
