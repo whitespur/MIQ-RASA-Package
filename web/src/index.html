@@ -77,7 +77,6 @@
 
   <!-- Middleware Interceptor/Layer -->
   <script src="app/components/middleware/middleware.js"></script>
-  <script src="app/components/middleware/auth.js"></script>
 
   <!-- Shared components -->
   <script src="app/shared/sidebar/sidebar.js"></script>
@@ -93,7 +92,7 @@
   <link href="assets/css/style.css" rel="stylesheet">
 </head>
 
-<body class="app header-fixed sidebar-fixed" ng-class="$route.current.activePage == 'agents' ? 'aside-menu-fixed' : 'aside-menu-hidden'" ng-controller="appCtrl">
+<body class="app header-fixed sidebar-fixed {{ !authenticated ? 'need_auth' : 'authenticated'}}" ng-class="$route.current.activePage == 'agents' ? 'aside-menu-fixed' : 'aside-menu-hidden'" ng-controller="appCtrl">
   <div id="alertTextDiv" class="alert alert-warning alert-dismissible fade alert-div" role="alert">
     <button style="padding: 0px !important" type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
