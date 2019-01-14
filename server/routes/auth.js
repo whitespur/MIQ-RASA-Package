@@ -147,8 +147,8 @@ var components = ['navigation'];
 
   isComponent = function(name) {
     if(components.indexOf(name) > -1) {
-      return true;
-    } else { return false;}
+      return false;
+    } else { return true;}
   }
 
 module.exports = {
