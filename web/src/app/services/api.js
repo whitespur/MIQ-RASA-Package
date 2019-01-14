@@ -4,7 +4,8 @@ app.factory('Account', function($resource) {
   return $resource(api_endpoint_v2 + '/accounts/:account_id/:path', {agent_id: '@id', path: '@path'},
   {
       'get':    {method: 'GET',  isArray: true},
-      'update': { method:'PUT' }
+      'update': { method:'PUT' },
+      'query': {method: 'GET',  isArray: true}
   });
 });
 
