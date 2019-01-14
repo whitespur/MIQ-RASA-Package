@@ -17,9 +17,6 @@ function SideBarController($scope,Navigation, Account) {
             console.log("Error Message while Getting Messages." + errorResponse);
             });
 
-        }
-        Navigation.get({level: data.level}, function(response) {
-
-        });
+      
     });
 }
