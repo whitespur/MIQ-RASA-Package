@@ -23,8 +23,14 @@ var auth = require('./auth');
 
 router.use(function (req, res, next) {
     console.log('Middleware Proc');
-    auth.auth_canView(req, res, next);
-    next()
+    if(url == 'version' || url == 'rasa/version' || url == 'status' || url == 'settings') {
+        console.log('Next');
+        next('route')
+    } else {
+        console.log('CanView');
+
+        auth.auth_canView(req, res, next);
+    }
 })
 
 router.get('/accounts', accounts.getAccounts);
