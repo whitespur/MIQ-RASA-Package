@@ -59,7 +59,7 @@ class Authentication{
     console.log(req);
     console.log(res);
       //Get permissions from both parts
-      var usrPems     = Authentication.requestUserPermission(user_id, this.pages[page_id]),
+      var usrPems     = Authentication.requestUserPermission(user_id, this.pages[page_id]);
   }
 
   onDeAuthenticate(req, res) {
