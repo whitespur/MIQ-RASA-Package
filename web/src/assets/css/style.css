@@ -57,6 +57,10 @@ canvas.chart {
     cursor: pointer;
 }
 
+.nav-item .hide, .nav-title .hide {
+    display:none;
+}
+
 .p-a-1 {
     padding: 1rem!important;
 }
