@@ -2,18 +2,21 @@ angular
 .module('app')
 .controller('SideBarController', SideBarController)
 
-function SideBarController($scope,Navigation, Account,$sessionStorage) {
+function SideBarController($scope,Navigation, $http,Account,$sessionStorage) {
     $scope.$sessionStorage = $sessionStorage;
-    Account.get({account_id: $sessionStorage.uid}, function(data) {
+    $http({method: 'GET', url: api_endpoint_v2 + '/accounts/'+$sessionStorage.uid}).then(
+        function(data){
         $scope.account = data;
-        console.log(data);
-        console.log('i was here LinksLevel');
-
-        Navigation.get({level: $scope.account.level}, function(response) {
-            $scope.nav_links = response;
-            console.log(response);        
-        });
-    });
-
-
+            $http({method: 'GET', url: api_endpoint_v2 + '/navigation/'+response.level}).then(
+                function(response){
+                    console.log(response);
+                    $scope.nav_links = response;
+                },
+                function(errorResponse){
+                }
+              );
+        },
+        function(errorResponse){
+        }
+      );
 }
