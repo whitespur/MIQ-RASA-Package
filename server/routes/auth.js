@@ -63,9 +63,10 @@ var pages = {
       .then(function (permission) {
         backURL=req.header('Referer') || '/';
         if(permission != '') {
-          db.one("SELECT * FROM navigation WHERE name = '" + page_name + "'")
+          db.one("SELECT * FROM navigation WHERE href LIKE '%" + page_name + "%'")
           .then(function (response) {
             backURL=req.header('Referer') || '/';
+            console.log(respoonse);
             if(response != '') {
               if(permission.level >= response.level) {
                 next('route');
