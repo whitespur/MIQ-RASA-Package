@@ -47,21 +47,25 @@ var pages = {
       });
   }
   onCanView = function(req, res, next) {
-    console.log(req.headers);
-    console.log(req.jwt);
-    console.log(req.url);
-      //Get permissions from both parts
-      var usrPems     = Authentication.requestUserPermission(user_id, this.pages[page_id]);
+    var url = req.url.replace('/', '');
+    var jwt = req.jwt;
+    var headers = req.headers;
+
+    if(url == 'version' || url == 'version' || url == 'status') {
+      next();
+    } else {
+      Authentication.requestUserPermission(jwt.username, url);
+    }
   }
   onDeAuthenticate = function(req, res) {
       //authenticate user
       console.log("Deauthenticate User");
       res.status(200).send({ auth: false, token: null });
   }
-  requestUserPermission = function(user_id, page_name) {
+  requestUserPermission = function(username, page_name) {
     console.log("auth.requestUserPermissions");
     pagePems    = this.pagePems;
-    db.any('SELECT account_type_id, name, level FROM account_type_permissions WHERE account_type_id = ' + user_id + ' & name = ' + page_name)
+    db.any('SELECT account_type_id, name, level FROM account JOIN account_type_permissions ON account_type_id = user_id WHERE username = ' + username + ' & name = ' + page_name)
       .then(function (response) {
           if(response.level >= level) {
             res.status(200)
