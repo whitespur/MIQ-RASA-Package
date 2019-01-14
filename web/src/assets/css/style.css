@@ -57,6 +57,10 @@ canvas.chart {
     display: none;
 }
 
+.need_auth {
+    background: #29363d !important;
+}
+
 .app-header.navbar .nav-item .nav-link, .app-header.navbar .nav-item .dropdown-toggle {
     cursor: pointer;
 }
