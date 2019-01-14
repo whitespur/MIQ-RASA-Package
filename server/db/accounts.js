@@ -3,7 +3,9 @@ const db = require('./db')
 function getAccounts(req, res, next) {
   db.any('SELECT * FROM account')
     .then(function (data) {
+      console.log('ACCOUNT OUTPUT::::::')
       console.log(data);
+
       if(is_array(data)) {
 
       res.status(200)
