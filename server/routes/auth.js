@@ -51,8 +51,11 @@ var pages = {
     var jwt = req.jwt;
     var headers = req.headers;
 
-  
+    if(url == 'version' || url == 'version' || url == 'status') {
+      next();
+    } else {
       Authentication.requestUserPermission(jwt.username, url);
+    }
   }
   onDeAuthenticate = function(req, res) {
       //authenticate user
@@ -61,7 +64,6 @@ var pages = {
   }
   requestUserPermission = function(username, page_name) {
     console.log("auth.requestUserPermissions");
-    pagePems    = this.pagePems;
     db.any('SELECT account_type_id, name, level FROM account JOIN account_type_permissions ON account_type_id = user_id WHERE username = ' + username + ' & name = ' + page_name)
       .then(function (response) {
           if(response.level >= level) {
@@ -69,9 +71,9 @@ var pages = {
               .json({
                 status: '200',
                 message: 'Can View',
-                permissions: pagePems[response.level]
+                permissions: permissions[response.level]
               });
-              return pagePems[response.level];
+              next();
           } else {
             res.status(200)
               .json({
