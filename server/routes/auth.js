@@ -68,7 +68,7 @@ var pages = {
             next('route');
           } else {
             console.log('Not Viewable2');
-            return res.status(200).send({
+            return res.status(200).json({
                 success: false,
                 message: 'You cannot view this page.',
                 code: 755,
