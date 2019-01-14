@@ -3,6 +3,8 @@ const db = require('./db')
 function getAccounts(req, res, next) {
   db.any('SELECT * FROM account')
     .then(function (data) {
+      console.log(data);
+
       res.status(200)
         .json(data);
     })
