@@ -1,6 +1,10 @@
+"use strict";
+
 var jwt = require('jsonwebtoken');
-const db = require('../db/db');
-class Authentication{
+const db = require('../db/db');"use strict";
+
+var Router = importFile('/routers/router');
+class Authentication extends Router {
 
   constructor() {
     this.permissions = {
@@ -58,25 +62,17 @@ class Authentication{
         });
       });
   }
-
-  onIsAuthenticated() {
-      
-  }
-
   onCanView(req, res, next) {
     console.log(req);
     console.log(res);
       //Get permissions from both parts
       var usrPems     = Authentication.requestUserPermission(user_id, this.pages[page_id]);
   }
-
   onDeAuthenticate(req, res) {
       //authenticate user
       console.log("Deauthenticate User");
       res.status(200).send({ auth: false, token: null });
   }
-
-  //Internal Functionalities
   requestUserPermission(user_id, page_name) {
     console.log("auth.requestUserPermissions");
     pagePems    = this.pagePems;
@@ -103,7 +99,6 @@ class Authentication{
         return next(err);
       });
   }
-
   onAuthClient() {
     //authenticate client based on client secret key
     //username,user_fullname,agent_name,client_secret_key should all be present in the body
@@ -124,6 +119,6 @@ class Authentication{
         });
       });
   }
-  }
+}
 
 module.exports = Authentication;
