@@ -13,7 +13,7 @@ function getLinks(req, res, next) {
 
 function getLinksByLevel(req, res, next) {
   var query = req.params.level;
-  db.any('SELECT * FROM navigation WHERE level <= $1', query)
+  db.any('SELECT * FROM navigation WHERE level <= $1 ORDER BY order_position', query)
     .then(function (data) {
       res.status(200)
         .json(data);
