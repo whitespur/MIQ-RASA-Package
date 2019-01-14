@@ -66,7 +66,7 @@ var components = ['navigation','accounts'];
         if(permission != '' && isComponent(page_name) == false) {
           db.one("SELECT * FROM navigation WHERE href LIKE '%" + page_name + "%'")
           .then(function (response) {
-            backURL=req.header('Referer') || '/';
+            backURL=req.header('Referer').split('/')[0] || '/';
             if(response != '') {
               if(permission.level >= response.level) {
                 console.log('NEXT->');
@@ -95,7 +95,7 @@ var components = ['navigation','accounts'];
             }
           })
           .catch(function (err) {
-            backURL=req.header('Referer') || '/';
+            backURL=req.header('Referer').split('/')[0] || '/';
 
             console.log(err);
             res.redirect(backURL);
