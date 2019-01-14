@@ -50,7 +50,7 @@ var pages = {
     var url = req.url.replace('/', '');
     var jwt = req.jwt;
     var headers = req.headers;
-    console.log(url);
+    console.log('URL: ' + url);
     if(url == 'version' || url == 'rasa/version' || url == 'status') {
       next();
     } else {
