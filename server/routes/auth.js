@@ -26,7 +26,6 @@ class Authentication{
       10:'permission_center'
     };
   }
-  
   onAuthenticate(user) {
       //authenticate user
       console.log("Authenticate User");
