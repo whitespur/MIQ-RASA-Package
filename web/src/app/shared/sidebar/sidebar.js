@@ -3,7 +3,6 @@ angular
 .controller('SideBarController', SideBarController)
 
 function SideBarController($scope,Navigation, Account) {
-    var jwt = req.jwt;
     console.log($scope);
     Account.get({account_id: $scope.$routeParams.account_id}, function(data) {
         $scope.account = data;
