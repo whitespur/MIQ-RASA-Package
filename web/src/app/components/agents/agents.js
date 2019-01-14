@@ -7,6 +7,10 @@ function AgentsController($scope, $rootScope, Agent) {
       $scope.agentList = data;
   });
 
+  console.log($scope);
+  Account.get({account_id: $sessionStorage.uid}, function(data) {
+    $scope.account = data;
+  });
 
   $scope.editAgentInfo = function(agent) {
     Agent.update({ agent_id:agent.agent_id }, agent).$promise.then(function() {
