@@ -147,6 +147,7 @@ router.post('/auth/canView', auth.auth_canView);
 
 router.post('/authclient', auth.authenticateClient);
 
-router.get('/health', health.liveness), auth.auth_canView;
-
+router.get('/health', health.liveness, function(req, res, next) {
+    auth.auth_canView(req, res, next);
+});
 module.exports = router;
