@@ -7,10 +7,8 @@
               <select ng-options="model.name as model.name for model in $root.config.server_model_dirs_array" ng-model="modelname" class="nav-link"></select>
             </li>
           -->
-            <li  dir-paginate="link in nav_links  | itemsPerPage: 10" pagination-id="nav">
-                <span class="{{link.is_title ? 'nav-title' : 'nav-item'}}">
-                    <a class="nav-link" ng-class="{active: $route.current.activePage == link.page}" href="#!{{link.href}}"><i class="{{link.icon}}"></i> {{link.name}} </a>
-                </span>
+            <li class="{{link.is_title ? 'nav-title' : 'nav-item'}}"  dir-paginate="link in nav_links  | itemsPerPage: 10" pagination-id="nav">
+                <a class="nav-link" ng-class="{active: $route.current.activePage == link.page}" href="#!{{link.href}}"><i class="{{link.icon}}"></i> {{link.name}} </a>
             </li>
 
             <li class="nav-title">
