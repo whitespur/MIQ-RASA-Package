@@ -47,18 +47,14 @@ var pages = {
       });
   }
   onCanView = function(req, res, next) {
-    console.log("auth.canView");
-
     var url = req.url.replace('/', '');
     var jwt = req.jwt;
     var headers = req.headers;
-    console.log(url);
+
     if(url == 'version' || url == 'version' || url == 'status') {
-      console.log('next');
       next();
     } else {
-      console.log('Check');
-      requestUserPermission(jwt.username, url);
+      requestUserPermission(jwt.username, url, next);
     }
   }
   onDeAuthenticate = function(req, res) {
@@ -66,11 +62,17 @@ var pages = {
       console.log("Deauthenticate User");
       res.status(200).send({ auth: false, token: null });
   }
-  requestUserPermission = function(username, page_name) {
+  requestUserPermission = function(username, page_name,next) {
     console.log("auth.requestUserPermissions");
     db.any('SELECT account_type_id, name, level FROM account JOIN account_type_permissions ON account_type_id = user_id WHERE username = ' + username + ' & name = ' + page_name)
       .then(function (response) {
           if(response.level >= level) {
+            res.status(200)
+              .json({
+                status: '200',
+                message: 'Can View',
+                permissions: permissions[response.level]
+              });
               next();
           } else {
             res.status(200)
