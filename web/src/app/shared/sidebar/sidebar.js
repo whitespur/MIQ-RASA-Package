@@ -7,12 +7,19 @@ function SideBarController($scope,Navigation, Account) {
         $scope.account = data;
         console.log(data);
   console.log('i was here ctrlside');
-
-        Navigation.get({level: data.level}, function(response) {
+        $http({method: 'GET', url: api_endpoint_v2 + '/navigation/' + data.level}).then(
+            function(response){
   console.log('i was here navstart');
+  $scope.nav_links = response;
 
-            $scope.nav_links = response;
-            console.log(response);        
+            },
+            function(errorResponse){
+            console.log("Error Message while Getting Messages." + errorResponse);
+            });
+
+        }
+        Navigation.get({level: data.level}, function(response) {
+
         });
     });
 }
