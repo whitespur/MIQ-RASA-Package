@@ -47,10 +47,12 @@ var pages = {
       });
   }
   onCanView = function(req, res, next) {
+    console.log("auth.canView");
+
     var url = req.url.replace('/', '');
     var jwt = req.jwt;
     var headers = req.headers;
-
+    
     if(url == 'version' || url == 'version' || url == 'status') {
       next();
     } else {
