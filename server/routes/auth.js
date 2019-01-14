@@ -93,7 +93,7 @@ class Authentication{
       .catch(function (err) {
         console.log(err);
         return next(err);
-      });)
+      });
   }
 
   onAuthClient() {
