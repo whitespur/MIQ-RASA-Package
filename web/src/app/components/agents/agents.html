@@ -3,8 +3,8 @@
         <!-- Breadcrumb Menu-->
         <li class="breadcrumb-menu">
             <div class="btn-group" role="group">
-                <a class="btn btn-outline-secondary {{account.level <= 2 ? 'hide' : ''}}" href="#!/agent/import"><i class="fa fa-upload"></i> &nbsp;Import Agent</a>
-                <a class="btn btn-outline-secondary {{account.level <= 2 ? 'hide' : ''}}" href="#!/agent/add"><i class="icon-plus"></i> &nbsp;Add Agent</a>
+                <a class="btn btn-outline-secondary  {{account.level < 3 ? 'hide' : 'show'}}" href="#!/agent/import"><i class="fa fa-upload"></i> &nbsp;Import Agent</a>
+                <a class="btn btn-outline-secondary {{account.level < 3 ? 'hide' : 'show'}}" href="#!/agent/add"><i class="icon-plus"></i> &nbsp;Add Agent</a>
             </div>
         </li>
 </ol>
