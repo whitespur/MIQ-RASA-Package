@@ -149,4 +149,5 @@ body.need_auth {
     background-repeat: no-repeat !important;
     background-size: 100% 28% !important;
     background-position: 32% 2%!important;
+    overflow:hidden !important;
 }
