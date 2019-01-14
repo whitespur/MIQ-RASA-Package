@@ -59,7 +59,7 @@ var pages = {
   }
   requestUserPermission = function(username, page_name,next, res, req) {
     console.log("auth.requestUserPermissions");
-    db.one("SELECT account_type_permissions.level as level FROM account JOIN account_type_permissions ON account_type_id::int = user_id WHERE name = '" + page_name + "' AND username = '" + username + "'")
+    db.one("SELECT * FROM account JOIN account_type_permissions ON account_type_id::int = user_id WHERE name = '" + page_name + "' AND username = '" + username + "'")
       .then(function (response) {
         console.log(response);
         backURL=req.header('Referer') || '/';
