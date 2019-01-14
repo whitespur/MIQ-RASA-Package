@@ -60,10 +60,38 @@ var pages = {
   requestUserPermission = function(username, page_name,next, res, req) {
     console.log("auth.requestUserPermissions");
     db.one("SELECT * FROM account JOIN account_type_permissions ON account_type_id::int = user_id WHERE name = '" + page_name + "' AND username = '" + username + "'")
-      .then(function (response) {
-        console.log(response);
+      .then(function (permission) {
         backURL=req.header('Referer') || '/';
         if(response != '') {
+          db.one("SELECT * FROM navigation WHERE name = '" + page_name + "'")
+          .then(function (response) {
+            backURL=req.header('Referer') || '/';
+            if(response != '') {
+              if(permission.level >= response.level) {
+                next('route');
+              } else {
+                return res.status(200).json({
+                    success: false,
+                    message: 'You cannot view this page.',
+                    errCode: 755,
+                    redirect: backURL,
+                    response: response
+                });
+              }
+            } else {
+              console.log('Not Viewable');
+              console.log(':: No Result == NOT VIEWABLE');
+              res.redirect(backURL);
+            }
+          })
+          .catch(function (err) {
+            backURL=req.header('Referer') || '/';
+
+            console.log(err);
+            res.redirect(backURL);
+
+            return next(err);
+          });
           if(response.level >= 2) {
             next('route');
           } else {
