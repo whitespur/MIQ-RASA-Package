@@ -51,11 +51,8 @@ var pages = {
     var jwt = req.jwt;
     var headers = req.headers;
 
-    if(url == 'version' || url == 'version' || url == 'status') {
-      next();
-    } else {
+  
       Authentication.requestUserPermission(jwt.username, url);
-    }
   }
   onDeAuthenticate = function(req, res) {
       //authenticate user
