@@ -67,12 +67,6 @@ var pages = {
     db.any('SELECT account_type_id, name, level FROM account JOIN account_type_permissions ON account_type_id = user_id WHERE username = ' + username + ' & name = ' + page_name)
       .then(function (response) {
           if(response.level >= level) {
-            res.status(200)
-              .json({
-                status: '200',
-                message: 'Can View',
-                permissions: permissions[response.level]
-              });
               next();
           } else {
             res.status(200)
