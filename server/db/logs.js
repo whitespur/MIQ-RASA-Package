@@ -60,7 +60,8 @@ function getAvgNluResponseTimesLast30Days(req, res, next){
 }
 
 function getIntentsMostUsed(req, res, next){
-  db.any('select * from intents_most_used')
+  if(req.jwt.level > 2) {
+    db.any('select * from intents_most_used')
     .then(function (data) {
       res.status(200)
         .json(data);
@@ -68,10 +69,21 @@ function getIntentsMostUsed(req, res, next){
     .catch(function (err) {
       return next(err);
     })
+  } else {
+    db.any('select * from intents_most_used, agents WHERE agents.account = ' + req.jwt.uid)
+    .then(function (data) {
+      res.status(200)
+        .json(data);
+    })
+    .catch(function (err) {
+      return next(err);
+    })
+  }
 }
 
 function getAgentsByIntentConfidencePct(req, res, next){
-  db.any('select count(*),intent_confidence_pct, agents.agent_id, agents.agent_name from nlu_parse_log, agents, messages '
+  if(req.jwt.level > 2) {
+    db.any('select count(*),intent_confidence_pct, agents.agent_id, agents.agent_name from nlu_parse_log, agents, messages '
          +' where messages.agent_id = agents.agent_id and messages.messages_id=nlu_parse_log.messages_id '
          +' group by intent_confidence_pct, agents.agent_id, agents.agent_name ')
     .then(function (data) {
@@ -81,6 +93,18 @@ function getAgentsByIntentConfidencePct(req, res, next){
     .catch(function (err) {
       return next(err);
     })
+  } else {
+    db.any('select count(*),intent_confidence_pct, agents.agent_id,agents.account,agents.agent_name from nlu_parse_log, agents, messages '
+         +' where messages.agent_id = agents.agent_id and messages.messages_id=nlu_parse_log.messages_id and agents.account = ' + req.jwt.uid
+         +' group by intent_confidence_pct, agents.agent_id, agents.agent_name ')
+    .then(function (data) {
+      res.status(200)
+        .json(data);
+    })
+    .catch(function (err) {
+      return next(err);
+    })
+  }
 }
 
 function getNluParseLogByAgent(req, res, next) {
