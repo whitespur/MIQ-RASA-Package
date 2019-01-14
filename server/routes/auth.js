@@ -23,7 +23,7 @@ var pages = {
   10:'permission_center'
 };
 
-  onAuthenticate = function(user) {
+  onAuthenticate = function(req) {
       //authenticate user
       console.log("Authenticate User");
       db.one('select * from account where username = $1', [req.body.username])
@@ -105,7 +105,7 @@ var pages = {
   }
   
   onIsAuthenticated = function() {
-    
+
   }
 
 module.exports = {
