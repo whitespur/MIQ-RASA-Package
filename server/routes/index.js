@@ -21,10 +21,13 @@ var nlu_router = require('./mw_routes/nlu_router');
 var logs = require('../db/logs');
 var auth = require('./auth');
 
-router.get('/accounts', accounts.getAccounts, function(req, res, next) {
-    console.log('Middleware Proc'); 
-    auth.auth_canView(req, res, next, 'accounts');
-});
+router.use(function (req, res, next) {
+    console.log('Middleware Proc');
+    auth.auth_canView(req, res, next);
+    next()
+})
+
+router.get('/accounts', accounts.getAccounts);
 router.get('/accounts/:accounts_id', accounts.getSingleAccount);
 
 router.get('/agents', agents.getAllAgents);
