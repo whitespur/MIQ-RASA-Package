@@ -24,6 +24,6 @@ function getLinksByLevel(req, res, next) {
 }
 
 module.exports = {
-  getAccounts: getAccounts,
-  getSingleAccount: getSingleAccount
+  getLinks: getLinks,
+  getLinksByLevel: getLinksByLevel
 };

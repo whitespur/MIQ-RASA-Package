@@ -158,6 +158,8 @@ router.get('/health', health.liveness);
 
 //Navigation
 router.get('/navigation', navigation.getLinks);
+router.get('/navigation/:level', navigation.getLinksByLevel);
+
 
 module.exports = router;
 
