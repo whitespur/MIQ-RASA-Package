@@ -143,9 +143,5 @@ router.post('/auth/init', auth.auth_init);
 router.get('/auth/check', auth.auth_check);
 router.get('/auth/destroy', auth.auth_deauthenticate);
 router.get('/auth/canView', auth.auth_canView);
-
-
-router.post('/authclient', auth.authenticateClient);
-
 router.get('/health', health.liveness);
 module.exports = router;
