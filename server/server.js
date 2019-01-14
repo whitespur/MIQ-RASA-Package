@@ -36,7 +36,7 @@ app.use(function(req, res, next) {
   if(req.originalUrl.endsWith('health')) {
     next();
   } else if(!req.headers.authorization) {
-    if(req.originalUrl.endsWith('auth_init') || req.originalUrl.endsWith('authclient')){
+    if(req.originalUrl.endsWith('init') || req.originalUrl.endsWith('authclient')){
       console.log("No Token, but got an Auth request. Allowing it");
       next();
     }else{
