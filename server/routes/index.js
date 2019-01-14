@@ -20,7 +20,7 @@ var core_router = require('./mw_routes/core_router');
 var nlu_router = require('./mw_routes/nlu_router');
 var logs = require('../db/logs');
 var auth = require('./auth');
-var auth = require('../db/navigation');
+var navigation = require('../db/navigation');
 
 
 router.use(function (req, res, next) {
