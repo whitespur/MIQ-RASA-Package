@@ -68,12 +68,12 @@ var pages = {
             next('route');
           } else {
             console.log('Not Viewable2');
-            return res.status(200).json({
-                success: false,
-                message: 'You cannot view this page.',
-                code: 755,
-                url: backURL
-            });
+            return res.status(200).json([
+                false,
+                'You cannot view this page.',
+                755,
+                backURL
+            ]);
           }
         } else {
           console.log('Not Viewable');
