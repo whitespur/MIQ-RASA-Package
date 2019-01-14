@@ -65,14 +65,15 @@ var pages = {
         backURL=req.header('Referer') || '/';
         if(response != '') {
           if(response.level >= 2) {
-            console.log('Viewable');
             next('route');
           } else {
             console.log('Not Viewable2');
-            return {
-              'status': 200,
-              'message': 'Not viewable',
-            };
+            return res.status(200).send({
+                success: false,
+                message: 'You cannot view this page.',
+                code: 755,
+                url: backURL
+            });
           }
         } else {
           console.log('Not Viewable');
