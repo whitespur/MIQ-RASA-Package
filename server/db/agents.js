@@ -108,7 +108,6 @@ function uploadAgentFromFile(req, res, next) {
 
 function getAllAgents(req, res, next) {
   console.log(req);
-  console.log(res);
   db.any('select * from agents')
     .then(function (data) {
       res.status(200)
