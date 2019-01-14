@@ -69,7 +69,10 @@ var pages = {
             next('route');
           } else {
             console.log('Not Viewable2');
-            res.redirect(backURL);
+            return {
+              'status': 200,
+              'message': 'Not viewable',
+            };
           }
         } else {
           console.log('Not Viewable');
