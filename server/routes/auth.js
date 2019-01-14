@@ -59,12 +59,13 @@ var components = ['navigation','accounts'];
       res.status(200).send({ auth: false, token: null });
   }
   requestUserPermission = function(username, page_name,next, res, req) {
+    page_name = page_name.split('/')[0];
     console.log("auth.requestUserPermissions");
     db.one("SELECT * FROM account WHERE username = '" + username + "'")
       .then(function (permission) {
         backURL=req.header('Referer').split('/')[0] || '/';
         if(permission != '' && isComponent(page_name) == false) {
-          db.one("SELECT * FROM navigation WHERE href LIKE '%" + page_name.split('/')[0] + "%'")
+          db.one("SELECT * FROM navigation WHERE href LIKE '%" + page_name + "%'")
           .then(function (response) {
             backURL=req.header('Referer').split('/')[0] || '/';
             if(response != '') {
