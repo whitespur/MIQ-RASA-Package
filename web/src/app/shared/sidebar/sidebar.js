@@ -7,11 +7,13 @@ function SideBarController($scope,Navigation, Account,$sessionStorage) {
     Account.get({account_id: $sessionStorage.uid}, function(data) {
         $scope.account = data;
         console.log(data);
-            console.log('i was here LinksLevel');
-
-        Navigation.get({level: data.level}, function(response) {
+        console.log('i was here LinksLevel');
+    }).then(function() {
+        Navigation.get({level: $scope.account.level}, function(response) {
             $scope.nav_links = response;
             console.log(response);        
         });
     });
+
+
 }
