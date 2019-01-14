@@ -139,10 +139,10 @@ router.post('/messages/list', messages.getMessagesListByUser);
 router.get('/messages/:messages_id', messages.getMessageDetails);
 
 //authentication js
-router.post('/auth/init', auth.onAuthenticate);
-router.get('/auth/check', auth.onIsAuthenticated);
-router.get('/auth/destroy', auth.onDeAuthenticate);
-router.get('/auth/canView', auth.onCanView);
+router.post('/auth/init', auth.auth_init);
+router.get('/auth/check', auth.auth_check);
+router.get('/auth/destroy', auth.auth_deauthenticate);
+router.get('/auth/canView', auth.auth_canView);
 
 
 router.post('/authclient', auth.authenticateClient);
