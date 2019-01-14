@@ -126,6 +126,4 @@ class Authentication{
   }
   }
 
-module.exports = {
-  auth: Authentication
-};
+module.exports = Authentication;
