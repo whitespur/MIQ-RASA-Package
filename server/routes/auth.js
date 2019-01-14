@@ -62,18 +62,19 @@ var pages = {
     db.one("SELECT account_type_id, account_type_permissions.name as name, level FROM account JOIN account_type_permissions ON account_type_id::int = user_id WHERE name = '" + page_name + "' AND username = '" + username + "'")
       .then(function (response) {
         console.log(response);
+        backURL=req.header('Referer') || '/';
         if(response != '') {
           if(response.level >= 2) {
             console.log('Viewable');
             next('route');
           } else {
             console.log('Not Viewable');
-            return false;
+            res.redirect(backURL);
           }
         } else {
           console.log('Not Viewable');
           console.log(':: No Result == NOT VIEWABLE');
-          return false;
+          res.redirect(backURL);
         }
       })
       .catch(function (err) {
