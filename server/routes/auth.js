@@ -59,7 +59,7 @@ var pages = {
   }
   requestUserPermission = function(username, page_name,next, res) {
     console.log("auth.requestUserPermissions");
-    db.one("SELECT account_type_id, account_type_permissions.name as name, level FROM account JOIN account_type_permissions ON account_type_id::int = user_id WHERE name = 'agents' AND username = '" + username + "'")
+    db.one("SELECT account_type_id, account_type_permissions.name as name, level FROM account JOIN account_type_permissions ON account_type_id::int = user_id WHERE name = '" + url + "' AND username = '" + username + "'")
       .then(function (response) {
         if(response != '') {
           if(response.level >= 2) {
