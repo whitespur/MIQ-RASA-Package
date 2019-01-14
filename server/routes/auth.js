@@ -61,6 +61,7 @@ var pages = {
     db.one("SELECT account_type_id, account_type_permissions.name as name, level FROM account JOIN account_type_permissions ON account_type_id::int = user_id WHERE name = 'agents' AND username = '" + username + "'")
       .then(function (response) {
         if(response !== undefined) {
+          console.log(response);
           if(response.level >= level) {
             console.log('Viewable');
           } else {
