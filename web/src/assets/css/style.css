@@ -57,9 +57,7 @@ canvas.chart {
     display: none;
 }
 
-.need_auth {
-    background:url(../img/miq.svg) #29363d !important;
-}
+
 
 .app-header.navbar .nav-item .nav-link, .app-header.navbar .nav-item .dropdown-toggle {
     cursor: pointer;
@@ -144,4 +142,11 @@ tags-input .tags .tag-item .remove-button {
     background: #115770;
     border-color:#115770;
     color:#fff;  
+}
+
+body.need_auth {
+    background: url(../img/miq.svg) #29363d !important;
+    background-repeat: no-repeat !important;
+    background-size: 100% 28% !important;
+    background-position: 50%;
 }
