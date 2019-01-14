@@ -8,7 +8,7 @@ function SideBarController($scope,Navigation, Account,$sessionStorage) {
         $scope.account = data;
         console.log(data);
         console.log('i was here LinksLevel');
-    }).then(function() {
+
         Navigation.get({level: $scope.account.level}, function(response) {
             $scope.nav_links = response;
             console.log(response);        
