@@ -7,6 +7,10 @@ app.factory('Account', function($resource) {
   });
 });
 
+app.factory('Navigation', function($resource) {
+  return $resource(api_endpoint_v2 + '/navigation/:level');
+});
+
 app.factory('Agent_Models', function($resource) {
   return $resource(api_endpoint_v2 + '/agent/models/:agent_id', {agent_id: '@id'},
   {

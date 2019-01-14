@@ -20,6 +20,8 @@ var core_router = require('./mw_routes/core_router');
 var nlu_router = require('./mw_routes/nlu_router');
 var logs = require('../db/logs');
 var auth = require('./auth');
+var auth = require('../db/navigation');
+
 
 router.use(function (req, res, next) {
     var url = req.url.replace('/', '');
@@ -153,4 +155,9 @@ router.get('/auth/check', auth.auth_check);
 router.get('/auth/destroy', auth.auth_deauthenticate);
 router.get('/auth/canView', auth.auth_canView);
 router.get('/health', health.liveness);
+
+//Navigation
+router.get('/navigation', navigation.getLinks);
+
 module.exports = router;
+
