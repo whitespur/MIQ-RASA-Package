@@ -53,6 +53,10 @@ canvas.chart {
     margin-right: 350px;
 }
 
+.hide {
+    display: none;
+}
+
 .app-header.navbar .nav-item .nav-link, .app-header.navbar .nav-item .dropdown-toggle {
     cursor: pointer;
 }
