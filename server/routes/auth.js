@@ -47,10 +47,10 @@ var pages = {
       });
   }
   onCanView = function(req, res, next) {
+    console.log('URL: ' + url);
+
     var url = req.url.replace('/', '');
     var jwt = req.jwt;
-    var headers = req.headers;
-    console.log('URL: ' + url);
     if(url == 'version' || url == 'rasa/version' || url == 'status') {
       next();
     } else {
@@ -67,7 +67,7 @@ var pages = {
     db.any('SELECT account_type_id, name, level FROM account JOIN account_type_permissions ON account_type_id = user_id WHERE username = ' + username + ' & name = ' + page_name)
       .then(function (response) {
           if(response.level >= level) {
-              next();
+            console.log('Viewable');
           } else {
             console.log('Not Viewable');
             return false;
