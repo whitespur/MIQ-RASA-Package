@@ -62,7 +62,7 @@ var components = ['navigation','accounts'];
     console.log("auth.requestUserPermissions");
     db.one("SELECT * FROM account WHERE username = '" + username + "'")
       .then(function (permission) {
-        backURL=req.header('Referer') || '/';
+        backURL=req.header('Referer').split('/')[0] || '/';
         if(permission != '' && isComponent(page_name) == false) {
           db.one("SELECT * FROM navigation WHERE href LIKE '%" + page_name + "%'")
           .then(function (response) {
