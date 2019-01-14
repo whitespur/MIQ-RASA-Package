@@ -103,6 +103,10 @@ var pages = {
         });
       });
   }
+  
+  onIsAuthenticated = function() {
+    
+  }
 
 module.exports = {
   auth_init           : onAuthenticate,
