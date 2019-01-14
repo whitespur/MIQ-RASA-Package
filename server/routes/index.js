@@ -24,7 +24,8 @@ var auth = require('./auth');
 
 router.use(function (req, res, next) {
     var url = req.url.replace('/', '');
-    if(url == 'version' || url == 'rasa/version' || url == 'rasa/status' || url == 'status' || url == 'settings' || url == 'rasa/config') {
+    console.log(url);
+    if(url == 'version' || url == 'rasa/version' || url == 'rasa/status' || url == 'status' || url == 'settings' || url == 'rasa/config' || url == 'auth/init') {
         next('route')
     } else {
         auth.auth_canView(req, res, next, url);
