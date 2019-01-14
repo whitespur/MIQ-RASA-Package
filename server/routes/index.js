@@ -20,11 +20,11 @@ var core_router = require('./mw_routes/core_router');
 var nlu_router = require('./mw_routes/nlu_router');
 var logs = require('../db/logs');
 var auth = require('./auth');
+var navigation = require('../db/navigation');
 
 
 router.use(function (req, res, next) {
     var url = req.url.replace('/', '');
-    console.log(url);
     if(url == 'version' || url == 'rasa/version' || url == 'rasa/status' || url == 'status' || url == 'settings' || url == 'rasa/config' || url == 'auth/init') {
         next('route')
     } else {
@@ -155,6 +155,10 @@ router.get('/auth/check', auth.auth_check);
 router.get('/auth/destroy', auth.auth_deauthenticate);
 router.get('/auth/canView', auth.auth_canView);
 router.get('/health', health.liveness);
+
+//Navigation
+router.get('/navigation', navigation.getLinks);
+router.get('/navigation/:level', navigation.getLinksByLevel);
 
 
 module.exports = router;
