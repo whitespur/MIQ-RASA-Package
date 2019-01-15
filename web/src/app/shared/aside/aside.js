@@ -51,7 +51,6 @@ function AsideController($scope, $rootScope, $interval, Agent, Agent_Models, $ht
 
   var agent_names = [];
   Agent.query({account: $sessionStorage.uid}, function(data) {
-    $scope.agents = data;
     agent_names.push(data.agent_name);
   });
 
