@@ -38,7 +38,7 @@ app.use(function(req, res, next) {
   } else if(!req.headers.authorization) {
     if(req.originalUrl.endsWith('init') || req.originalUrl.endsWith('authclient')){
       console.log("No Token, but got an Auth request. Allowing it");
-      next();
+      next('route');
     }else{
       return  res.status(401).send({
           success: false,
