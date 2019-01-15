@@ -49,6 +49,16 @@ function AsideController($scope, $rootScope, $interval, $http,Rasa_Parse, Rasa_C
     $interval.cancel(configcheck);
   });
 
+  var agent_ids = [];
+  Agent.query({account: $sessionStorage.uid}, function(data) {
+    $scope.agents = data;
+    agent_ids.push(data.agent_id);
+  });
+
+  Agent_Models.query({agent_id: agent_ids}, function(data) {
+    console.log(data);
+  });
+
   function getRasaConfig() {
     // Add a status param to config and set to 0 if server is offline
     Rasa_Status.get(function(statusdata) {
