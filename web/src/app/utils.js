@@ -40,7 +40,7 @@ function getNoOfTrainingJobs(statusData) {
     }
     return count;
 }
-function getAvailableModels(statusData, agent_names = null, level = null) {
+function getAvailableModels(statusData) {
   var arrModels = [];
   if(statusData === undefined)
     return arrModels;
@@ -51,9 +51,7 @@ function getAvailableModels(statusData, agent_names = null, level = null) {
        var modelName = projectObj.available_models[i];
        //if(modelName == 'fallback') continue modelItr;
         var xdate = parseRasaModelFolderDate(modelName);
-        if(agent_names.indexOf(project) > -1 || level > 2 || agent_names == null) {
           arrModels.push({name : project + "*" + modelName, xdate: xdate});
-        }
       };
   }
   if (statusData.available_projects.length == 0) {
