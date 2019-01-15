@@ -42,9 +42,11 @@ function getNoOfTrainingJobs(statusData) {
 }
 function getAvailableModels(statusData, agent_names) {
   var arrModels = [];
+  console.log(statusData);
 
   if(statusData === undefined)
     return arrModels;
+    console.log( statusData.available_projects);
 
   for (var project in statusData.available_projects) {
     if (!statusData.available_projects.hasOwnProperty(project)) continue;
