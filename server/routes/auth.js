@@ -61,7 +61,6 @@ var components = ['navigation','accounts','avgNluResponseTimesLast30Days', 'rasa
       res.status(200).send({ auth: false, token: null });
   }
   requestUserPermission = function(username, page_name,next, res, req) {
-    page_name = page_name;
     console.log("auth.requestUserPermissions");
     db.one("SELECT * FROM account WHERE username = '" + username + "'")
       .then(function (permission) {
@@ -106,9 +105,11 @@ var components = ['navigation','accounts','avgNluResponseTimesLast30Days', 'rasa
             }
           });
         } else if( isComponent(page_name) !== false && permission.level >= 2) {
-          console.log('i go');
-          console.log(next('route'));
-          next('route');
+          if(next('route') !== undefined) {
+            next('route');
+          } else {
+            next();
+          }
         } else {
           return res.status(200).json({
               success: false,
