@@ -25,8 +25,23 @@ var pages = {
 };
 
 var home_url = 'https://api.miq.ai/';
+<<<<<<< HEAD
+=======
 
-var components = ['navigation','accounts', 'avgNluResponseTimesLast30Days', 'rasa/parse','activeUserCountLast30Days', 'agentsByIntentConfidencePct', 'intentsMostUsed','avgUserResponseTimesLast30Days'];
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of 53d32f3... Create Account / Route / Auth
+=======
+>>>>>>> parent of 53d32f3... Create Account / Route / Auth
+=======
+>>>>>>> parent of 53d32f3... Create Account / Route / Auth
+=======
+>>>>>>> parent of 53d32f3... Create Account / Route / Auth
+=======
+>>>>>>> parent of 53d32f3... Create Account / Route / Auth
+var components = ['navigation','accounts', 'avgNluResponseTimesLast30Days', 'activeUserCountLast30Days', 'agentsByIntentConfidencePct', 'intentsMostUsed','avgUserResponseTimesLast30Days'];
 
   onAuthenticate = function(req, res, next) {
       //authenticate user
@@ -35,6 +50,7 @@ var components = ['navigation','accounts', 'avgNluResponseTimesLast30Days', 'ras
       .then(function (data) {
         if(data.password == req.body.password) {
           //create token and send it back
+          console.log(data);
         var tokenData = {username:data.username,name:data.username,level:data.level,uid:data.user_id};
         // if user is found and password is right
         // create a token
@@ -61,7 +77,6 @@ var components = ['navigation','accounts', 'avgNluResponseTimesLast30Days', 'ras
       res.status(200).send({ auth: false, token: null });
   }
   requestUserPermission = function(username, page_name,next, res, req) {
-    page_name = page_name.split('/')[0];
     console.log("auth.requestUserPermissions");
     db.one("SELECT * FROM account WHERE username = '" + username + "'")
       .then(function (permission) {
@@ -72,11 +87,8 @@ var components = ['navigation','accounts', 'avgNluResponseTimesLast30Days', 'ras
             backURL=req.header('Referer').split('/')[0] || '/';
             if(response != '') {
               if(permission.level >= response.level) {
-                console.log('NEXT->');
                 next('route');
               } else {
-                console.log('ERR!');
-
                 return res.status(200).json({
                     success: false,
                     message: 'You cannot view this page.',
@@ -86,8 +98,6 @@ var components = ['navigation','accounts', 'avgNluResponseTimesLast30Days', 'ras
                 });
               }
             } else {
-              console.log('ERR!');
-
               return res.status(200).json({
                   success: false,
                   message: 'You cannot view this page.',
@@ -101,14 +111,18 @@ var components = ['navigation','accounts', 'avgNluResponseTimesLast30Days', 'ras
             if(err.message == 'No data returned from the query.') {
               next('route');
             } else {
-              res.redirect(home_url);
-              return next(err);
+              return res.status(200).json({
+                  success: false,
+                  message: 'You cannot view this page.',
+                  errCode: 755,
+                  redirect: backURL,
+                  response: response
+              });
             }
           });
         } else if( isComponent(page_name) !== false && permission.level >= 2) {
-          next('route');
+            next();
         } else {
-          console.log(page_name);
           return res.status(200).json({
               success: false,
               message: 'You cannot view this page.',
@@ -119,12 +133,13 @@ var components = ['navigation','accounts', 'avgNluResponseTimesLast30Days', 'ras
         }
       })
       .catch(function (err) {
-        backURL=req.header('Referer') || '/';
-
-        console.log(err);
-        res.redirect(backURL);
-
-        return next(err);
+        return res.status(200).json({
+            success: false,
+            message: 'You cannot view this page.',
+            errCode: 755,
+            redirect: backURL,
+            response: response
+        });
       });
   }
   onAuthClient = function() {

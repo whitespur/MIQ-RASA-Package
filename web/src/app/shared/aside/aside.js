@@ -2,7 +2,7 @@ angular
 .module('app')
 .controller('AsideController', AsideController)
 
-function AsideController($scope, $rootScope, $interval, $http,Rasa_Parse, Rasa_Config, Rasa_Version, Settings, Rasa_Status, IntentResponse, mySocket) {
+function AsideController($scope, $rootScope, $interval, Agent, Account, $http,Rasa_Parse, $sessionStorage, Rasa_Config, Rasa_Version, Settings, Rasa_Status, IntentResponse, mySocket) {
   //$scope.test_text = 'I want italian food in new york';
   $scope.test_text_response = {};
   $rootScope.config = {}; //Initilize in case server is not online at startup
@@ -48,6 +48,20 @@ function AsideController($scope, $rootScope, $interval, $http,Rasa_Parse, Rasa_C
   $scope.$on("$destroy", function(){
     $interval.cancel(configcheck);
   });
+  
+  Account.get({account_id: $sessionStorage.uid}, function(data) {
+    $scope.account = data;
+  });
+
+
+  var agent_names = [];
+  Agent.query({account: $sessionStorage.uid}, function(data) {
+    for(var i = 0; i < data.length; i++) {
+      if(data[i].agent_name != undefined) {
+        agent_names.push(data[i].agent_name);
+      }
+    }
+  });
 
   function getRasaConfig() {
     // Add a status param to config and set to 0 if server is offline
@@ -55,9 +69,10 @@ function AsideController($scope, $rootScope, $interval, $http,Rasa_Parse, Rasa_C
       Rasa_Config.get().$promise.then(function(data) {
         $rootScope.config = data.toJSON();
         $rootScope.config.isonline = 1;
-        $rootScope.config.server_model_dirs_array = getAvailableModels(statusdata);
+        console.log(agent_names);
+        $rootScope.config.server_model_dirs_array = getAvailableModels(statusdata, agent_names, $scope.account.level);
         if ($rootScope.config.server_model_dirs_array.length > 0) {
-          $rootScope.modelname = $rootScope.config.server_model_dirs_array[0].name;
+            $rootScope.modelname = $rootScope.config.server_model_dirs_array[0].name;
         }
       }, function(error) {
         // error handler

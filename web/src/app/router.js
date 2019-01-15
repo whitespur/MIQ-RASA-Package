@@ -127,11 +127,6 @@ app.config(function($routeProvider, $locationProvider) {
       templateUrl:'/app/components/accounts/edit_account.html',
       activePage:'edit_account'
     })
-    .when('/accounts/create', {
-      controller:'CreateAccountController as CreateAccount',
-      templateUrl:'/app/components/accounts/create_account.html',
-      activePage:'create_account'
-    })
     .when('/permission_center', {
       controller:'PermissionsController',
       templateUrl:'/app/components/permissions/permissions.html',

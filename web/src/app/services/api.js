@@ -5,7 +5,7 @@ app.factory('Account', function($resource) {
   {
       'get':    {method: 'GET'},
       'update': { method:'PUT' },
-      'query': {method: 'GET', isArray: true}
+      'query': {method: 'GET'}
   });
 });
 
@@ -14,7 +14,6 @@ app.factory('Navigation', function($resource) {
   {
     'get':    {method: 'GET'},
     'query': {method: 'GET', isArray: true}
-
   });
 });
 
