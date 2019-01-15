@@ -2,7 +2,7 @@ angular
 .module('app')
 .controller('AsideController', AsideController)
 
-function AsideController($scope, $rootScope, $interval, Agent, Agent_Models, $http,Rasa_Parse, $sessionStorage, Rasa_Config, Rasa_Version, Settings, Rasa_Status, IntentResponse, mySocket) {
+function AsideController($scope, $rootScope, $interval, Agent, Account, $http,Rasa_Parse, $sessionStorage, Rasa_Config, Rasa_Version, Settings, Rasa_Status, IntentResponse, mySocket) {
   //$scope.test_text = 'I want italian food in new york';
   $scope.test_text_response = {};
   $rootScope.config = {}; //Initilize in case server is not online at startup
@@ -49,6 +49,12 @@ function AsideController($scope, $rootScope, $interval, Agent, Agent_Models, $ht
     $interval.cancel(configcheck);
   });
 
+  
+  Account.get({account_id: $sessionStorage.uid}, function(data) {
+    $scope.account = data;
+  });
+
+
   var agent_names = [];
   Agent.query({account: $sessionStorage.uid}, function(data) {
     for(var i = 0; i < data.length; i++) {
@@ -67,7 +73,7 @@ function AsideController($scope, $rootScope, $interval, Agent, Agent_Models, $ht
         $rootScope.config = data.toJSON();
         $rootScope.config.isonline = 1;
         console.log(agent_names);
-        $rootScope.config.server_model_dirs_array = getAvailableModels(statusdata, agent_names);
+        $rootScope.config.server_model_dirs_array = getAvailableModels(statusdata, agent_names, $scope.account.level);
         if ($rootScope.config.server_model_dirs_array.length > 0) {
             $rootScope.modelname = $rootScope.config.server_model_dirs_array[0].name;
         }
