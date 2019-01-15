@@ -66,9 +66,12 @@ var components = ['navigation','accounts','auth', 'avgNluResponseTimesLast30Days
     db.one("SELECT * FROM account WHERE username = '" + username + "'")
       .then(function (permission) {
         backURL=req.header('Referer').split('/')[0] || '/';
+        console.log('GOT HER 1');
         if(permission != '' && isComponent(page_name) == false) {
           db.one("SELECT * FROM navigation WHERE href LIKE '%" + page_name + "%'")
           .then(function (response) {
+        console.log('GOT HER 2');
+
             backURL=req.header('Referer').split('/')[0] || '/';
             if(response != '') {
               if(permission.level >= response.level) {
@@ -102,6 +105,8 @@ var components = ['navigation','accounts','auth', 'avgNluResponseTimesLast30Days
               console.log('NEXT->NoQUERY');
               next('route');
             } else {
+              console.log('GOT HER 3');
+
               res.redirect(home_url);
               return next(err);
             }
@@ -121,11 +126,10 @@ var components = ['navigation','accounts','auth', 'avgNluResponseTimesLast30Days
         }
       })
       .catch(function (err) {
+        console.log('GOT HER 4');
+
         backURL=req.header('Referer') || '/';
-
-        console.log(err);
         res.redirect(backURL);
-
         return next(err);
       });
   }
