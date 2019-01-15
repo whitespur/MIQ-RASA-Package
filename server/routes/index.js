@@ -22,13 +22,13 @@ var logs = require('../db/logs');
 var auth = require('./auth');
 var navigation = require('../db/navigation');
 
+var NoAuthPages = ['version', 'rasa/version', 'rasa/status', 'status', 'settings', 'rasa/config', 'auth/init', 'navigation']
 
 router.use(function (req, res, next) {
-    var url = req.url.replace('/', '');
+    var url = req.url.replace('/', '').split('/')[0];
     if(url == 'version' || url == 'rasa/version' || url == 'rasa/status' || url == 'status' || url == 'settings' || url == 'rasa/config' || url == 'auth/init') {
         next('route')
     } else {
-        console.log(url);
         auth.auth_canView(req, res, next, url);
     }
 })
@@ -43,6 +43,7 @@ router.put('/agents/:agent_id', agents.updateAgent);
 router.post('/agentStory', agents.updateAgentStory);
 router.delete('/agents/:agent_id', agents.removeAgent);
 router.post('/agents/upload', agents.uploadAgentFromFile);
+router.get('/agents/models/:agent_id', agents.getAgentActions);
 
 
 router.get('/actions/:action_id', actions.getSingleAction);
