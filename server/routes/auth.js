@@ -32,8 +32,11 @@ var home_url = 'https://api.miq.ai/';
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> parent of 53d32f3... Create Account / Route / Auth
 =======
+=======
+>>>>>>> 579c480924b28c26e05c069c6d8b97acf1d2fa4c
 >>>>>>> parent of 53d32f3... Create Account / Route / Auth
 =======
 >>>>>>> parent of 53d32f3... Create Account / Route / Auth
