@@ -25,8 +25,7 @@ var pages = {
 };
 
 var home_url = 'https://api.miq.ai/';
-
-var components = ['navigation','accounts','avgNluResponseTimesLast30Days', 'activeUserCountLast30Days', 'agentsByIntentConfidencePct', 'intentsMostUsed','avgUserResponseTimesLast30Days'];
+var components = ['navigation','accounts','avgNluResponseTimesLast30Days', 'rasa/parse', 'activeUserCountLast30Days', 'agentsByIntentConfidencePct', 'intentsMostUsed','avgUserResponseTimesLast30Days'];
 
   onAuthenticate = function(req, res, next) {
       //authenticate user
@@ -62,7 +61,7 @@ var components = ['navigation','accounts','avgNluResponseTimesLast30Days', 'acti
       res.status(200).send({ auth: false, token: null });
   }
   requestUserPermission = function(username, page_name,next, res, req) {
-    page_name = page_name.split('/')[0];
+    page_name = page_name;
     console.log("auth.requestUserPermissions");
     db.one("SELECT * FROM account WHERE username = '" + username + "'")
       .then(function (permission) {
@@ -71,8 +70,6 @@ var components = ['navigation','accounts','avgNluResponseTimesLast30Days', 'acti
         if(permission != '' && isComponent(page_name) == false) {
           db.one("SELECT * FROM navigation WHERE href LIKE '%" + page_name + "%'")
           .then(function (response) {
-        console.log('GOT HER 2');
-
             backURL=req.header('Referer').split('/')[0] || '/';
             if(response != '') {
               if(permission.level >= response.level) {
@@ -114,8 +111,6 @@ var components = ['navigation','accounts','avgNluResponseTimesLast30Days', 'acti
           });
         } else if( isComponent(page_name) !== false && permission.level >= 2) {
           console.log('NEXT->Component');
-          console.log(page_name);
-
           next('route');
         } else {
           console.log('GOT HER 5');
