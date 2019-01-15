@@ -115,6 +115,8 @@ var components = ['navigation','accounts','auth', 'avgNluResponseTimesLast30Days
           console.log('NEXT->Component');
           next('route');
         } else {
+          console.log('GOT HER 5');
+
           console.log(page_name);
           return res.status(200).json({
               success: false,
