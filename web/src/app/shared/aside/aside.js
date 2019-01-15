@@ -69,11 +69,8 @@ function AsideController($scope, $rootScope, $interval, Agent, Account, $http,Ra
       Rasa_Config.get().$promise.then(function(data) {
         $rootScope.config = data.toJSON();
         $rootScope.config.isonline = 1;
-        if(agent_names !== undefined) {
-          $rootScope.config.server_model_dirs_array = getAvailableModels(statusdata, agent_names, $scope.account.level);
-        } else {
-          $rootScope.config.server_model_dirs_array = getAvailableModels(statusdata);
-        }
+        console.log(agent_names);
+        $rootScope.config.server_model_dirs_array = getAvailableModels(statusdata, agent_names, $scope.account.level);
         if ($rootScope.config.server_model_dirs_array.length > 0) {
             $rootScope.modelname = $rootScope.config.server_model_dirs_array[0].name;
         }
