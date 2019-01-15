@@ -114,6 +114,8 @@ var components = ['navigation','accounts','avgNluResponseTimesLast30Days', 'rasa
           });
         } else if( isComponent(page_name) !== false && permission.level >= 2) {
           console.log('NEXT->Component');
+          console.log(page_name);
+
           next('route');
         } else {
           console.log('GOT HER 5');
