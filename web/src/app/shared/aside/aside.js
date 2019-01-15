@@ -48,6 +48,7 @@ function AsideController($scope, $rootScope, $interval, Agent, Account, $http,Ra
   $scope.$on("$destroy", function(){
     $interval.cancel(configcheck);
   });
+
   
   Account.get({account_id: $sessionStorage.uid}, function(data) {
     $scope.account = data;
@@ -57,6 +58,8 @@ function AsideController($scope, $rootScope, $interval, Agent, Account, $http,Ra
   var agent_names = [];
   Agent.query({account: $sessionStorage.uid}, function(data) {
     for(var i = 0; i < data.length; i++) {
+      console.log(data[i]);
+      console.log('done');
       if(data[i].agent_name != undefined) {
         agent_names.push(data[i].agent_name);
       }
@@ -69,11 +72,8 @@ function AsideController($scope, $rootScope, $interval, Agent, Account, $http,Ra
       Rasa_Config.get().$promise.then(function(data) {
         $rootScope.config = data.toJSON();
         $rootScope.config.isonline = 1;
-        if(agent_names !== undefined) {
-          $rootScope.config.server_model_dirs_array = getAvailableModels(statusdata, agent_names, $scope.account.level);
-        } else {
-          $rootScope.config.server_model_dirs_array = getAvailableModels(statusdata);
-        }
+        console.log(agent_names);
+        $rootScope.config.server_model_dirs_array = getAvailableModels(statusdata, agent_names, $scope.account.level);
         if ($rootScope.config.server_model_dirs_array.length > 0) {
             $rootScope.modelname = $rootScope.config.server_model_dirs_array[0].name;
         }
