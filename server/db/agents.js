@@ -242,5 +242,6 @@ module.exports = {
   removeAgent: removeAgent,
   uploadAgentFromFile:uploadAgentFromFile,
   updateAgentStory: updateAgentStory,
-  combineAgents: combineAgents
+  combineAgents: combineAgents,
+  getLatestModel: getLatestModel
 };
