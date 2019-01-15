@@ -141,7 +141,7 @@ function getSingleAgent(req, res, next) {
 
 
 function getLatestModel(req, res, next) {
-  var agentID = parseInt(req.params.agent_id);
+  var agentID = req.params.agent_id;
   db.one('select * from agent_models where agent_id IN ($1)', agentID)
     .then(function (data) {
       res.status(200)
