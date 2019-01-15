@@ -14,7 +14,6 @@ app.factory('Navigation', function($resource) {
   {
     'get':    {method: 'GET'},
     'query': {method: 'GET', isArray: true}
-
   });
 });
 
