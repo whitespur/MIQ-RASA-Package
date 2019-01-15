@@ -106,6 +106,8 @@ var components = ['navigation','accounts','avgNluResponseTimesLast30Days', 'rasa
             }
           });
         } else if( isComponent(page_name) !== false && permission.level >= 2) {
+          console.log('i go');
+          console.log(next('route'));
           next('route');
         } else {
           return res.status(200).json({
