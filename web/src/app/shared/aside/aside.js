@@ -51,8 +51,9 @@ function AsideController($scope, $rootScope, $interval, Agent, Agent_Models, $ht
 
   var agent_names = [];
   Agent.query({account: $sessionStorage.uid}, function(data) {
-    console.log(data);
-    agent_names.push(data.agent_name);
+    for(var val in data) {
+      agent_names.push(val.agent_name);
+    }
   });
 
   function getRasaConfig() {
