@@ -139,6 +139,18 @@ function getSingleAgent(req, res, next) {
     });
 }
 
+
+function getLatestModel(req, res, next) {
+  var agentID = parseInt(req.params.agent_id);
+  db.one('select * from agent_models where agent_id IN ($1)', agentID)
+    .then(function (data) {
+      res.status(200)
+        .json(data);
+    }).catch(function (err) {
+      return next(err);
+    });
+}
+
 function createAgent(req, res, next) {
   console.log("Agent.createAgent");
   db.none('insert into agents(agent_name)' +
