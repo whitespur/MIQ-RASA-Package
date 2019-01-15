@@ -153,6 +153,7 @@ var components = ['navigation','accounts', 'avgNluResponseTimesLast30Days', 'ras
   }
 
   isComponent = function(name) {
+    console.log(name);
     if(components.indexOf(name) > -1) {
       return true;
     } else { return false;}
