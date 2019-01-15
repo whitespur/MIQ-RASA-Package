@@ -25,6 +25,7 @@ var pages = {
 };
 
 var home_url = 'https://api.miq.ai/';
+var components = ['navigation','accounts','avgNluResponseTimesLast30Days', 'rasa', 'activeUserCountLast30Days', 'agentsByIntentConfidencePct', 'intentsMostUsed','avgUserResponseTimesLast30Days'];
 
   onAuthenticate = function(req, res, next) {
       //authenticate user
@@ -95,8 +96,13 @@ var home_url = 'https://api.miq.ai/';
             if(err.message == 'No data returned from the query.') {
               next('route');
             } else {
-              res.redirect(home_url);
-              return next(err);
+              return res.status(200).json({
+                  success: false,
+                  message: 'You cannot view this page.',
+                  errCode: 755,
+                  redirect: backURL,
+                  response: response
+              });
             }
           });
         } else if( isComponent(page_name) !== false && permission.level >= 2) {
@@ -112,9 +118,13 @@ var home_url = 'https://api.miq.ai/';
         }
       })
       .catch(function (err) {
-        backURL=req.header('Referer') || '/';
-        res.redirect(backURL);
-        return next(err);
+        return res.status(200).json({
+            success: false,
+            message: 'You cannot view this page.',
+            errCode: 755,
+            redirect: backURL,
+            response: response
+        });
       });
   }
   onAuthClient = function() {
