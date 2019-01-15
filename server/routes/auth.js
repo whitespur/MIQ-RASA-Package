@@ -24,6 +24,8 @@ var pages = {
   10:'permission_center'
 };
 
+var home_url = 'https://api.miq.ai/';
+
 var components = ['navigation','accounts', 'avgNluResponseTimesLast30Days', 'activeUserCountLast30Days', 'agentsByIntentConfidencePct', 'intentsMostUsed','avgUserResponseTimesLast30Days'];
 
   onAuthenticate = function(req, res, next) {
@@ -96,12 +98,12 @@ var components = ['navigation','accounts', 'avgNluResponseTimesLast30Days', 'act
             }
           })
           .catch(function (err) {
-            backURL=req.header('Referer').split('/')[0] || '/';
-
-            console.log(err);
-            res.redirect(backURL);
-
-            return next(err);
+            if(err.message == 'No data returned from the query.') {
+              next('route');
+            } else {
+              res.redirect(home_url);
+              return next(err);
+            }
           });
         } else if( isComponent(page_name) !== false && permission.level >= 2) {
           next('route');
