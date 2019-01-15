@@ -26,7 +26,7 @@ var pages = {
 
 var home_url = 'https://api.miq.ai/';
 
-var components = ['navigation','accounts','auth', 'avgNluResponseTimesLast30Days', 'rasa', 'activeUserCountLast30Days', 'agentsByIntentConfidencePct', 'intentsMostUsed','avgUserResponseTimesLast30Days'];
+var components = ['navigation','accounts','avgNluResponseTimesLast30Days', 'rasa', 'activeUserCountLast30Days', 'agentsByIntentConfidencePct', 'intentsMostUsed','avgUserResponseTimesLast30Days'];
 
   onAuthenticate = function(req, res, next) {
       //authenticate user
@@ -35,6 +35,7 @@ var components = ['navigation','accounts','auth', 'avgNluResponseTimesLast30Days
       .then(function (data) {
         if(data.password == req.body.password) {
           //create token and send it back
+          console.log(data);
         var tokenData = {username:data.username,name:data.username,level:data.level,uid:data.user_id};
         // if user is found and password is right
         // create a token
