@@ -60,11 +60,8 @@ function AsideController($scope, $rootScope, $interval, Agent, Agent_Models, $ht
       Rasa_Config.get().$promise.then(function(data) {
         $rootScope.config = data.toJSON();
         $rootScope.config.isonline = 1;
-        $rootScope.config.server_model_dirs_array = getAvailableModels(statusdata);
+        $rootScope.config.server_model_dirs_array = getAvailableModels(statusdata, agent_names);
         if ($rootScope.config.server_model_dirs_array.length > 0) {
-          if(agent_names.indexOf($rootScope.config.server_model_dirs_array[0].name) > -1) {
-            console.log($rootScope.config.server_model_dirs_array[0].name);
-
             $rootScope.modelname = $rootScope.config.server_model_dirs_array[0].name;
           }
         }
