@@ -50,7 +50,7 @@ function AsideController($scope, $rootScope, $interval, Agent, Agent_Models, $ht
   });
 
   var agent_names = [];
-  Agent.query({agent_id: $sessionStorage.uid}, function(data) {
+  Agent.get({agent_id: $sessionStorage.uid}, function(data) {
     console.log(data);
     agent_names.push(data.agent_name);
   });
