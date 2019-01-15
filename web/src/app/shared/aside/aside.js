@@ -62,9 +62,9 @@ function AsideController($scope, $rootScope, $interval, Agent, Agent_Models, $ht
         $rootScope.config.isonline = 1;
         $rootScope.config.server_model_dirs_array = getAvailableModels(statusdata);
         if ($rootScope.config.server_model_dirs_array.length > 0) {
-          console.log($rootScope.config.server_model_dirs_array[0].name);
-
           if(agent_names.indexOf($rootScope.config.server_model_dirs_array[0].name) > -1) {
+            console.log($rootScope.config.server_model_dirs_array[0].name);
+
             $rootScope.modelname = $rootScope.config.server_model_dirs_array[0].name;
           }
         }
