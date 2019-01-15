@@ -43,7 +43,6 @@ router.put('/agents/:agent_id', agents.updateAgent);
 router.post('/agentStory', agents.updateAgentStory);
 router.delete('/agents/:agent_id', agents.removeAgent);
 router.post('/agents/upload', agents.uploadAgentFromFile);
-router.get('/agents/models/:agent_id',  agents.getLatestModel);
 
 router.get('/actions/:action_id', actions.getSingleAction);
 router.put('/actions/:action_id', actions.updateAction);
