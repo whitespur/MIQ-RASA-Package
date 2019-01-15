@@ -131,7 +131,6 @@ if (app.get('env') === 'development') {
     .json({
       status: 'error',
       message: err,
-      req:req
     });
   });
 }
