@@ -28,6 +28,9 @@ var home_url = 'https://api.miq.ai/';
 <<<<<<< HEAD
 =======
 
+<<<<<<< HEAD
+>>>>>>> parent of 53d32f3... Create Account / Route / Auth
+=======
 >>>>>>> parent of 53d32f3... Create Account / Route / Auth
 var components = ['navigation','accounts', 'avgNluResponseTimesLast30Days', 'activeUserCountLast30Days', 'agentsByIntentConfidencePct', 'intentsMostUsed','avgUserResponseTimesLast30Days'];
 
