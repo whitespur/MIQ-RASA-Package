@@ -72,7 +72,7 @@ var components = ['navigation','accounts', 'avgNluResponseTimesLast30Days', 'ras
             backURL=req.header('Referer').split('/')[0] || '/';
             if(response != '') {
               if(permission.level >= response.level) {
-                console.log('NEXT->');
+                console.log('NEXT->Page');
                 next('route');
               } else {
                 console.log('ERR!');
@@ -99,6 +99,7 @@ var components = ['navigation','accounts', 'avgNluResponseTimesLast30Days', 'ras
           })
           .catch(function (err) {
             if(err.message == 'No data returned from the query.') {
+              console.log('NEXT->NoQUERY');
               next('route');
             } else {
               res.redirect(home_url);
@@ -106,6 +107,7 @@ var components = ['navigation','accounts', 'avgNluResponseTimesLast30Days', 'ras
             }
           });
         } else if( isComponent(page_name) !== false && permission.level >= 2) {
+          console.log('NEXT->Component');
           next('route');
         } else {
           console.log(page_name);
