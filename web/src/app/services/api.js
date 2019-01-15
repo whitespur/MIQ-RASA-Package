@@ -12,7 +12,9 @@ app.factory('Account', function($resource) {
 app.factory('Navigation', function($resource) {
   return $resource(api_endpoint_v2 + '/navigation/:level', {level: '@level'},
   {
-    'get':    {method: 'GET'}
+    'get':    {method: 'GET'},
+    'query': {method: 'GET', isArray: true}
+
   });
 });
 
