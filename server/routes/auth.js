@@ -105,11 +105,7 @@ var components = ['navigation','accounts','avgNluResponseTimesLast30Days', 'rasa
             }
           });
         } else if( isComponent(page_name) !== false && permission.level >= 2) {
-          if(next('route') !== undefined) {
-            next('route');
-          } else {
             next();
-          }
         } else {
           return res.status(200).json({
               success: false,
