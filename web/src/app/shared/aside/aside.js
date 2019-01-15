@@ -51,9 +51,9 @@ function AsideController($scope, $rootScope, $interval, Agent, Agent_Models, $ht
 
   var agent_names = [];
   Agent.query({account: $sessionStorage.uid}, function(data) {
-    console.log(data);
     for(var i = 0; i < data.length; i++) {
       console.log(data[i]);
+      console.log('done');
       if(data[i].agent_name != undefined) {
         agent_names.push(data[i].agent_name);
       }
