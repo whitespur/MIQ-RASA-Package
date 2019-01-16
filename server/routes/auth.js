@@ -26,7 +26,7 @@ var pages = {
 
 var home_url = 'https://api.miq.ai/';
 
-var components = ['navigation','accounts', 'avgNluResponseTimesLast30Days', 'rasa/parse','activeUserCountLast30Days', 'agentsByIntentConfidencePct', 'intentsMostUsed','avgUserResponseTimesLast30Days'];
+var components = ['auth_init','rasaconfig','navigation','accounts', 'avgNluResponseTimesLast30Days', 'rasa/parse','activeUserCountLast30Days', 'agentsByIntentConfidencePct', 'intentsMostUsed','avgUserResponseTimesLast30Days'];
 
   onAuthenticate = function(req, res, next) {
       //authenticate user
@@ -72,11 +72,8 @@ var components = ['navigation','accounts', 'avgNluResponseTimesLast30Days', 'ras
             backURL=req.header('Referer').split('/')[0] || '/';
             if(response != '') {
               if(permission.level >= response.level) {
-                console.log('NEXT->');
                 next('route');
               } else {
-                console.log('ERR!');
-
                 return res.status(200).json({
                     success: false,
                     message: 'You cannot view this page.',
@@ -86,8 +83,6 @@ var components = ['navigation','accounts', 'avgNluResponseTimesLast30Days', 'ras
                 });
               }
             } else {
-              console.log('ERR!');
-
               return res.status(200).json({
                   success: false,
                   message: 'You cannot view this page.',
