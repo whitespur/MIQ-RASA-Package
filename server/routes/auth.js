@@ -62,6 +62,7 @@ var components = ['auth_init','rasaconfig','navigation','accounts', 'avgNluRespo
   }
   requestUserPermission = function(username, page_name,next, res, req) {
     page_name = page_name.split('/')[0];
+    console.log(page_name);
     console.log("auth.requestUserPermissions");
     db.one("SELECT * FROM account WHERE username = '" + username + "'")
       .then(function (permission) {
