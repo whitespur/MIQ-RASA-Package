@@ -26,7 +26,7 @@ var pages = {
 
 var home_url = 'https://api.miq.ai/';
 
-var components = ['auth_init','rasaconfig','navigation','accounts', 'avgNluResponseTimesLast30Days', 'rasa/parse','activeUserCountLast30Days', 'agentsByIntentConfidencePct', 'intentsMostUsed','avgUserResponseTimesLast30Days'];
+var components = ['auth_init','rasa','navigation','accounts', 'avgNluResponseTimesLast30Days', 'rasa/parse','activeUserCountLast30Days', 'agentsByIntentConfidencePct', 'intentsMostUsed','avgUserResponseTimesLast30Days'];
 
   onAuthenticate = function(req, res, next) {
       //authenticate user
