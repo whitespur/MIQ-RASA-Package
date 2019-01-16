@@ -25,10 +25,9 @@ var navigation = require('../db/navigation');
 
 router.use(function (req, res, next) {
     var url = req.url.replace('/', '');
-    if(url == 'version' || url == 'rasa/version' || url == 'rasa/status' || url == 'status' || url == 'settings' || url == 'rasa/config' || url == 'auth/init') {
+    if(url == 'version' || url == 'rasa/version' || url == 'rasa/status' || url == 'rasaconfig' || url == 'status' || url == 'settings' || url == 'rasa/config' || url == 'auth/init') {
         next('route')
     } else {
-        console.log(url);
         auth.auth_canView(req, res, next, url);
     }
 })
