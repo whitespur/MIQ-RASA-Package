@@ -27,15 +27,13 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
   }
   function loadResponses(){
     Responses.query({intent_id: $scope.$routeParams.intent_id}, function(data) {
-      console.log(data);
         $scope.responses = data;
     });
   }
   $scope.saveNewResponse = function(event){
     this.formData.intent_id = $scope.$routeParams.intent_id;
     this.formData.response_type = 1;//DEFAULT type
-    console.log(this.formData);
-    this.formData.response_text.replace(/\r?\n/g, '<br/>');
+    this.formData.response_text.replace(/\n/g, '<br />');;
     Response.save(this.formData).$promise.then(function(resp) {
       //update list
       loadResponses();
