@@ -146,7 +146,7 @@
                 <div class="form-check">
                     <strong data-toggle="tooltip" data-placement="top" title="Send one of the Random Static response. If webhook is enabled, these will be ignored." tooltip>Static Responses</strong>
                     <br><br>
-                    <textarea ng-model="formData.response_text" class="form-control" id="response_text" placeholder="Enter a response text and press enter" ng-keyup="$event.keyCode == 13 && addBreak($event)"></textarea><input type="button" ng-click="saveNewResponse($event)" value="Add Intent">
+                    <textarea ng-model="formData.response_text" class="form-control" id="response_text" placeholder="Enter a response text and press enter" ng-keyup="$event.keyCode == 13 && addBreak(this)"></textarea><input type="button" ng-click="saveNewResponse($event)" value="Add Intent">
                     <ul class="list-group" ng-hide="responses.length == 0" style="margin-top: 20px;">
                       <li class="list-group-item" ng-repeat="response in responses track by response.response_id">
                         <span ng-bind-html="response.response_text | trusted"></span>
