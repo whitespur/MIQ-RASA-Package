@@ -27,6 +27,7 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
   }
   function loadResponses(){
     Responses.query({intent_id: $scope.$routeParams.intent_id}, function(data) {
+      console.log(loadResponses);
         $scope.responses = data;
     });
   }
