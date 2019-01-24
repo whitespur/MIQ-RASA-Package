@@ -40,6 +40,10 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
       $scope.formData = {};
     });
   }
+  $scope.addBreak = function(event) {
+    console.log(event);
+  }
+
   $scope.deleteResponse = function(response_id) {
     Response.remove({response_id: response_id}).$promise.then(function(resp) {
       loadResponses();
