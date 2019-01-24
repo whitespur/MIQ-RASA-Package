@@ -34,7 +34,7 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
     this.formData.intent_id = $scope.$routeParams.intent_id;
     this.formData.response_type = 1;//DEFAULT type
     console.log(this.formData);
-    this.formData.response_text.replace(/\r?\n/g, '<br />');
+    this.formData.response_text.replace(/\r?\n/g, '<br/>');
     Response.save(this.formData).$promise.then(function(resp) {
       //update list
       loadResponses();
