@@ -33,17 +33,14 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
   $scope.saveNewResponse = function(event){
     this.formData.intent_id = $scope.$routeParams.intent_id;
     this.formData.response_type = 1;//DEFAULT type
+    console.log(this.formData);
+    this.formData.response_text.replace(/\r?\n/g, '<br />');
     Response.save(this.formData).$promise.then(function(resp) {
       //update list
       loadResponses();
       //empty formData
       $scope.formData = {};
     });
-  }
-  $scope.addBreak = function(event) {
-    this.formData.response_text = this.formData.response_text.replace(/\r?\n/g, '<br />');
-    console.log('test');
-    console.log(event);
   }
 
   $scope.deleteResponse = function(response_id) {
