@@ -41,6 +41,7 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
     });
   }
   $scope.addBreak = function(event) {
+    this.formData.response_text = this.formData.response_text.replace(/\r?\n/g, '<br />');
     console.log('test');
     console.log(event);
   }
