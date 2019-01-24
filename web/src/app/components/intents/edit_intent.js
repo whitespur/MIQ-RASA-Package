@@ -41,6 +41,7 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
     });
   }
   $scope.addBreak = function(event) {
+    console.log('test');
     console.log(event);
   }
 
