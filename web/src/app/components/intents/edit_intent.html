@@ -148,7 +148,7 @@
                     <small>Marker teksten i feltet herunder som du ønsker at formatere, Eks. Links.</small>
 
                     <br><br>
-                    <textarea ng-model="formData.response_text" class="form-control" id="response_text" placeholder="Enter a response text and press enter" (textSelect)="showTextTaskbar( $event )" ng-keyup="$event.keyCode == 13 && addBreak(this)"></textarea><input type="button" ng-click="saveNewResponse($event)" value="Add Intent">
+                    <textarea ng-model="formData.response_text" class="form-control" id="response_text" placeholder="Enter a response text and press enter" (select)="showTextTaskbar($event)" ng-keyup="$event.keyCode == 13 && addBreak(this)"></textarea><input type="button" ng-click="saveNewResponse($event)" value="Add Intent">
                     <ul class="list-group" ng-hide="responses.length == 0" style="margin-top: 20px;">
                       <li class="list-group-item" ng-repeat="response in responses track by response.response_id">
                         <span ng-bind-html="response.response_text | trusted"></span>
