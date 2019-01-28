@@ -144,6 +144,11 @@ tags-input .tags .tag-item .remove-button {
     color:#fff;  
 }
 
+.card-header strong {
+    margin-top: 3px;
+    float: left;
+}
+
 .btn-outline-primary {
     display: block;
     float: left;
