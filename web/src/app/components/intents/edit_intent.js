@@ -48,8 +48,8 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
     });
   }
 
-  $scope.showTextTaskbar = function(response_id) {
-    console.log('hej');
+  $scope.showTextTaskbar = function(e) {
+    console.log(e);
   }
 
   $scope.updateIntentNameAndWebhook = function(intent) {
