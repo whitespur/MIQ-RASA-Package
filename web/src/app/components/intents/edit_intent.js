@@ -52,7 +52,9 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
     var start = ev.currentTarget.selectionStart;
     var end   = ev.currentTarget.selectionEnd;
     var text = ev.currentTarget.value.substr(start, end - start);
-  console.log(text);
+    if(text !== '') {
+      console.log('Text Selected: ' + text);
+    }
   }
 
   $scope.updateIntentNameAndWebhook = function(intent) {
