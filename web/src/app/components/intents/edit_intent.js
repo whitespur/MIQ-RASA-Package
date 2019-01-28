@@ -53,6 +53,10 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
     var selectionText = selection.anchorNode.textContent
     console.log(selection);
     var text = "";
+    if (selection) {
+        text = selection.toString();
+    }
+    console.log(text);
   }
 
   $scope.updateIntentNameAndWebhook = function(intent) {
