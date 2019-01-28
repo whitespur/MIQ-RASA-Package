@@ -51,17 +51,8 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
   $scope.showTextTaskbar = function(ev) {
     var selection = window.getSelection();
     var selectionText = selection.anchorNode.textContent
-    console.log(selectionText);
+    console.log(selection);
     var text = "";
-    const start = ev.target.selectionStart;
-  const end = ev.target.selectionEnd;
-  console.log(ev.target.value.substr(start, end - start))
-    if (window.getSelection) {
-        text = window.getSelection().toString();
-    } else if (document.selection && document.selection.type != "Control") {
-        text = document.selection.createRange().text;
-    }
-    console.log(text);
   }
 
   $scope.updateIntentNameAndWebhook = function(intent) {
