@@ -13,6 +13,24 @@ angular.module("app")
         }
     }
 })
+.directive('inputFieldSelection', function(){
+  return{
+    restrict: 'A',
+    scope:{
+      onSelected: '='
+    },
+      link:function(scope, elem, attrs){
+        elem.on('select', function(){ 
+         var text = elem.val().substring(elem.prop('selectionStart'), 
+              elem.prop('selectionEnd'));
+          scope.onSelected(text); 
+        });
+        elem.on('blur', function(){ scope.onSelected('') });
+        elem.on('keydown', function(){ scope.onSelected('')});
+        elem.on('mousedown', function(){ scope.onSelected('')  });
+      }
+    }
+  })
 .directive('tooltip', function(){
     return {
         restrict: 'A',
