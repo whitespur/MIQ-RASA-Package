@@ -51,6 +51,7 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
   $scope.showTextTaskbar = function(e) {
     console.log('start');
     var text = "";
+    console.log(window.getSelection());
     if (window.getSelection) {
         text = window.getSelection().toString();
     } else if (document.selection && document.selection.type != "Control") {
