@@ -54,7 +54,7 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
     range.selectNodeContents(ev.target);
     selection.removeAllRanges();
     selection.addRange(range);
-    console.log(ev);
+    console.log(selection);
     //text content should display...
     //now that the content is highlighted, you can copy it
     document.execCommand('copy');
