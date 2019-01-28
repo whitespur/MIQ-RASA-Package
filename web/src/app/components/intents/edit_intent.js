@@ -58,7 +58,9 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
   }
 
   $scope.addLink = function(ev) {
-    console.log(ev);
+    var url = prompt('Insert the page you wish to link to in the field below.');
+    var html = '<a href="' + url + '">' + $scope.text_selected + '</a>';
+    $scope.formData.response_text.replace($scope.text_selected, html);
   }
 
   $scope.updateIntentNameAndWebhook = function(intent) {
