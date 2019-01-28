@@ -151,3 +151,22 @@ body.need_auth {
     background-position: 32% 2%!important;
     overflow:hidden !important;
 }
+
+.Navbar-text {
+    display: flex;
+    margin-top: 10px;
+}
+
+.Navbar-text a {
+    background: #20a8d8;
+    padding: 5px 10px;
+    color: #fff;
+    float: left;
+    margin: 0px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.ui-intent-box {
+    margin-top:20px;
+}
