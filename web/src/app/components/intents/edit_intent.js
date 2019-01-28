@@ -47,6 +47,11 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
       loadResponses();
     });
   }
+
+  $scope.showTextTaskbar = function(response_id) {
+    console.log('hej');
+  }
+
   $scope.updateIntentNameAndWebhook = function(intent) {
     Intent.update({ intent_id:intent.intent_id }, intent).$promise.then(function() {
       $rootScope.$broadcast('setAlertText', "Intent information updated Sucessfully!!");
