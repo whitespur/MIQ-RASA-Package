@@ -49,14 +49,7 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
   }
 
   $scope.showTextTaskbar = function(ev) {
-    var selection = window.getSelection();
-    var range = document.createRange();
-    range.selectNodeContents(this.formData.response_text);
-    selection.removeAllRanges();
-    selection.addRange(range);
-    console.log(selection);
-    //text content should display...
-    //now that the content is highlighted, you can copy it
+    console.log(window.getSelection().toString());
   }
 
   $scope.updateIntentNameAndWebhook = function(intent) {
