@@ -54,7 +54,6 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
     var text = ev.currentTarget.value.substr(start, end - start);
     if(text !== '') {
       $scope.text_selected = text;
-      console.log($scope);
     }
   }
 
