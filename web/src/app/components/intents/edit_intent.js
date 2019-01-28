@@ -55,7 +55,7 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
     } else if (document.selection && document.selection.type != "Control") {
         text = document.selection.createRange().text;
     }
-    this.selectedText = text;
+    console.log(text);
   }
 
   $scope.updateIntentNameAndWebhook = function(intent) {
