@@ -49,13 +49,12 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
   }
 
   $scope.showTextTaskbar = function(ev) {
-    console.log(ev.target);
     var selection = window.getSelection();
     var range = document.createRange();
     range.selectNodeContents(ev.target);
     selection.removeAllRanges();
     selection.addRange(range);
-    console.log(selection.anchorNode.textContent);
+    console.log(ev);
     //text content should display...
     //now that the content is highlighted, you can copy it
     document.execCommand('copy');
