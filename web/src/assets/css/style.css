@@ -174,11 +174,11 @@ body.need_auth {
     float:left;
 }
 
-.ui-intent-save {
+body .ui-intent-save {
     float: right;
     width: 5%;
     background: #20a8d8;
-    color: #fff;
+    color: #fff !important;
     border: 0px;
     justify-items: ;
     margin-top: 20px;
