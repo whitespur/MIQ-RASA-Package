@@ -49,7 +49,9 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
   }
 
   $scope.showTextTaskbar = function(ev) {
-    console.log('start');
+    var selection = window.getSelection();
+    var selectionText = selection.anchorNode.textContent
+    console.log(selectionText);
     var text = "";
     const start = ev.target.selectionStart;
   const end = ev.target.selectionEnd;
