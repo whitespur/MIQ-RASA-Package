@@ -160,7 +160,7 @@ body.need_auth {
 body .Navbar-text a {
     background: #20a8d8;
     padding: 5px 10px;
-    color: #fff;
+    color: #fff !important;
     display:block;
     float: left;
     margin: 0px;
