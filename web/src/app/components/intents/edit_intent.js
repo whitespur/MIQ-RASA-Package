@@ -48,10 +48,12 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
     });
   }
 
-  $scope.showTextTaskbar = function(e) {
+  $scope.showTextTaskbar = function(ev) {
     console.log('start');
     var text = "";
-    console.log(window.getSelection().toString());
+    const start = ev.target.selectionStart;
+  const end = ev.target.selectionEnd;
+  console.log(ev.target.value.substr(start, end - start))
     if (window.getSelection) {
         text = window.getSelection().toString();
     } else if (document.selection && document.selection.type != "Control") {
