@@ -144,6 +144,15 @@ tags-input .tags .tag-item .remove-button {
     color:#fff;  
 }
 
+.btn-outline-primary {
+    display: block;
+    float: left;
+    width: 100%;
+    margin-bottom: 0px;
+    line-height: 1;
+    margin-top: 0px;
+}
+
 body.need_auth {
     background: url(../img/miq.svg) #29363d !important;
     background-repeat: no-repeat !important;
