@@ -155,7 +155,7 @@ tags-input .tags .tag-item .remove-button {
     width: 100%;
     margin-bottom: 0px;
     line-height: 1;
-    margin-top: 0px;
+    margin-top: 0px !important;
 }
 
 body.need_auth {
