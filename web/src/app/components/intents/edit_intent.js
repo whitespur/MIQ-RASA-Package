@@ -49,11 +49,8 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
   }
 
   $scope.showTextTaskbar = function(ev) {
-    const start = ev.target.selectionStart;
-  const end = ev.target.selectionEnd;
-  console.log(ev.target.value.substr(start, end - start))
-  console.log(start);
-  console.log(end);
+
+  console.log(ev);
   }
 
   $scope.updateIntentNameAndWebhook = function(intent) {
