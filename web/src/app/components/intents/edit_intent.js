@@ -49,16 +49,17 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
   }
 
   $scope.showTextTaskbar = function(ev) {
-    console.log(ev);
     var start = ev.currentTarget.selectionStart;
     var end   = ev.currentTarget.selectionEnd;
     var text = ev.currentTarget.value.substr(start, end - start);
     if(text !== '') {
-      console.log('Text Selected: ' + text);
       $scope.text_selected = text;
-
       console.log($scope);
     }
+  }
+
+  $scope.addLink = function(ev) {
+    console.log(ev);
   }
 
   $scope.updateIntentNameAndWebhook = function(intent) {
