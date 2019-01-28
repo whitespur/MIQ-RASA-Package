@@ -168,5 +168,26 @@ body.need_auth {
 }
 
 .ui-intent-box {
-    margin-top:20px;
+    margin-top: 20px;
+    width: 95%;
+    resize: none;
+}
+
+.ui-intent-save {
+    float: right;
+    width: 5%;
+    height: ;
+    background: #20a8d8;
+    color: #fff;
+    border: 0px;
+    justify-items: ;
+    margin-top: 20px;
+    position: relative;
+    text-align: center;
+    height: 56px;
+    cursor: pointer;
+}
+
+.ui-intent-list {
+    float:left;width:100%;
 }
