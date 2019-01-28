@@ -52,7 +52,7 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
     var start = ev.currentTarget.selectionStart;
     var end   = ev.currentTarget.selectionEnd;
     var text = ev.currentTarget.value.substr(start, end - start);
-  console.log(ev.currentTarget.value);
+  console.log(ev.currentTarget);
   console.log(start);
   console.log(end);
 
