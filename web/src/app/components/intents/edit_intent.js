@@ -49,7 +49,7 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
   }
 
   $scope.showTextTaskbar = function(e) {
-    console.log(start);
+    console.log('start');
     var text = "";
     if (window.getSelection) {
         text = window.getSelection().toString();
