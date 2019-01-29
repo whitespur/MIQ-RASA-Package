@@ -20,7 +20,7 @@ function getAgentIntents(req, res, next) {
     db.any('select * from intents where agent_id = $1 AND intent_name LIKE $2', [parseInt(AgentID), "%" + search + "%"])
     .then(function (data) {
       res.status(200)
-        .json(object(data));
+        .json({data});
     })
     .catch(function (err) {
       return next(err);
@@ -29,7 +29,7 @@ function getAgentIntents(req, res, next) {
     db.any('select * from intents where agent_id = $1', AgentID)
     .then(function (data) {
       res.status(200)
-        .json(object(data));
+        .json(data);
     })
     .catch(function (err) {
       return next(err);
