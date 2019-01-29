@@ -19,17 +19,30 @@ function getAgentIntents(req, res, next) {
   if(search !== undefined) {
     db.any('select * from intents where agent_id = $1 AND intent_name LIKE $2 JOIN responses ON responses.intent_id = intents.intent_id ORDER BY intent_name asc', [parseInt(AgentID), "%" + search + "%"])
     .then(function (data) {
-      res.status(200)
-        .json({data});
-    })
+      db.any('select * from responses where responses.agent_id = $1 & responses.response_text LIKE $2 ORDER BY responses.intent_name asc', [parseInt(AgentID), "%" + search + "%"])
+      .then(function (responses) {
+        res.status(200)
+            .json({intents: data, responses: responses});
+        })
+      })
+      .catch(function (err) {
+        return next(err);
+      })
     .catch(function (err) {
       return next(err);
     });
   } else {
-    db.any('select * from intents where agent_id = $1 JOIN responses ON responses.intent_id = intents.intent_id ORDER BY intent_name asc', AgentID)
+    db.any('select * from intents where intents.agent_id = $1 ORDER BY intents.intent_name asc', AgentID)
     .then(function (data) {
+      db.any('select * from responses where responses.agent_id = $1 ORDER BY responses.intent_name asc', AgentID)
+    .then(function (responses) {
+
       res.status(200)
-        .json(data);
+          .json({intents: data, responses: responses});
+      })
+    })
+    .catch(function (err) {
+      return next(err);
     })
     .catch(function (err) {
       return next(err);
