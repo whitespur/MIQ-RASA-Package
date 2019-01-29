@@ -15,7 +15,9 @@ function getSingleIntent(req, res, next) {
 function getAgentIntents(req, res, next) {
   console.log("intents.getAgentIntents");
   var AgentID = parseInt(req.params.agent_id);
-  db.any('select * from intents where agent_id = $1', AgentID)
+  var search = req.query.search;
+  if(search !== undefined) {
+    db.any('select * from intents where agent_id = $1 and where intent_name LIKE "%$2%"', AgentID, search)
     .then(function (data) {
       res.status(200)
         .json(data);
@@ -23,13 +25,23 @@ function getAgentIntents(req, res, next) {
     .catch(function (err) {
       return next(err);
     });
+  } else {
+    db.any('select * from intents where agent_id = $1', AgentID)
+    .then(function (data) {
+      res.status(200)
+        .json(data);
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+  }
+  
 }
 
 function getAgentIntentsWithCombined(req, res, next) {
   var AgentID = parseInt(req.params.agent_id);
   var CombinedIds = req.query.combined_to;
-  var search = req.params.search;
-
+  var search = req.query.search;
   var IDS;
   if(CombinedIds != undefined ) {
     IDS = CombinedIds + ',' + AgentID;
