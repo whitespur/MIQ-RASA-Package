@@ -28,7 +28,7 @@ function getAgentIntents(req, res, next) {
 function getAgentIntentsWithCombined(req, res, next) {
   var AgentID = parseInt(req.params.agent_id);
   var CombinedIds = req.query.combined_to;
-  var search = req.query.search;
+  var search = req.params.search;
 
   var IDS;
   if(CombinedIds != undefined ) {
