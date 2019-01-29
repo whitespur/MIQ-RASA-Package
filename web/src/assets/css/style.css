@@ -219,3 +219,23 @@ body .ui-intent-save {
 .ui-intent-list {
     float:left;width:100%;
 }
+
+.ui-intent-count {
+    float: right;
+    text-align: center;
+    border-left: 1px solid #aaa;
+    padding-left: 15px;
+    font-size: 12px;
+    color: #aaa;
+    line-height: 1;
+    padding-bottom: 5px;
+    padding-top: 1px;
+}
+
+.ui-small-title {
+    display: block;
+    font-size: 10px;
+    color: #aaa;
+    letter-spacing: 1.2px;
+    line-height: 1.9;
+}
