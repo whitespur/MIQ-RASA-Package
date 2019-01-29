@@ -163,11 +163,5 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
     });
   }
 
-  $scope.searchField = function() {
-    console.log('Searching for: ' + $scope.formData.searchField);
-    Intent.get({intent_id: $scope.$routeParams.intent_id, search: $scope.formData.intentSearch}, function(data) {
-      $scope.intent = data;
-    });
-  }
 
 }
