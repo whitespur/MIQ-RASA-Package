@@ -60,7 +60,7 @@ function getAgentIntents(req, res, next) {
       var i = 0;
       var responses = data.map(function (responses) {
           return responses[data.intent_id][i] = responses;
-          i++:
+          i++;
       });
       res.status(200)
           .json([data, responses]);
