@@ -8,7 +8,7 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
       $scope.storiesList = [];
       parseStories(data.story_details);
   });
-
+  $scope.submenu = false;
   Intents.query({agent_id: $scope.$routeParams.agent_id}, function(data) {
     var obj = {};
     var idToName = {}
