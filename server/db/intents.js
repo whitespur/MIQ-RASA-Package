@@ -31,8 +31,7 @@ function getAgentIntents(req, res, next) {
       .then(function (responses) {
       var i = 0;
         var responses = data.map(function (responses) {
-          responses[data.intent_id] = {};
-          return responses[data.intent_id][i] = responses;
+          return responses[data.intent_id].push(responses);
       });
       i++;
         res.status(200)
@@ -59,8 +58,7 @@ function getAgentIntents(req, res, next) {
     .then(function (responses) {
       var i = 0;
       var responses = data.map(function (responses) {
-          responses[data.intent_id] = {};
-          return responses[data.intent_id][i] = responses;
+          return responses[data.intent_id].push(responses);
           i++;
       });
       res.status(200)
