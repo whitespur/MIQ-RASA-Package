@@ -43,9 +43,15 @@ function getAgentIntents(req, res, next) {
   } else {
     db.any('select * from intents where intents.agent_id = $1 ORDER BY intents.intent_name asc', AgentID)
     .then(function (data) {
-      var ids = (({ intent_id }) => ({ intent_id }))(data);
+      var ids = data.map(function (data) {
+        if (data.agent_id === parseInt(AgentID)) {
+          return data[data.agent_id] = data.intent_id;
+        } else {
+          return null
+        }
+      });
       console.log(ids);
-      db.any('select * from responses where responses.agent_id = $1 ORDER BY responses.intent_name asc', AgentID)
+      db.any('select * from responses where responses.intent_id IN $1 ORDER BY responses.intent_name asc', ids)
     .then(function (responses) {
   
 
