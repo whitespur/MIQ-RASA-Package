@@ -92,7 +92,7 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
 
   };
   $scope.addAction = function(form, agent) {
-    form.agent_id = agent.agent_id;
+    form.agent_id = agent.sagent_id;
     form.action_name = form.action_name_prefix+form.action_name;
     Actions.save(form).$promise.then(function(resp) {
       $('#modal-add-actions').modal('hide');
@@ -105,7 +105,7 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
   
   $scope.searchField = function() {
     console.log('Searching for: ' + $scope.formData.searchField);
-    Intent.get({intent_id: $scope.$routeParams.intent_id, search: $scope.formData.intentSearch}, function(data) {
+    Intents.get({agent_id: $scope.agekt.agent_id, search: $scope.formData.intentSearch}, function(data) {
       $scope.intent = data;
     });
   }
