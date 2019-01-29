@@ -26,7 +26,7 @@ function getAgentIntents(req, res, next) {
       return next(err);
     });
   } else {
-    db.any('select * from intents where agent_id = $1', AgentID)
+    db.any('select * from intents where agent_id = $1 ORDER BY intent_name asc', AgentID)
     .then(function (data) {
       res.status(200)
         .json(data);
