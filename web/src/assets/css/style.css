@@ -239,3 +239,10 @@ body .ui-intent-save {
     letter-spacing: 1.2px;
     line-height: 1.9;
 }
+
+[pagination-id="intentsList"] a {
+    line-height: 1.4;
+    float: left;
+    padding-top: 8px;
+    text-transform: capitalize;
+}
