@@ -51,7 +51,7 @@ function getAgentIntents(req, res, next) {
         }
       });
       console.log(ids);
-      db.any('select * from responses where responses.intent_id IN $1 ORDER BY responses.intent_name asc', ids)
+      db.any('select * from responses where responses.intent_id IN ($1) ORDER BY responses.intent_name asc', ids.join(', '))
     .then(function (responses) {
   
 
