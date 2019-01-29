@@ -17,7 +17,7 @@ function getAgentIntents(req, res, next) {
   var AgentID = parseInt(req.params.agent_id);
   var search = req.query.search;
   if(search !== undefined) {
-    db.any('select * from intents where agent_id = $1 and where intent_name LIKE "%$2%"', AgentID, search)
+    db.any('select * from intents where agent_id = $1 and where intent_name LIKE "%'  + search + '%"', AgentID)
     .then(function (data) {
       res.status(200)
         .json(data);
