@@ -19,6 +19,7 @@ function getAgentIntents(req, res, next) {
   if(search !== undefined) {
     db.any('select * from intents where agent_id = $1 AND intent_name LIKE $2  ORDER BY intent_name asc', [parseInt(AgentID), "%" + search + "%"])
     .then(function (data) {
+      console.log(data);
       var ids = (({ intent_id }) => ({ intent_id }))(data);
       console.log(ids);
       db.any('select * from responses where responses.intent_id IN $1 & responses.response_text LIKE $2 ORDER BY responses.intent_name asc', [ids, "%" + search + "%"])
