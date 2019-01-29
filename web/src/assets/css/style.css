@@ -101,7 +101,7 @@ tags-input .tags .tag-item .remove-button {
     color: #fff;
 }
 .list-group-item:hover, a.list-group-item:focus {text-decoration: none;background-color: rgb(245, 245, 245);}
-.list-group { margin-bottom:0px; }
+.list-group { margin-bottom:5px; }
 
 .alert-div{
   position: fixed;
@@ -115,6 +115,15 @@ tags-input .tags .tag-item .remove-button {
       margin-left: -200px;
   }
 }
+}
+#ui-intent-search {
+    padding: .75rem 1.25rem;
+    border: 0px;
+    width: 90%;
+}
+
+.list-group-item.search {
+    padding:0px;
 }
 
 /** MIQ **/
