@@ -25,7 +25,7 @@
               <div class="col-sm-12">
                   <div class="list-group">
                       <div class="list-group-item search">
-                        <input type="search" name="intentSearch" id="ui-intent-search" placeholder="Search for your intent.">
+                        <input type="search" name="intentSearch" ng-keyup="searchField()" id="ui-intent-search" placeholder="Search for your intent.">
                       </div>
                   </div>
                 <div class="list-group" dir-paginate="intent in intentList  | itemsPerPage: 10 " pagination-id="intentsList">
