@@ -29,17 +29,8 @@ function getAgentIntents(req, res, next) {
       });
       db.any('select * from responses where intent_id IN (' +  ids.join(', ') + ') AND response_text LIKE $1 ORDER BY response_text asc', ["%" + search + "%"])
       .then(function (responses) {
-        var arr = {};
-        var responses = data.map(function (response) {
-            arr[data.intent_id] = {};
-            return arr[data.intent_id] = response;
-            i++;
-        });
-        var result = Object.keys(arr).map(function(key) {
-          return [Number(key), arr[key]];
-        });
         res.status(200)
-            .json([data, arr]);
+            .json([data, responses]);
         })
       })
       .catch(function (err) {
@@ -60,16 +51,8 @@ function getAgentIntents(req, res, next) {
       });
       db.any('select * from responses where intent_id IN (' +  ids.join(', ') + ') ORDER BY response_text asc')
     .then(function (responses) {
-      var arr = {};
-      var responses = data.map(function (response) {
-          arr[data.intent_id] = {};
-          return arr[data.intent_id] = response;
-      });
-      var result = Object.keys(arr).map(function(key) {
-        return [Number(key), arr[key]];
-      });
       res.status(200)
-          .json([data, result]);
+          .json([data, responses]);
       })
     })
     .catch(function (err) {
