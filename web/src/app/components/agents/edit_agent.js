@@ -17,6 +17,8 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
         var id = data[0][i].intent_id;
 
         data[0][i]['response_count'] = 0;
+        data[0][i]['expression_count'] = 0;
+
         if(name) {
           obj[name] = data[0][i];
           idToName[id] = name;
@@ -33,6 +35,19 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
           }
           obj[name]['responses'][res_id] = data[1][i];
           obj[name]['response_count']++;
+        }
+      }
+
+      for(var i in data[2]) {
+        var id = data[2][i].intent_id;
+        var name = idToName[id];
+        if(obj[name] !== undefined) {
+          var ex_id = data[1][i].expression_id;
+          if(obj[name]['expressions'] === undefined) {
+            obj[name]['expressions'] = {};
+          }
+          obj[name]['expressions'][ex_id] = data[2][i];
+          obj[name]['expression_count']++;
         }
       }
       console.log(obj);
