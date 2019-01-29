@@ -13,9 +13,10 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
     var obj = {};
       for(var i in data[0]) {
         var id = data[0][i].intent_id;
+        data[0][i]['response_count'] = 0;
         obj[id] = data[0][i];
       }
-      
+
       for(var i in data[1]) {
         var id = data[1][i].intent_id;
         var res_id = data[1][i].response_id;
@@ -23,6 +24,7 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
           obj[id]['responses'] = {};
         }
         obj[id]['responses'][res_id] = data[1][i];
+        obj[id]['response_count']++;
       }
       console.log(obj);
       $scope.intentList = obj;
