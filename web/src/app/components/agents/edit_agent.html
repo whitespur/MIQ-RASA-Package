@@ -23,6 +23,11 @@
           <div class="card-block">
             <div class="row">
               <div class="col-sm-12">
+                  <div class="list-group">
+                      <div class="list-group-item">
+                        <input type="search" name="intentSearch" id="ui-intent-search" placeholder="Search for your intent.">
+                      </div>
+                  </div>
                 <div class="list-group" dir-paginate="intent in intentList  | itemsPerPage: 5" pagination-id="intentsList">
                   <div class="list-group-item">
                     <a href="#!/agent/{{intent.agent_id}}/intent/{{intent.intent_id}}">{{intent.intent_name}}</a>
