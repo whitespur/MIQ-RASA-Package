@@ -20,17 +20,14 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
       }
 
       for(var i in data[1]) {
-        if(data[0][i] !== undefined) {
-          var id = data[0][i].intent_id;
+        if(obj !== undefined) {
           var name = data[0][i].intent_name;
-          if(obj[name] !== undefined) {
-            var res_id = data[1][i].response_id;
-            if(obj[name]['responses'] === undefined) {
-              obj[name]['responses'] = {};
-            }
-            obj[name]['responses'][res_id] = data[1][i];
-            obj[name]['response_count']++;
+          var res_id = data[1][i].response_id;
+          if(obj[name]['responses'] === undefined) {
+            obj[name]['responses'] = {};
           }
+          obj[name]['responses'][res_id] = data[1][i];
+          obj[name]['response_count']++;
         }
       }
       console.log(obj);
