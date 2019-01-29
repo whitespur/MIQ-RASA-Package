@@ -104,8 +104,8 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
   }
   
   $scope.searchField = function() {
-    console.log('Searching for: ' + $scope.formData.searchField);
-    Intents.get({agent_id: $scope.agekt.agent_id, search: $scope.formData.intentSearch}, function(data) {
+    console.log('Searching for: ' + $scope.formData.searchText);
+    Intents.get({agent_id:$scope.$routeParams.agent_id , search: $scope.formData.searchText}, function(data) {
       $scope.intent = data;
     });
   }
