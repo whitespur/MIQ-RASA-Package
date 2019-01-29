@@ -150,4 +150,8 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
       console.log(data);
     });
   }
+
+  $scope.showMenu = function(id) {
+    $scope.submenu = id;
+  }
 }
