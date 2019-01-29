@@ -19,10 +19,9 @@ function getAgentIntents(req, res, next) {
   if(search !== undefined) {
     db.any('select * from intents where agent_id = $1 AND intent_name LIKE $2  ORDER BY intent_name asc', [parseInt(AgentID), "%" + search + "%"])
     .then(function (data) {
-      console.log(data);
       var ids = data.map(function (data) {
         if (data.agent_id === parseInt(AgentID)) {
-          return data[data.agent_id] = data.intent_id;
+          return  data.intent_id;
         } else {
           return null
         }
@@ -44,7 +43,7 @@ function getAgentIntents(req, res, next) {
     .then(function (data) {
       var ids = data.map(function (data) {
         if (data.agent_id === parseInt(AgentID)) {
-          return data[data.agent_id] = data.intent_id;
+          return data.intent_id;
         } else {
           return null
         }
