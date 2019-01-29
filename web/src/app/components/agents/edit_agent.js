@@ -12,7 +12,7 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
   Intents.query({agent_id: $scope.$routeParams.agent_id}, function(data) {
     var obj = {};
       for(var i in data[0]) {
-        var id = data[0][i].intent_id;
+        var id = data[0][i].intent_name;
         data[0][i]['response_count'] = 0;
         if(id) {
           obj[id] = data[0][i];
@@ -20,7 +20,7 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
       }
 
       for(var i in data[1]) {
-        var id = data[1][i].intent_id;
+        var id = data[1][i].intent_name;
         if(obj[id] !== undefined) {
           var res_id = data[1][i].response_id;
           if(typeof(obj[id]['responses']) !== 'object') {
