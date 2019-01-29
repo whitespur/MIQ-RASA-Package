@@ -152,6 +152,7 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
   }
 
   $scope.showMenu = function(id) {
+    console.log(id);
     $scope.submenu = id;
   }
 }
