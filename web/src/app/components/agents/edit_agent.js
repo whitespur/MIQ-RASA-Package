@@ -10,13 +10,16 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
   });
 
   Intents.query({agent_id: $scope.$routeParams.agent_id}, function(data) {
+    console.log(data);
     var obj = {};
       for(var i = 0; i < data[0].length; i++) {
+        console.log(data[0][i]);
         var id = data[0][i].intent_id;
         obj[id] = data[0][i];
       }
 
       for(var i = 0; i < data[1].length; i++) {
+        console.log(data[1][i]);
         var id = data[1][i].intent_id;
         var res_id = data[1][i].response_id;
 
