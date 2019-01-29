@@ -31,7 +31,7 @@
                 <div class="list-group" dir-paginate="intent in intentList  | itemsPerPage: 10 " pagination-id="intentsList">
                   <div class="list-group-item">
                     <a href="#!/agent/{{intent.agent_id}}/intent/{{intent.intent_id}}">{{intent.intent_name}}</a>
-                    <span class="ui-intent-count">{{intent.response_count}}</span>
+                    <span class="ui-intent-count"><span class="ui-small-title">Responses</span>{{intent.response_count}}</span>
                   </div>
               </div>
             </div>
