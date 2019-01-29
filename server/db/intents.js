@@ -27,11 +27,10 @@ function getAgentIntents(req, res, next) {
           return null
         }
       });
-      console.log(ids);
       db.any('select * from responses where responses.intent_id IN $1 & responses.response_text LIKE $2 ORDER BY responses.intent_name asc', [ids, "%" + search + "%"])
       .then(function (responses) {
         res.status(200)
-            .json({intents: data, responses: responses});
+            .json([data, responses]);
         })
       })
       .catch(function (err) {
@@ -50,13 +49,10 @@ function getAgentIntents(req, res, next) {
           return null
         }
       });
-      console.log(ids);
       db.any('select * from responses where intent_id IN (' +  ids.join(', ') + ') ORDER BY response_text asc')
     .then(function (responses) {
-  
-
       res.status(200)
-          .json({intents: data, responses: responses});
+          .json([data, responses]);
       })
     })
     .catch(function (err) {

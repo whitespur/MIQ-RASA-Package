@@ -10,7 +10,8 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
   });
 
   Intents.query({agent_id: $scope.$routeParams.agent_id}, function(data) {
-      $scope.intentList = data;
+      $scope.intentList = data[0];
+      console.log(data);
   });
 
   AgentEntities.query({agent_id: $scope.$routeParams.agent_id},function(data) {
@@ -104,8 +105,9 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
   }
   
   $scope.searchField = function() {
-    Intents.get({agent_id:$scope.$routeParams.agent_id , search: $scope.formData.searchText}, function(data) {
-      $scope.intentList = data.data;
+    Intents.query({agent_id:$scope.$routeParams.agent_id , search: $scope.formData.searchText}, function(data) {
+      $scope.intentList = data[0];
+      console.log(data);
     });
   }
 }
