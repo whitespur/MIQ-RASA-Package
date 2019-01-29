@@ -241,7 +241,7 @@ body .ui-intent-save {
     line-height: 1.9;
 }
 
-[pagination-id="intentsList"] a {
+[pagination-id="intentsList"] .list-group-item > a {
     line-height: 1.4;
     float: left;
     padding-top: 8px;
@@ -250,4 +250,18 @@ body .ui-intent-save {
 
 span.ui-intent-count:nth-child(2) {
     padding-right: 0px;
+}
+
+.ui-btn-blocks {
+    float:right;
+}
+
+.ui-btn-blocks a {
+    display: block;
+    width: 100%;
+    color: #fff;
+    background: #115770;
+    font-size: 10px;
+    text-align: center;
+    padding: 5px 10px;
 }
