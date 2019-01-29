@@ -19,8 +19,9 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
       for(var i in data[1]) {
         var id = data[1][i].intent_id;
         var res_id = data[1][i].response_id;
-
-        obj[id] = {};
+        if(typeof(obj[id][res_id]) !== 'object') {
+          obj[id][res_id] = {};
+        }
         obj[id][res_id] = data[1][i];
       }
       console.log(obj);
