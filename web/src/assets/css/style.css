@@ -229,8 +229,8 @@ body .ui-intent-save {
     color: #aaa;
     padding-right:15px;
     line-height: 1;
-    padding-bottom: 5px;
-    padding-top: 1px;
+    padding-bottom: 10px;
+    padding-top: 10px;
 }
 
 .ui-small-title {
