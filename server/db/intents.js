@@ -30,9 +30,8 @@ function getAgentIntents(req, res, next) {
       db.any('select * from responses where responses.intent_id IN $1 & responses.response_text LIKE $2 ORDER BY responses.intent_name asc', [ids, "%" + search + "%"])
       .then(function (responses) {
       var i = 0;
-
         var responses = data.map(function (responses) {
-          responses[data.intent_id][i] = [];
+          responses[data.intent_id] = {};
           return responses[data.intent_id][i] = responses;
       });
       i++;
@@ -60,7 +59,7 @@ function getAgentIntents(req, res, next) {
     .then(function (responses) {
       var i = 0;
       var responses = data.map(function (responses) {
-          responses[data.intent_id][i] = [];
+          responses[data.intent_id] = {};
           return responses[data.intent_id][i] = responses;
           i++;
       });
