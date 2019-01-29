@@ -262,6 +262,7 @@ span.ui-intent-count:nth-child(2) {
     color: #fff;
     background: #115770;
     font-size: 10px;
+    margin-bottom:2px;
     text-align: center;
     padding: 5px 10px;
 }
