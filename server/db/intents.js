@@ -40,7 +40,7 @@ function getAgentIntentsWithCombined(req, res, next) {
     db.any('select * from intents where agent_id IN (' + IDS + ') AND WHERE intent_name LIKE "%' + search + '%"')
     .then(function (data) {
         res.status(200)
-          .json(data);
+          .json(object(data));
     })
     .catch(function (err) {
       return next(err);
@@ -49,7 +49,7 @@ function getAgentIntentsWithCombined(req, res, next) {
     db.any('select * from intents where agent_id IN (' + IDS + ')')
     .then(function (data) {
         res.status(200)
-          .json(data);
+          .json(object(data));
     })
     .catch(function (err) {
       return next(err);
