@@ -13,7 +13,7 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
 
   IntentTags.query(function(data) {
       $scope.tagList = data;
-
+    console.log(data);
       $scope.tagList.push({
         tag_id: 0,
         category_name: 'Create New',
