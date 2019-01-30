@@ -61,10 +61,7 @@ app.factory('Intents', function($resource) {
 
 
 app.factory('IntentTags', function($resource) {
-  return $resource(api_endpoint_v2 + '/intents/tags', {},
-  {
-      'update': { method:'PUT' }
-  });
+  return $resource(api_endpoint_v2 + '/tags', {})
 });
 
 app.factory('Expressions', function($resource) {
