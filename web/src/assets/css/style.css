@@ -256,7 +256,8 @@ span.ui-intent-count:nth-child(2) {
     float:right;
 }
 
-.ui-btn-blocks a {
+.ui-btn-blocks a,
+.ui-btn-blocks a:not([href]) {
     display: block;
     width: 100%;
     color: #fff;
