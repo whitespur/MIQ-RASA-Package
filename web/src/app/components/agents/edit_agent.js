@@ -155,7 +155,7 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
   $scope.showMenu = function(id, $event) {
     console.log($event);
     if($scope.SubmenuVar == id) {
-      $scope.SubmenuVar = id;
+      $scope.SubmenuVar = false;
       $event.currentTarget.innerText = 'Quickview';
     } else {
       $scope.SubmenuVar = id;
