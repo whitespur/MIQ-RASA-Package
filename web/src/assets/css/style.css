@@ -302,3 +302,8 @@ span.ui-intent-count:nth-child(2) {
     clear: both;
     content: '';
 }
+
+.ui-submenu-container {
+    overflow: hidden;
+    overflow-y: auto;
+}
