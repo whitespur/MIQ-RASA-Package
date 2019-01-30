@@ -260,11 +260,27 @@ span.tagContainer::after {
     content: 'Tags';
     display: block;
     position: absolute;
-    top: -19px;
+    top: -17px;
     font-size: 11px;
     text-transform: uppercase;
     color: #bbb;
-    left: 0;
+    left: 4px;
+}
+
+.ui-input-w-text {
+    flex-basis: 35%;
+    position: relative;
+}
+
+span.ui-input-w-text::after {
+    content: 'Tags';
+    display: block;
+    position: absolute;
+    top: -17px;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #bbb;
+    left: 4px;
 }
 
 .tagContainer {
