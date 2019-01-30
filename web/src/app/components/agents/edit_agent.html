@@ -40,7 +40,7 @@
                   <div ng-style="{'visibility': SubmenuVar == $index ? 'visible':'hidden', 'height': SubmenuVar == $index ? '200px' : '0px'}" class="menu-id-{{$index}} ui-submenu-container">
                       <div class="ui-inner-submenu">
                         <div class="ui-inner-expressions">
-                            <div class="ui-list-inner" dir-paginate="expression in intent.expressions"  pagination-id="expressionsList">
+                            <div class="ui-list-inner" dir-paginate="expression in intent.expressions | itemsPerPage: -1"  pagination-id="expressionsList">
                                 <div class="list-group-item">
                                   <span>Expression:</span><a>{{expression.expression_text}}</a>
                                 </div>
@@ -50,7 +50,7 @@
                             </div>
                         </div>
                         <div class="ui-inner-responses">
-                          <div class="ui-list-inner" dir-paginate="response in intent.responses"  pagination-id="responsesList">
+                          <div class="ui-list-inner" dir-paginate="response in intent.responses | itemsPerPage: -1"  pagination-id="responsesList">
                               <div class="list-group-item">
                                   <span>Response:</span><a>{{response.response_text}}</a>
                                 </div>
