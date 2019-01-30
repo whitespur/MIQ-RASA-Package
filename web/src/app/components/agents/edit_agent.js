@@ -41,8 +41,7 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
       for(var i in data[2]) {
         var id = data[2][i].intent_id;
         var name = idToName[id];
-        console.log(name);
-        if(obj[name] !== undefined && data[1][i] !== undefined) {
+        if(name !== undefined && obj[name] !== undefined && data[1][i] !== undefined) {
           var ex_id = data[1][i].expression_id;
           if(obj[name]['expressions'] === undefined) {
             obj[name]['expressions'] = {};
