@@ -26,8 +26,10 @@
             <div class="card-block">
               <div class="row">
                 <div class="col-sm-12">
-                  <div class="form-group">
-                    <span><select class="ui-tags"><option dir-paginate="tag in tagList | itemsPerPage: 200" pagination-id="intentsList" value="tag.tag_id">{{tag.category_name}}</option></select></span><input ng-model="intent.intent_name" type="text" class="form-control" value="{{intent.intent_name}}" placeholder="Service Endpoint URL">
+                  <div class="form-group" style="display:Flex;">
+                    <span style="flex-basis:15%;margin-right:5px;"><select class="ui-tags"><option dir-paginate="tag in tagList | itemsPerPage: 200" pagination-id="intentsList" value="tag.tag_id">{{tag.category_name}}</option></select></span>
+                    <span class="tagContainer"></span>
+                    <input ng-model="intent.intent_name" type="text" class="form-control" value="{{intent.intent_name}}" placeholder="Service Endpoint URL">
                   </div>
                 </div>
               </div>
