@@ -37,7 +37,7 @@
                     <span class="ui-intent-count"><span class="ui-small-title">Responses</span>{{intent.response_count}}</span>
                     <span class="ui-intent-count"><span class="ui-small-title">Expressions</span>{{intent.expression_count}}</span>
                   </div>
-                  <div *ngIf="!auth.isLoggedIn == true" class="{{$index}}">
+                  <div ng-style="{'visibility': SubmenuVar == $index ? 'visible':'hidden'}" class="{{$index}}">
                     hej
                   </div>
               </div>
