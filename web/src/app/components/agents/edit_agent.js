@@ -152,8 +152,15 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
     });
   }
 
-  $scope.showMenu = function(id) {
-    $scope.SubmenuVar = id;
-    $scope.quickView_text = 'Close Quickview';
+  $scope.showMenu = function(id, $event) {
+    console.log($event);
+    if($scope.SubmenuVar == id) {
+      $scope.SubmenuVar = id;
+      $scope.quickView_text = 'Quickview';
+    } else {
+      $scope.SubmenuVar = id;
+      $scope.quickView_text = 'Close Quickview';
+    }
+    
   }
 }
