@@ -30,6 +30,7 @@ function getAgentIntents(req, res, next) {
       .then(function (responses) {
         db.any('select * from expressions where intent_id IN (' +  ids.join(', ') + ') AND expression_text LIKE $1 ORDER BY expression_text asc', ["%" + search + "%"])
         .then(function (expressions) {
+
           res.status(200)
               .json([data, responses, expressions]);
           })
@@ -58,6 +59,8 @@ function getAgentIntents(req, res, next) {
     .then(function (responses) {
       db.any('select * from expressions where intent_id IN (' +  ids.join(', ') + ') ORDER BY expression_text asc')
         .then(function (expressions) {
+          console.log(expressions);
+
           res.status(200)
               .json([data, responses, expressions]);
           })
