@@ -273,7 +273,7 @@ span.tagContainer::after {
 }
 
 span.ui-input-w-text::after {
-    content: 'Tags';
+    content: 'Intent Name';
     display: block;
     position: absolute;
     top: -17px;
