@@ -37,8 +37,25 @@
                     <span class="ui-intent-count"><span class="ui-small-title">Responses</span>{{intent.response_count}}</span>
                     <span class="ui-intent-count"><span class="ui-small-title">Expressions</span>{{intent.expression_count}}</span>
                   </div>
-                  <div ng-style="{'visibility': SubmenuVar == $index ? 'visible':'hidden'}" class="{{$index}}">
-                    hej
+                  <div ng-style="{'visibility': SubmenuVar == $index ? 'visible':'hidden'}" class="menu-id-{{$index}}">
+                      <div class="ui-inner-submenu">
+                        <div class="ui-inner-expressions">
+                            <div dir-paginate="expression in intent.expressions | itemsPerPage: 10 track by $EIndex"  pagination-id="expressionsList">
+                                heh
+                            </div>
+                            <div style="float:right">
+                              <dir-pagination-controls pagination-id="expressionsList"></dir-pagination-controls>
+                            </div>
+                        </div>
+                        <div class="ui-inner-responses">
+                          <div dir-paginate="expression in intent.responses | itemsPerPage: 10 track by $RIndex"  pagination-id="responsesList">
+hehehe
+                          </div>
+                          <div style="float:right">
+                            <dir-pagination-controls pagination-id="responsesList"></dir-pagination-controls>
+                          </div>
+                        </div>
+                      </div>
                   </div>
               </div>
             </div>
