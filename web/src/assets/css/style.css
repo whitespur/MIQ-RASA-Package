@@ -286,6 +286,7 @@ span.ui-input-w-text::after {
 .tagContainer {
     flex-basis: 50%;
     display: block;
+    position:relative;
     width: 100%;
     padding: .375rem .75rem;
     font-size: .875rem;
