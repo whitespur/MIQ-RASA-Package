@@ -40,6 +40,7 @@
                   <div ng-style="{'visibility': SubmenuVar == $index ? 'visible':'hidden'}" class="menu-id-{{$index}}">
                       <div class="ui-inner-submenu">
                         <div class="ui-inner-expressions">
+                          {{log(intent)}}
                             <div dir-paginate="expression in intent.expressions | itemsPerPage: 10 track by $EIndex"  pagination-id="expressionsList">
                                 heh
                             </div>
