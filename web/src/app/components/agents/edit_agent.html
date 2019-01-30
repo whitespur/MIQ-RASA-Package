@@ -43,7 +43,7 @@
                           {{log(intent)}}
                             <div dir-paginate="expression in intent.expressions | itemsPerPage: 10"  pagination-id="expressionsList">
                                 <div class="list-group-item">
-                                  <a href="#!/agent/{{intent.agent_id}}/intent/{{intent.intent_id}}">{{expression.expression_name}}</a>
+                                  <a>{{expression.expression_text}}</a>
                                 </div>
                             </div>
                             <div style="float:right">
@@ -51,8 +51,10 @@
                             </div>
                         </div>
                         <div class="ui-inner-responses">
-                          <div dir-paginate="expression in intent.responses | itemsPerPage: 10 track by $RIndex"  pagination-id="responsesList">
-hehehe
+                          <div dir-paginate="response in intent.responses | itemsPerPage: 10 track by $RIndex"  pagination-id="responsesList">
+                              <div class="list-group-item">
+                                  <a>{{response.response_text}}</a>
+                                </div>
                           </div>
                           <div style="float:right">
                             <dir-pagination-controls pagination-id="responsesList"></dir-pagination-controls>
