@@ -41,9 +41,9 @@
                       <div class="ui-inner-submenu">
                         <div class="ui-inner-expressions">
                           {{log(intent)}}
-                            <div dir-paginate="expression in intent.expressions | itemsPerPage: 10"  pagination-id="expressionsList">
+                            <div class="ui-list-inner" dir-paginate="expression in intent.expressions | itemsPerPage: 10"  pagination-id="expressionsList">
                                 <div class="list-group-item">
-                                  <a>{{expression.expression_text}}</a>
+                                  <span>Expression:</span><a>{{expression.expression_text}}</a>
                                 </div>
                             </div>
                             <div style="float:right">
@@ -51,9 +51,9 @@
                             </div>
                         </div>
                         <div class="ui-inner-responses">
-                          <div dir-paginate="response in intent.responses | itemsPerPage: 10"  pagination-id="responsesList">
+                          <div class="ui-list-inner" dir-paginate="response in intent.responses | itemsPerPage: 10"  pagination-id="responsesList">
                               <div class="list-group-item">
-                                  <a>{{response.response_text}}</a>
+                                  <span>Response:</span><a>{{response.response_text}}</a>
                                 </div>
                           </div>
                           <div style="float:right">
