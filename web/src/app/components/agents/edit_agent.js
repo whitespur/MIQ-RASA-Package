@@ -156,10 +156,10 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
     console.log($event);
     if($scope.SubmenuVar == id) {
       $scope.SubmenuVar = id;
-      $scope.quickView_text = 'Quickview';
+      $event.currentTarget.innerText = 'Quickview';
     } else {
       $scope.SubmenuVar = id;
-      $scope.quickView_text = 'Close Quickview';
+      $event.currentTarget.innerText = 'Close Quickview';
     }
     
   }
