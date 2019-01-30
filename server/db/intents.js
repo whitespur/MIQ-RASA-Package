@@ -178,7 +178,7 @@ function updateIntent(req, res, next) {
 
 function getTags(req, res, next) {
   console.log("intents.getTags");
-  db.any('SELECT * FROM intent_tags')
+  db.any('SELECT * FROM intent_tags', [])
     .then(function (resp) {
       res.status(200)
         .json(resp);
