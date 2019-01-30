@@ -270,6 +270,7 @@ span.ui-intent-count:nth-child(2) {
 
 .ui-list-inner .list-group-item {
     background: #115770;
+    padding:0px;
 }
 
 .ui-list-inner .list-group-item a {
