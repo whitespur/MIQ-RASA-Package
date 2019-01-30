@@ -19,7 +19,7 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
         data[0][i]['response_count'] = 0;
         data[0][i]['expression_count'] = 0;
 
-        if(name) {
+        if(name && name !== undefined) {
           obj[name] = data[0][i];
           idToName[id] = name;
         }
