@@ -175,6 +175,19 @@ function updateIntent(req, res, next) {
     });
 }
 
+
+function getTags(req, res, next) {
+  console.log("intents.getTags");
+  db.any('SELECT * FROM intent_tags')
+    .then(function (resp) {
+      res.status(200)
+        .json(resp);
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
+
 module.exports = {
   getAgentIntents: getAgentIntents,
   createAgentIntent: createAgentIntent,
@@ -182,5 +195,6 @@ module.exports = {
   removeIntent: removeIntent,
   getUniqueIntents: getUniqueIntents,
   updateIntent: updateIntent,
-  getAgentIntentsWithCombined: getAgentIntentsWithCombined
+  getAgentIntentsWithCombined: getAgentIntentsWithCombined,
+  getTags: getTags
 };

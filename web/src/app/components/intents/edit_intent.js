@@ -11,6 +11,15 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
       $scope.entityList = data;
   });
 
+  IntentTags.query(function(data) {
+      $scope.tagList = data;
+
+      $scope.tagList.push({
+        tag_id: 0,
+        category_name: 'Create New',
+      });
+  });
+
   Intent.get({intent_id: $scope.$routeParams.intent_id}, function(data) {
       $scope.intent = data;
   });

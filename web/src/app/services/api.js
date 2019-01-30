@@ -59,6 +59,14 @@ app.factory('Intents', function($resource) {
   return $resource(api_endpoint_v2 + '/agents/:agent_id/intents', {agent_id:'@id',combined_to:'@combined_to', search:'@search'});
 });
 
+
+app.factory('IntentTags', function($resource) {
+  return $resource(api_endpoint_v2 + '/intents/tags', {},
+  {
+      'update': { method:'PUT' }
+  });
+});
+
 app.factory('Expressions', function($resource) {
   return $resource(api_endpoint_v2 + '/intents/:intent_id/expressions', {intent_id:'@id'});
 });

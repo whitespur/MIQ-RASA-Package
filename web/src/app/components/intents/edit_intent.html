@@ -27,7 +27,7 @@
               <div class="row">
                 <div class="col-sm-12">
                   <div class="form-group">
-                    <input ng-model="intent.intent_name" type="text" class="form-control" value="{{intent.intent_name}}" placeholder="Service Endpoint URL">
+                    <span><select class="ui-tags"><option dir-paginate="tag in tagList" pagination-id="intentsList" value="tag.tag_id">{{tag.category_name}}</option></select></span><input ng-model="intent.intent_name" type="text" class="form-control" value="{{intent.intent_name}}" placeholder="Service Endpoint URL">
                   </div>
                 </div>
               </div>
