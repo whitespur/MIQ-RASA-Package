@@ -2,7 +2,7 @@ angular
 .module('app')
 .controller('EditIntentController', EditIntentController)
 
-function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, Expressions, Expression, Parameter, Parameters, Entities, UniqueIntentEntities,Responses, Response ) {
+function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, Expressions, Expression, Parameter, Parameters, Entities, UniqueIntentEntities,Responses, Response, IntentTags ) {
   Agent.get({agent_id: $scope.$routeParams.agent_id}, function(data) {
       $scope.agent = data;
   });
