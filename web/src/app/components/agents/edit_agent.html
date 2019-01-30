@@ -32,7 +32,7 @@
                   <div class="list-group-item">
                     <a href="#!/agent/{{intent.agent_id}}/intent/{{intent.intent_id}}">{{intent.intent_name}}</a>
                     <span class="ui-btn-blocks">
-                        <a  ng-click="showMenu($index)">Quick View</a>
+                        <a  ng-click="showMenu($index)">{{quickView_text}}</a>
                         <a href="#!/agent/{{intent.agent_id}}/intent/{{intent.intent_id}}">Full View</a></span>
                     <span class="ui-intent-count"><span class="ui-small-title">Responses</span>{{intent.response_count}}</span>
                     <span class="ui-intent-count"><span class="ui-small-title">Expressions</span>{{intent.expression_count}}</span>
