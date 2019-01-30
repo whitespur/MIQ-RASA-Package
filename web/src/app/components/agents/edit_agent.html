@@ -42,7 +42,9 @@
                         <div class="ui-inner-expressions">
                           {{log(intent)}}
                             <div dir-paginate="expression in intent.expressions | itemsPerPage: 10"  pagination-id="expressionsList">
-                                heh
+                                <div class="list-group-item">
+                                  <a href="#!/agent/{{intent.agent_id}}/intent/{{intent.intent_id}}">{{expression.expression_name}}</a>
+                                </div>
                             </div>
                             <div style="float:right">
                               <dir-pagination-controls pagination-id="expressionsList"></dir-pagination-controls>
