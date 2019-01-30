@@ -275,7 +275,19 @@ span.ui-intent-count:nth-child(2) {
 .ui-list-inner .list-group-item a {
     display: block;
     color: #fff;
-    padding-top: 0px;
+    padding: 10px;
+}
+
+.ui-list-inner .list-group-item span {
+    float: left;
+    color: #fff;
+    font-size: 11px;
+    border-right: 1px solid;
+    padding-right: 10px;
+    margin-right: 10px;
+    padding: 11px;
+    height: 100%;
+    position: relative;
 }
 
 .ui-list-inner .list-group-item::after {
