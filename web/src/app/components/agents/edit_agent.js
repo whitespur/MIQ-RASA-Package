@@ -9,6 +9,7 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
       parseStories(data.story_details);
   });
   $scope.submenu = false;
+  $scope.quickView_text = 'Quick View';
   Intents.query({agent_id: $scope.$routeParams.agent_id}, function(data) {
     var obj = {};
     var idToName = {}
@@ -152,7 +153,7 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
   }
 
   $scope.showMenu = function(id) {
-    console.log(id);
     $scope.SubmenuVar = id;
+    $scope.quickView_text = 'Close Quickview';
   }
 }
