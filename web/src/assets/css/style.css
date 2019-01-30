@@ -260,6 +260,8 @@ span.ui-intent-count:nth-child(2) {
 .ui-btn-blocks a:not([href]) {
     display: block;
     width: 100%;
+    cursor:pointer;
+
     color: #fff;
     background: #115770;
     font-size: 10px;
@@ -278,6 +280,7 @@ span.ui-intent-count:nth-child(2) {
     display: block;
     color: #fff;
     padding: 10px;
+    cursor:pointer;
     float: right;
     width: calc(100% - 110px);
 }
