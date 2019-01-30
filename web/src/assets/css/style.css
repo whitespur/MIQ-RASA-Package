@@ -270,6 +270,11 @@ span.ui-intent-count:nth-child(2) {
     padding: 5px 10px;
 }
 
+.ui-btn-blocks a:not([href]):hover {
+    color: rgba(255,255,255,0.8);
+
+}
+
 .ui-list-inner .list-group-item {
     background: #115770;
     padding:0px;
