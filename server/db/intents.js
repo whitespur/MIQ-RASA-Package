@@ -90,7 +90,7 @@ function getAgentIntentsWithCombined(req, res, next) {
   db.any('select * from intents where agent_id IN (' + IDS + ')')
   .then(function (data) {
       res.status(200)
-        .json(object(data));
+        .json(data);
   })
   .catch(function (err) {
     return next(err);
@@ -106,7 +106,6 @@ function getUniqueIntents(req, res, next) {
         .json(data);
     })
     .catch(function (err) {
-      console.log(err);
       return next(err);
     });
 }
@@ -165,7 +164,15 @@ function updateIntent(req, res, next) {
 
 
 function getTags(req, res, next) {
-
+  console.log("intents.getTags");
+  db.any('SELECT * FROM intent_tags', [])
+    .then(function (resp) {
+      res.status(200)
+        .json(resp);
+    })
+    .catch(function (err) {
+      return next(err);
+    });
 }
 
 module.exports = {
