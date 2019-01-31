@@ -12,72 +12,6 @@ function getSingleIntent(req, res, next) {
     });
 }
 
-function getAgentIntents(req, res, next) {
-  console.log("intents.getAgentIntents");
-  var AgentID = parseInt(req.params.agent_id);
-  var search = req.query.search;
-  if(search !== undefined) {
-    db.any('select * from intents where agent_id = $1 AND intent_name LIKE $2  ORDER BY intent_name asc', [parseInt(AgentID), "%" + search + "%"])
-    .then(function (data) {
-      var ids = data.map(function (data) {
-        if (data.agent_id === parseInt(AgentID)) {
-          return  data.intent_id;
-        } else {
-          return null
-        }
-      });
-      db.any('select * from responses where intent_id IN (' +  ids.join(', ') + ') AND response_text LIKE $1 ORDER BY response_text asc', ["%" + search + "%"])
-      .then(function (responses) {
-        db.any('select * from expressions where intent_id IN (' +  ids.join(', ') + ') AND expression_text LIKE $1 ORDER BY expression_text asc', ["%" + search + "%"])
-        .then(function (expressions) {
-
-          res.status(200)
-              .json([data, responses, expressions]);
-          })
-        })
-        .catch(function (err) {
-          return next(err);
-        })
-      })
-      .catch(function (err) {
-        return next(err);
-      })
-    .catch(function (err) {
-      return next(err);
-    });
-  } else {
-    db.any('select * from intents where intents.agent_id = $1 ORDER BY intents.intent_name asc', AgentID)
-    .then(function (data) {
-      var ids = data.map(function (data) {
-        if (data.agent_id === parseInt(AgentID)) {
-          return data.intent_id;
-        } else {
-          return null
-        }
-      });
-      db.any('select * from responses where intent_id IN (' +  ids.join(', ') + ') ORDER BY response_text asc')
-    .then(function (responses) {
-      db.any('select * from expressions where intent_id IN (' +  ids.join(', ') + ') ORDER BY expression_text asc')
-        .then(function (expressions) {
-          console.log(expressions);
-
-          res.status(200)
-              .json([data, responses, expressions]);
-          })
-        })
-        .catch(function (err) {
-          return next(err);
-        })
-    })
-    .catch(function (err) {
-      return next(err);
-    })
-    .catch(function (err) {
-      return next(err);
-    });
-  }
-}
-
 function getAgentIntentsWithCombined(req, res, next) {
   var AgentID = parseInt(req.params.agent_id);
   var CombinedIds = req.query.combined_to;
@@ -87,10 +21,8 @@ function getAgentIntentsWithCombined(req, res, next) {
   } else {
     IDS = AgentID;
   }
-  console.log(IDS);
   db.any('select * from intents where agent_id IN (' + IDS + ')')
   .then(function (data) {
-    console.log(data);
       res.status(200)
         .json(object(data));
   })
