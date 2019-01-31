@@ -16,7 +16,66 @@ function getAgentIntents(req, res, next) {
   console.log("intents.getAgentIntents");
   var AgentID = parseInt(req.params.agent_id);
   var search = req.query.search;
- 
+  if(search !== undefined) {
+    db.any('select * from intents where agent_id = $1 AND intent_name LIKE $2  ORDER BY intent_name asc', [parseInt(AgentID), "%" + search + "%"])
+    .then(function (data) {
+      var ids = data.map(function (data) {
+        if (data.agent_id === parseInt(AgentID)) {
+          return  data.intent_id;
+        } else {
+          return null
+        }
+      });
+      db.any('select * from responses where intent_id IN (' +  ids.join(', ') + ') AND response_text LIKE $1 ORDER BY response_text asc', ["%" + search + "%"])
+      .then(function (responses) {
+        db.any('select * from expressions where intent_id IN (' +  ids.join(', ') + ') AND expression_text LIKE $1 ORDER BY expression_text asc', ["%" + search + "%"])
+        .then(function (expressions) {
+
+          res.status(200)
+              .json([data, responses, expressions]);
+          })
+        })
+        .catch(function (err) {
+          return next(err);
+        })
+      })
+      .catch(function (err) {
+        return next(err);
+      })
+    .catch(function (err) {
+      return next(err);
+    });
+  } else {
+    db.any('select * from intents where intents.agent_id = $1 ORDER BY intents.intent_name asc', AgentID)
+    .then(function (data) {
+      var ids = data.map(function (data) {
+        if (data.agent_id === parseInt(AgentID)) {
+          return data.intent_id;
+        } else {
+          return null
+        }
+      });
+      db.any('select * from responses where intent_id IN (' +  ids.join(', ') + ') ORDER BY response_text asc')
+    .then(function (responses) {
+      db.any('select * from expressions where intent_id IN (' +  ids.join(', ') + ') ORDER BY expression_text asc')
+        .then(function (expressions) {
+          console.log(expressions);
+
+          res.status(200)
+              .json([data, responses, expressions]);
+          })
+        })
+        .catch(function (err) {
+          return next(err);
+        })
+    })
+    .catch(function (err) {
+      return next(err);
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+  }
 }
 
 function getAgentIntentsWithCombined(req, res, next) {
@@ -105,18 +164,6 @@ function updateIntent(req, res, next) {
 }
 
 
-function getTags(req, res, next) {
-  console.log("intents.getTags");
-  console.log('huehuehuheuhueheuhe _---__---_--_--_------------___--_----_--_-');
-  db.any('SELECT * FROM intent_tags', [])
-    .then(function (resp) {
-      res.status(200)
-        .json(resp);
-    })
-    .catch(function (err) {
-      return next(err);
-    });
-}
 
 module.exports = {
   getAgentIntents: getAgentIntents,
@@ -125,6 +172,6 @@ module.exports = {
   removeIntent: removeIntent,
   getUniqueIntents: getUniqueIntents,
   updateIntent: updateIntent,
-  getAgentIntentsWithCombined: getAgentIntentsWithCombined,
-  getTags: getTags
+  getAgentIntentsWithCombined: getAgentIntentsWithCombined
+
 };
