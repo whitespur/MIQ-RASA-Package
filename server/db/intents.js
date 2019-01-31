@@ -12,6 +12,13 @@ function getSingleIntent(req, res, next) {
     });
 }
 
+function getAgentIntents(req, res, next) {
+  console.log("intents.getAgentIntents");
+  var AgentID = parseInt(req.params.agent_id);
+  var search = req.query.search;
+ 
+}
+
 function getAgentIntentsWithCombined(req, res, next) {
   var AgentID = parseInt(req.params.agent_id);
   var CombinedIds = req.query.combined_to;
