@@ -164,6 +164,9 @@ function updateIntent(req, res, next) {
 }
 
 
+function getTags(req, res, next) {
+
+}
 
 module.exports = {
   getAgentIntents: getAgentIntents,
@@ -172,6 +175,6 @@ module.exports = {
   removeIntent: removeIntent,
   getUniqueIntents: getUniqueIntents,
   updateIntent: updateIntent,
-  getAgentIntentsWithCombined: getAgentIntentsWithCombined
-
+  getAgentIntentsWithCombined: getAgentIntentsWithCombined,
+  getTags: getTags
 };
