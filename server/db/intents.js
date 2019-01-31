@@ -76,7 +76,6 @@ function getAgentIntents(req, res, next) {
       return next(err);
     });
   }
-  
 }
 
 function getAgentIntentsWithCombined(req, res, next) {
@@ -107,6 +106,7 @@ function getUniqueIntents(req, res, next) {
         .json(data);
     })
     .catch(function (err) {
+      console.log(err);
       return next(err);
     });
 }
