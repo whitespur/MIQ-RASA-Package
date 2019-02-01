@@ -64,7 +64,7 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
   $scope.onTagChange = function(event) {
     console.log($scope.last_tag);
 
-    if($scope.last_tag === 'create') {
+    if($scope.active_tag === 'create') {
       console.log('create');
       $scope.last_tag = $scope.active_tag;
     } else if($scope.last_tag !== $scope.active_tag && $scope.last_tag !== '') {
