@@ -339,7 +339,7 @@ span.ui-input-w-text::after {
 .newTag .accept {
     position: absolute;
     left: -10px;
-    top: -10px;
+    bottom: -10px;
     width: 20px;
     height: 20px;
     background: rgb(9, 155, 65);
