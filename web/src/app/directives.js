@@ -31,7 +31,21 @@ angular.module("app")
       }
     }
   })
-.directive('tooltip', function(){
+  .directive('bindHtmlCompile', function($compile) {
+    return {
+      restrict: "A",
+      scope: {
+        bindHtmlCompile: "="
+      },
+      link: function(scope, elem) {
+        scope.$watch("bindHtmlCompile", function(newVal) {
+          elem.html('');
+          var newElem = angular.element(newVal);
+          var compileNewElem = $compile(newElem)(scope.$parent);
+          elem.append(compileNewElem);
+        });
+      }
+    }.directive('tooltip', function(){
     return {
         restrict: 'A',
         link: function(scope, element, attrs){
