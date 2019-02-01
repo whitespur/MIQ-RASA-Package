@@ -36,7 +36,7 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
   });
 
   $scope.removeTag = function(name) {
-    $scope.tagsInNames = $scope.tagsInNames.replace('<span>' + name + '</span>', '');
+    $scope.tagsInNames = $scope.tagsInNames.replace('<span>' + name + '<div (click)="removeTag(' + value.category_name + ')" class="close removeTag" ng-click="removeTag($event)">x</div></span>', '');
   }
 
 
