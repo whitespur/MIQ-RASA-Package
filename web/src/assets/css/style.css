@@ -283,6 +283,10 @@ span.ui-input-w-text::after {
     left: 4px;
 }
 
+.ui-input-w-text input {
+    height:40px;
+}
+
 .tagContainer {
     flex-basis: 50%;
     display: block;
@@ -290,6 +294,7 @@ span.ui-input-w-text::after {
     width: 100%;
     padding: .375rem .75rem;
     font-size: .875rem;
+    height:40px;
     line-height: 1.5;
     color: #3e515b;
     background-color: #fff;
@@ -331,7 +336,7 @@ span.ui-input-w-text::after {
 
 .ui-tags {
     width: 100%;
-    height: 35px;
+    height: 40px;
     padding-left: 5px;
 }
 
