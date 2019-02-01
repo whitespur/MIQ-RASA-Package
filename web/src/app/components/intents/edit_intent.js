@@ -66,7 +66,7 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
     if($scope.active_tag === 'create' && $scope.active_tag !== $scope.last_tag) {
       $scope.last_tag = $scope.active_tag;
       
-    } else if($scope.tagList[$scope.active_tag] !== undefined && $scope.active_tag !== 'create'  && $scope.active_tag !== $scope.last_tag && $scope.active_tag !== 0) {
+    } else if($scope.tagList[$scope.active_tag] !== undefined && $scope.active_tag !== 'create'  && $scope.active_tag !== $scope.last_tag && $scope.active_tag !== '0') {
       if($scope.tagsInNames.indexOf($scope.tagList[$scope.active_tag].category_name) !== -1) {
         $scope.tagsInNames = $scope.tagsInNames.replace('<span>' + $scope.tagList[$scope.active_tag].category_name + '</span>', '');
       } else {
