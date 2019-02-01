@@ -42,7 +42,7 @@ angular.module("app")
           elem.html('');
           var newElem = angular.element(newVal);
           var compileNewElem = $compile(newElem)(scope.$parent);
-          elem.append(compileNewElem);
+          elem.html(compileNewElem);
         });
       }
     }.directive('tooltip', function(){
