@@ -7,7 +7,7 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
       $scope.agent = data;
   });
 
-  $scope.active_tag = 0;
+  $scope.active_tag = '';
   $scope.last_tag = '';
   $scope.tagsInNames = '';
 
