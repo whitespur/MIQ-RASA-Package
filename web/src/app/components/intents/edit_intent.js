@@ -18,7 +18,7 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
   IntentTags.query(function(data) {
       $scope.tagList = data;
       $scope.tagList.push({
-        tag_id: 0,
+        tag_id: 'create',
         category_name: 'Create New',
       });
       console.log($scope.tagList);
@@ -69,7 +69,7 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
         $scope.tagsInNames = $scope.tagsInNames + '<span>' + $scope.tagList[$scope.last_tag].category_name + '</span>';
       }
       $scope.last_tag = $scope.active_tag;
-    } else if($scope.last_tag == 0) {
+    } else if($scope.last_tag == 'create') {
       console.log('create');
     } else {
       $scope.last_tag = $scope.active_tag;
