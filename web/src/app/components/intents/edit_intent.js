@@ -91,20 +91,20 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
   }
 
   $scope.acceptNewTag = function() {
-    if($scope.new_tag !== null) {
+    if($scope.new_tag.length > 0) {
       IntentTags.save({cat_name: $scope.new_tag}).$promise.then(function(resp) {
-        console.log(resp);
+        $scope.tagsInNames = $scope.tagsInNames + '<span>' + $scope.new_tag + '</span>';
+        IntentTags.query(function(data) {
+            $scope.tagList = data;
+            $scope.tagList.unshift({
+              tag_id: 'create',
+              category_name: 'Create New',
+            });
+        });
+
         $scope.last_tag = '0';
         $scope.active_tag = '0';
         $scope.new_tag = '';
-        $scope.tagsInNames = $scope.tagsInNames + '<span>' + $scope.new_tag + '</span>';
-        IntentTags.query(function(data) {
-          $scope.tagList = data;
-          $scope.tagList.unshift({
-            tag_id: 'create',
-            category_name: 'Create New',
-          });
-      });
       });
     } else {
       alert('A tag need a name..');
