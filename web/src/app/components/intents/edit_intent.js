@@ -21,7 +21,6 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
         tag_id: 'create',
         category_name: 'Create New',
       });
-      console.log($scope.tagList);
   });
 
   Intent.get({intent_id: $scope.$routeParams.intent_id}, function(data) {
@@ -72,7 +71,7 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
     if($scope.active_tag === 'create' && $scope.active_tag !== $scope.last_tag) {
       $scope.last_tag = $scope.active_tag;
       console.log('i Create Stuff');
-    } else if($scope.tagList[$scope.active_tag] !== undefined && $scope.active_tag !== 'create') {
+    } else if($scope.tagList[$scope.active_tag] !== undefined && $scope.active_tag !== 'create'  && $scope.active_tag !== $scope.last_tag) {
       if($scope.tagsInNames.indexOf($scope.tagList[$scope.active_tag].category_name) !== -1) {
         $scope.tagsInNames = $scope.tagsInNames.replace('<span>' + $scope.tagList[$scope.active_tag].category_name + '</span>', '');
       } else {
