@@ -66,7 +66,8 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
         $scope.tagsInNames = $scope.tagsInNames + '<span>' + $scope.tagList[$scope.last_tag].category_name + '</span>';
         console.log( $scope.tagsInNames);
         $scope.last_tag = $scope.active_tag;
-
+    } else {
+      $scope.last_tag = $scope.active_tag;
     }
   }
 
