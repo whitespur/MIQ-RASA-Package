@@ -148,11 +148,11 @@ function createIntentTag(req, res, next) {
 
 function getBindIntentTags(req, res, next) {
   console.log("intents.bindIntentTag");
-  db.any('SELECT * FROM intent_tags_binds, intent_tags WHERE intent_tags.intent_id = $1 AND intent_tags.intent_id = intent_tags_binds.intent_id',
+  db.any('SELECT * FROM intent_tags_binds, intent_tags WHERE intent_tags.intent_id = $1',
     req.body.intent_id)
     .then(function (resp) {
       res.status(200)
-        .json(resp);
+        .json(req.body);
     })
     .catch(function (err) {
       return next(err);
@@ -254,5 +254,4 @@ module.exports = {
   bindIntentTag: bindIntentTag,
   createIntentTag: createIntentTag,
   getBindIntentTags: getBindIntentTags
-
 };
