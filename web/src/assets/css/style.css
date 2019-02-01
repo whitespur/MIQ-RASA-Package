@@ -319,7 +319,7 @@ span.ui-input-w-text::after {
     position:relative;
 }
 
-.newTag::after {
+.newTag .close {
     position: absolute;
     left: -10px;
     top: -10px;
@@ -332,6 +332,8 @@ span.ui-input-w-text::after {
     text-align: center;
     line-height: 1.4;
     font-size: 12px;
+    z-index: 5555;
+    cursor: pointer;
 }
 
 .ui-btn-blocks a,
