@@ -27,13 +27,17 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
 
   Bind.query({intent_id: $scope.$routeParams.intent_id},function(data) {
       angular.forEach(data, function(value) {
-          $scope.tagsInNames = $scope.tagsInNames + '<span>' + value.category_name + '</span>';
+          $scope.tagsInNames = $scope.tagsInNames + '<span>' + value.category_name + '<span ng-click="removeTag(' + value.category_name + ')"</span>';
       });
   });
 
   Intent.get({intent_id: $scope.$routeParams.intent_id}, function(data) {
       $scope.intent = data;
   });
+
+  $scope.removeTag = function(name) {
+    $scope.tagsInNames = $scope.tagsInNames.replace('<span>' + name + '</span>', '');
+  }
 
 
   loadExpressions();
