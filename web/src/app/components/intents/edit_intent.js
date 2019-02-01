@@ -36,7 +36,9 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
   });
 
   $scope.removeTag = function(ev) {
-    $scope.tagsInNames = $scope.tagsInNames.replace('<span>' + ev.currentTarget.attributes.nodeValue + '<div ng-click="removeTag(' + ev.currentTarget.attributes.nodeValue  + ')" class="close removeTag">x</div></span>', '');
+    console.log('<span>' + ev.currentTarget.attributes.nodeValue + '<div ng-click="removeTag(' + ev.currentTarget.attributes.nodeValue  + ')" class="close removeTag">x</div></span>');
+    console.log($scope.tagsInNames);
+      $scope.tagsInNames = $scope.tagsInNames.replace('<span>' + ev.currentTarget.attributes.nodeValue + '<div ng-click="removeTag(' + ev.currentTarget.attributes.nodeValue  + ')" class="close removeTag">x</div></span>', '');
   }
 
 
