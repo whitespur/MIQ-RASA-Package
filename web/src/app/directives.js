@@ -45,7 +45,8 @@ angular.module("app")
           elem.html(compileNewElem);
         });
       }
-    }.directive('tooltip', function(){
+    }
+  }).directive('tooltip', function(){
     return {
         restrict: 'A',
         link: function(scope, element, attrs){
