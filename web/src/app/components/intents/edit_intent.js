@@ -7,13 +7,14 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
       $scope.agent = data;
   });
 
+  $scope.active_tag = 0;
+
   AgentEntities.query({agent_id: $scope.$routeParams.agent_id},function(data) {
       $scope.entityList = data;
   });
 
   IntentTags.query(function(data) {
       $scope.tagList = data;
-      console.log(data);
       $scope.tagList.push({
         tag_id: 0,
         category_name: 'Create New',
@@ -57,8 +58,8 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
     });
   }
 
-  $scope.onTagChange = function($event) {
-    console.log($event);
+  $scope.onTagChange = function(event) {
+    console.log(event);
   }
 
   $scope.showTextTaskbar = function(ev) {
