@@ -57,6 +57,7 @@ router.get('/intents/:intent_id/unique_intent_entities', intents.getUniqueIntent
 router.put('/intents/:intent_id', intents.updateIntent);
 router.get('/tags', intents.getTags);
 router.post('/bind/tag', intents.bindIntentTag);
+router.get('/bind/tag', intents.getBindIntentTags);
 router.get('/tags/:intentid', intents.getIntentTags);
 router.post('/tags', intents.createIntentTag);
 
