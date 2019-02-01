@@ -309,6 +309,7 @@ span.ui-input-w-text::after {
     padding: 3px 15px;
     font-size: 12px;
     float: left;
+    margin-right:5px;
     text-transform: capitalize;
     border-radius: 5px;
     background: #f5f5f5;
