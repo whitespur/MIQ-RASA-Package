@@ -27,7 +27,7 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
 
   Bind.query({intent_id: $scope.$routeParams.intent_id},function(data) {
       angular.forEach(data, function(value) {
-          $scope.tagsInNames = $scope.tagsInNames + '<span>' + value.category_name + '<div (click)="removeTag($event.target)" class="close removeTag" ng-click="removeTag($event)">x</div>'+ '</span>';
+          $scope.tagsInNames = $scope.tagsInNames + '<span>' + value.category_name + '<div (click)="removeTag(' + value.category_name + ')" class="close removeTag" ng-click="removeTag($event)">x</div>'+ '</span>';
         });
   });
 
@@ -35,8 +35,7 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
       $scope.intent = data;
   });
 
-  $scope.removeTag = function(target) {
-    console.log(target);
+  $scope.removeTag = function(name) {
     $scope.tagsInNames = $scope.tagsInNames.replace('<span>' + name + '</span>', '');
   }
 
