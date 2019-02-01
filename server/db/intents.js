@@ -150,7 +150,7 @@ function getBindIntentTags(req, res, next) {
   var intent_id = req.query.intent_id;
 
   console.log("intents.bindIntentTag");
-  db.any('SELECT * FROM intent_tags_binds, intent_tags WHERE intent_tags_binds.intent_id = $1',
+  db.any('SELECT * FROM intent_tags_binds JOIN intent_tags ON intent_tags_binds.tag_id = intent_tags.tag_id WHERE intent_tags_binds.intent_id = $1',
   intent_id)
     .then(function (resp) {
       res.status(200)
