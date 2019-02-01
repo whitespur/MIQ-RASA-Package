@@ -64,6 +64,11 @@ app.factory('IntentTags', function($resource) {
   return $resource(api_endpoint_v2 + '/tags/:intent_id', {intent_id:'@intent_id'})
 });
 
+app.factory('Bind', function($resource) {
+  return $resource(api_endpoint_v2 + '/bind/tag', {})
+});
+
+
 app.factory('Expressions', function($resource) {
   return $resource(api_endpoint_v2 + '/intents/:intent_id/expressions', {intent_id:'@id'});
 });

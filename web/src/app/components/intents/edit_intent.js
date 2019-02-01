@@ -67,20 +67,16 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
     console.log($scope.active_tag);
     if($scope.active_tag === 'create' && $scope.active_tag !== $scope.last_tag) {
       $scope.last_tag = $scope.active_tag;
-      
     } else if($scope.tagList[$scope.active_tag] !== undefined && $scope.active_tag !== 'create'  && $scope.active_tag !== $scope.last_tag && $scope.active_tag !== '0') {
       if($scope.tagsInNames.indexOf($scope.tagList[$scope.active_tag].category_name) !== -1) {
         $scope.tagsInNames = $scope.tagsInNames.replace('<span>' + $scope.tagList[$scope.active_tag].category_name + '</span>', '');
       } else {
-        $scope.tagsInNames = $scope.tagsInNames + '<span>' + $scope.tagList[$scope.active_tag].category_name + '</span>';
+        Bind.save({intent_id:$scope.$routeParams.intent_id, tag_id:$scope.active_tag}).$promise.then(function(resp) {
+          $scope.tagsInNames = $scope.tagsInNames + '<span>' + $scope.tagList[$scope.active_tag].category_name + '</span>';
+        });
       }
       $scope.last_tag = $scope.active_tag;
     } else {
-      console.log($scope.tagList[$scope.last_tag]);
-      console.log($scope.last_tag);
-      console.log($scope.active_tag);
-      console.log($scope.tagList);
-
       $scope.last_tag = $scope.active_tag;
     }
   }
