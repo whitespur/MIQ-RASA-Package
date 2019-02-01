@@ -237,6 +237,7 @@ module.exports = {
   getAgentIntentsWithCombined: getAgentIntentsWithCombined,
   getTags: getTags,
   getIntentTags: getIntentTags,
-  bindIntentTag: bindIntentTag
+  bindIntentTag: bindIntentTag,
+  createIntentTag: createIntentTag
 
 };
