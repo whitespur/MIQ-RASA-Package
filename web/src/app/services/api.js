@@ -61,7 +61,7 @@ app.factory('Intents', function($resource) {
 
 
 app.factory('IntentTags', function($resource) {
-  return $resource(api_endpoint_v2 + '/tags', {})
+  return $resource(api_endpoint_v2 + '/tags/:intent_id', {intent_id:'@intent_id'})
 });
 
 app.factory('Expressions', function($resource) {
