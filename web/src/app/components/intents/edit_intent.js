@@ -91,7 +91,7 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
   }
 
   $scope.acceptNewTag = function() {
-    IntentTags.save($scope.new_tag).$promise.then(function(resp) {
+    IntentTags.save({cat_name: $scope.new_tag}).$promise.then(function(resp) {
       console.log(resp);
       $scope.last_tag = '0';
       $scope.active_tag = '0';

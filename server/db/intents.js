@@ -132,7 +132,7 @@ function createIntentTag(req, res, next) {
   console.log("intents.intentTag");
   db.any('insert into intent_tags(category_name)' +
       'values($1) RETURNING tag_id',
-    req.body)
+    req.body.cat_name)
     .then(function (resp) {
       res.status(200)
         .json({
