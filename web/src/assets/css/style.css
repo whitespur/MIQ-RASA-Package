@@ -326,7 +326,23 @@ span.ui-input-w-text::after {
     width: 20px;
     height: 20px;
     background: #333;
-    content: 'x';
+    border-radius: 50%;
+    color: #fff;
+    text-align: center;
+    line-height: 1.4;
+    font-size: 12px;
+    z-index: 5555;
+    cursor: pointer;
+}
+
+
+.newTag .new {
+    position: absolute;
+    left: -10px;
+    top: -10px;
+    width: 20px;
+    height: 20px;
+    background: rgb(9, 155, 65);
     border-radius: 50%;
     color: #fff;
     text-align: center;
