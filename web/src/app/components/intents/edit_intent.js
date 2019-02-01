@@ -67,7 +67,7 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
       $scope.last_tag = $scope.active_tag;
       console.log('i Create Stuff');
     } else if($scope.last_tag !== $scope.active_tag && $scope.last_tag !== '') {
-      if($scope.tagsInNames.indexOf($scope.tagList[$scope.last_tag].category_name) !== -1) {
+      if($scope.tagsInNames.indexOf($scope.tagList[$scope.active_tag].category_name) !== -1) {
         $scope.tagsInNames = $scope.tagsInNames.replace('<span>' + $scope.tagList[$scope.active_tag].category_name + '</span>', '');
       } else {
         $scope.tagsInNames = $scope.tagsInNames + '<span>' + $scope.tagList[$scope.active_tag].category_name + '</span>';
