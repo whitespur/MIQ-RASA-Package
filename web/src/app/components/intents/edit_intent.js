@@ -59,7 +59,7 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
   }
 
   $scope.onTagChange = function(event) {
-    console.log(event);
+    console.log($scope.active_tag);
   }
 
   $scope.showTextTaskbar = function(ev) {
