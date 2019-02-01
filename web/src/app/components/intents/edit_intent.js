@@ -62,7 +62,7 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
   }
 
   $scope.onTagChange = function(event) {
-    if($scope.last_tag !== $scope.active_tag && $scope.last_tag !== '' && $scope.last_tag !== 0) {
+    if($scope.last_tag !== $scope.active_tag && $scope.last_tag !== '' && $scope.last_tag !== 'create') {
       if($scope.tagsInNames.indexOf($scope.tagList[$scope.last_tag].category_name) !== -1) {
         $scope.tagsInNames = $scope.tagsInNames.replace('<span>' + $scope.tagList[$scope.last_tag].category_name + '</span>', '');
       } else {
