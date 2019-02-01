@@ -91,10 +91,12 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
   }
 
   $scope.acceptNewTag = function() {
-    $scope.last_tag = '0';
-    $scope.active_tag = '0';
-    $scope.tagsInNames = $scope.tagsInNames + '<span>' + $scope.new_tag + '</span>';
-
+    Response.save(new_tag).$promise.then(function(resp) {
+      console.log(resp);
+      $scope.last_tag = '0';
+      $scope.active_tag = '0';
+      $scope.tagsInNames = $scope.tagsInNames + '<span>' + $scope.new_tag + '</span>';
+    });
   }
 
   $scope.showTextTaskbar = function(ev) {
