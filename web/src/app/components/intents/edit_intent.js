@@ -10,6 +10,8 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
   $scope.active_tag = '0';
   $scope.last_tag = '';
   $scope.tagsInNames = '';
+  $scope.new_tag = '';
+
 
   AgentEntities.query({agent_id: $scope.$routeParams.agent_id},function(data) {
       $scope.entityList = data;
@@ -86,6 +88,13 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
   $scope.closeNewTag = function() {
     $scope.last_tag = '0';
     $scope.active_tag = '0';
+  }
+
+  $scope.acceptNewTag = function() {
+    $scope.last_tag = '0';
+    $scope.active_tag = '0';
+    $scope.tagsInNames = $scope.tagsInNames + '<span>' + $scope.new_tag + '</span>';
+
   }
 
   $scope.showTextTaskbar = function(ev) {
