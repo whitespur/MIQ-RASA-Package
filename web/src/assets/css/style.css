@@ -299,6 +299,17 @@ span.ui-input-w-text::after {
     margin-right: 5px;
 }
 
+.tagContainer {
+    border: 1px solid;
+    padding: 3px 15px;
+    font-size: 12px;
+    float: left;
+    text-transform: capitalize;
+    border-radius: 5px;
+    background: #f5f5f5;
+    box-shadow: 0px 3px 2px -2px rgba(85,85,85,.25);
+}
+
 .ui-btn-blocks a,
 .ui-btn-blocks a:not([href]) {
     display: block;
