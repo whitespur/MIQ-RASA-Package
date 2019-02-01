@@ -63,9 +63,7 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
 
   $scope.onTagChange = function(event) {
     console.log($scope.last_tag);
-
     if($scope.active_tag === 'create') {
-      console.log('create');
       $scope.last_tag = $scope.active_tag;
     } else if($scope.last_tag !== $scope.active_tag && $scope.last_tag !== '') {
       if($scope.tagsInNames.indexOf($scope.tagList[$scope.last_tag].category_name) !== -1) {
@@ -77,8 +75,6 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
     } else {
       $scope.last_tag = $scope.active_tag;
     }
-    console.log($scope.last_tag);
-
   }
 
   $scope.showTextTaskbar = function(ev) {
