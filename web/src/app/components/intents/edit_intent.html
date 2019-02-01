@@ -28,7 +28,7 @@
                 <div class="col-sm-12">
                   <div class="form-group" style="display:Flex;">
                     <span ng-style="{'visibility': active_tag !== 'create' ? 'visible':'hidden', 'display': active_tag !== 'create' ? 'block':'none'}" style="flex-basis:15%;margin-right:5px;"><select class="ui-tags" ng-model="active_tag" value="{{active_tag}}" ng-click="onTagChange()"><option  dir-paginate="tag in tagList | itemsPerPage: 200 track by $index" pagination-id="intentsList" value="{{tag.tag_id}}">{{tag.category_name}}</option></select></span>
-                    <span ng-style="{'visibility': active_tag === 'create' ? 'visible':'hidden', 'display': active_tag === 'create' ? 'block':'none'}" style="flex-basis:15%;margin-right:5px;"><input style="height:40px;" type="text" class="form-control" value="" placeholder="Name of tag"></span>
+                    <span ng-style="{'visibility': active_tag === 'create' ? 'visible':'hidden', 'display': active_tag === 'create' ? 'block':'none'}" style="flex-basis:15%;margin-right:5px;" class="newTag"><input style="height:40px;" type="text" class="form-control" value="" placeholder="Name of tag"></span>
                     
                     <span class="tagContainer" ng-bind-html="tagsInNames">{{tagsInNames}}</span>
                     <span class="ui-input-w-text"><input ng-model="intent.intent_name" type="text" class="form-control" value="{{intent.intent_name}}" placeholder="Service Endpoint URL"></span>
