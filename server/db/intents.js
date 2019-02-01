@@ -154,7 +154,7 @@ function getBindIntentTags(req, res, next) {
   intent_id)
     .then(function (resp) {
       res.status(200)
-        .json(req.body);
+        .json([req.body]);
     })
     .catch(function (err) {
       return next(err);
