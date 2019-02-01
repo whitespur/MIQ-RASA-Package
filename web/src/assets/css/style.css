@@ -304,7 +304,7 @@ span.ui-input-w-text::after {
     margin-right: 5px;
 }
 
-.tagContainer {
+.tagContainer span {
     border: 1px solid;
     padding: 3px 15px;
     font-size: 12px;
