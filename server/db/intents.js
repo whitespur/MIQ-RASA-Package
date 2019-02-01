@@ -128,6 +128,58 @@ function createAgentIntent(req, res, next) {
     });
 }
 
+function createIntentTag(req, res, next) {
+  console.log("intents.intentTag");
+  db.any('insert into intent_tags(category_name)' +
+      'values($1) RETURNING tag_id',
+    req.body)
+    .then(function (resp) {
+      res.status(200)
+        .json({
+          status: 'success',
+          message: 'Inserted',
+        });
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
+
+function bindIntentTag(req, res, next) {
+  console.log("intents.bindIntentTag");
+  db.any('insert into intent_tags_binds(intent_id, tag_id)' +
+      'values($1, $2)',
+    [req.body.intent_id, req.body.tag_id])
+    .then(function (resp) {
+      res.status(200)
+        .json({
+          status: 'success',
+          message: 'Inserted',
+        });
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
+
+function getIntentTags(req, res, next) {
+  console.log("intents.bindIntentTag");
+  var IntentID = parseInt(req.params.intent_id);
+
+  db.any('SELECT * FROM intent_tags_binds ' +
+      'where intent_id = $1',
+      IntentID)
+    .then(function (resp) {
+      res.status(200)
+        .json(resp);
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
+
+
+
 function removeIntent(req, res, next) {
   console.log("intents.removeIntent");
   var intentID = parseInt(req.params.intent_id);
@@ -183,5 +235,8 @@ module.exports = {
   getUniqueIntents: getUniqueIntents,
   updateIntent: updateIntent,
   getAgentIntentsWithCombined: getAgentIntentsWithCombined,
-  getTags: getTags
+  getTags: getTags,
+  getIntentTags: getIntentTags,
+  bindIntentTag: bindIntentTag
+
 };
