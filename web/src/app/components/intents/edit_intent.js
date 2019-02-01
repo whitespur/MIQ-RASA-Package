@@ -57,6 +57,10 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
     });
   }
 
+  $scope.onTagChange = function($event) {
+    console.log($event);
+  }
+
   $scope.showTextTaskbar = function(ev) {
     var start = ev.currentTarget.selectionStart;
     var end   = ev.currentTarget.selectionEnd;
