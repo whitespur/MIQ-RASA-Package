@@ -91,12 +91,16 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
   }
 
   $scope.acceptNewTag = function() {
-    IntentTags.save({cat_name: $scope.new_tag}).$promise.then(function(resp) {
-      console.log(resp);
-      $scope.last_tag = '0';
-      $scope.active_tag = '0';
-      $scope.tagsInNames = $scope.tagsInNames + '<span>' + $scope.new_tag + '</span>';
-    });
+    if($scope.new_tag !== '') {
+      IntentTags.save({cat_name: $scope.new_tag}).$promise.then(function(resp) {
+        console.log(resp);
+        $scope.last_tag = '0';
+        $scope.active_tag = '0';
+        $scope.tagsInNames = $scope.tagsInNames + '<span>' + $scope.new_tag + '</span>';
+      });
+    } else {
+      alert('A tag need a name..');
+    }
   }
 
   $scope.showTextTaskbar = function(ev) {
