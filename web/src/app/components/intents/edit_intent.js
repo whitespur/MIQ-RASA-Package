@@ -8,6 +8,8 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
   });
 
   $scope.active_tag = 0;
+  $scope.last_tag = '';
+  $scope.tagsInNames = '';
 
   AgentEntities.query({agent_id: $scope.$routeParams.agent_id},function(data) {
       $scope.entityList = data;
@@ -19,6 +21,7 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
         tag_id: 0,
         category_name: 'Create New',
       });
+      console.log($scope.tagList);
   });
 
   Intent.get({intent_id: $scope.$routeParams.intent_id}, function(data) {
@@ -59,7 +62,11 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
   }
 
   $scope.onTagChange = function(event) {
-    console.log($scope.active_tag);
+    if($scope.last_tag !== $scope.active_tag) {
+      $scope.last_tag = $scope.active_tag;
+        $scope.tagsInNames = $scope.tagsInNames + '<span>' + + '</span>';
+
+    }
   }
 
   $scope.showTextTaskbar = function(ev) {
