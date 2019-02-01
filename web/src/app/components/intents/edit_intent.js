@@ -66,14 +66,19 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
     if($scope.active_tag === 'create' && $scope.last_tag !== $scope.active_tag ) {
       $scope.last_tag = $scope.active_tag;
       console.log('i Create Stuff');
-    } else if($scope.last_tag !== $scope.active_tag && $scope.last_tag !== '') {
-      if($scope.tagsInNames.indexOf($scope.tagList[$scope.active_tag].category_name) !== -1) {
-        $scope.tagsInNames = $scope.tagsInNames.replace('<span>' + $scope.tagList[$scope.active_tag].category_name + '</span>', '');
+    } else if($scope.last_tag !== $scope.active_tag && $scope.last_tag !== '' && $scope.tagList[$scope.last_tag] !== undefined) {
+      if($scope.tagsInNames.indexOf($scope.tagList[$scope.last_tag].category_name) !== -1) {
+        $scope.tagsInNames = $scope.tagsInNames.replace('<span>' + $scope.tagList[$scope.last_tag].category_name + '</span>', '');
       } else {
-        $scope.tagsInNames = $scope.tagsInNames + '<span>' + $scope.tagList[$scope.active_tag].category_name + '</span>';
+        $scope.tagsInNames = $scope.tagsInNames + '<span>' + $scope.tagList[$scope.last_tag].category_name + '</span>';
       }
       $scope.last_tag = $scope.active_tag;
     } else {
+      console.log($scope.tagList[$scope.last_tag]);
+      console.log($scope.last_tag);
+      console.log($scope.active_tag);
+      console.log($scope.tagList);
+
       $scope.last_tag = $scope.active_tag;
     }
   }
