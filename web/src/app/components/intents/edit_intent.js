@@ -7,7 +7,7 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
       $scope.agent = data;
   });
 
-  $scope.active_tag = 0;
+  $scope.active_tag = '0';
   $scope.last_tag = '';
   $scope.tagsInNames = '';
 
@@ -27,11 +27,6 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
       $scope.intent = data;
   });
 
-  function prepend(value, array) {
-    var newArray = array.slice();
-    
-    return newArray;
-  }
 
   loadExpressions();
   loadResponses();
