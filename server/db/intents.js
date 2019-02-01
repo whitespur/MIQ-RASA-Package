@@ -147,9 +147,11 @@ function createIntentTag(req, res, next) {
 
 
 function getBindIntentTags(req, res, next) {
+  var intent_id = req.query.intent_id;
+
   console.log("intents.bindIntentTag");
   db.any('SELECT * FROM intent_tags_binds, intent_tags WHERE intent_tags.intent_id = $1',
-    req.body.intent_id)
+  intent_id)
     .then(function (resp) {
       res.status(200)
         .json(req.body);
