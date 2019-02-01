@@ -17,16 +17,22 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
 
   IntentTags.query(function(data) {
       $scope.tagList = data;
-      $scope.tagList.push({
+      prepend({
         tag_id: 'create',
         category_name: 'Create New',
-      });
+      }, $scope.tagList);
       console.log($scope.tagList);
   });
 
   Intent.get({intent_id: $scope.$routeParams.intent_id}, function(data) {
       $scope.intent = data;
   });
+
+  function prepend(value, array) {
+    var newArray = array.slice();
+    newArray.unshift(value);
+    return newArray;
+  }
 
   loadExpressions();
   loadResponses();
