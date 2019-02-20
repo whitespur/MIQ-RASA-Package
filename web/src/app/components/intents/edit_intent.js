@@ -180,6 +180,7 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
   }
 
   $scope.doUpdateExpression = function(expression_id) {
+    console.log(expression_id);
     var span = $('#expression_' + expression_id);
     var body = $('body');
     span.parent().parent().removeClass('doUpdate');
