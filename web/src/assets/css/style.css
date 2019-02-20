@@ -455,7 +455,7 @@ body.editing::before {
     border: 1px solid rgba(51, 51, 51, 0.5);
 }
 
-.list-group.active .list-group-item > span:not(:first-child) > button:not(:first-child) {
+.list-group.active .list-group-item > span:not(:first-child) > button:not(:nth-child(2)) {
     opacity:0;
     display:none;
 }
