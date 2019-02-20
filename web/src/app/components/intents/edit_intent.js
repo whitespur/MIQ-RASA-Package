@@ -170,7 +170,7 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
     });
   }
 
-  $scope.editExpression(expression_id) {
+  $scope.editExpression = function(expression_id) {
     var span = $('#expression_' + expression_id);
     span.attr('contentEditable');
   }
