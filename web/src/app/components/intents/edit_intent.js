@@ -174,7 +174,6 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
     var span = $('#expression_' + expression_id);
     var body = $('body');
     span.parent().parent().addClass('active');
-    span.parent().find('> span:last-child').prepend('<button class="btn btn btn-outline-success doUpdate" ng-click="doUpdateExpression(expression.expression_id)"><span class="icon-check"></span></button>');
     body.addClass('editing');
     span.attr('contentEditable', 'true').focus();
   }
