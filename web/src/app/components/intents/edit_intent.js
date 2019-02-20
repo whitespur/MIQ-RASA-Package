@@ -199,8 +199,8 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
    
   }
 
-  $scope.doUpdateResponse = function(expression_id) {
-    var span = $('#response_' + expression_id);
+  $scope.doUpdateResponse = function(response_id) {
+    var span = $('#response_' + response_id);
     var body = $('body');
     span.parent().removeClass('active');
     body.removeClass('editing');
