@@ -78,9 +78,10 @@ app.factory('IntentExpressions', function($resource) {
 });
 
 app.factory('Expression', function($resource) {
-  return $resource(api_endpoint_v2 + '/expressions/:expression_id',  {
-      'update': { method:'PUT' }
-  });
+  return $resource(api_endpoint_v2 + '/expressions/:expression_id', {expression_id: '@id'},  
+    {
+        'update': { method:'PUT' }
+    });
 });
 
 app.factory('UniqueIntentEntities', function($resource) {
