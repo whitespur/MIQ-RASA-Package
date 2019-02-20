@@ -80,10 +80,15 @@
                         aria-expanded="false" aria-controls="table_expression_{{expression.expression_id}}">
                         <span class="icon-arrow-down" id="icon_expression_{{expression.expression_id}}"></span>
                       </button>
+                      <button class="btn btn btn-outline-secondary" confirm-click-title="Edit Expression" ng-click="editExpression(expression.expression_id)">
+                        <span class="icon-edit"></span>
+                      </button>
                       <button class="btn btn btn-outline-danger" confirm-click-title="Delete Expression" confirm-click="Are you sure? This will delete the expression and all its resolved entities."
                         ng-click="deleteExpression(expression.expression_id)">
                         <span class="icon-trash"></span>
                       </button>
+
+                      
                     </span>
                   </div>
                   <div class="collapse" id="table_expression_{{expression.expression_id}}">
@@ -105,6 +110,9 @@
                           </td>
                           <td class="td-middle">{{ parameter.parameter_value }}</td>
                           <td class="col-md-1">
+                            <button class="btn btn btn-outline-secondary" confirm-click-title="Edit Response" ng-click="editResponse(parameter.parameter_id)">
+                              <span class="icon-edit"></span>
+                            </button>
                             <button class="btn btn btn-outline-danger" ng-click="deleteParameter(parameter.parameter_id)">
                               <span class="icon-trash"></span>
                             </button>
