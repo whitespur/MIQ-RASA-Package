@@ -182,8 +182,8 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
     console.log(expression_id);
     var span = $('#expression_' + expression_id);
     var body = $('body');
-    span.parent().parent().removeClass('doUpdate');
-    span.parent().find('> span:last-child .doUpdate').remove()
+    span.parent().parent().removeClass('active');
+    span.parent().find('> span:last-child .doUpdate').fadeOut()
     body.removeClass('editing');
     span.attr('contentEditable', 'false');
   }
