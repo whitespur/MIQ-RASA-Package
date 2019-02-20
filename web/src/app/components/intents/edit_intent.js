@@ -36,10 +36,10 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
   });
 
   $scope.removeTag = function(ev) {
-    console.log(ev.currentTarget);
-    console.log('<span>' + ev.currentTarget.attributes.nodeValue + '<div ng-click="removeTag(' + ev.currentTarget.attributes.nodeValue  + ')" class="close removeTag">x</div></span>');
+    console.log(ev);
+    console.log('<span>' + ev.currentTarget.attributes.nodeValue + '<div ng-click="removeTag($event)" class="close removeTag">x</div></span>');
     console.log($scope.tagsInNames);
-      $scope.tagsInNames = $scope.tagsInNames.replace('<span>' + ev.currentTarget.attributes.nodeValue + '<div ng-click="removeTag(' + ev.currentTarget.attributes.nodeValue  + ')" class="close removeTag">x</div></span>', '');
+      $scope.tagsInNames = $scope.tagsInNames.replace('<span>' + ev.currentTarget.attributes.nodeValue + '<div ng-click="removeTag($event)" class="close removeTag">x</div></span>', '');
   }
 
 
@@ -168,6 +168,11 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
     UniqueIntentEntities.query({intent_id: $scope.$routeParams.intent_id},function(data) {
       $scope.intentEntityList = data;
     });
+  }
+
+  $scope.editExpression(expression_id) {
+    var span = $('#expression_' + expression_id);
+    span.attr('contentEditable');
   }
 
   function loadParameters() {
