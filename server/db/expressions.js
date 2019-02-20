@@ -78,7 +78,7 @@ function removeExpression(req, res, next) {
 function updateExpression(req, res, next) {
   console.log("expressions.updateExpression");
   var expressionId = parseInt(req.params.expression_id);
-  db.any('update expressions set expression_highlighted_text = ${expression_highlighted_text} where expression_id = $2', req.body, expressionId)
+  db.any('update expressions set expression_highlighted_text = ${expression_highlighted_text} where expression_id = ${expression_id}', req.body)
     .then(function (result) {
       /* jshint ignore:start */
       res.status(200)
