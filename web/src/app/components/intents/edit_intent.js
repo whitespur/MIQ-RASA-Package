@@ -175,7 +175,7 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
     var body = $('body');
     span.parent().parent().addClass('active');
     body.addClass('editing');
-    span.attr('contentEditable', 'true');
+    span.attr('contentEditable', 'true').focus();
   }
 
   function loadParameters() {
