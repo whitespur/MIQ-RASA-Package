@@ -435,9 +435,15 @@ body.editing::before {
     height: 100%;
 }
 
-.list-group.active {
+.list-group.active, .list-group-item.active {
     z-index: 50000000;
     position: relative;
+}
+
+.editing .list-group-item.active {
+    background:#fff;
+    border-color:#fff;
+    color:#333;
 }
 
 .list-group-item > span:first-child {
