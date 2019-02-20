@@ -108,6 +108,23 @@ function getActionResponsesQuery(req, res, next) {
     });
 }
 
+function updateResponse(req, res, next) {
+  console.log("expressions.updateResponse");
+  db.any('update responses set response_text = ${response_text} where response_id = ${response_id}', req.body)
+    .then(function (result) {
+      /* jshint ignore:start */
+      res.status(200)
+        .json({
+          status: 'success',
+          message: 'Updated Response'
+        });
+      /* jshint ignore:end */
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
+
 module.exports = {
   getIntentResponses: getIntentResponses,
   removeResponse: removeResponse,
@@ -115,5 +132,6 @@ module.exports = {
   createActionResponse: createActionResponse,
   getRandomResponseForIntent:getRandomResponseForIntent,
   getActionResponses: getActionResponses,
-  getActionResponsesQuery: getActionResponsesQuery
+  getActionResponsesQuery: getActionResponsesQuery,
+  updateResponse: updateResponse
 };

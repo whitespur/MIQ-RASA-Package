@@ -166,8 +166,12 @@ app.factory('Responses', function($resource) {
 });
 //Reponse actions: create and delete
 app.factory('Response', function($resource) {
-  return $resource(api_endpoint_v2 + '/response/:response_id', {response_id:'@id'});
+  return $resource(api_endpoint_v2 + '/response/:response_id', {response_id:'@id'},
+  {
+      'update': { method:'PUT' }
+  });
 });
+
 app.factory('IntentResponse', function($resource) {
   return $resource(api_endpoint_v2 + '/rndmresponse');
 });

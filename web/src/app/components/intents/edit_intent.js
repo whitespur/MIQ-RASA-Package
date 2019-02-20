@@ -199,6 +199,18 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
    
   }
 
+  $scope.doUpdateResponse = function(expression_id) {
+    var span = $('#response_' + expression_id);
+    var body = $('body');
+    span.parent().removeClass('active');
+    body.removeClass('editing');
+    span.attr('contentEditable', 'false');
+    Response.update({response_id: response_id}, {response_id: response_id, response_text: span.text().trim()}).$promise.then(function() {
+      loadResponses();
+    });
+  }
+
+
   function loadParameters() {
     Parameters.query({intent_id: $scope.$routeParams.intent_id},function(data) {
         $scope.parameterList = data;

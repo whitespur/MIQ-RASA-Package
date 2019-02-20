@@ -121,6 +121,7 @@ router.post('/actionresponse', responses.createActionResponse);
 router.get('/response/:intent_id', responses.getIntentResponses);
 router.post('/response', responses.createIntentResponse);
 router.delete('/response/:response_id', responses.removeResponse);
+router.put('/response/:response_id', responses.updateResponse);
 
 router.get('/rndmresponse', responses.getRandomResponseForIntent);
 router.get('/action_responses', responses.getActionResponsesQuery);
