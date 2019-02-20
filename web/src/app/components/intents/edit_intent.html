@@ -89,8 +89,6 @@
                         ng-click="deleteExpression(expression.expression_id)">
                         <span class="icon-trash"></span>
                       </button>
-
-                      
                     </span>
                   </div>
                   <div class="collapse" id="table_expression_{{expression.expression_id}}">
@@ -112,9 +110,7 @@
                           </td>
                           <td class="td-middle">{{ parameter.parameter_value }}</td>
                           <td class="col-md-1">
-                            <button class="btn btn btn-outline-secondary" confirm-click-title="Edit Response" ng-click="editResponse(parameter.parameter_id)">
-                              <span class="icon-pencil"></span>
-                            </button>
+                              
                             <button class="btn btn btn-outline-danger" ng-click="deleteParameter(parameter.parameter_id)">
                               <span class="icon-trash"></span>
                             </button>
@@ -166,8 +162,11 @@
                     <textarea ng-model="formData.response_text" class="form-control ui-intent-box" id="response_text" placeholder="Enter a response text and press enter" ng-mouseup="showTextTaskbar($event)" ng-keyup="$event.keyCode == 13 && addBreak(this)" ></textarea><input type="button" class="ui-intent-save" ng-click="saveNewResponse($event)" value="Add">
                     <ul class="list-group ui-intent-list" ng-hide="responses.length == 0" style="margin-top: 20px;">
                       <li class="list-group-item" ng-repeat="response in responses track by response.response_id">
-                        <span ng-bind-html="response.response_text | trusted"></span>
+                        <span id="response_{{response.response_id}}" ng-bind-html="response.response_text | trusted"></span>
                         <span class="float-right">
+                          <button class="btn btn btn-outline-outline" confirm-click-title="Edit Response" confirm-click="Are you sure? This will enable edit mode on the element" ng-click="editResponse(response.response_id)">
+                            <span class="icon-pencil"></span>
+                          </button>
                           <button type="button" class="btn btn btn-outline-danger" confirm-click-title="Delete Response" confirm-click="Are you sure? This will delete the response." ng-click="deleteResponse(response.response_id)">
                             <span class="icon-trash"></span>
                           </button>
