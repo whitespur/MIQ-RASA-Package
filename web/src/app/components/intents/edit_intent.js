@@ -176,6 +176,7 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
     span.parent().parent().addClass('active');
     body.addClass('editing');
     span.attr('contentEditable', 'true').focus();
+   
   }
 
   $scope.doUpdateExpression = function(expression_id) {
@@ -184,6 +185,9 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
     span.parent().parent().removeClass('active');
     body.removeClass('editing');
     span.attr('contentEditable', 'false');
+    Expression.update({expression_id: expression_id}, {expression_id: expression_id, expression_highlighted_text: span.text().trim()}).$promise.then(function() {
+      loadExpressions();
+    });
   }
 
   function loadParameters() {
