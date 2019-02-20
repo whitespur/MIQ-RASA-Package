@@ -487,8 +487,8 @@ div.list-group.ng-scope > div.list-group-item > span.float-right > button.btn.bt
 }
 
 div.list-group.ng-scope.active > div.list-group-item > span.float-right > button.btn.btn.btn-outline-success, div.list-group-item.active > span.float-right > button.btn.btn.btn-outline-success {
-    visibility: visible;
-    opacity:1;
+    visibility: visible !important;
+    opacity:1 !important;
 }
 
 div.list-group.ng-scope.active > div.list-group-item > span.float-right > button.btn.btn.btn-outline-success > span {
