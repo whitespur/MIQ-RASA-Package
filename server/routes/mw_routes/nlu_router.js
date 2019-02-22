@@ -116,23 +116,23 @@ function FinalizeRequest(req, res, modelName, agentObj, second) {
     uri: global.rasanluendpoint + "/parse",
     body: JSON.stringify(req.body)
   }, function (error, response, body) {
-    if(error){
-      console.log(error);
-      sendOutput(500, res, '{"error" : ' + error + '}');
+    if(body === undefined) {
+      return false;
     }
-    try {
-      console.log("rasa_response:+++ " + body);
-      updateCacheWithRasaNluResponse(JSON.parse(body), cache_key);
-      console.log(body);
-      console.log(modelName);
-      console.log(req);
-      console.log(projectName);
-      console.log(res);
-      updateAndSendRasaResponse(req, cache_key, JSON.parse(body), modelName, projectName, res);
-    } catch (err) {
-      console.log(err);
-      sendOutput(500, res, '{"error" : ' + err + '}');
-    }
+      if(error){
+        console.log(error);
+        sendOutput(500, res, '{"error" : ' + error + '}');
+      }
+      try {
+        console.log("rasa_response:+++ " + body);
+        updateCacheWithRasaNluResponse(JSON.parse(body), cache_key);
+        updateAndSendRasaResponse(req, cache_key, JSON.parse(body), modelName, projectName, res);
+      }
+      } catch (err) {
+        console.log(err);
+        sendOutput(500, res, '{"error" : ' + err + '}');
+      }
+   
   });
 }
 
