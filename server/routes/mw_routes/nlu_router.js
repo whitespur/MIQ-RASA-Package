@@ -127,7 +127,6 @@ function FinalizeRequest(req, res, modelName, agentObj, second) {
         console.log("rasa_response:+++ " + body);
         updateCacheWithRasaNluResponse(JSON.parse(body), cache_key);
         updateAndSendRasaResponse(req, cache_key, JSON.parse(body), modelName, projectName, res);
-      }
       } catch (err) {
         console.log(err);
         sendOutput(500, res, '{"error" : ' + err + '}');
