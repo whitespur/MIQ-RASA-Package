@@ -110,6 +110,7 @@ function FinalizeRequest(req, res, modelName, agentObj, second) {
   var cache_key = req.jwt.username + "_" + modelName + "_" + Date.now();
   logRequest(req, "parse", {project:projectName, model: modelName, intent: '', query: req.body.q});
   createInitialCacheRequest(req,cache_key,agentObj);
+  console.log('Jeg viser body her:: ' + req.body);
   console.log(req.body);
   request({
     method: "POST",
