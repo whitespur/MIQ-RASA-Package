@@ -132,7 +132,7 @@ function FinalizeRequest(req, res, modelName, agentObj, second) {
         sendOutput(500, res, '{"error" : ' + err + '}');
       }
   });
-
+}
 // ----------------------------------------------------------
 // Utility functions for middleware
 // ----------------------------------------------------------
