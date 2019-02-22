@@ -118,6 +118,7 @@ function FinalizeRequest(req, res, modelName, agentObj, second) {
     body: JSON.stringify(req.body)
   }, function (error, response, body) {
     if(body === undefined) {
+      console.log(body);
       return false;
     }
       if(error){
