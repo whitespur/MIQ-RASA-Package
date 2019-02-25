@@ -96,6 +96,7 @@ function parseRequest(req, res, next, agentObj) {
       .then(function (returnData){
         console.log(returnData);
         modelName = returnData.model_name;
+        console.log(modelName);
         
         FinalizeRequest(req, res, modelName,obj, agentObj);
       },
@@ -118,7 +119,6 @@ function FinalizeRequest(req, res, modelName, agentObj, second) {
     body: JSON.stringify(req.body)
   }, function (error, response, body) {
     if(body === undefined) {
-      console.log(body);
       return false;
     }
       if(error){
