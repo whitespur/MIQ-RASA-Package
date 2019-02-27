@@ -107,8 +107,6 @@ function parseRequest(req, res, next, agentObj) {
 }
 
 function FinalizeRequest(req, res, modelName, agentObj, second) {
-  mail.sendMail('mbs@miq.ai', 'RASA er gået ned.', 'Rasa er lige gået ned')
-
   var projectName = req.body.project;
   req.body.model = modelName;
   var cache_key = req.jwt.username + "_" + modelName + "_" + Date.now();
