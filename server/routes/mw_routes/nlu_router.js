@@ -1,5 +1,6 @@
 //All NLU specific functions and routes.
 var request = require('request');
+var mail = require('../../mails/mail');
 const db = require('../../db/db')
 const NodeCache = require( "node-cache" );
 //https://github.com/mpneuried/nodecache
@@ -106,6 +107,8 @@ function parseRequest(req, res, next, agentObj) {
 }
 
 function FinalizeRequest(req, res, modelName, agentObj, second) {
+  mail.sendMail('mbs@miq.ai', 'RASA er gået ned.', 'Rasa er lige gået ned')
+
   var projectName = req.body.project;
   req.body.model = modelName;
   var cache_key = req.jwt.username + "_" + modelName + "_" + Date.now();
@@ -117,6 +120,8 @@ function FinalizeRequest(req, res, modelName, agentObj, second) {
     body: JSON.stringify(req.body)
   }, function (error, response, body) {
     if(body === undefined) {
+      mail.sendMail('mbs@miq.ai', 'RASA er gået ned.', 'Rasa er lige gået ned')
+      mail.sendMail('dennis@miq.ai', 'RASA er gået ned.', 'Rasa er lige gået ned');
       return false;
     }
       if(error){
