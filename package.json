@@ -28,6 +28,7 @@
     "ng-tags-input": "^3.2.0",
     "ngstorage": "^0.3.11",
     "node-cache": "^4.1.1",
+    "nodemailer": "^5.1.1",
     "pg-promise": "^5.9.5",
     "popper.js": "latest",
     "request": "^2.88.0",
