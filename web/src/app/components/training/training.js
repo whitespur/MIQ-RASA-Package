@@ -93,7 +93,6 @@ function TrainingController($scope, $rootScope, $interval, $http, Rasa_Status, A
             IntentExpressions.query({intent_ids: intentIds}, function(expressions) {
               var expressionIds = expressions.map(function(item) { return item['expression_id']; }).toString();
               if (expressionIds.length > 0) {
-                ExpressionParameters.query({expression_ids: expressionIds}, function(params) {
                   $http({method: 'POST', url: api_endpoint_v2 + '/expression_parameters'}).
                     then(function(params) {
                       if(params.length >0){
@@ -116,10 +115,6 @@ function TrainingController($scope, $rootScope, $interval, $http, Rasa_Status, A
                     }, function(error) {
                       console.log(error);
                   });
-                }, function(error) {
-                  $scope.generateError = error;
-                  $scope.exportdata = undefined;
-                });
               } else {
                 generateData(regex, intents, expressions);
               }
