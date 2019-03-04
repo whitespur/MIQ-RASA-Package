@@ -197,6 +197,7 @@ $scope.saveIntentResponseBlocks = function(e) {
   notifyText.remove();
   textBlockContainer.remove();
   $scope.is_response_focus = false;
+  IntentTextBlockContainer = '';
 }
 
   $scope.updateIntentNameAndWebhook = function(intent) {
