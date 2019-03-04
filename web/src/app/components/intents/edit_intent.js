@@ -188,7 +188,7 @@ $scope.saveIntentResponseBlocks = function(e) {
       html += $(this).text() + '</block>';
     }
   })
-  formData.response_text = html;
+  this.formData.response_text = html;
   IntentTextBlockContainer.fadeOut(150);
 
   el.attr('disabled', false);
