@@ -145,7 +145,7 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
 
 var saveIntentBtn = $('.ui-intent-save');
 var IntentTextBlockContainer = '';
-$('#response_text').on('focus', function() {
+/* $('#response_text').on('focus', function() {
   var el = $(this);
   var value = el.val();
   var parent = el.parent();
@@ -169,7 +169,7 @@ $('#response_text').on('focus', function() {
     }
     parent.find('.text-block-container').append('<div class="single-block"><div class="innerTaskbar"><a onclick="$(this).parent().parent().remove()">X</a></div><textarea ng-mouseup="showTextTaskbar($event)" >' + v + '</textarea></div>');
   })
-});
+}); */
 
 $scope.addTextSection = function(e) {
   IntentTextBlockContainer.append('<div class="single-block"><div class="innerTaskbar"><a onclick="$(this).parent().parent().remove()">X</a></div><textarea ng-mouseup="showTextTaskbar($event)" >' + $scope.default_textarea_text + '</textarea></div>')
