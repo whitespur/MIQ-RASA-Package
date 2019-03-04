@@ -165,20 +165,19 @@ $('#response_text').on('focus', function() {
     if(v == '') {
       v = 'Insert your text block data here';
     }
-    parent.find('.text-block-container').append('<div class="single-block"><div class="innerTaskbar"><a ng-click="removeElement()">X</a></div><textarea>' + v + '</textarea></div>');
+    parent.find('.text-block-container').append('<div class="single-block"><div class="innerTaskbar"><a class="removeElement">X</a></div><textarea>' + v + '</textarea></div>');
   })
 });
 
 $scope.addTextSection = function(e) {
-  IntentTextBlockContainer.append('<div class="single-block"><div class="innerTaskbar"><a ng-click="removeElement()">X</a></div><textarea>Insert your text block data here</textarea></div>')
+  IntentTextBlockContainer.append('<div class="single-block"><div class="innerTaskbar"><a class="removeElement">X</a></div><textarea>Insert your text block data here</textarea></div>')
   IntentTextBlockContainer.find('.single-block:last-child').trigger('click');
 }
 
-$scope.removeElement = function(e) {
-  console.log(e.currentTarget);
-  var el = $(e.currentTarget);
+$('.removeElement').on('click', function(e) {
+  var el = $(this);
   el.parent().parent().remove();
-}
+});
 
   $scope.updateIntentNameAndWebhook = function(intent) {
     Intent.update({ intent_id:intent.intent_id }, intent).$promise.then(function() {
