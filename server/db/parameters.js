@@ -27,8 +27,7 @@ function getIntentParameters(req, res, next) {
 
 function getExpressionParametersQuery(req, res, next) {
   console.log("parameters.getExpressionParametersQuery");
-  console.log(req.body);
-  var expressionIds = req.params.expression_ids;
+  var expressionIds = req.body.expression_ids;
   var sql = 'select * from expression_parameters where expression_id in (' + expressionIds + ')';
   db.any(sql)
     .then(function (data) {
