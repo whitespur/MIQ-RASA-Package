@@ -142,11 +142,12 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
   }
 
 $('#response_text').on('focus', function() {
-  var value = $(this).val();
-  var parent = $(this).parent();
+  var el = $(this);
+  var value = el.val();
+  var parent = el.parent();
   $scope.is_response_focus = true;
-  $(this).attr('disabled', true);
-  $('<p>All blocks symbolises a text section in the chatbot.</p>').insertBefore($(this));
+  el.attr('disabled', true);
+  $('<p>All blocks symbolises a text section in the chatbot.</p>').insertBefore(el);
 
   var blocks = value.split('</block>');
   if(parent.find('.text-block-container').length < 1) {
