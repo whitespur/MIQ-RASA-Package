@@ -267,7 +267,6 @@ $scope.saveIntentResponseBlocks = function(e) {
     span.parent().addClass('active');
     body.addClass('editing');
     span.attr('contentEditable', 'true').focus();
-    turnToInput(span);
    
   }
 
@@ -277,7 +276,7 @@ $scope.saveIntentResponseBlocks = function(e) {
     span.parent().removeClass('active');
     body.removeClass('editing');
     span.attr('contentEditable', 'false');
-    Response.update({response_id: response_id}, {response_id: response_id, response_text: span.text().trim()}).$promise.then(function() {
+    Response.update({response_id: response_id}, {response_id: response_id, response_text: span.html().trim()}).$promise.then(function() {
       loadResponses();
     });
   }
