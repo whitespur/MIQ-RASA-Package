@@ -246,7 +246,7 @@ $scope.saveIntentResponseBlocks = function(e) {
 
   function turnToInput(el) {
     var text = el.html();
-    el.replaceWith('<textarea>' + text + '</textarea>');
+    el.replaceWith('<textarea style="width:100%";>' + text + '</textarea>');
   }
 
   $scope.doUpdateExpression = function(expression_id) {
