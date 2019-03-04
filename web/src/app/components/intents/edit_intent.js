@@ -152,7 +152,7 @@ $('#response_text').on('focus', function() {
 
   var blocks = value.split('</block>');
   if(parent.find('.text-block-container').length < 1) {
-    parent.append('<div class="text-block-container"></div>');
+    $('<div class="text-block-container"></div>').insertBefore(el);
   } else {
     parent.find('.text-block-container').find('div').remove();
   }
