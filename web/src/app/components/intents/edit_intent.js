@@ -122,6 +122,7 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
   }
 
   $scope.showTextTaskbar = function(ev) {
+    console.log('go');
     var start = ev.currentTarget.selectionStart;
     var end   = ev.currentTarget.selectionEnd;
     var text = ev.currentTarget.value.substr(start, end - start);
