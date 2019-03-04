@@ -184,8 +184,8 @@ $scope.saveIntentResponseBlocks = function(e) {
   var textBlockContainer =  el.parent().parent().find('.text-block-container');
   var textbar = $('#response_text');
   blocks.each(function(i,v) {
-    if($(this).text() !== $scope.default_textarea_text) {
-      html += $(this).text() + '</block>';
+    if($(this).find('textarea').text() !== $scope.default_textarea_text) {
+      html += $(this).find('textarea').text() + '</block>';
     }
   })
   this.formData.response_text = html;
