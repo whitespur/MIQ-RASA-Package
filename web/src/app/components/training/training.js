@@ -94,6 +94,7 @@ function TrainingController($scope, $rootScope, $interval, $http, Rasa_Status, A
               var expressionIds = expressions.map(function(item) { return item['expression_id']; }).toString();
               if (expressionIds.length > 0) {
                 ExpressionParameters.query({expression_ids: expressionIds}, function(params) {
+                  console.log(params);
                   generateData(regex, intents, expressions, params, synonyms);
                   /* WIP 2.3 - Update to latest json model for Rasa */
                   var entityIds = params.map(function(item) { return item['entity_id']; }).toString();
