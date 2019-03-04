@@ -148,7 +148,7 @@ $('#response_text').on('focus', function() {
   $scope.is_response_focus = true;
   el.attr('disabled', true);
   el.fadeOut(150);
-  $('<p>All blocks symbolises a text section in the chatbot.</p>').insertBefore(el);
+  $('<p class="small-notify-text">All blocks symbolises a text section in the chatbot.</p>').insertBefore(el);
 
   var blocks = value.split('</block>');
   if(parent.find('.text-block-container').length < 1) {
