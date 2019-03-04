@@ -168,8 +168,8 @@ $('#response_text').on('focus', function() {
   })
 });
 
-$scope.addTextSection = function(event, el) {
-  var el = $(el);
+$scope.addTextSection = function(e) {
+  var el = $(e.target);
   console.log(el);
   var container = el.parent().parent();
   var block_container = container.find('.text-block-container');
