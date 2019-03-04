@@ -176,8 +176,25 @@ $scope.addTextSection = function(e) {
 }
 
 $scope.saveIntentResponseBlocks = function(e) {
-  console.log(e);
-  console.log('hello');
+  var el = $(e.currentTarget);
+  var parent = el.parent();
+  var blocks = el.parent().parent().find('.single-block');
+  var html = '';
+  var notifyText = $('.small-notify-text');
+  var textBlockContainer =  el.parent().parent().find('.text-block-container');
+
+  blocks.each(function(i,v) {
+    if($(this).text() !== $scope.default_textarea_text) {
+      html += $(this).text() + '</block>';
+    }
+  })
+  formData.response_text = html;
+  IntentTextBlockContainer.fadeOut(150);
+
+  el.attr('disabled', false);
+  el.fadeIn(150);
+  saveIntentBtn.fadeIn(150);
+  $scope.is_response_focus = false;
 }
 
   $scope.updateIntentNameAndWebhook = function(intent) {
