@@ -500,12 +500,14 @@ div.list-group.ng-scope > div.list-group-item > span.float-right > button.btn.bt
     background: #f5f5f5;
     border: 1px solid #ccc;
     padding: 10px;
+    flex-wrap: wrap;
 }
 
 .text-block-container .single-block {
     float: left;
     width: 33.33%;
     flex: 1;
+    flex-basis: 33.33%;
     max-width: 33.33%;
 }
 
