@@ -246,8 +246,7 @@ $scope.saveIntentResponseBlocks = function(e) {
 
   function turnToInput(el) {
     var text = el.html();
-    el.html('');
-    el.append('<textarea>' + text + '</textarea>');
+    el.replaceWith('<textarea>' + text + '</textarea>');
   }
 
   $scope.doUpdateExpression = function(expression_id) {
@@ -267,7 +266,7 @@ $scope.saveIntentResponseBlocks = function(e) {
     span.parent().addClass('active');
     body.addClass('editing');
     span.attr('contentEditable', 'true').focus();
-   
+    turnToInput(span);
   }
 
   $scope.doUpdateResponse = function(response_id) {
