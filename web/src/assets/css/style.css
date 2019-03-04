@@ -509,7 +509,7 @@ div.list-group.ng-scope > div.list-group-item > span.float-right > button.btn.bt
     max-width: 33.33%;
 }
 
-.text-block-container .single-block:not(:nth-child(3n3)) {
+.text-block-container .single-block:not(:nth-child(3n+3)) {
     margin-right: 10px;
 }
 
