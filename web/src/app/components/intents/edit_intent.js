@@ -174,7 +174,7 @@ $scope.addTextSection = function(e) {
   IntentTextBlockContainer.find('.single-block:last-child').trigger('click');
 }
 
-function removeElement(e) {
+$scope.removeElement = function(e) {
   console.log(e.currentTarget);
   var el = $(e.currentTarget);
   el.parent().parent().remove();
