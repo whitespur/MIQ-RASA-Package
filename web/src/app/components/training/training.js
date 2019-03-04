@@ -90,7 +90,7 @@ function TrainingController($scope, $rootScope, $interval, $http, Rasa_Status, A
         AllSynonymVariants.query(function(synonyms) { //WIP 2.3
           var intentIds = intents.map(function(item) { return item['intent_id']; }).toString();
           if (intentIds.length > 0) {
-            IntentExpressions.post({intent_ids: intentIds}, function(expressions) {
+            IntentExpressions.query({intent_ids: intentIds}, function(expressions) {
               var expressionIds = expressions.map(function(item) { return item['expression_id']; }).toString();
               if (expressionIds.length > 0) {
                 ExpressionParameters.query({expression_ids: expressionIds}, function(params) {
