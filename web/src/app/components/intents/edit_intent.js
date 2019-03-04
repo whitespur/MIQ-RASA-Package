@@ -201,9 +201,6 @@ $scope.saveIntentResponseBlocks = function(e) {
     }
   })
 
-
-
-  
   IntentTextBlockContainer.fadeOut(150);
   $('[ng-show="is_response_focus"]').addClass('ng-hide');
   textbar.attr('disabled', false);
@@ -215,7 +212,8 @@ $scope.saveIntentResponseBlocks = function(e) {
   IntentTextBlockContainer = '';
   if($scope.updating !== false) {
     console.log($scope.updating)
-    $scope.updating.html(html);
+    console.log(html);
+    $($scope.updating[0]).html(html);
   } else {
     this.formData.response_text = html;
   }
