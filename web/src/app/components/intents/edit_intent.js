@@ -168,7 +168,7 @@ $('#response_text').on('focus', function() {
   })
 });
 
-$scope.addTextSection = function(el) {
+$scope.addTextSection = function(event, el) {
   var el = $(el);
   console.log(el);
   var container = el.parent().parent();
