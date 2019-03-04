@@ -182,7 +182,7 @@ $scope.saveIntentResponseBlocks = function(e) {
   var html = '';
   var notifyText = $('.small-notify-text');
   var textBlockContainer =  el.parent().parent().find('.text-block-container');
-
+  var textbar = $('#response_text');
   blocks.each(function(i,v) {
     if($(this).text() !== $scope.default_textarea_text) {
       html += $(this).text() + '</block>';
@@ -191,8 +191,8 @@ $scope.saveIntentResponseBlocks = function(e) {
   this.formData.response_text = html;
   IntentTextBlockContainer.fadeOut(150);
 
-  el.attr('disabled', false);
-  el.fadeIn(150);
+  textbar.attr('disabled', false);
+  textbar.fadeIn(150);
   saveIntentBtn.fadeIn(150);
   $scope.is_response_focus = false;
 }
