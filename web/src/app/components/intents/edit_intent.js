@@ -7,6 +7,8 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
       $scope.agent = data;
   });
 
+  $scope.updating = false;
+
   $scope.active_tag = '0';
   $scope.last_tag = '';
   $scope.tagsInNames = '';
@@ -280,7 +282,8 @@ $scope.saveIntentResponseBlocks = function(e) {
 
   $scope.editResponse = function(expression_id) {
     var span = $('#response_' + expression_id);
-    startBlockView(el, span.html());
+    $scope.updating = span;
+    startBlockView($('#response_text'), span.html());
   }
 
   $scope.doUpdateResponse = function(response_id) {
