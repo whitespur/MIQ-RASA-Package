@@ -500,6 +500,7 @@ div.list-group.ng-scope > div.list-group-item > span.float-right > button.btn.bt
     background: #f5f5f5;
     border: 1px solid #ccc;
     padding: 10px;
+    padding-bottom:0px;
     flex-wrap: wrap;
 }
 
@@ -509,6 +510,7 @@ div.list-group.ng-scope > div.list-group-item > span.float-right > button.btn.bt
     flex: 1;
     flex-basis: calc(33.33% - 6.66px);
     max-width: calc(33.33% - 6.66px);
+    margin-bottom:10px;
 }
 
 .text-block-container .single-block:not(:nth-child(3n+3)) {
