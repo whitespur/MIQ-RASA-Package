@@ -196,7 +196,7 @@ $scope.saveIntentResponseBlocks = function(e) {
   saveIntentBtn.fadeIn(150);
   notifyText.remove();
   textBlockContainer.remove();
-  $scope.is_response_focus = false;
+  $scope.is_response_focus = null;
   IntentTextBlockContainer = '';
 }
 
