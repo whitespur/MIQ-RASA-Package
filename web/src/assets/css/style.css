@@ -512,7 +512,7 @@ div.list-group.ng-scope > div.list-group-item > span.float-right > button.btn.bt
     color: #fff;
 }
 
-.single-block .innerTaskbar:last-child {
+.single-block .innerTaskbar a:last-child {
     float: right;
     padding-right: 7px;
     font-size: 13px;
