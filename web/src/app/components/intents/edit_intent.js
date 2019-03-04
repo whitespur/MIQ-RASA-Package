@@ -1,3 +1,5 @@
+import { EALREADY } from "constants";
+
 angular
 .module('app')
 .controller('EditIntentController', EditIntentController)
@@ -242,7 +244,13 @@ $scope.saveIntentResponseBlocks = function(e) {
     span.parent().parent().addClass('active');
     body.addClass('editing');
     span.attr('contentEditable', 'true').focus();
-   
+    turnToInput(span);
+  }
+
+  function turnToInput(el) {
+    var text = el.html();
+    el.html('');
+    el.append('<textarea>' + text + '</textarea>');
   }
 
   $scope.doUpdateExpression = function(expression_id) {
