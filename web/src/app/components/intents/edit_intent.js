@@ -12,7 +12,7 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
   $scope.tagsInNames = '';
   $scope.new_tag = '';
   $scope.default_textarea_text = 'Insert your text block data here';
-
+  $scope.is_response_focus = false;
 
   AgentEntities.query({agent_id: $scope.$routeParams.agent_id},function(data) {
       $scope.entityList = data;
@@ -196,7 +196,7 @@ $scope.saveIntentResponseBlocks = function(e) {
   saveIntentBtn.fadeIn(150);
   notifyText.remove();
   textBlockContainer.remove();
-  $scope.is_response_focus = null;
+  $scope.is_response_focus = false;
   IntentTextBlockContainer = '';
 }
 
