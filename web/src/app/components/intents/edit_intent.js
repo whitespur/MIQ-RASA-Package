@@ -242,7 +242,6 @@ $scope.saveIntentResponseBlocks = function(e) {
     span.parent().parent().addClass('active');
     body.addClass('editing');
     span.attr('contentEditable', 'true').focus();
-    turnToInput(span);
   }
 
   function turnToInput(el) {
@@ -268,6 +267,7 @@ $scope.saveIntentResponseBlocks = function(e) {
     span.parent().addClass('active');
     body.addClass('editing');
     span.attr('contentEditable', 'true').focus();
+    turnToInput(span);
    
   }
 
