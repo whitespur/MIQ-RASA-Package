@@ -153,7 +153,7 @@ $('#response_text').on('focus', function() {
   el.fadeOut(150);
   saveIntentBtn.fadeOut(150);
   $('<p class="small-notify-text">All blocks symbolises a text section in the chatbot.</p>').insertBefore(el);
-  $('[ng-show="is_response_focus"]').show().removeClass('ng-hide');
+  $('[ng-show="is_response_focus"]').removeClass('ng-hide');
   var blocks = value.split('</block>');
   if(IntentTextBlockContainer == '') {
     $('<div class="text-block-container"></div>').insertBefore(el);
