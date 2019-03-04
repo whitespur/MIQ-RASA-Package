@@ -194,15 +194,18 @@ $scope.saveIntentResponseBlocks = function(e) {
   var notifyText = $('.small-notify-text');
   var textBlockContainer =  el.parent().parent().find('.text-block-container');
   var textbar = $('#response_text');
+  
   blocks.each(function(i,v) {
     if($(this).find('textarea').text() !== $scope.default_textarea_text) {
       html += $(this).find('textarea').text() + '</block>';
     }
   })
-  this.formData.response_text = html;
+
+
+
+  
   IntentTextBlockContainer.fadeOut(150);
   $('[ng-show="is_response_focus"]').addClass('ng-hide');
-
   textbar.attr('disabled', false);
   textbar.fadeIn(150);
   saveIntentBtn.fadeIn(150);
@@ -210,6 +213,11 @@ $scope.saveIntentResponseBlocks = function(e) {
   textBlockContainer.remove();
   $scope.is_response_focus = false;
   IntentTextBlockContainer = '';
+  if($scope.updating !== false) {
+    $scope.updating.html(html);
+  } else {
+    this.formData.response_text = html;
+  }
 }
 
   $scope.updateIntentNameAndWebhook = function(intent) {
