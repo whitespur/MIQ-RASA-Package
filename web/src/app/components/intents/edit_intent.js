@@ -170,6 +170,7 @@ $('#response_text').on('focus', function() {
 
 $scope.addTextSection = function(el) {
   var el = $(el);
+  console.log('adding');
   var container = el.parent().parent();
   var block_container = container.find('.text-block-container');
   block_container.append('<div class="single-block"><textarea>Insert your text block data here</textarea></div>')
