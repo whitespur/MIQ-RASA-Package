@@ -194,6 +194,8 @@ $scope.saveIntentResponseBlocks = function(e) {
   textbar.attr('disabled', false);
   textbar.fadeIn(150);
   saveIntentBtn.fadeIn(150);
+  notifyText.remove();
+  textBlockContainer.remove();
   $scope.is_response_focus = false;
 }
 
