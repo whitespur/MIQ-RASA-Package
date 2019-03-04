@@ -165,17 +165,17 @@ $('#response_text').on('focus', function() {
     if(v == '') {
       v = 'Insert your text block data here';
     }
-    parent.find('.text-block-container').append('<div class="single-block"><div class="innerTaskbar"><a>X</a></div><textarea>' + v + '</textarea></div>');
+    parent.find('.text-block-container').append('<div class="single-block"><div class="innerTaskbar"><a ng-click="removeElement()">X</a></div><textarea>' + v + '</textarea></div>');
   })
 });
 
 $scope.addTextSection = function(e) {
-  IntentTextBlockContainer.append('<div class="single-block"><div class="innerTaskbar"><a onclick="removeElement(this)">X</a></div><textarea>Insert your text block data here</textarea></div>')
+  IntentTextBlockContainer.append('<div class="single-block"><div class="innerTaskbar"><a ng-click="removeElement()">X</a></div><textarea>Insert your text block data here</textarea></div>')
   IntentTextBlockContainer.find('.single-block:last-child').trigger('click');
 }
 
-function removeElement(el) {
-  var el = $(el);
+function removeElement(e) {
+  var el = $(e.target);
   el.parent().parent().remove();
 }
 
