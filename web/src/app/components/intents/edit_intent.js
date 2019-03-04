@@ -247,11 +247,12 @@ $scope.saveIntentResponseBlocks = function(e) {
   function turnToInput(el) {
     el.hide();
     var text = el.html();
-    $('<textarea class="editing_textarea" style="width:100%;" val="' + text + '"></textarea>').insertAfter(el);
+    $('<textarea class="editing_textarea" style="width:100%;"></textarea>').insertAfter(el);
+    $('.editing_textarea').val(text);
   }
 
   function turnToSpan(el) {
-    var text = $('.editing_textarea').html();
+    var text = $('.editing_textarea').val();
     $('.editing_textarea').remove();
     return text;
   }
