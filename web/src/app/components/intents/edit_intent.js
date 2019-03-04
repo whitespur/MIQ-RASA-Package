@@ -175,7 +175,8 @@ $scope.addTextSection = function(e) {
 }
 
 function removeElement(e) {
-  var el = $(e.target);
+  console.log(e.currentTarget);
+  var el = $(e.currentTarget);
   el.parent().parent().remove();
 }
 
