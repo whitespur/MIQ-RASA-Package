@@ -192,7 +192,6 @@ $scope.saveIntentResponseBlocks = function(e) {
   var html = '';
   var notifyText = $('.small-notify-text');
   var textbar = $('#response_text');
-  
   blocks.each(function(i,v) {
     if($(this).find('textarea').text() !== $scope.default_textarea_text) {
       html += $(this).find('textarea').text() + '</block>';
@@ -210,7 +209,7 @@ $scope.saveIntentResponseBlocks = function(e) {
   IntentTextBlockContainer = '';
   if($scope.updating !== false) {
     console.log($scope.updating)
-    console.log(html);
+    console.log(el);
     $($scope.updating[0]).html(html);
   } else {
     this.formData.response_text = html;
