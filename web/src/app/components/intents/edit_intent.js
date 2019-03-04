@@ -190,6 +190,7 @@ $scope.saveIntentResponseBlocks = function(e) {
   })
   this.formData.response_text = html;
   IntentTextBlockContainer.fadeOut(150);
+  $('[ng-show="is_response_focus"]').addClass('ng-hide');
 
   textbar.attr('disabled', false);
   textbar.fadeIn(150);
