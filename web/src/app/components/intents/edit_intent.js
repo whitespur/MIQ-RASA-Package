@@ -263,7 +263,6 @@ $scope.saveIntentResponseBlocks = function(e) {
     span.parent().parent().removeClass('active');
     body.removeClass('editing');
     span.attr('contentEditable', 'false');
-    turnToSpan(span);
     Expression.update({expression_id: expression_id}, {expression_id: expression_id, expression_highlighted_text: span.text().trim()}).$promise.then(function() {
       loadExpressions();
     });
@@ -284,6 +283,8 @@ $scope.saveIntentResponseBlocks = function(e) {
     span.parent().removeClass('active');
     body.removeClass('editing');
     span.attr('contentEditable', 'false');
+    turnToSpan(span);
+
     Response.update({response_id: response_id}, {response_id: response_id, response_text: span.html().trim()}).$promise.then(function() {
       loadResponses();
     });
