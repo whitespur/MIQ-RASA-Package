@@ -75,7 +75,7 @@ router.post('/expressions', expressions.createIntentExpression);
 router.delete('/expressions/:expression_id', expressions.removeExpression);
 router.put('/expressions/:expression_id', expressions.updateExpression);
 
-router.get('/expression_parameters', parameters.getExpressionParametersQuery); //Used for training
+router.post('/expression_parameters', parameters.getExpressionParametersQuery); //Used for training
 
 router.get('/expresions/:expression_id/parameters', parameters.getExpressionParameters);
 router.get('/parameters/:parameter_id', parameters.getSingleParameter);
