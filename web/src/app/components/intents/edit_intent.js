@@ -254,7 +254,7 @@ $scope.saveIntentResponseBlocks = function(e) {
     console.log('go');
     var text = $('.editing_textarea').html();
     $('.editing_textarea').remove();
-    el.html(text).show();
+    el.text(text).show();
   }
 
   $scope.doUpdateExpression = function(expression_id) {
