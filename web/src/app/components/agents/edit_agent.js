@@ -148,7 +148,6 @@ function EditAgentController($rootScope,$scope, Agent, Intents, Entities,AgentEn
   $scope.searchField = function() {
     Intents.query({agent_id:$scope.$routeParams.agent_id , search: $scope.formData.searchText}, function(data) {
       $scope.intentList = data[0];
-      console.log(data);
     });
   }
 
