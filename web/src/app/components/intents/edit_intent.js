@@ -187,7 +187,7 @@ $scope.addTextSection = function(e) {
 }
 
 $scope.saveIntentResponseBlocks = function(e) {
-  var el = $(e.currentTarget);
+  var el = $('.text-block-container');
   var parent = el.parent();
   var blocks = el.parent().parent().find('.single-block');
   var html = '';
