@@ -253,6 +253,7 @@ $scope.saveIntentResponseBlocks = function(e) {
 
   function turnToSpan(el) {
     var text = $('.editing_textarea').val();
+    console.log(text);
     $('.editing_textarea').remove();
     el.text(text);
     return text;
