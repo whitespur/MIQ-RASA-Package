@@ -93,28 +93,25 @@ function TrainingController($scope, $rootScope, $interval, $http, Rasa_Status, A
             IntentExpressions.query({intent_ids: intentIds}, function(expressions) {
               var expressionIds = expressions.map(function(item) { return item['expression_id']; }).toString();
               if (expressionIds.length > 0) {
-                  $http({method: 'POST', url: api_endpoint_v2 + '/expression_parameters', params: expressionIds}).
-                    then(function(params) {
-                      if(params.length >0){
-                        console.log(params);
-                        console.log('hello');
-                        generateData(regex, intents, expressions, params, synonyms);
-                        /* WIP 2.3 - Update to latest json model for Rasa */
-                        var entityIds = params.map(function(item) { return item['entity_id']; }).toString();
-                        if (entityIds.length > 0) {
-                          EntitySynonymVariantsByEntity.query({entity_ids: entityIds}, function(entitysynonyms) {
-                            generateData(regex, intents, expressions, params, entitysynonyms)
-                          }, function(error) {
-                            $scope.generateError = error;
-                            $scope.exportdata = undefined;
-                          });
-                        } else {
-                          generateData(regex, intents, expressions, params);
-                        }
-                      }
+                ExpressionParameters.query({expression_ids: JSON.stringify(expressionIds)}, function(params) {
+                  generateData(regex, intents, expressions, params, synonyms);
+                  /* WIP 2.3 - Update to latest json model for Rasa */
+                  var entityIds = params.map(function(item) { return item['entity_id']; }).toString();
+                  if (entityIds.length > 0) {
+                    EntitySynonymVariantsByEntity.query({entity_ids: entityIds}, function(entitysynonyms) {
+                      generateData(regex, intents, expressions, params, entitysynonyms)
                     }, function(error) {
-                      console.log(error);
-                  });
+                      $scope.generateError = error;
+                      $scope.exportdata = undefined;
+                    });
+                  } else {
+                    generateData(regex, intents, expressions, params);
+                  }
+
+                }, function(error) {
+                  $scope.generateError = error;
+                  $scope.exportdata = undefined;
+                });
               } else {
                 generateData(regex, intents, expressions);
               }
