@@ -245,12 +245,20 @@ $scope.saveIntentResponseBlocks = function(e) {
   }
 
   function turnToInput(el) {
+    el.hide();
     var text = el.html();
-    el.replaceWith('<textarea style="width:100%";>' + text + '</textarea>');
+    $('<textarea class="editing_textarea" style="width:100%";>' + text + '</textarea>').insertAfter(el);
+  }
+
+  function turnToSpan(el) {
+    var text = $('.editing_textarea').html();
+    $('.editing_textarea').remove();
+    el.html(text).show();
   }
 
   $scope.doUpdateExpression = function(expression_id) {
     var span = $('#expression_' + expression_id);
+    turnToSpan(span);
     var body = $('body');
     span.parent().parent().removeClass('active');
     body.removeClass('editing');
