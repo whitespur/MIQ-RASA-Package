@@ -214,6 +214,7 @@ $scope.saveIntentResponseBlocks = function(e) {
   $scope.is_response_focus = false;
   IntentTextBlockContainer = '';
   if($scope.updating !== false) {
+    console.log($scope.updating)
     $scope.updating.html(html);
   } else {
     this.formData.response_text = html;
