@@ -93,7 +93,7 @@ function TrainingController($scope, $rootScope, $interval, $http, Rasa_Status, A
             IntentExpressions.query({intent_ids: intentIds}, function(expressions) {
               var expressionIds = expressions.map(function(item) { return item['expression_id']; }).toString();
               if (expressionIds.length > 0) {
-                  $http({method: 'POST', url: api_endpoint_v2 + '/expression_parameters'}).
+                  $http({method: 'POST', url: api_endpoint_v2 + '/expression_parameters', params: expressionIds}).
                     then(function(params) {
                       if(params.length >0){
                         console.log(params);
