@@ -1,5 +1,3 @@
-import { EALREADY } from "constants";
-
 angular
 .module('app')
 .controller('EditIntentController', EditIntentController)
