@@ -166,12 +166,12 @@ $('#response_text').on('focus', function() {
     if(v == '') {
       v = $scope.default_textarea_text;
     }
-    parent.find('.text-block-container').append('<div class="single-block"><div class="innerTaskbar"><a onclick="$(this).parent().parent().remove()">X</a></div><textarea>' + v + '</textarea></div>');
+    parent.find('.text-block-container').append('<div class="single-block"><div class="innerTaskbar"><a onclick="$(this).parent().parent().remove()">X</a></div><textarea ng-mouseup="showTextTaskbar($event)" >' + v + '</textarea></div>');
   })
 });
 
 $scope.addTextSection = function(e) {
-  IntentTextBlockContainer.append('<div class="single-block"><div class="innerTaskbar"><a onclick="$(this).parent().parent().remove()">X</a></div><textarea>' + $scope.default_textarea_text + '</textarea></div>')
+  IntentTextBlockContainer.append('<div class="single-block"><div class="innerTaskbar"><a onclick="$(this).parent().parent().remove()">X</a></div><textarea ng-mouseup="showTextTaskbar($event)" >' + $scope.default_textarea_text + '</textarea></div>')
   IntentTextBlockContainer.find('.single-block:last-child').trigger('click');
 }
 
