@@ -129,11 +129,21 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
     }
   }
 
+  $scope.hideTextTaskbar = function(ev) {
+    if(text !== '') {
+      $scope.text_selected = null;
+    }
+  }
+
   $scope.addLink = function(ev) {
     var url = prompt('Insert the page you wish to link to in the field below.');
     var html = '<a target="_blank" href="http://' + url.trim() + '">' + $scope.text_selected.trim() + '</a>';
     $scope.formData.response_text = $scope.formData.response_text.replace($scope.text_selected, html);
   }
+
+$('#response_text').on('focus', function() {
+  $scope.is_response_focus = true;  
+});
 
   $scope.updateIntentNameAndWebhook = function(intent) {
     Intent.update({ intent_id:intent.intent_id }, intent).$promise.then(function() {
