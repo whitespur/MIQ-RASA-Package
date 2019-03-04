@@ -254,7 +254,8 @@ $scope.saveIntentResponseBlocks = function(e) {
     console.log('go');
     var text = $('.editing_textarea').html();
     $('.editing_textarea').remove();
-    el.text(text).show();
+    this.formData.response_text = text.replace(/(?:\r\n|\r|\n)/g, '</br>');
+
   }
 
   $scope.doUpdateExpression = function(expression_id) {
