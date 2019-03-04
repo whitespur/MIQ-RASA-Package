@@ -505,10 +505,10 @@ div.list-group.ng-scope > div.list-group-item > span.float-right > button.btn.bt
 
 .text-block-container .single-block {
     float: left;
-    width: 33.33%;
+    width: calc(33.33% - 3.33px);
     flex: 1;
-    flex-basis: 33.33%;
-    max-width: 33.33%;
+    flex-basis: calc(33.33% - 3.33px);
+    max-width: calc(33.33% - 3.33px);
 }
 
 .text-block-container .single-block:not(:nth-child(3n+3)) {
