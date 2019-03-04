@@ -142,7 +142,22 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
   }
 
 $('#response_text').on('focus', function() {
-  $scope.is_response_focus = true;  
+  var value = $(this).val();
+  var parent = $(this).parent();
+  $scope.is_response_focus = true;
+  $(this).attr('disabled', true);
+  $('<p>All blocks symbolises a text section in the chatbot.</p>').insertBefore($(this));
+
+  var blocks = value.split('</block>');
+  if(parent.find('.text-block-container').length < 1) {
+    parent.append('<div class="text-block-container"></div>');
+  } else {
+    parent.find('.text-block-container').find('div').remove();
+  }
+
+  $.each(blocks, function(i,v) {
+    parent.find('.text-block-container').append('<div class="single-block"><textarea>' + v + '</textarea></div>');
+  })
 });
 
   $scope.updateIntentNameAndWebhook = function(intent) {
