@@ -93,10 +93,7 @@ app.factory('Parameters', function($resource) {
 });
 
 app.factory('ExpressionParameters', function($resource) {
-  return $resource(api_endpoint_v2 + '/expression_parameters/:expression_id', {expression_id: '@id'},
-  {
-      'query': { method:'POST' }
-  });
+  return $resource(api_endpoint_v2 + '/expression_parameters/:expression_id');
 });
 
 app.factory('Parameter', ['$resource', function($resource) {
