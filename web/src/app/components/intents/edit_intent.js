@@ -161,9 +161,19 @@ $('#response_text').on('focus', function() {
   }
 
   $.each(blocks, function(i,v) {
+    if(v == '') {
+      v = 'Insert your text block data here';
+    }
     parent.find('.text-block-container').append('<div class="single-block"><textarea>' + v + '</textarea></div>');
   })
 });
+
+function addTextSection(el) {
+  var el = $(el);
+  var container = el.parent().parent();
+  var block_container = container.find('.text-block-container');
+  block_container.append('<div class="single-block"><textarea>Insert your text block data here</textarea></div>')
+}
 
   $scope.updateIntentNameAndWebhook = function(intent) {
     Intent.update({ intent_id:intent.intent_id }, intent).$promise.then(function() {
