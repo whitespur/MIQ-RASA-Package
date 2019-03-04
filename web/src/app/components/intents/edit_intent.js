@@ -251,10 +251,9 @@ $scope.saveIntentResponseBlocks = function(e) {
   }
 
   function turnToSpan(el) {
-    console.log('go');
     var text = $('.editing_textarea').html();
     $('.editing_textarea').remove();
-    el.empty().text(text).show();
+    return text;
   }
 
   $scope.doUpdateExpression = function(expression_id) {
@@ -283,9 +282,8 @@ $scope.saveIntentResponseBlocks = function(e) {
     span.parent().removeClass('active');
     body.removeClass('editing');
     span.attr('contentEditable', 'false');
-    turnToSpan(span);
-
-    Response.update({response_id: response_id}, {response_id: response_id, response_text: span.html().trim()}).$promise.then(function() {
+    var text = turnToSpan(span);
+    Response.update({response_id: response_id}, {response_id: response_id, response_text: text.trim()}).$promise.then(function() {
       loadResponses();
     });
   }
