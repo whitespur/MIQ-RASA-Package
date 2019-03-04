@@ -146,6 +146,10 @@ var saveIntentBtn = $('.ui-intent-save');
 var IntentTextBlockContainer = '';
 $('#response_text').on('focus', function() {
   var el = $(this);
+  startBlockView(el);
+});
+
+function startBlockView(el, data) {
   var value = el.val();
   var parent = el.parent();
   $scope.is_response_focus = true;
@@ -154,12 +158,17 @@ $('#response_text').on('focus', function() {
   saveIntentBtn.fadeOut(150);
   $('<p class="small-notify-text">All blocks symbolises a text section in the chatbot.</p>').insertBefore(el);
   $('[ng-show="is_response_focus"]').removeClass('ng-hide');
-  var blocks = value.split('</block>');
   if(IntentTextBlockContainer == '') {
     $('<div class="text-block-container"></div>').insertBefore(el);
     IntentTextBlockContainer = parent.find('.text-block-container');
   } else {
     IntentTextBlockContainer.find('div').remove();
+  }
+
+  if(data != undefined) {
+    var blocks = data.split('</block>');
+  } else {
+    var blocks = value.split('</block>');
   }
 
   $.each(blocks, function(i,v) {
@@ -168,7 +177,7 @@ $('#response_text').on('focus', function() {
     }
     parent.find('.text-block-container').append('<div class="single-block"><div class="innerTaskbar"><a onclick="$(this).parent().parent().remove()">X</a></div><textarea ng-mouseup="showTextTaskbar($event)" >' + v + '</textarea></div>');
   })
-});
+}
 
 $scope.addTextSection = function(e) {
   IntentTextBlockContainer.append('<div class="single-block"><div class="innerTaskbar"><a onclick="$(this).parent().parent().remove()">X</a></div><textarea ng-mouseup="showTextTaskbar($event)" >' + $scope.default_textarea_text + '</textarea></div>')
