@@ -170,8 +170,13 @@ $('#response_text').on('focus', function() {
 });
 
 $scope.addTextSection = function(e) {
-  IntentTextBlockContainer.append('<div class="single-block"><div class="innerTaskbar"><a>X</a></div><textarea>Insert your text block data here</textarea></div>')
+  IntentTextBlockContainer.append('<div class="single-block"><div class="innerTaskbar"><a onclick="removeElement(this)">X</a></div><textarea>Insert your text block data here</textarea></div>')
   IntentTextBlockContainer.find('.single-block:last-child').trigger('click');
+}
+
+function removeElement(el) {
+  var el = $(el);
+  el.parent().parent().remove();
 }
 
   $scope.updateIntentNameAndWebhook = function(intent) {

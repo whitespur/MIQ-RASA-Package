@@ -516,6 +516,7 @@ div.list-group.ng-scope > div.list-group-item > span.float-right > button.btn.bt
     float: right;
     padding-right: 7px;
     font-size: 13px;
+    cursor:pointer;
 }
 
 .text-block-container .single-block {
