@@ -92,6 +92,7 @@ function TrainingController($scope, $rootScope, $interval, $http, Rasa_Status, A
           if (intentIds.length > 0) {
             IntentExpressions.query({intent_ids: intentIds}, function(expressions) {
               var expressionIds = expressions.map(function(item) { return item['expression_id']; }).toString();
+              console.log(expressionIds);
               if (expressionIds.length > 0) {
                 ExpressionParameters.query({expression_ids: expressionIds}, function(params) {
                   console.log(params);
