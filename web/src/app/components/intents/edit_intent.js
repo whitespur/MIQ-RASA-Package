@@ -280,11 +280,7 @@ $scope.saveIntentResponseBlocks = function(e) {
 
   $scope.editResponse = function(expression_id) {
     var span = $('#response_' + expression_id);
-    var body = $('body');
-    span.parent().addClass('active');
-    body.addClass('editing');
-    span.attr('contentEditable', 'true').focus();
-    turnToInput(span);
+    startBlockView(el, span.html());
   }
 
   $scope.doUpdateResponse = function(response_id) {
