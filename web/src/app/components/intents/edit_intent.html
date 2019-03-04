@@ -161,7 +161,7 @@
                     </div>
                     <div ng-if="is_response_focus" class="Navbar-text">
                       <a ng-click="addTextSection()">Add Text Section</a>
-                      <a style="margin-left: auto;" ng-click="saveIntentResponseBlocks()">Save</a>
+                      <a style="margin-left: auto;" ng-click="saveIntentResponseBlocks($event)">Save</a>
 
                     </div>
                     <textarea ng-model="formData.response_text" class="form-control ui-intent-box" id="response_text" placeholder="Enter a response text and press enter" ng-mouseup="showTextTaskbar($event)" ng-keyup="$event.keyCode == 13 && addBreak(this)" ></textarea><input type="button" class="ui-intent-save" ng-click="saveNewResponse($event)" value="Add">

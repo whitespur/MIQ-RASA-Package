@@ -11,6 +11,7 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
   $scope.last_tag = '';
   $scope.tagsInNames = '';
   $scope.new_tag = '';
+  $scope.default_textarea_text = 'Insert your text block data here';
 
 
   AgentEntities.query({agent_id: $scope.$routeParams.agent_id},function(data) {
@@ -163,21 +164,21 @@ $('#response_text').on('focus', function() {
 
   $.each(blocks, function(i,v) {
     if(v == '') {
-      v = 'Insert your text block data here';
+      v = $scope.default_textarea_text;
     }
     parent.find('.text-block-container').append('<div class="single-block"><div class="innerTaskbar"><a onclick="$(this).parent().parent().remove()">X</a></div><textarea>' + v + '</textarea></div>');
   })
 });
 
 $scope.addTextSection = function(e) {
-  IntentTextBlockContainer.append('<div class="single-block"><div class="innerTaskbar"><a onclick="$(this).parent().parent().remove()">X</a></div><textarea>Insert your text block data here</textarea></div>')
+  IntentTextBlockContainer.append('<div class="single-block"><div class="innerTaskbar"><a onclick="$(this).parent().parent().remove()">X</a></div><textarea>' + $scope.default_textarea_text + '</textarea></div>')
   IntentTextBlockContainer.find('.single-block:last-child').trigger('click');
 }
 
-$(document).find('.removeElement').on('click', function(e) {
-  var el = $(this);
-  el.parent().parent().remove();
-});
+$scope.saveIntentResponseBlocks = function(e) {
+  console.log(e);
+  console.log('hello');
+}
 
   $scope.updateIntentNameAndWebhook = function(intent) {
     Intent.update({ intent_id:intent.intent_id }, intent).$promise.then(function() {
