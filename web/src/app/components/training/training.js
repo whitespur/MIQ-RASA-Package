@@ -90,12 +90,12 @@ function TrainingController($scope, $rootScope, $interval, $http, Rasa_Status, A
         AllSynonymVariants.query(function(synonyms) { //WIP 2.3
           var intentIds = intents.map(function(item) { return item['intent_id']; }).toString();
           if (intentIds.length > 0) {
-            IntentExpressions.query({intent_ids: intentIds}, function(expressions) {
+            IntentExpressions.post({intent_ids: intentIds}, function(expressions) {
               var expressionIds = expressions.map(function(item) { return item['expression_id']; }).toString();
-              console.log(expressionIds);
               if (expressionIds.length > 0) {
                 ExpressionParameters.query({expression_ids: expressionIds}, function(params) {
                   console.log(params);
+                  console.log('hello');
                   generateData(regex, intents, expressions, params, synonyms);
                   /* WIP 2.3 - Update to latest json model for Rasa */
                   var entityIds = params.map(function(item) { return item['entity_id']; }).toString();
