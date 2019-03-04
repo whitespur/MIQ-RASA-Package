@@ -141,6 +141,8 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
     $scope.formData.response_text = $scope.formData.response_text.replace($scope.text_selected, html);
   }
 
+var saveIntentBtn = $('.ui-intent-save');
+
 $('#response_text').on('focus', function() {
   var el = $(this);
   var value = el.val();
@@ -148,6 +150,7 @@ $('#response_text').on('focus', function() {
   $scope.is_response_focus = true;
   el.attr('disabled', true);
   el.fadeOut(150);
+  saveIntentBtn.fadeOut(150);
   $('<p class="small-notify-text">All blocks symbolises a text section in the chatbot.</p>').insertBefore(el);
 
   var blocks = value.split('</block>');
