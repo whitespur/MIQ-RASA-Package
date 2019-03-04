@@ -142,7 +142,7 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
   }
 
 var saveIntentBtn = $('.ui-intent-save');
-
+var IntentTextBlockContainer = '';
 $('#response_text').on('focus', function() {
   var el = $(this);
   var value = el.val();
@@ -154,10 +154,11 @@ $('#response_text').on('focus', function() {
   $('<p class="small-notify-text">All blocks symbolises a text section in the chatbot.</p>').insertBefore(el);
 
   var blocks = value.split('</block>');
-  if(parent.find('.text-block-container').length < 1) {
+  if(IntentTextBlockContainer == '') {
     $('<div class="text-block-container"></div>').insertBefore(el);
+    IntentTextBlockContainer = parent.find('.text-block-container');
   } else {
-    parent.find('.text-block-container').find('div').remove();
+    IntentTextBlockContainer.find('div').remove();
   }
 
   $.each(blocks, function(i,v) {
@@ -169,11 +170,7 @@ $('#response_text').on('focus', function() {
 });
 
 $scope.addTextSection = function(e) {
-  var el = $(e.target);
-  console.log(el);
-  var container = el.parent().parent();
-  var block_container = container.find('.text-block-container');
-  block_container.append('<div class="single-block"><textarea>Insert your text block data here</textarea></div>')
+  IntentTextBlockContainer.append('<div class="single-block"><textarea>Insert your text block data here</textarea></div>')
 }
 
   $scope.updateIntentNameAndWebhook = function(intent) {
