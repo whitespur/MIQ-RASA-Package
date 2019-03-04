@@ -188,11 +188,9 @@ $scope.addTextSection = function(e) {
 
 $scope.saveIntentResponseBlocks = function(e) {
   var el = $('.text-block-container');
-  var parent = el.parent();
-  var blocks = el.parent().parent().find('.single-block');
+  var blocks = el.find('.single-block');
   var html = '';
   var notifyText = $('.small-notify-text');
-  var textBlockContainer =  el.parent().parent().find('.text-block-container');
   var textbar = $('#response_text');
   
   blocks.each(function(i,v) {
@@ -207,7 +205,7 @@ $scope.saveIntentResponseBlocks = function(e) {
   textbar.fadeIn(150);
   saveIntentBtn.fadeIn(150);
   notifyText.remove();
-  textBlockContainer.remove();
+  el.remove();
   $scope.is_response_focus = false;
   IntentTextBlockContainer = '';
   if($scope.updating !== false) {
