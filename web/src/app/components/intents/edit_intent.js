@@ -151,6 +151,7 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
       var url = prompt('Insert the page you wish to link to in the field below.');
       var html = '<a target="_blank" href="//' + url.trim() + '">' + $scope.text_selected.trim() + '</a>';
       $scope.formData.response_text = $scope.formData.response_text.replace($scope.text_selected, html);
+      $scope.text_selected = null;
     } else {
       //TODO: Error Handling
       return false;
