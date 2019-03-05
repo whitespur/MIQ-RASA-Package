@@ -15,6 +15,7 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
   $scope.new_tag = '';
   $scope.default_textarea_text = 'Insert your text block data here';
   $scope.is_response_focus = false;
+  $scope.text_selected = null;
 
   AgentEntities.query({agent_id: $scope.$routeParams.agent_id},function(data) {
       $scope.entityList = data;
