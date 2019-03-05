@@ -177,9 +177,28 @@ function startBlockView(el, data) {
     if(v == '') {
       v = $scope.default_textarea_text;
     }
-    parent.find('.text-block-container').append("<div class='single-block'><div class='innerTaskbar'><a onclick='$(this).parent().parent().remove()'>X</a></div><div class='textblock' contentEditable='true' ng-mouseup='showTextTaskbar($event)'>" + v + "</div></div>");
+    parent.find('.text-block-container').append("<div class='single-block'><div class='innerTaskbar'><a onclick='$(this).parent().parent().remove()'>X</a></div><div class='textblock' contentEditable='true' ng-mouseup='showTextTaskbar($event)'>" + escapeHtml(v) + "</div></div>");
   })
 }
+
+function escapeHtml(unsafe) {
+  return unsafe
+       .replace(/&/g, "&amp;")
+       .replace(/</g, "&lt;")
+       .replace(/>/g, "&gt;")
+       .replace(/"/g, "&quot;")
+       .replace(/'/g, "&#039;");
+}
+
+function unescapeHtml(safe) {
+  return safe
+       .replace("&amp;", /&/g)
+       .replace("&lt;", /</g)
+       .replace( "&gt;", />/g)
+       .replace("&quot;", /"/g)
+       .replace("&#039;", /'/g);
+}
+
 
 $scope.addTextSection = function(e) {
   IntentTextBlockContainer.append('<div class="single-block"><div class="innerTaskbar"><a onclick="$(this).parent().parent().remove()">X</a></div><textarea ng-mouseup="showTextTaskbar($event)" >' + $scope.default_textarea_text + '</textarea></div>')
