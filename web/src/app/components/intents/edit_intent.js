@@ -252,6 +252,27 @@ $scope.saveIntentResponseBlocks = function(e) {
   }
 }
 
+$scope.closeIntentResponseBlocks = function(e) {
+  var el = $('.text-block-container');
+  var blocks = el.find('.single-block');
+  var html = '';
+  var notifyText = $('.small-notify-text');
+  var textbar = $('#response_text');
+
+  IntentTextBlockContainer.fadeOut(150);
+  $('[ng-show="is_response_focus"]').addClass('ng-hide');
+  textbar.attr('disabled', false);
+  textbar.fadeIn(150);
+  saveIntentBtn.fadeIn(150);
+  notifyText.remove();
+  el.remove();
+  $scope.is_response_focus = false;
+  IntentTextBlockContainer = '';
+  if($scope.updating !== false) {
+    $scope.updating = false;
+  }
+}
+
   $scope.updateIntentNameAndWebhook = function(intent) {
     Intent.update({ intent_id:intent.intent_id }, intent).$promise.then(function() {
       $rootScope.$broadcast('setAlertText', "Intent information updated Sucessfully!!");

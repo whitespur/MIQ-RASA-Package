@@ -161,7 +161,7 @@
                       <a ng-click="addLink()">Add Link</a>
 
                       <a style="margin-left: auto;" ng-click="saveIntentResponseBlocks($event)">Save</a>
-                      <a style="margin-left: auto;background:red;" ng-click="saveIntentResponseBlocks($event)">Close</a>
+                      <a style="background:red;" ng-click="closeIntentResponseBlocks($event)">Close</a>
                     </div>
                     <textarea ng-model="formData.response_text" class="form-control ui-intent-box" id="response_text" placeholder="Enter a response text and press enter" ng-mouseup="showTextTaskbar($event)" ng-keyup="$event.keyCode == 13 && addBreak(this)" ></textarea><input type="button" class="ui-intent-save" ng-click="saveNewResponse($event)" value="Add">
                     <ul class="list-group ui-intent-list" ng-hide="responses.length == 0" style="margin-top: 20px;">
