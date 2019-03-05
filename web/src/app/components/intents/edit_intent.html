@@ -156,11 +156,10 @@
                 <div class="form-check">
                     <strong data-toggle="tooltip" data-placement="top" title="Send one of the Random Static response. If webhook is enabled, these will be ignored." tooltip>Static Responses</strong>
                     <small>Marker teksten i feltet herunder som du ønsker at formatere, Eks. Links.</small>
-                    <div ng-if="text_selected" class="Navbar-text">
-                      <a ng-click="addLink()">Add Link</a>
-                    </div>
                     <div ng-show="is_response_focus" class="Navbar-text">
                       <a ng-click="addTextSection()">Add Text Section</a>
+                      <a ng-if="text_selected" ng-click="addLink()">Add Link</a>
+
                       <a style="margin-left: auto;" ng-click="saveIntentResponseBlocks($event)">Save</a>
 
                     </div>
