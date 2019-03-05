@@ -341,7 +341,7 @@ class DataRouter(object):
 
         def training_callback(model_path):
             model_dir = os.path.basename(os.path.normpath(model_path))
-            self.project_store[project].update(model_dir)
+            training_callback(model_dir)
             self._current_training_processes -= 1
             self.project_store[project].current_training_processes -= 1
             if (self.project_store[project].status == 1 and
