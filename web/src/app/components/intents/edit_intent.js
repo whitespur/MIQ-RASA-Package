@@ -177,7 +177,7 @@ function startBlockView(el, data) {
     if(v == '') {
       v = $scope.default_textarea_text;
     }
-    parent.find('.text-block-container').append('<div class="single-block"><div class="innerTaskbar"><a onclick="$(this).parent().parent().remove()">X</a></div><textarea ng-mouseup="showTextTaskbar($event)" value="' + v + '"></textarea></div>');
+    parent.find('.text-block-container').append("<div class='single-block'><div class='innerTaskbar'><a onclick='$(this).parent().parent().remove()'>X</a></div><textarea ng-mouseup='showTextTaskbar($event)' value='" + v + "'></textarea></div>");
   })
 }
 
