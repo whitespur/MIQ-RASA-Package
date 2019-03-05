@@ -124,6 +124,13 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
   }
 
   $scope.showTextTaskbar = function(ev) {
+    var text = "";
+    if (window.getSelection) {
+        text = window.getSelection().toString();
+    } else if (document.selection && document.selection.type != "Control") {
+        text = document.selection.createRange().text;
+    }
+    console.log(text);
     var start = ev.currentTarget.selectionStart;
     var end   = ev.currentTarget.selectionEnd;
     console.log(start);
