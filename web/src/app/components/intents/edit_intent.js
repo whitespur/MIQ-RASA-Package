@@ -192,8 +192,10 @@ function startBlockView(el, data) {
   }
 
   $.each(blocks, function(i,v) {
-    if(v == '') {
+    if(v == '' && i == 0) {
       v = $scope.default_textarea_text;
+    } else if(v == '') {
+      return false;
     }
     parent.find('.text-block-container').append($compile("<div class='single-block'><div class='innerTaskbar'><a onclick='$(this).parent().parent().remove()'>X</a></div><div class='textblock' ng-mouseup='showTextTaskbar($event)' contentEditable='true'>" + escapeHtml(v) + "</div></div>")($scope));
   })
