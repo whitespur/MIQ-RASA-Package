@@ -65,7 +65,7 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
   $scope.saveNewResponse = function(event){
     this.formData.intent_id = $scope.$routeParams.intent_id;
     this.formData.response_type = 1;//DEFAULT type
-    this.formData.response_text = this.formData.response_text.replace(/(?:\r\n|\r|\n)/g, '</br>');
+    this.formData.response_text = this.formData.response_text.replace(/(?:\r\n|\r|\n)/g, '<br/>');
     Response.save(this.formData).$promise.then(function(resp) {
       //update list
       loadResponses();
@@ -186,9 +186,9 @@ function startBlockView(el, data) {
   }
 
   if(data != undefined) {
-    var blocks = data.split('<\ br>');
+    var blocks = data.split('<br/>');
   } else {
-    var blocks = value.split('<\ br>');
+    var blocks = value.split('<br/>');
   }
 
   $.each(blocks, function(i,v) {
@@ -231,7 +231,7 @@ $scope.saveIntentResponseBlocks = function(e) {
   var textbar = $('#response_text');
   blocks.each(function(i,v) {
     if($(this).find('div.textblock').html() !== $scope.default_textarea_text) {
-      html += $(this).find('div.textblock').text() + '<\ br>';
+      html += $(this).find('div.textblock').text() + '<br/>';
     }
   })
 
