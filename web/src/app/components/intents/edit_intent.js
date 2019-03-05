@@ -181,7 +181,7 @@ function startBlockView(el, data) {
     if(v == '') {
       v = $scope.default_textarea_text;
     }
-    parent.find('.text-block-container').append($compile("<div class='single-block'><div class='innerTaskbar'><a onclick='$(this).parent().parent().remove()'>X</a></div><div class='textblock' ng-mouseup='showTextTaskbar($event)' contentEditable='true'>" + escapeHtml(v) + "</div></div>"($scope)));
+    parent.find('.text-block-container').append($compile("<div class='single-block'><div class='innerTaskbar'><a onclick='$(this).parent().parent().remove()'>X</a></div><div class='textblock' ng-mouseup='showTextTaskbar($event)' contentEditable='true'>" + escapeHtml(v) + "</div></div>")($scope));
   })
 }
 
