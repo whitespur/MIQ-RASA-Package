@@ -177,12 +177,12 @@ function startBlockView(el, data) {
     if(v == '') {
       v = $scope.default_textarea_text;
     }
-    parent.find('.text-block-container').append('<div class="single-block"><div class="innerTaskbar"><a onclick="$(this).parent().parent().remove()">X</a></div><textarea ng-mouseup="showTextTaskbar($event)">' + v + '</textarea></div>');
+    parent.find('.text-block-container').append('<div class="single-block"><div class="innerTaskbar"><a onclick="$(this).parent().parent().remove()">X</a></div><textarea ng-mouseup="showTextTaskbar($event)" value="' + v + '"></textarea></div>');
   })
 }
 
 $scope.addTextSection = function(e) {
-  IntentTextBlockContainer.append('<div class="single-block"><div class="innerTaskbar"><a onclick="$(this).parent().parent().remove()">X</a></div><textarea ng-mouseup="showTextTaskbar($event)">' + $scope.default_textarea_text + '</textarea></div>')
+  IntentTextBlockContainer.append('<div class="single-block"><div class="innerTaskbar"><a onclick="$(this).parent().parent().remove()">X</a></div><textarea ng-mouseup="showTextTaskbar($event)" >' + $scope.default_textarea_text + '</textarea></div>')
   IntentTextBlockContainer.find('.single-block:last-child').trigger('click');
 }
 
