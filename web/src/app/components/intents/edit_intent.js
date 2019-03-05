@@ -186,9 +186,9 @@ function startBlockView(el, data) {
   }
 
   if(data != undefined) {
-    var blocks = data.split('<br/>');
+    var blocks = data.split('<br>');
   } else {
-    var blocks = value.split('<br/>');
+    var blocks = value.split('<br>');
   }
 
   $.each(blocks, function(i,v) {
