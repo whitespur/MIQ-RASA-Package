@@ -132,7 +132,7 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
     }
   }
 
-  $('.textBlock').on('click', function(e) {
+  $('.textblock').on('click', function(e) {
     $scope.showTextTaskbar(e);
   })
 
