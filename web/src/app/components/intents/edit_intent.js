@@ -193,8 +193,8 @@ $scope.saveIntentResponseBlocks = function(e) {
   var notifyText = $('.small-notify-text');
   var textbar = $('#response_text');
   blocks.each(function(i,v) {
-    if($(this).find('textarea').innerHTML !== $scope.default_textarea_text) {
-      html += $(this).find('textarea').innerHTML + '</block>';
+    if($(this).find('textarea')[0].innerHTML !== $scope.default_textarea_text) {
+      html += $(this).find('textarea')[0].innerHTML + '</block>';
     }
   })
 
@@ -285,7 +285,7 @@ $scope.saveIntentResponseBlocks = function(e) {
   $scope.editResponse = function(expression_id) {
     var span = $('#response_' + expression_id);
     $scope.updating = span;
-    startBlockView($('#response_text'), span.innerHTML);
+    startBlockView($('#response_text'), span[0].innerHTML);
   }
 
   $scope.doUpdateResponse = function(response_id) {
