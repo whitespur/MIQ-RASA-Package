@@ -212,8 +212,8 @@ $scope.saveIntentResponseBlocks = function(e) {
   var notifyText = $('.small-notify-text');
   var textbar = $('#response_text');
   blocks.each(function(i,v) {
-    if($(this).find('textarea')[0].innerHTML !== $scope.default_textarea_text) {
-      html += $(this).find('textarea')[0].innerHTML + '</block>';
+    if($(this).find('textarea')[0].html !== $scope.default_textarea_text) {
+      html += unescapeHtml($(this).find('textarea')[0].html) + '</block>';
     }
   })
 
