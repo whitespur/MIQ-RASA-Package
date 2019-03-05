@@ -130,13 +130,6 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
     } else if (document.selection && document.selection.type != "Control") {
         text = document.selection.createRange().text;
     }
-    console.log(text);
-    var start = ev.currentTarget.selectionStart;
-    var end   = ev.currentTarget.selectionEnd;
-    console.log(start);
-    console.log(end);
-    console.log(ev);
-    var text = ev.currentTarget.value.substr(start, end - start);
     if(text !== '') {
       $scope.text_selected = text;
     }
