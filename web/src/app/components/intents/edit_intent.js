@@ -193,8 +193,8 @@ $scope.saveIntentResponseBlocks = function(e) {
   var notifyText = $('.small-notify-text');
   var textbar = $('#response_text');
   blocks.each(function(i,v) {
-    if($(this).find('textarea').html() !== $scope.default_textarea_text) {
-      html += $(this).find('textarea').html() + '</block>';
+    if($(this).find('textarea').innerHTML() !== $scope.default_textarea_text) {
+      html += $(this).find('textarea').innerHTML() + '</block>';
     }
   })
 
@@ -208,8 +208,6 @@ $scope.saveIntentResponseBlocks = function(e) {
   $scope.is_response_focus = false;
   IntentTextBlockContainer = '';
   if($scope.updating !== false) {
-    console.log($scope.updating)
-    console.log(el);
     $($scope.updating[0]).html(html);
   } else {
     this.formData.response_text = html;
@@ -263,7 +261,7 @@ $scope.saveIntentResponseBlocks = function(e) {
     el.hide();
     var text = el.html();
     $('<textarea class="editing_textarea" style="width:100%;"></textarea>').insertAfter(el);
-    $('.editing_textarea').val(text);
+    $('.editing_textarea').innerHTML(text);
   }
 
   function turnToSpan(el) {
@@ -287,7 +285,7 @@ $scope.saveIntentResponseBlocks = function(e) {
   $scope.editResponse = function(expression_id) {
     var span = $('#response_' + expression_id);
     $scope.updating = span;
-    startBlockView($('#response_text'), span.html());
+    startBlockView($('#response_text'), span.innerHTML());
   }
 
   $scope.doUpdateResponse = function(response_id) {
