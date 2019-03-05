@@ -247,7 +247,7 @@ $scope.saveIntentResponseBlocks = function(e) {
   if($scope.updating !== false) {
     $($scope.updating[0]).html(html);
     $scope.updating = false;
-    Response.update({response_id: response_id}, {response_id: response_id, response_text: text.trim()}).$promise.then(function() {
+    Response.update({response_id: $scope.response_id}, {response_id: $scope.response_id, response_text: html}).$promise.then(function() {
       loadResponses();
     });
   } else {
