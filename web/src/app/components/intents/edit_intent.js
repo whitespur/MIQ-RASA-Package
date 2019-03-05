@@ -214,7 +214,7 @@ $scope.saveIntentResponseBlocks = function(e) {
   blocks.each(function(i,v) {
     console.log($(this).find('div.textblock'));
     if($(this).find('div.textblock')[0].html !== $scope.default_textarea_text) {
-      html += unescapeHtml($(this).find('div.textblock').outerText()) + '</block>';
+      html += unescapeHtml($(this).find('div.textblock').html()) + '</block>';
     }
   })
 
