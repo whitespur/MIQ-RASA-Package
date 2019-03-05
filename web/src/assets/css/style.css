@@ -516,6 +516,8 @@ div.list-group.ng-scope > div.list-group-item > span.float-right > button.btn.bt
     background: #fff;
     min-height: 100px;
     padding: 5px;
+    float:left;
+    width:100%;
 }
 
 .single-block .innerTaskbar a:last-child {
