@@ -246,8 +246,10 @@ $scope.saveIntentResponseBlocks = function(e) {
   IntentTextBlockContainer = '';
   if($scope.updating !== false) {
     $($scope.updating[0]).html(html);
-    loadResponses();
     $scope.updating = false;
+    Response.update({response_id: response_id}, {response_id: response_id, response_text: text.trim()}).$promise.then(function() {
+      loadResponses();
+    });
   } else {
     this.formData.response_text = html;
   }
@@ -344,6 +346,7 @@ $scope.closeIntentResponseBlocks = function(e) {
   $scope.editResponse = function(expression_id) {
     var span = $('#response_' + expression_id);
     $scope.updating = span;
+    $scope.response_id = expression_id;
     startBlockView($('#response_text'), span[0].innerHTML);
   }
 
