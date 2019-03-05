@@ -132,9 +132,9 @@ function EditIntentController($rootScope, $scope, Agent, AgentEntities, Intent, 
     }
   }
 
-  $('.textblock').on('click', function(e) {
+  function showTextTaskbar(e) {
     $scope.showTextTaskbar(e);
-  })
+  }
 
   $scope.hideTextTaskbar = function(ev) {
     if(text !== '') {
@@ -181,7 +181,7 @@ function startBlockView(el, data) {
     if(v == '') {
       v = $scope.default_textarea_text;
     }
-    parent.find('.text-block-container').append("<div class='single-block'><div class='innerTaskbar'><a onclick='$(this).parent().parent().remove()'>X</a></div><div class='textblock' ng-click='showTextTaskbar($event)' contentEditable='true' ng-mouseup='showTextTaskbar($event)'>" + escapeHtml(v) + "</div></div>");
+    parent.find('.text-block-container').append("<div class='single-block'><div class='innerTaskbar'><a onclick='$(this).parent().parent().remove()'>X</a></div><div class='textblock' onclick='showTextTaskbar(e)' contentEditable='true'>" + escapeHtml(v) + "</div></div>");
   })
 }
 
