@@ -28,10 +28,11 @@ function onLinkClick(req, res, next) {
         })
         .catch(function (err) {
             console.log("Error in createMessage" + err);
-            //res.status(500).json(err);
+            res.status(500).json(err);
             return;
         });
-    } else {  return; }
+            console.log("Error in createMessage" + err);
+        } else {  return; }
 }
 
 function getCurrentTime() {
