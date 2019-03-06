@@ -186,11 +186,11 @@ function startBlockView(el, data) {
   }
   
   if(data != undefined) {
-    var blocks = data.split('<block>');
+    var blocks = data.match(/<block>.*?<\/block>/g);
   } else {
-    var blocks = value.split('<block>');
+    var blocks = value.match(/<block>.*?<\/block>/g);
   }
-
+console.log(blocks);
   $.each(blocks, function(i,v) {
     if(v == '' && i == 0) {
       v = $scope.default_textarea_text;
