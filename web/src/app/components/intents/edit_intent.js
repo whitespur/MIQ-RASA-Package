@@ -231,11 +231,13 @@ $scope.saveIntentResponseBlocks = function(e) {
   var html = '';
   var notifyText = $('.small-notify-text');
   var textbar = $('#response_text');
-  blocks.each(function(i,v) {
-    if($(this).find('div.textblock').html() !== $scope.default_textarea_text) {
-      html += $(this).find('div.textblock').text() + '<block>';
+
+  var result = str.match(/<block>(.*?)<\/block>/g).map(function(val){
+    if(val !== $scope.default_textarea_text) {
+      html += '<block>' + val + '</block>';
     }
-  })
+  });
+
 
   IntentTextBlockContainer.fadeOut(150);
   $('[ng-show="is_response_focus"]').addClass('ng-hide');
