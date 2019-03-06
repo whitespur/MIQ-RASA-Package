@@ -11,10 +11,10 @@ function startConversation(req, res, next) {
     });
 }
 
-function onLinkClick(req) {
-    console.log(req);
-    return req;
-    /* if(data.destination != undefined && data.conversation_id) {
+function onLinkClick(req, res, next) {
+    var data = req.body;
+    data.user_id = req.jwt.uid;
+    if(data.destination != undefined) {
       console.log("Conversation.onLinkClick");
       data.time = getCurrentTime();
       data.date = getCurrentDate();
@@ -29,7 +29,7 @@ function onLinkClick(req) {
             //res.status(500).json(err);
             return;
         });
-    } else { return; } */
+    } else { return; }
 }
 
 function getCurrentTime() {
