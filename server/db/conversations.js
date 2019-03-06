@@ -19,6 +19,7 @@ function onLinkClick(req, res, next) {
       console.log("Conversation.onLinkClick");
       data.time = getCurrentTime();
       data.date = getCurrentDate();
+      console.log(data);
       db.any('insert into stat_links(user_id, destination, time, date)' +
             ' values(${user_id},${destination}, ${time},${date})', data)
         .then(function (messages_id) {
@@ -30,7 +31,7 @@ function onLinkClick(req, res, next) {
             //res.status(500).json(err);
             return;
         });
-    } else { return; }
+    } else {  return; }
 }
 
 function getCurrentTime() {
