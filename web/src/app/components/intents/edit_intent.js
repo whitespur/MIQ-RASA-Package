@@ -232,7 +232,7 @@ $scope.saveIntentResponseBlocks = function(e) {
   var notifyText = $('.small-notify-text');
   var textbar = $('#response_text');
 
-  var result = str.match(/<block>(.*?)<\/block>/g).map(function(val){
+  var result = blocks.match(/<block>(.*?)<\/block>/g).map(function(val){
     if(val !== $scope.default_textarea_text) {
       html += '<block>' + val + '</block>';
     }
