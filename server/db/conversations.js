@@ -13,12 +13,13 @@ function startConversation(req, res, next) {
 
 function onLinkClick(req, res, next) {
     var data = req.body;
+    data.time = getCurrentTime();
+    data.date = getCurrentDate();
     data.user_id = req.jwt.uid;
     console.log(data);
     if(data.destination != undefined) {
       console.log("Conversation.onLinkClick");
-      data.time = getCurrentTime();
-      data.date = getCurrentDate();
+
       console.log(data);
       db.any('insert into stat_links(user_id, destination, time, date)' +
             ' values(${user_id},${destination}, ${time},${date})', data)
