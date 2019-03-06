@@ -186,13 +186,9 @@ function startBlockView(el, data) {
   }
   
   if(data != undefined) {
-    var blocks = data.match(/<block>(.*?)<\/block>/g).map(function(val){
-      return val;
-   });
+    var blocks = data.match(/<block>(.*?)<\/block>/g);
   } else {
-    var blocks = str.match(/<block>(.*?)<\/block>/g).map(function(val){
-      return val;
-   });
+    var blocks = value.match(/<block>(.*?)<\/block>/g);
   }
 
   $.each(blocks, function(i,v) {
