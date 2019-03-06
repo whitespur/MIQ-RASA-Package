@@ -11,9 +11,9 @@ function startConversation(req, res, next) {
     });
 }
 
-function onLinkClick(data) {
-    console.log(data);
-    return data;
+function onLinkClick(req) {
+    console.log(req.params);
+    return;
     if(data.destination != undefined && data.conversation_id) {
       console.log("Conversation.onLinkClick");
       data.time = getCurrentTime();
