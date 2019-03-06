@@ -21,6 +21,8 @@ var nlu_router = require('./mw_routes/nlu_router');
 var logs = require('../db/logs');
 var auth = require('./auth');
 var navigation = require('../db/navigation');
+var conversations = require('../db/conversations');
+
 
 
 router.use(function (req, res, next) {
@@ -43,7 +45,6 @@ router.put('/agents/:agent_id', agents.updateAgent);
 router.post('/agentStory', agents.updateAgentStory);
 router.delete('/agents/:agent_id', agents.removeAgent);
 router.post('/agents/upload', agents.uploadAgentFromFile);
-
 
 router.get('/actions/:action_id', actions.getSingleAction);
 router.put('/actions/:action_id', actions.updateAction);
@@ -159,6 +160,10 @@ router.get('/agent/:agent_id/messages', messages.getUniqueUsersList);
 router.get('/agent/:agent_id/recent9UniqueUsersList', messages.getRecent9UniqueUsersList);
 router.post('/messages/list', messages.getMessagesListByUser);
 router.get('/messages/:messages_id', messages.getMessageDetails);
+
+//Stat API
+router.post('/stat/link', conversations.onLinkClick);
+
 
 //authentication js
 router.post('/auth/init', auth.auth_init);
