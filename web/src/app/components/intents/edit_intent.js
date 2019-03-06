@@ -186,9 +186,9 @@ function startBlockView(el, data) {
   }
   
   if(data != undefined) {
-    var blocks = data.match(/<block>(.*?)<\/block>/g);
+    var blocks = data.split('<block>');
   } else {
-    var blocks = value.match(/<block>(.*?)<\/block>/g);
+    var blocks = value.split('<block>');
   }
 
   $.each(blocks, function(i,v) {
@@ -197,7 +197,7 @@ function startBlockView(el, data) {
     } else if(v == '') {
       return false;
     }
-    parent.find('.text-block-container').append($compile("<div class='single-block'><div class='innerTaskbar'><a onclick='$(this).parent().parent().remove()'>X</a></div><div class='textblock' ng-mouseup='showTextTaskbar($event)' contentEditable='true'>" + escapeHtml(v) + "</div></div>")($scope));
+    parent.find('.text-block-container').append($compile("</block><div class='single-block'><div class='innerTaskbar'><a onclick='$(this).parent().parent().remove()'>X</a></div><div class='textblock' ng-mouseup='showTextTaskbar($event)' contentEditable='true'><block>" + escapeHtml(v) + "</div></div>")($scope));
   })
 }
 
