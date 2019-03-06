@@ -1,5 +1,14 @@
 
 
+app.factory('CurrentAccount', function($resource) {
+  return $resource(api_endpoint_v2 + '/accounts/current/:path', {path: '@path'},
+  {
+      'get':    {method: 'GET'},
+      'update': { method:'PUT' },
+      'query': {method: 'GET', isArray: true}
+  });
+});
+
 app.factory('Account', function($resource) {
   return $resource(api_endpoint_v2 + '/accounts/:account_id/:path', {agent_id: '@id', path: '@path'},
   {
@@ -167,6 +176,7 @@ app.factory('ActionResponses', function($resource) {
 app.factory('Responses', function($resource) {
   return $resource(api_endpoint_v2 + '/response/:intent_id', {intent_id:'@id'});
 });
+
 //Reponse actions: create and delete
 app.factory('Response', function($resource) {
   return $resource(api_endpoint_v2 + '/response/:response_id', {response_id:'@id'},

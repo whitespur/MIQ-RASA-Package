@@ -2,8 +2,9 @@ angular
   .module('app')
   .controller('InsightsController', InsightsController)
 
-function InsightsController($scope, $http, $sce, NLU_log_stats) {
+function InsightsController($scope, $http, $sce, CurrentAccount, NLU_log_stats) {
   $scope.option = "Daily";
+  $scope.currentUser = '';
   loadDailyActiveUsers();
 
   NLU_log_stats.query({path: "avgNluResponseTimesLast30Days"}, function (data) {
@@ -18,6 +19,11 @@ function InsightsController($scope, $http, $sce, NLU_log_stats) {
     }
     $scope.nlu_avg = parseInt(nlu_avg_response / data.length);
     $scope.nlu_response_data = [nlu_response_data];
+  });
+
+  CurrentAccount.get({}, function(data) {
+    console.log(data);
+      $scope.currentUser = data;
   });
   
   NLU_log_stats.query({path: "avgUserResponseTimesLast30Days"}, function (data) {
