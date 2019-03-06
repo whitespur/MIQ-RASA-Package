@@ -87,23 +87,13 @@
             <div class="col-sm-6 col-lg-6">
                 <div class="card">
                     <div class="card-header">
-                        <strong>Questions <small>{{currentUser.username}}</small></strong>
-                        <div class="btn-group" role="group">
-                            <button type="button" class="btn-primary dropdown-toggle" style="margin: 0px" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="icon-people"></i>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item float-right" ng-repeat="agent_name in agents_dropdown" ng-click="updatePieChartData(agent_name)">
-                                    <small>{{agent_name}}</small>
-                                </a>
-                            </div>
-                        </div>
+                        <strong>Questions Asked <small>{{currentUser.username}}</small></strong>
                     </div>
-
-                <div class="card-block">
-                    <div class="chart-wrapper">
-                        <canvas id="chart_pie_intents_usage" class="chart chart-doughnut" chart-data="intents_pie_data" chart-labels="intents_pie_labels"
-                            chart-colors="colors" chart-options="piechart_options" height="244px" />
+                    <div class="card-block">
+                        <div class="chart-wrapper">
+                            <canvas id="chart_pie_intents_usage" class="chart chart-doughnut" chart-data="intents_pie_data" chart-labels="intents_pie_labels"
+                                chart-colors="colors" chart-options="piechart_options" height="244px" />
+                        </div>
                     </div>
                 </div>
             </div>
