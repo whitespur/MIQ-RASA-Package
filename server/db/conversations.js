@@ -15,7 +15,7 @@ function onLinkClick(req) {
     console.log(req);
     res.status(200)
         .json(req);
-    if(data.destination != undefined && data.conversation_id) {
+    /* if(data.destination != undefined && data.conversation_id) {
       console.log("Conversation.onLinkClick");
       data.time = getCurrentTime();
       data.date = getCurrentDate();
@@ -30,7 +30,7 @@ function onLinkClick(req) {
             //res.status(500).json(err);
             return;
         });
-    } else { return; }
+    } else { return; } */
 }
 
 function getCurrentTime() {
