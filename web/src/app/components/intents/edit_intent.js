@@ -186,9 +186,9 @@ function startBlockView(el, data) {
   }
 
   if(data != undefined) {
-    var blocks = data.split('<br>');
+    var blocks = data.split('<block>');
   } else {
-    var blocks = value.split('<br>');
+    var blocks = value.split('<block>');
   }
 
   $.each(blocks, function(i,v) {
@@ -233,7 +233,7 @@ $scope.saveIntentResponseBlocks = function(e) {
   var textbar = $('#response_text');
   blocks.each(function(i,v) {
     if($(this).find('div.textblock').html() !== $scope.default_textarea_text) {
-      html += $(this).find('div.textblock').text() + '<br/>';
+      html += $(this).find('div.textblock').text() + '<block>';
     }
   })
 
