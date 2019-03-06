@@ -197,7 +197,7 @@ console.log(blocks);
     } else if(v == '') {
       return false;
     }
-    parent.find('.text-block-container').append($compile("</block><div class='single-block'><div class='innerTaskbar'><a onclick='$(this).parent().parent().remove()'>X</a></div><div class='textblock' ng-mouseup='showTextTaskbar($event)' contentEditable='true'><block>" + escapeHtml(v) + "</div></div>")($scope));
+    parent.find('.text-block-container').append($compile("</block><div class='single-block'><div class='innerTaskbar'><a onclick='$(this).parent().parent().remove()'>X</a></div><div class='textblock' ng-mouseup='showTextTaskbar($event)' contentEditable='true'><block>" + escapeHtml(v.replace('<block>', '').replace('</block>', '')) + "</block></div></div>")($scope));
   })
 }
 
