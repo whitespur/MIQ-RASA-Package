@@ -14,6 +14,7 @@ function startConversation(req, res, next) {
 function onLinkClick(req, res, next) {
     var data = req.body;
     data.user_id = req.jwt.uid;
+    console.log(data);
     if(data.destination != undefined) {
       console.log("Conversation.onLinkClick");
       data.time = getCurrentTime();
