@@ -31,17 +31,7 @@ function onLinkClick(req, res, next) {
             res.status(500).json(err);
             return;
         });
-            console.log("Error in createMessage" + err);
-        } else {  return; }
-}
-
-function getCurrentTime() {
-
-    return current_hour;
-}
-
-function getCurrentDate() {
-
+    } else {  return; }
 }
 
 function createMessage(messageObj) {
