@@ -14,8 +14,7 @@ function startConversation(req, res, next) {
 function onLinkClick(req, res, next) {
     var data = req.body;
     var date = new Date();
-    var current_hour = date.getHours();
-    data.time = current_hour;
+    data.time = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
     data.date = date;
     data.user_id = req.jwt.uid;
     if(data.destination != undefined) {
