@@ -12,8 +12,9 @@ function startConversation(req, res, next) {
 }
 
 function onLinkClick(req) {
-    console.log(req.params);
-    return;
+    console.log(req);
+    res.status(200)
+        .json(req);
     if(data.destination != undefined && data.conversation_id) {
       console.log("Conversation.onLinkClick");
       data.time = getCurrentTime();
