@@ -23,7 +23,7 @@ function InsightsController($scope, $http, $sce, CurrentAccount, NLU_log_stats) 
 
   CurrentAccount.get({}, function(data) {
     console.log(data);
-      $scope.currentUser = data;
+    $scope.currentUser = data;
   });
   
   NLU_log_stats.query({path: "avgUserResponseTimesLast30Days"}, function (data) {
