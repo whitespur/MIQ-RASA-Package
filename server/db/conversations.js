@@ -13,8 +13,10 @@ function startConversation(req, res, next) {
 
 function onLinkClick(req, res, next) {
     var data = req.body;
-    data.time = getCurrentTime();
-    data.date = getCurrentDate();
+    var date = new Date();
+    var current_hour = date.getHours();
+    data.time = current_hour;
+    data.date = date;
     data.user_id = req.jwt.uid;
     console.log(data);
     if(data.destination != undefined) {
@@ -37,14 +39,12 @@ function onLinkClick(req, res, next) {
 }
 
 function getCurrentTime() {
-    var date = new Date();
-    var current_hour = date.getHours();
+
     return current_hour;
 }
 
 function getCurrentDate() {
-    var date = new Date();
-    return date.format('y-m-d');
+
 }
 
 function createMessage(messageObj) {
