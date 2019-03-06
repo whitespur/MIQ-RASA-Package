@@ -184,11 +184,15 @@ function startBlockView(el, data) {
   } else {
     IntentTextBlockContainer.find('div').remove();
   }
-
+  
   if(data != undefined) {
-    var blocks = data.split('<block>');
+    var blocks = data.match(/<block>(.*?)<\/block>/g).map(function(val){
+      return val;
+   });
   } else {
-    var blocks = value.split('<block>');
+    var blocks = str.match(/<block>(.*?)<\/block>/g).map(function(val){
+      return val;
+   });
   }
 
   $.each(blocks, function(i,v) {
@@ -231,13 +235,11 @@ $scope.saveIntentResponseBlocks = function(e) {
   var html = '';
   var notifyText = $('.small-notify-text');
   var textbar = $('#response_text');
-
-  var result = blocks.match(/<block>(.*?)<\/block>/g).map(function(val){
-    if(val !== $scope.default_textarea_text) {
-      html += '<block>' + val + '</block>';
+  blocks.each(function(i,v) {
+    if($(this).find('div.textblock').html() !== $scope.default_textarea_text) {
+      html += '<block>' + $(this).find('div.textblock').text() + '</block>';
     }
-  });
-
+  })
 
   IntentTextBlockContainer.fadeOut(150);
   $('[ng-show="is_response_focus"]').addClass('ng-hide');
