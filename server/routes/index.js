@@ -34,6 +34,7 @@ router.use(function (req, res, next) {
 
 router.get('/accounts', accounts.getAccounts);
 router.get('/accounts/:accounts_id', accounts.getSingleAccount);
+router.get('/accounts/current', accounts.getCurrentAccount);
 
 router.get('/agents', agents.getAllAgents);
 router.get('/agents/:agent_id', agents.getSingleAgent);
