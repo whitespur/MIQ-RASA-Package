@@ -14,7 +14,7 @@ function getAccounts(req, res, next) {
 function getCurrentAccount(req, res, next) {
   var jwt = req.jwt;
   var username = jwt.username;
-  db.any('SELECT * FROM account WHERE username = "' + username + '"')
+  db.any("SELECT * FROM account WHERE username = '" + username + "'")
     .then(function (data) {
       res.status(200)
         .json(data);
