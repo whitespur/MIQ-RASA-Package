@@ -18,16 +18,14 @@ function onLinkClick(req, res, next) {
     data.time = current_hour;
     data.date = date;
     data.user_id = req.jwt.uid;
-    console.log(data);
     if(data.destination != undefined) {
       console.log("Conversation.onLinkClick");
-
-      console.log(data);
       db.any('insert into stat_links(user_id, destination, time, date)' +
             ' values(${user_id},${destination}, ${time},${date})', data)
         .then(function (messages_id) {
             console.log("Click Registered")
-            return;
+            res.status(200)
+                .json('Click Registered');
         })
         .catch(function (err) {
             console.log("Error in createMessage" + err);
