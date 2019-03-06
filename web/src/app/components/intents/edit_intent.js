@@ -187,18 +187,25 @@ function startBlockView(el, data) {
   
   if(data != undefined) {
     var blocks = data.match(/<block>.*?<\/block>/g);
+    if(blocks == null) {
+      blocks = [data];
+    }
   } else {
     var blocks = value.match(/<block>.*?<\/block>/g);
-  }
-console.log(blocks);
-  $.each(blocks, function(i,v) {
-    if(v == '' && i == 0) {
-      v = $scope.default_textarea_text;
-    } else if(v == '') {
-      return false;
+    if(blocks == null) {
+      blocks = [value];
     }
-    parent.find('.text-block-container').append($compile("</block><div class='single-block'><div class='innerTaskbar'><a onclick='$(this).parent().parent().remove()'>X</a></div><div class='textblock' ng-mouseup='showTextTaskbar($event)' contentEditable='true'><block>" + escapeHtml(v.replace('<block>', '').replace('</block>', '')) + "</block></div></div>")($scope));
-  })
+  }
+ 
+    $.each(blocks, function(i,v) {
+      if(v == '' && i == 0) {
+        v = $scope.default_textarea_text;
+      } else if(v == '') {
+        return false;
+      }
+      parent.find('.text-block-container').append($compile("</block><div class='single-block'><div class='innerTaskbar'><a onclick='$(this).parent().parent().remove()'>X</a></div><div class='textblock' ng-mouseup='showTextTaskbar($event)' contentEditable='true'><block>" + escapeHtml(v.replace('<block>', '').replace('</block>', '')) + "</block></div></div>")($scope));
+    })
+  
 }
 
 function escapeHtml(unsafe) {
