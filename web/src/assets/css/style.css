@@ -543,7 +543,6 @@ div.list-group.ng-scope > div.list-group-item > span.float-right > button.btn.bt
     padding: 5px;
     padding-left: 0px;
     position: relative;
-    border-bottom: 1px solid #ccc;
 }
 
 .ui-intent-list block::after {
